@@ -16,5 +16,5 @@ build:
 run:
 	docker run --rm -it \
 		-v /var/run/docker.sock:/var/run/docker.sock \
-		-v $$(pwd):/data \
+		-v $$(pwd):/home/$$(id -un)/data \
 		--hostname awing --name cli-dev-shell cli-dev-shell
