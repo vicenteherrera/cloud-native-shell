@@ -8,7 +8,7 @@ build:
 		--build-arg stern_ver=1.11.0 \
 		--build-arg gcloud_ver=378.0.0 \
 		--build-arg user=$$(id -un) \
-		--build-arg group=developer \
+		--build-arg group=$$(id -un) \
 		--build-arg uid=$$(id -u) \
 		--build-arg gid=$$(id -g) \
 		--build-arg pass=changeme
