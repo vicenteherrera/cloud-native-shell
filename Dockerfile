@@ -76,6 +76,12 @@ RUN curl -sLo minikube https://storage.googleapis.com/minikube/releases/v${minik
   && chmod +x minikube && \
     mv minikube /usr/local/bin
 
+ARG kind_ver=0.12.0
+# Kind
+RUN curl -Lo ./kind https://kind.sigs.k8s.io/dl/v${kind_ver}/kind-linux-amd64 && \
+    chmod +x ./kind && \
+    mv ./kind /usr/local/bin
+
 # Stern
 ARG stern_ver=1.11.0
 RUN curl -sLo stern https://github.com/wercker/stern/releases/download/${stern_ver}/stern_linux_amd64 && \

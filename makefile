@@ -5,6 +5,7 @@ all: build run
 build:
 	sudo docker build . -t cli-dev-shell \
 		--build-arg minikube_ver=1.23.2 \
+		--build-arg kind_ver=0.12.0 \
 		--build-arg stern_ver=1.11.0 \
 		--build-arg gcloud_ver=378.0.0 \
 		--build-arg 1password_ver=2.0.0 \
