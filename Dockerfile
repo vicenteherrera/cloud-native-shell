@@ -138,10 +138,6 @@ COPY --chown=${user}:${group} config/fish/config.fish ./.config/fish/config.fish
 COPY --chown=${user}:${group} config/fish/config-alias.fish ./.config/fish/config-alias.fish
 COPY --chown=${user}:${group} config/starship.toml ./.config/starship.toml
 
-# Fisher, z
-# RUN curl -sL https://git.io/fisher | fish && fish -c 'fisher install jorgebucaran/fisher' && \
-#     fish -c'fisher install jethrokuan/z'
-
 # Kubectl completions
 RUN echo 'source <(kubectl completion bash)' >>/home/${user}/.bashrc && \
     echo 'alias k=kubectl' >>/home/${user}/.bashrc && \
@@ -171,6 +167,16 @@ RUN pip3 install thefuck --user
 
 # Install Jekyll
 # RUN gem install jekyll bundler
+
+RUN git clone https://github.com/jethrokuan/z.git && \
+    mv ./z/conf.d/z.fish ./.config/fish/conf.d/z.fish && \
+    mv ./z/functions/* ./.config/fish/functions && \
+    rm -rf ./z
+
+# Fisher
+# RUN curl -sL https://git.io/fisher | fish && \
+#     fisher install jorgebucaran/fisher
+
 
 ENV DEBIAN_FRONTEND=
 
