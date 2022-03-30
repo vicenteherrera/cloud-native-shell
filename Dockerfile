@@ -5,10 +5,16 @@ WORKDIR /install
 # General
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get -y upgrade && \
-    apt-get install -y apt-utils curl gnupg2 apt-transport-https lsb-release sudo unzip
+    apt-get install -y apt-utils curl wget gnupg2 apt-transport-https lsb-release sudo unzip \
+    swig libpcsclite-dev
+# Last line for Yubikey manager
         
 # Development (git, vim, build, python, ruby)
-RUN apt-get -y install python3-pip git vim build-essential ruby-full zlib1g-dev conntrack
+RUN apt-get -y install git vim build-essential direnv bat \
+    python3-dev python3-pip python3-setuptools \
+    npm \
+    ruby-full zlib1g-dev \
+    conntrack
 # conntrack is a Kubernetes 1.20.2 requirement
 
 # Kubectl
@@ -58,6 +64,12 @@ RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - && \
     apt-get -y update && apt-get install -y vagrant
 # This will require an additional virtualization hypervisor
 
+# Dotnet
+RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
+    dpkg -i packages-microsoft-prod.deb && rm packages-microsoft-prod.deb && \
+    apt-get update && \
+    apt-get install -y dotnet-sdk-6.0
+
 # Minikube
 ARG minikube_ver=1.23.2
 RUN curl -sLo minikube https://storage.googleapis.com/minikube/releases/v${minikube_ver}/minikube-linux-amd64 \
@@ -69,6 +81,18 @@ ARG stern_ver=1.11.0
 RUN curl -sLo stern https://github.com/wercker/stern/releases/download/${stern_ver}/stern_linux_amd64 && \
     chmod +x stern && \
     mv stern /usr/local/bin
+
+# Go
+ARG go_ver=1.18
+RUN curl -sLo go.tar.gz https://go.dev/dl/go${go_ver}.linux-amd64.tar.gz && \
+    tar -C /usr/local -xzf go.tar.gz && \
+    rm go.tar.gz
+
+# 1Password
+ARG 1password_ver=2.0.0
+RUN curl -sLo op.zip https://cache.agilebits.com/dist/1P/op2/pkg/v2.0.0/op_linux_amd64_v2.0.0.zip && \
+    unzip op.zip && mv op /usr/local/bin && rm op.zip op.sig
+# gpg --verify op.sig op
 
 # Fish shell
 RUN echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /' \
@@ -93,17 +117,27 @@ RUN groupadd -g ${gid} ${group} && \
     useradd -u ${uid} -g ${group} -s /usr/bin/fish -m ${user} && \
     usermod -aG sudo ${user} && \
     usermod -aG docker ${user} && newgrp docker && \
-    sudo usermod --shell /bin/bash vicente && \
+    sudo usermod --shell /bin/bash ${user} && \
     echo "${user}:${pass}" | chpasswd
+
+RUN mkdir -p /home/${user}/.config/fish/completions /home/${user}/.config/fish/conf.d /home/${user}/.config/fish/functions && \
+    chown -R ${user}:${group} /home/${user}
 
 # Switch to user
 USER ${uid}:${gid}
 WORKDIR /home/${user}
+RUN mkdir -p "$HOME/.local/bin" "$HOME/.go/bin" "$HOME/.keys"
+COPY config/fish/config.fish ./.config/fish/config.fish
+COPY config/fish/config-alias.fish ./.config/fish/config-alias.fish
+
+# Fisher, z
+# RUN curl -sL https://git.io/fisher | fish && fish -c 'fisher install jorgebucaran/fisher' && \
+#     fish -c'fisher install jethrokuan/z'
 
 # Kubectl completions
-RUN echo 'source <(kubectl completion bash)' >>/home/vicente/.bashrc && \
-    echo 'alias k=kubectl' >>/home/vicente/.bashrc && \
-    echo 'complete -F __start_kubectl k' >>/home/vicente/.bashrc
+RUN echo 'source <(kubectl completion bash)' >>/home/${user}/.bashrc && \
+    echo 'alias k=kubectl' >>/home/${user}/.bashrc && \
+    echo 'complete -F __start_kubectl k' >>/home/${user}/.bashrc
 
 # GCloud cli
 ARG gcloud_ver=378.0.0
@@ -112,11 +146,20 @@ RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cl
     ./google-cloud-sdk/install.sh --usage-reporting false -q && \
     rm -r ./google-cloud-sdk google-cloud-sdk-${gcloud_ver}-linux-x86_64.tar.gz
 
+# nvm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
 # Pyenv
 RUN curl https://pyenv.run | bash
 
 # Poetry
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -
+
+# Yubikey Manager
+RUN pip install --user yubikey-manager
+
+# Thef*ck
+RUN pip3 install thefuck --user
 
 # Install Jekyll
 # RUN gem install jekyll bundler
