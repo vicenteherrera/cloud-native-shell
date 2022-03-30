@@ -10,6 +10,7 @@ build:
 		--build-arg gcloud_ver=378.0.0 \
 		--build-arg 1password_ver=2.0.0 \
 		--build-arg go_ver=1.18 \
+		--build-arg dotnet_ver=6.0 \
 		--build-arg user=$$(id -un) \
 		--build-arg group=$$(id -un) \
 		--build-arg uid=$$(id -u) \

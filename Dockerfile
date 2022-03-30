@@ -65,10 +65,11 @@ RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - && \
 # This will require an additional virtualization hypervisor
 
 # Dotnet
+ARG dotnet_ver=6.0
 RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
     dpkg -i packages-microsoft-prod.deb && rm packages-microsoft-prod.deb && \
     apt-get update && \
-    apt-get install -y dotnet-sdk-6.0
+    apt-get install -y dotnet-sdk-${dotnet_ver}
 
 # Minikube
 ARG minikube_ver=1.23.2
