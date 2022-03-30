@@ -1,0 +1,130 @@
+format = """
+$username\
+$hostname\
+$shlvl\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$kubernetes\
+$hg_branch\
+$docker_context\
+$cmake\
+$dart\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$helm\
+$java\
+$julia\
+$kotlin\
+$nim\
+$nodejs\
+$ocaml\
+$perl\
+$php\
+$purescript\
+$python\
+$ruby\
+$rust\
+$swift\
+$terraform\
+$vagrant\
+$zig\
+$nix_shell\
+$conda\
+$memory_usage\
+$aws\
+$line_break\
+$directory\
+$line_break\
+$character"""
+
+# $package\
+# $openstack\
+# $env_var\
+# $crystal\
+# $custom\
+# $cmd_duration\
+# $line_break\
+# $lua\
+# $jobs\
+# $battery\
+# $time\
+# $status\
+
+# Wait 10 milliseconds for starship to check files under the current directory.
+scan_timeout = 10
+
+# Disable the newline at the start of the prompt
+# add_newline = false
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true 
+format = " [$path]($style)[$read_only]($read_only_style) "
+# 🏠    
+
+[character]
+success_symbol = "[](bold green)"
+# ❯    ✗     
+error_symbol = "[](bold red)"
+vicmd_symbol = "[V](bold green) "
+
+[git_branch]
+symbol = " "
+# symbol = ""
+# symbol = "🌱        "
+format="[$symbol$branch]($style) "
+style = "fg:103"
+
+[git_status]
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+staged = '[++\($count\)](green)'
+format = '([\[$all_status$ahead_behind\]]($style) )'
+
+[kubernetes]
+symbol = "謁 "
+# ⛵   
+format='[$symbol$context(\($namespace\))]($style) '
+style = "fg:105"
+disabled = false
+
+[kubernetes.context_aliases]
+"dev.local.cluster.k8s" = "dev"
+
+[python]
+symbol = "🐍"
+format = '[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style) '
+style = "bright-yellow"
+
+[aws]
+symbol = " "
+# symbol = "  "
+format = '[$symbol($profile|)($region)]($style)'
+style = "yellow"
+
+[aws.region_aliases]
+ap-southeast-2 = "au"
+us-east-1 = "us-e1"
+us-west-1 = "us-w1"
+us-east-2 = "us-e2"
+us-west-2 = "us-w2"
+
+[golang]
+symbol = " "
+#   
+format = "[$symbol($version )]($style)"
+
+[ruby]
+symbol = " "
+# 💎      
+format = "[$symbol($version)]($style) "
+style = "red"
+
+[perl]
+format = "[$symbol($version)]($style) "

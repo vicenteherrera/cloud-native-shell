@@ -134,8 +134,9 @@ RUN mkdir -p /home/${user}/.config/fish/completions /home/${user}/.config/fish/c
 USER ${uid}:${gid}
 WORKDIR /home/${user}
 RUN mkdir -p "$HOME/.local/bin" "$HOME/.go/bin" "$HOME/.keys"
-COPY config/fish/config.fish ./.config/fish/config.fish
-COPY config/fish/config-alias.fish ./.config/fish/config-alias.fish
+COPY --chown=${user}:${group} config/fish/config.fish ./.config/fish/config.fish
+COPY --chown=${user}:${group} config/fish/config-alias.fish ./.config/fish/config-alias.fish
+COPY --chown=${user}:${group} config/starship.toml ./.config/starship.toml
 
 # Fisher, z
 # RUN curl -sL https://git.io/fisher | fish && fish -c 'fisher install jorgebucaran/fisher' && \
