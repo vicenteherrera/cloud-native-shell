@@ -28,3 +28,6 @@ run:
 		-v /dev/hidraw1:/dev/hidraw1 \
 		--privileged \
 		--hostname awing --name cli-dev-shell cli-dev-shell
+
+# /dev/hidraw1 mounted to access Yubikey, with /dev/bus/usb, /sys/bus/usb and /sys/devices
+# May be in a different number for you

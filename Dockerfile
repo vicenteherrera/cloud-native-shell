@@ -77,8 +77,8 @@ RUN curl -sLo minikube https://storage.googleapis.com/minikube/releases/v${minik
   && chmod +x minikube && \
     mv minikube /usr/local/bin
 
-ARG kind_ver=0.12.0
 # Kind
+ARG kind_ver=0.12.0
 RUN curl -Lo ./kind https://kind.sigs.k8s.io/dl/v${kind_ver}/kind-linux-amd64 && \
     chmod +x ./kind && \
     mv ./kind /usr/local/bin
