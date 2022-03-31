@@ -114,6 +114,10 @@ RUN curl -sS https://starship.rs/install.sh >./install.sh && \
     sh ./install.sh --yes && \
     rm install.sh
 
+
+# Clean APT cache
+RUN apt clean
+
 # ------------------------------------------------------------------------------------
 
 # Set user and group
