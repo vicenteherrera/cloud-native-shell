@@ -195,5 +195,5 @@ RUN pip install thefuck --user
 # RUN gem install jekyll bundler
 
 ENV DEBIAN_FRONTEND=
-
-CMD /usr/bin/fish
+ENV DEFAULT_SHELL="${shell}"
+CMD $DEFAULT_SHELL

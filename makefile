@@ -15,6 +15,7 @@ build:
 		--build-arg group=$$(id -un) \
 		--build-arg uid=$$(id -u) \
 		--build-arg gid=$$(id -g) \
+		--build-arg shell=/usr/bin/fish \
 		--build-arg pass=changeme
 
 run:
