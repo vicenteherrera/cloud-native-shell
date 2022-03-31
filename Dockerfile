@@ -6,8 +6,8 @@ WORKDIR /install
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get -y upgrade && \
     apt-get install -y apt-utils curl wget gnupg2 apt-transport-https lsb-release sudo unzip \
-    swig libpcsclite-dev \
-    zsh nano
+    zsh nano \
+    swig libpcsclite-dev
 # Last line for Yubikey manager
         
 # Development (git, vim, build, python, ruby)
@@ -15,6 +15,7 @@ RUN apt-get -y install git vim build-essential direnv bat \
     python3-dev python3-pip python3-setuptools \
     npm \
     ruby-full zlib1g-dev \
+    podman \
     conntrack
 # conntrack is a Kubernetes 1.20.2 requirement
 

@@ -6,6 +6,7 @@ A command line environment configured with tools for cloud-native development
 
 * make, curl, git, vim, nano and other command line utils
 * Docker
+* Podman
 * Kubectl, aliases
 * Kubectx
 * Kubens
