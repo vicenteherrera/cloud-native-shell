@@ -6,7 +6,8 @@ WORKDIR /install
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get -y upgrade && \
     apt-get install -y apt-utils curl wget gnupg2 apt-transport-https lsb-release sudo unzip \
-    swig libpcsclite-dev
+    swig libpcsclite-dev \
+    zsh nano
 # Last line for Yubikey manager
         
 # Development (git, vim, build, python, ruby)
