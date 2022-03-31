@@ -113,35 +113,61 @@ RUN curl -sS https://starship.rs/install.sh >./install.sh && \
     sh ./install.sh --yes && \
     rm install.sh
 
+# ------------------------------------------------------------------------------------
+
 # Set user and group
 ARG user=vicente
 ARG group=developer
 ARG uid=1000
 ARG gid=1000
 ARG pass=changeme
+ARG shell=/usr/bin/fish
 
 RUN groupadd -g ${gid} ${group} && \
-    useradd -u ${uid} -g ${group} -s /usr/bin/fish -m ${user} && \
+    useradd -u ${uid} -g ${group} -s ${shell} -m ${user} && \
     usermod -aG sudo ${user} && \
     usermod -aG docker ${user} && newgrp docker && \
-    sudo usermod --shell /bin/bash ${user} && \
     echo "${user}:${pass}" | chpasswd
 
-RUN mkdir -p /home/${user}/.config/fish/completions /home/${user}/.config/fish/conf.d /home/${user}/.config/fish/functions && \
+RUN mkdir -p /home/${user}/.config/fish/completions \
+        /home/${user}/.config/fish/conf.d \
+        /home/${user}/.config/fish/functions && \
     chown -R ${user}:${group} /home/${user}
 
 # Switch to user
 USER ${uid}:${gid}
 WORKDIR /home/${user}
 RUN mkdir -p "$HOME/.local/bin" "$HOME/.go/bin" "$HOME/.keys"
+
+# --------------------------------------------------------------------------------------
+
+# Fish shell configuration files
 COPY --chown=${user}:${group} config/fish/config.fish ./.config/fish/config.fish
 COPY --chown=${user}:${group} config/fish/config-alias.fish ./.config/fish/config-alias.fish
 COPY --chown=${user}:${group} config/starship.toml ./.config/starship.toml
 
-# Kubectl completions
+# Z for the fish shell
+RUN git clone https://github.com/jethrokuan/z.git && \
+    mv ./z/conf.d/z.fish ./.config/fish/conf.d/z.fish && \
+    mv ./z/functions/* ./.config/fish/functions && \
+    rm -rf ./z
+
+# Kubectl completions for fish
+# Kubens completions for fish
+# Kubectx completions for fish
+
+# Bash shell specifics
+
+# Kubectl completions for bash
 RUN echo 'source <(kubectl completion bash)' >>/home/${user}/.bashrc && \
     echo 'alias k=kubectl' >>/home/${user}/.bashrc && \
     echo 'complete -F __start_kubectl k' >>/home/${user}/.bashrc
+
+# Zsh shell specifics
+
+# Programs that install on user profile
+
+# Krew
 
 # GCloud cli
 ARG gcloud_ver=378.0.0
@@ -163,20 +189,10 @@ RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-
 RUN pip install --user yubikey-manager
 
 # Thef*ck
-RUN pip3 install thefuck --user
+RUN pip install thefuck --user
 
 # Install Jekyll
 # RUN gem install jekyll bundler
-
-RUN git clone https://github.com/jethrokuan/z.git && \
-    mv ./z/conf.d/z.fish ./.config/fish/conf.d/z.fish && \
-    mv ./z/functions/* ./.config/fish/functions && \
-    rm -rf ./z
-
-# Fisher
-# RUN curl -sL https://git.io/fisher | fish && \
-#     fisher install jorgebucaran/fisher
-
 
 ENV DEBIAN_FRONTEND=
 
