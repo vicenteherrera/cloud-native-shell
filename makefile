@@ -1,5 +1,12 @@
 .PHONY: all
 
+BASH_SHELL=/bin/bash
+FISH_SHELL=/usr/bin/fish
+ZSH_SHELL=/usr/bin/zsh
+
+DEFAULT_SHELL=${FISH_SHELL}
+PASSWORD=changeme
+
 all: build run
 
 build:
@@ -15,8 +22,8 @@ build:
 		--build-arg group=$$(id -un) \
 		--build-arg uid=$$(id -u) \
 		--build-arg gid=$$(id -g) \
-		--build-arg shell=/usr/bin/fish \
-		--build-arg pass=changeme
+		--build-arg shell=${DEFAULT_SHELL} \
+		--build-arg pass=${PASSWORD}
 
 run:
 	sudo docker run --rm -it \
