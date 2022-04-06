@@ -4,15 +4,19 @@ A command line environment configured with tools for cloud-native development
 
 ## Software included
 
+* Debian 11
 * make, curl, git, vim, nano and other command line utils
 * Docker
 * Podman
+* Buildah
+* Skopeo
 * Kubectl, aliases
 * Kubectx
 * Kubens
-* Minikube
 * Helm
 * Stern
+* Minikube
+* Minishift
 * Kind
 * AWS cli
 * Google Cloud cli
@@ -21,6 +25,7 @@ A command line environment configured with tools for cloud-native development
 * npm, nvm
 * Go
 * Ruby, Jekyll
+* Terraform
 * Vagrant
 * 1Password cli
 * Yubikey manager

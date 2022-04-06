@@ -5,18 +5,22 @@ WORKDIR /install
 # General
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get -y upgrade && \
-    apt-get install -y apt-utils curl wget gnupg2 apt-transport-https lsb-release sudo unzip \
-    zsh nano \
-    swig libpcsclite-dev
+    apt-get install -y \
+        apt-utils software-properties-common  apt-transport-https lsb-release \
+        gnupg2 curl wget unzip sudo \
+        zsh nano \
+        swig libpcsclite-dev
 # Last line for Yubikey manager
         
 # Development (git, vim, build, python, ruby)
-RUN apt-get -y install git vim build-essential direnv bat \
-    python3-dev python3-pip python3-setuptools \
-    npm \
-    ruby-full zlib1g-dev \
-    podman \
-    conntrack
+RUN apt-get -y install \
+        git vim build-essential direnv bat \
+        python3-dev python3-pip python3-setuptools \
+        npm \
+        ruby-full zlib1g-dev \
+        podman buildah skopeo \
+        prometheus prometheus-alertmanager \
+        conntrack
 # conntrack is a Kubernetes 1.20.2 requirement
 
 # Kubectl
@@ -59,12 +63,12 @@ RUN curl -sL https://packages.microsoft.com/keys/microsoft.asc | \
         tee /etc/apt/sources.list.d/azure-cli.list && \
         apt-get update && apt-get install azure-cli
 
-# Vagrant
+# Terraform, Vagrant
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - && \
     echo "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" \
     | tee /etc/apt/sources.list.d/hashicorp.list > /dev/null && \
-    apt-get -y update && apt-get install -y vagrant
-# This will require an additional virtualization hypervisor
+    apt-get -y update && apt-get install -y vagrant terraform
+# Vagrant will require an additional virtualization hypervisor
 
 # Dotnet
 ARG dotnet_ver=6.0
@@ -77,7 +81,16 @@ RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod
 ARG minikube_ver=1.23.2
 RUN curl -sLo minikube https://storage.googleapis.com/minikube/releases/v${minikube_ver}/minikube-linux-amd64 \
   && chmod +x minikube && \
-    mv minikube /usr/local/bin
+    mv minikube /usr/local/bin/
+
+# Minishift
+# https://github.com/minishift/minishift/releases
+ARG minishift_ver=1.34.3
+RUN curl -sLo ms.tgz https://github.com/minishift/minishift/releases/download/v${minishift_ver}/minishift-${minishift_ver}-linux-amd64.tgz && \
+    tar -xvf ms.tgz && \
+    chmod +x minishift-${minishift_ver}-linux-amd64/minishift && \
+    mv minishift-${minishift_ver}-linux-amd64/minishift /usr/local/bin/ && \
+    rm -r minishift-${minishift_ver}-linux-amd64
 
 # Kind
 ARG kind_ver=0.12.0
@@ -114,7 +127,6 @@ RUN echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3
 RUN curl -sS https://starship.rs/install.sh >./install.sh && \
     sh ./install.sh --yes && \
     rm install.sh
-
 
 # Clean APT cache
 RUN apt clean
