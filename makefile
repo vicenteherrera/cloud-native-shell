@@ -11,12 +11,14 @@ all: build run
 
 build:
 	sudo docker build . -t cli-dev-shell \
+		--build-arg debian_ver=11 \
 		--build-arg minikube_ver=1.23.2 \
 		--build-arg minishift_ver=1.34.3 \
 		--build-arg kind_ver=0.12.0 \
 		--build-arg stern_ver=1.11.0 \
 		--build-arg gcloud_ver=378.0.0 \
 		--build-arg 1password_ver=2.0.0 \
+		--build-arg roxctl_ver=3.68.1 \
 		--build-arg go_ver=1.18 \
 		--build-arg dotnet_ver=6.0 \
 		--build-arg user=$$(id -un) \

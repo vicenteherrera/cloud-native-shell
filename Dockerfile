@@ -1,4 +1,5 @@
-FROM debian:11
+ARG debian_ver=11
+FROM debian:${debian_ver}
 
 WORKDIR /install
 
@@ -70,6 +71,9 @@ RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - && \
     apt-get -y update && apt-get install -y vagrant terraform
 # Vagrant will require an additional virtualization hypervisor
 
+# # Sysdig
+# RUN curl -s https://s3.amazonaws.com/download.draios.com/stable/install-sysdig | bash
+
 # Dotnet
 ARG dotnet_ver=6.0
 RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
@@ -115,6 +119,12 @@ ARG 1password_ver=2.0.0
 RUN curl -sLo op.zip https://cache.agilebits.com/dist/1P/op2/pkg/v2.0.0/op_linux_amd64_v2.0.0.zip && \
     unzip op.zip && mv op /usr/local/bin && rm op.zip op.sig
 # gpg --verify op.sig op
+
+# StackRox cli
+ARG roxctl_ver=3.68.1
+RUN curl -O https://mirror.openshift.com/pub/rhacs/assets/${roxctl_ver}/bin/Linux/roxctl && \
+    chmod +x roxctl && \
+    mv roxctl /usr/local/bin/
 
 # Fish shell
 RUN echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /' \

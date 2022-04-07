@@ -5,36 +5,45 @@ A command line environment configured with tools for cloud-native development
 ## Software included
 
 * Debian 11
-* make, curl, git, vim, nano and other command line utils
-* Docker
-* Podman
-* Buildah
-* Skopeo
-* Kubectl, aliases
-* Kubectx
-* Kubens
-* Helm
-* Stern
-* Minikube
-* Minishift
-* Kind
-* AWS cli
-* Google Cloud cli
-* Azure cli
-* Python, pip, PyEnv, Poetry
-* npm, nvm
-* Go
-* Ruby, Jekyll
-* Terraform
-* Vagrant
-* 1Password cli
-* Yubikey manager
-* Dot Net 6
-* Bash shell
-* Fish shell
-* zsh shell
-* Starship prompt
-* Thef*ck
-* Batcat
-* direnv
-* z
+* Containers and VM
+  * Docker
+  * Podman
+  * Buildah
+  * Skopeo
+  * Vagrant
+* Kubernetes
+  * Kubectl, aliases
+  * Kubectx
+  * Kubens
+  * Helm
+  * Stern
+  * Minikube
+  * Minishift
+  * Kind
+* Cloud
+  * AWS cli
+  * Google Cloud cli
+  * Azure cli
+  * Terraform
+* Programming
+  * Python, pip, PyEnv, Poetry
+  * node, npm, nvm
+  * Go
+  * Ruby, Jekyll
+  * Dot Net 6
+* Local security
+  * 1Password cli
+  * Yubikey manager
+* Cloud Native security
+  * roxctl
+* Shells
+  * Bash shell
+  * Fish shell
+  * zsh shell
+* Command line utilities
+  * make, curl, wget, git, vim, nano and others
+  * Starship prompt
+  * Thef*ck
+  * Batcat
+  * direnv
+  * z
