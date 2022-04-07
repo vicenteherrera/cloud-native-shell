@@ -42,6 +42,7 @@ A command line environment configured with tools for cloud-native development
   * zsh shell
 * Command line utilities
   * make, curl, wget, git, vim, nano and others
+  * GitHub cli
   * Starship prompt
   * Thef*ck
   * Batcat

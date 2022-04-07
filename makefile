@@ -11,7 +11,7 @@ all: build run
 
 build:
 	sudo docker build . -t cli-dev-shell \
-		--build-arg debian_ver=11 \
+		--build-arg debian_ver=11.3 \
 		--build-arg minikube_ver=1.23.2 \
 		--build-arg minishift_ver=1.34.3 \
 		--build-arg kind_ver=0.12.0 \

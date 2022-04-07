@@ -28,48 +28,59 @@ RUN apt-get -y install \
 RUN apt-get install -y apt-transport-https ca-certificates curl && \
     curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg && \
     echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" \
-    | tee /etc/apt/sources.list.d/kubernetes.list && \
-    apt-get update && apt-get install -y kubectl
-
-# Kubectx, Kubens
-RUN curl -sLo kubectx https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx && \
-    chmod +x kubectx && mv kubectx /usr/local/bin && \
-    curl -sLo kubens https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens && \
-    chmod +x kubens && mv kubens /usr/local/bin
-
-# Helm
-RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 && \
-    chmod 700 get_helm.sh && \
-    ./get_helm.sh && rm ./get_helm.sh
+    | tee /etc/apt/sources.list.d/kubernetes.list > /dev/null && \
+    apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/kubernetes.list && \
+    apt-get install -y kubectl
 
 # Docker (in Docker)
 RUN apt-get install -y lsb-release && \
     curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" \
     | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
-    apt-get update && apt-get install -y docker-ce docker-ce-cli containerd.io 
-
-# AWS cli
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
-    unzip awscliv2.zip && \
-    ./aws/install && \
-    rm -r ./aws awscliv2.zip
+    apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/docker.list && \
+    apt-get install -y docker-ce docker-ce-cli containerd.io 
 
 # Azure cli
-RUN curl -sL https://packages.microsoft.com/keys/microsoft.asc | \
-        gpg --dearmor | \
-        tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null && \
+RUN curl -sL https://packages.microsoft.com/keys/microsoft.asc \
+        | gpg --dearmor \
+        | tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null && \
     AZ_REPO=$(lsb_release -cs) && \
-    echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
-        tee /etc/apt/sources.list.d/azure-cli.list && \
-        apt-get update && apt-get install azure-cli
+    echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" \
+        | tee /etc/apt/sources.list.d/azure-cli.list && \
+    apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/azure-cli.list && \
+    apt-get install azure-cli
 
 # Terraform, Vagrant
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - && \
     echo "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" \
-    | tee /etc/apt/sources.list.d/hashicorp.list > /dev/null && \
-    apt-get -y update && apt-get install -y vagrant terraform
+        | tee /etc/apt/sources.list.d/hashicorp.list > /dev/null && \
+    apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/hashicorp.list && \
+    apt-get install -y vagrant terraform
 # Vagrant will require an additional virtualization hypervisor
+
+# GitHub cli
+RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
+        | tee /etc/apt/sources.list.d/github-cli.list > /dev/null && \
+    apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/github-cli.list && \ 
+    apt install gh
+
+# Kubectx, Kubens
+RUN curl -sLo kubectx https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx && \
+    chmod +x kubectx && mv kubectx /usr/local/bin/ && \
+    curl -sLo kubens https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens && \
+    chmod +x kubens && mv kubens /usr/local/bin/
+
+# Helm 3
+RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 && \
+    chmod 700 get_helm.sh && \
+    ./get_helm.sh && rm ./get_helm.sh
+
+# AWS cli 2
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    ./aws/install && \
+    rm -r ./aws awscliv2.zip
 
 # # Sysdig
 # RUN curl -s https://s3.amazonaws.com/download.draios.com/stable/install-sysdig | bash
@@ -100,13 +111,13 @@ RUN curl -sLo ms.tgz https://github.com/minishift/minishift/releases/download/v$
 ARG kind_ver=0.12.0
 RUN curl -Lo ./kind https://kind.sigs.k8s.io/dl/v${kind_ver}/kind-linux-amd64 && \
     chmod +x ./kind && \
-    mv ./kind /usr/local/bin
+    mv ./kind /usr/local/bin/
 
 # Stern
 ARG stern_ver=1.11.0
 RUN curl -sLo stern https://github.com/wercker/stern/releases/download/${stern_ver}/stern_linux_amd64 && \
     chmod +x stern && \
-    mv stern /usr/local/bin
+    mv stern /usr/local/bin/
 
 # Go
 ARG go_ver=1.18
@@ -117,7 +128,7 @@ RUN curl -sLo go.tar.gz https://go.dev/dl/go${go_ver}.linux-amd64.tar.gz && \
 # 1Password
 ARG 1password_ver=2.0.0
 RUN curl -sLo op.zip https://cache.agilebits.com/dist/1P/op2/pkg/v2.0.0/op_linux_amd64_v2.0.0.zip && \
-    unzip op.zip && mv op /usr/local/bin && rm op.zip op.sig
+    unzip op.zip && mv op /usr/local/bin/ && rm op.zip op.sig
 # gpg --verify op.sig op
 
 # StackRox cli
