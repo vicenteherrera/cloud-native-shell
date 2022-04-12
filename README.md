@@ -26,6 +26,9 @@ A command line environment configured with tools for cloud-native development
   * Google Cloud cli
   * Azure cli
   * Terraform
+* Observability
+  * Prometheus
+  * Alertmanager cli (amtool)
 * Programming
   * Python, pip, PyEnv, Poetry
   * node, npm, nvm
