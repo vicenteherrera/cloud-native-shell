@@ -85,12 +85,19 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 # # Sysdig
 # RUN curl -s https://s3.amazonaws.com/download.draios.com/stable/install-sysdig | bash
 
+# OpenShift 4 cli
+RUN curl -sLo oc.tar.gz https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/oc.tar.gz && \
+    tar -xvf oc.tar.gz && \
+    chmod +x oc && mv oc /usr/local/bin/ && \
+    rm README.md kubectl oc.tar.gz
+
 # Dotnet
 ARG dotnet_ver=6.0
 RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
     dpkg -i packages-microsoft-prod.deb && rm packages-microsoft-prod.deb && \
     apt-get update && \
     apt-get install -y dotnet-sdk-${dotnet_ver}
+ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 # Minikube
 ARG minikube_ver=1.23.2
