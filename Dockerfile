@@ -91,6 +91,11 @@ RUN curl -sLo oc.tar.gz https://mirror.openshift.com/pub/openshift-v4/clients/oc
     chmod +x oc && mv oc /usr/local/bin/ && \
     rm README.md kubectl oc.tar.gz
 
+# eksctl
+RUN curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" \
+        | tar xz -C /tmp && \
+    mv /tmp/eksctl /usr/local/bin
+
 # Dotnet
 ARG dotnet_ver=6.0
 RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \

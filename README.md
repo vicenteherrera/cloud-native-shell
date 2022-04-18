@@ -16,6 +16,7 @@ A command line environment configured with tools for cloud-native development
   * Kubectx
   * Kubens
   * OpenShift 4 cli
+  * eksctl
   * Helm
   * Stern
   * Minikube
