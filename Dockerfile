@@ -131,6 +131,11 @@ RUN curl -sLo stern https://github.com/wercker/stern/releases/download/${stern_v
     chmod +x stern && \
     mv stern /usr/local/bin/
 
+ARG helmfile_ver=0.144.0
+RUN curl -sLo helmfile https://github.com/roboll/helmfile/releases/download/v0.144.0/helmfile_linux_amd64 && \
+    chmod +x helmfile && \
+    mv helmfile /usr/local/bin/
+
 # Go
 ARG go_ver=1.18
 RUN curl -sLo go.tar.gz https://go.dev/dl/go${go_ver}.linux-amd64.tar.gz && \

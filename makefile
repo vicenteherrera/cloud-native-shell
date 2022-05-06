@@ -19,6 +19,7 @@ build:
 		--build-arg gcloud_ver=378.0.0 \
 		--build-arg 1password_ver=2.0.0 \
 		--build-arg roxctl_ver=3.68.1 \
+		--build-arg helmfile_ver=0.144.0 \
 		--build-arg go_ver=1.18 \
 		--build-arg dotnet_ver=6.0 \
 		--build-arg user=$$(id -un) \
