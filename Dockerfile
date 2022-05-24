@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get -y upgrade && \
     apt-get install -y \
         apt-utils software-properties-common  apt-transport-https lsb-release \
-        gnupg2 curl wget unzip sudo \
+        gnupg gnupg2 curl wget unzip sudo \
         zsh nano \
         swig libpcsclite-dev
 # Last line for Yubikey manager
@@ -49,6 +49,15 @@ RUN curl -sL https://packages.microsoft.com/keys/microsoft.asc \
         | tee /etc/apt/sources.list.d/azure-cli.list && \
     apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/azure-cli.list && \
     apt-get install azure-cli
+
+# Trivy
+RUN wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | apt-key add - && \
+    echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list && \
+    apt-get update && \
+    apt-get install trivy
+
+# Grype
+RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
 
 # Terraform, Vagrant
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - && \
@@ -131,6 +140,7 @@ RUN curl -sLo stern https://github.com/wercker/stern/releases/download/${stern_v
     chmod +x stern && \
     mv stern /usr/local/bin/
 
+# Helmfile
 ARG helmfile_ver=0.144.0
 RUN curl -sLo helmfile https://github.com/roboll/helmfile/releases/download/v0.144.0/helmfile_linux_amd64 && \
     chmod +x helmfile && \
@@ -153,6 +163,19 @@ ARG roxctl_ver=3.68.1
 RUN curl -O https://mirror.openshift.com/pub/rhacs/assets/${roxctl_ver}/bin/Linux/roxctl && \
     chmod +x roxctl && \
     mv roxctl /usr/local/bin/
+
+# KubeAudit
+ARG kubeaudit_ver=0.17.0
+RUN curl -sLo kubeaudit.tar.gz https://github.com/Shopify/kubeaudit/releases/download/${kubeaudit_ver}/kubeaudit_${kubeaudit_ver}_linux_amd64.tar.gz && \
+    tar -xvf kubeaudit.tar.gz && chmod +x kubeaudit && \
+    mv kubeaudit /usr/local/bin/ && rm kubeaudit.tar.gz README.md
+
+# Audit2RBAC
+ARG audit2rbac_ver 0.9.0
+RUN curl -sLo audit2rbac.tar.gz https://github.com/liggitt/audit2rbac/releases/download/v${audit2rbac_ver}/audit2rbac-linux-amd64.tar.gz && \
+    tar -xvf audit2rbac.tar.gz && \
+    chmod +x audit2rbac && \
+    mv audit2rbac /usr/local/bin/ && rm audit2rbac.tar.gz
 
 # Fish shell
 RUN echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /' \
@@ -240,6 +263,9 @@ RUN curl https://pyenv.run | bash
 
 # Poetry
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -
+
+# Kube-hunter
+RUN pip install kube-hunter
 
 # Yubikey Manager
 RUN pip install --user yubikey-manager

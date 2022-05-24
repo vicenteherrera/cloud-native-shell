@@ -40,7 +40,12 @@ A command line environment configured with tools for cloud-native development
   * 1Password cli
   * Yubikey manager
 * Cloud Native security
-  * roxctl
+  * [KubeAudit](https://github.com/Shopify/kubeaudit)
+  * [Kube-hunter](https://github.com/aquasecurity/kube-hunter)
+  * [audit2rbac](https://github.com/liggitt/audit2rbac)
+  * [Trivy](https://github.com/aquasecurity/trivy)
+  * [Grype](https://github.com/anchore/grype)
+  * [roxctl](https://docs.openshift.com/acs/3.66/cli/getting-started-cli.html)
 * Shells
   * Bash shell
   * Fish shell
@@ -53,3 +58,15 @@ A command line environment configured with tools for cloud-native development
   * Batcat
   * direnv
   * z
+
+# Other Cloud Native tools
+
+The following Cloud Native tools should be installed in the cluster/nodes to be able to use them.
+
+* [Falco](https://github.com/falcosecurity/falco)
+* [KubeBench](https://github.com/aquasecurity/kube-bench)
+* [Tetragon](https://github.com/cilium/tetragon)
+* [Tracee](https://github.com/aquasecurity/tracee)
+* [Hubble](https://github.com/cilium/hubble)
+* [RBAC-Police](https://github.com/PaloAltoNetworks/rbac-police)
+* [Gatekeeper](https://github.com/open-policy-agent/gatekeeper)
