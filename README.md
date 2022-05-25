@@ -45,6 +45,7 @@ A command line environment configured with tools for cloud-native development
   * [audit2rbac](https://github.com/liggitt/audit2rbac)
   * [Trivy](https://github.com/aquasecurity/trivy)
   * [Grype](https://github.com/anchore/grype)
+  * [detect-secrets](https://github.com/Yelp/detect-secrets)
   * [roxctl](https://docs.openshift.com/acs/3.66/cli/getting-started-cli.html)
 * Shells
   * Bash shell

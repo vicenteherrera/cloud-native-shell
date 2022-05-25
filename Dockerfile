@@ -267,6 +267,9 @@ RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-
 # Kube-hunter
 RUN pip install kube-hunter
 
+# detect-secrets
+RUN pip install detect-secrets
+
 # Yubikey Manager
 RUN pip install --user yubikey-manager
 
