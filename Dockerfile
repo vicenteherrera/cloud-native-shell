@@ -74,6 +74,13 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | s
     apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/github-cli.list && \ 
     apt install gh
 
+# Tekton cli
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3EFE0E0A2F2F60AA && \
+    echo "deb http://ppa.launchpad.net/tektoncd/cli/ubuntu eoan main" \
+        | tee /etc/apt/sources.list.d/tektoncd-ubuntu-cli.list && \
+    apt update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/tektoncd-ubuntu-cli.list && \
+    apt install -y tektoncd-cli
+
 # Kubectx, Kubens
 RUN curl -sLo kubectx https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx && \
     chmod +x kubectx && mv kubectx /usr/local/bin/ && \

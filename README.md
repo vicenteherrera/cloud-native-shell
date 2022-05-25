@@ -22,6 +22,7 @@ A command line environment configured with tools for cloud-native development
   * Minikube
   * Minishift
   * Kind
+  * Tekton cli
 * Cloud
   * AWS cli
   * Google Cloud cli
