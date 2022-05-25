@@ -246,6 +246,9 @@ RUN echo 'source <(kubectl completion bash)' >>/home/${user}/.bashrc && \
 
 # Programs that install on user profile
 
+# Jekyll, Bundler
+RUN gem install --user jekyll bundler
+
 # Krew
 
 # GCloud cli
@@ -269,9 +272,6 @@ RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-
 # Yubikey Manager
 # Thef*ck
 RUN pip install --user kube-hunter detect-secrets yubikey-manager thefuck
-
-# Install Jekyll
-# RUN gem install jekyll bundler
 
 ENV DEBIAN_FRONTEND=
 ENV DEFAULT_SHELL="${shell}"

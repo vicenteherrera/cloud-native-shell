@@ -51,7 +51,7 @@ A command line environment configured with tools for cloud-native development
   * Bash shell
   * Fish shell
   * zsh shell
-* Command line utilities
+* Command line utilities, miscelaneous
   * make, curl, wget, git, vim, nano and others
   * GitHub cli
   * Starship prompt
@@ -59,6 +59,7 @@ A command line environment configured with tools for cloud-native development
   * Batcat
   * direnv
   * z
+  * Jekyll, Bundler
 
 # Other Cloud Native tools
 
