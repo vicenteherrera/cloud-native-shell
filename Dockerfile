@@ -265,16 +265,10 @@ RUN curl https://pyenv.run | bash
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -
 
 # Kube-hunter
-RUN pip install kube-hunter
-
 # detect-secrets
-RUN pip install detect-secrets
-
 # Yubikey Manager
-RUN pip install --user yubikey-manager
-
 # Thef*ck
-RUN pip install thefuck --user
+RUN pip install --user kube-hunter detect-secrets yubikey-manager thefuck
 
 # Install Jekyll
 # RUN gem install jekyll bundler
