@@ -16,7 +16,7 @@ set -x PATH "$GOPATH/bin:/usr/local/go/bin:$PATH"
 
 ## Kubectl, Kubectx, Kubens, Krew
 alias k kubectl
-# set -gx PATH $PATH $HOME/.krew/bin
+set -gx PATH $PATH $HOME/.krew/bin
 
 # # Ruby
 set -x GEM_PATH "$HOME/.gem/bin"

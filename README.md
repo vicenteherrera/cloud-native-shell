@@ -13,6 +13,7 @@ A command line environment configured with tools for cloud-native development
   * Vagrant
 * Kubernetes
   * Kubectl, aliases
+  * Krew
   * Kubectx
   * Kubens
   * OpenShift 4 cli
