@@ -188,6 +188,14 @@ RUN curl -sLo audit2rbac.tar.gz https://github.com/liggitt/audit2rbac/releases/d
     chmod +x audit2rbac && \
     mv audit2rbac /usr/local/bin/ && rm audit2rbac.tar.gz
 
+# JLess
+ARG jless_ver=0.8.0
+RUN curl -sLo jless.zip https://github.com/PaulJuliusMartinez/jless/releases/download/v${jless_ver}/jless-v${jless_ver}-x86_64-unknown-linux-gnu.zip && \
+    unzip jless.zip && \
+    chmod +x jless && \
+    mv jless /usr/local/bin/ && \
+    rm jless.zip
+
 # Fish shell
 RUN echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /' \
     | tee /etc/apt/sources.list.d/shells:fish:release:3.list && \

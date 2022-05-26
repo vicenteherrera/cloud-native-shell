@@ -55,8 +55,9 @@ A command line environment configured with tools for cloud-native development
   * zsh shell
 * Command line utilities, miscelaneous
   * make, curl, wget, git, vim, nano and others
-  * GitHub cli
-  * Starship prompt
+  * [GitHub cli](https://cli.github.com/)
+  * [JLess](https://github.com/PaulJuliusMartinez/jless)
+  * [Starship prompt](https://starship.rs/)
   * Thef*ck
   * Batcat
   * direnv
