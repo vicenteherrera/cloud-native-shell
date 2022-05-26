@@ -4,7 +4,7 @@ A command line environment configured with tools for cloud-native development.
 
 ## Software included
 
-* Debian 11
+* [Debian 11 "Bullseye"](https://www.debian.org/News/2021/20210814)
 * Containers and VM
   * [Docker](https://docs.docker.com/engine/reference/commandline/cli/)
   * [Podman](https://podman.io/)
@@ -26,13 +26,13 @@ A command line environment configured with tools for cloud-native development.
   * [Minishift](https://github.com/minishift/minishift)
   * [Kind](https://kind.sigs.k8s.io/)
 * Cloud
-  * AWS cli
-  * Google Cloud cli
-  * Azure cli
-  * Terraform
+  * [AWS cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+  * [Google Cloud cli](https://cloud.google.com/sdk/gcloud)
+  * [Azure cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
+  * [Terraform](https://github.com/hashicorp/terraform)
 * Observability
-  * Prometheus (promtool)
-  * Alertmanager (amtool)
+  * [Prometheus (promtool)](https://prometheus.io/docs/prometheus/latest/configuration/unit_testing_rules/)
+  * [Alertmanager (amtool)](https://github.com/prometheus/alertmanager)
 * Programming
   * Python, pip, PyEnv, Poetry
   * node, npm, nvm
@@ -40,8 +40,8 @@ A command line environment configured with tools for cloud-native development.
   * Ruby, Jekyll
   * Dot Net 6
 * Local security
-  * 1Password cli
-  * Yubikey manager
+  * [1Password cli](https://1password.com/downloads/command-line/)
+  * [Yubikey manager](https://github.com/Yubico/yubikey-manager)
 * Cloud Native security
   * [KubeAudit](https://github.com/Shopify/kubeaudit)
   * [Kube-hunter](https://github.com/aquasecurity/kube-hunter)
