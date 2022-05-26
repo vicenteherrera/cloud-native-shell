@@ -20,10 +20,11 @@ A command line environment configured with tools for cloud-native development
   * [Helm](https://helm.sh/)
   * [Helmfile](https://github.com/roboll/helmfile)
   * [Stern](https://github.com/wercker/stern)
+  * [Tekton cli](https://tekton.dev/docs/cli/)
+  * [crictl](https://github.com/kubernetes-sigs/cri-tools/blob/master/docs/crictl.md)
   * [Minikube](https://minikube.sigs.k8s.io/docs/start/)
   * [Minishift](https://github.com/minishift/minishift)
   * [Kind](https://kind.sigs.k8s.io/)
-  * [Tekton cli](https://tekton.dev/docs/cli/)
 * Cloud
   * AWS cli
   * Google Cloud cli
@@ -66,13 +67,12 @@ A command line environment configured with tools for cloud-native development
   * [z](https://github.com/rupa/z)
   * [Jekyll](https://jekyllrb.com/), [Bundler](https://bundler.io/)
 
-# Other Cloud Native tools
+# Other Cloud Native tools not installed
 
 The following Cloud Native tools should be installed in the cluster/nodes to be able to use them.
 
 * [Falco](https://github.com/falcosecurity/falco)
 * [KubeBench](https://github.com/aquasecurity/kube-bench)
-* [Tetragon](https://github.com/cilium/tetragon)
 * [Tracee](https://github.com/aquasecurity/tracee)
 * [Hubble](https://github.com/cilium/hubble)
 * [RBAC-Police](https://github.com/PaloAltoNetworks/rbac-police)

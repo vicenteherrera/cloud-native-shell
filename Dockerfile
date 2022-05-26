@@ -199,7 +199,12 @@ RUN curl -sLo jless.zip https://github.com/PaulJuliusMartinez/jless/releases/dow
 # yq
 ARG yq_version=4.25.1
 RUN wget https://github.com/mikefarah/yq/releases/download/v${yq_version}/yq_linux_amd64.tar.gz -O - |\
-        tar xz && mv yq_linux_amd64 /usr/bin/yq
+        tar xz && mv yq_linux_amd64 /usr/local/bin/yq
+
+# crictl
+ARG crictl_ver=1.24.1
+RUN wget https://github.com/kubernetes-sigs/cri-tools/releases/download/v${crictl_ver}/crictl-v${crictl_ver}-linux-amd64.tar.gz -O - |\
+        tar xz && mv crictl /usr/local/bin/
 
 # helmfile
 ARG helmfile_ver=0.144.0
