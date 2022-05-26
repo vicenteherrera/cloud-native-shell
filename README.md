@@ -1,6 +1,6 @@
 # command-line-env
 
-A command line environment configured with tools for cloud-native development
+A command line environment configured with tools for cloud-native development.
 
 ## Software included
 
@@ -50,14 +50,15 @@ A command line environment configured with tools for cloud-native development
   * [Grype](https://github.com/anchore/grype)
   * [detect-secrets](https://github.com/Yelp/detect-secrets)
   * [Tetragon cli](https://github.com/cilium/tetragon)
+  * [sdc-cli (Sysdig cli)](https://sysdiglabs.github.io/sysdig-platform-cli/)
   * [roxctl](https://docs.openshift.com/acs/3.66/cli/getting-started-cli.html)
 * Shells
   * Bash shell
-  * Fish shell
+  * Fish shell (default)
   * zsh shell
 * Command line utilities, miscelaneous
   * make, curl, wget, git, vim, nano and others
-  * jq, [yq](https://github.com/mikefarah/yq)
+  * [jq](https://stedolan.github.io/jq/), [yq](https://github.com/mikefarah/yq)
   * [GitHub cli](https://cli.github.com/)
   * [JLess](https://github.com/PaulJuliusMartinez/jless)
   * [Starship prompt](https://starship.rs/)
@@ -67,7 +68,7 @@ A command line environment configured with tools for cloud-native development
   * [z](https://github.com/rupa/z)
   * [Jekyll](https://jekyllrb.com/), [Bundler](https://bundler.io/)
 
-# Other Cloud Native tools not installed
+## Other Cloud Native tools not installed
 
 The following Cloud Native tools should be installed in the cluster/nodes to be able to use them.
 
@@ -77,3 +78,9 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
 * [Hubble](https://github.com/cilium/hubble)
 * [RBAC-Police](https://github.com/PaloAltoNetworks/rbac-police)
 * [Gatekeeper](https://github.com/open-policy-agent/gatekeeper)
+
+## Build locally and launch
+
+```bash
+make
+```

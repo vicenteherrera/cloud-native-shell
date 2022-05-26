@@ -314,11 +314,8 @@ RUN curl https://pyenv.run | bash
 # Poetry
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -
 
-# Kube-hunter
-# detect-secrets
-# Yubikey Manager
-# Thef*ck
-RUN pip install --user kube-hunter detect-secrets yubikey-manager thefuck
+# Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli
+RUN pip install --user kube-hunter detect-secrets yubikey-manager thefuck sdccli
 
 ENV DEBIAN_FRONTEND=
 ENV DEFAULT_SHELL="${shell}"
