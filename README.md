@@ -6,24 +6,24 @@ A command line environment configured with tools for cloud-native development
 
 * Debian 11
 * Containers and VM
-  * Docker
-  * Podman
-  * Buildah
-  * Skopeo
-  * Vagrant
+  * [Docker](https://docs.docker.com/engine/reference/commandline/cli/)
+  * [Podman](https://podman.io/)
+  * [Buildah](https://buildah.io/)
+  * [Skopeo](https://github.com/containers/skopeo)
+  * [Vagrant](https://www.vagrantup.com/)
 * Kubernetes
-  * Kubectl, aliases
-  * Krew
-  * Kubectx
-  * Kubens
-  * OpenShift 4 cli
-  * eksctl
+  * [Kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/), aliases
+  * [Krew](https://krew.sigs.k8s.io/)
+  * [Kubectx, Kubens](https://github.com/ahmetb/kubectx)
+  * [OpenShift 4 cli (oc)](https://docs.openshift.com/container-platform/4.7/cli_reference/openshift_cli/getting-started-cli.html)
+  * [eksctl](https://eksctl.io/)
+  * [Helm](https://helm.sh/)
   * [Helmfile](https://github.com/roboll/helmfile)
-  * Stern
-  * Minikube
-  * Minishift
-  * Kind
-  * Tekton cli
+  * [Stern](https://github.com/wercker/stern)
+  * [Minikube](https://minikube.sigs.k8s.io/docs/start/)
+  * [Minishift](https://github.com/minishift/minishift)
+  * [Kind](https://kind.sigs.k8s.io/)
+  * [Tekton cli](https://tekton.dev/docs/cli/)
 * Cloud
   * AWS cli
   * Google Cloud cli
@@ -59,11 +59,11 @@ A command line environment configured with tools for cloud-native development
   * [GitHub cli](https://cli.github.com/)
   * [JLess](https://github.com/PaulJuliusMartinez/jless)
   * [Starship prompt](https://starship.rs/)
-  * Thef*ck
-  * Batcat
-  * direnv
-  * z
-  * Jekyll, Bundler
+  * [Thef*ck](https://github.com/nvbn/thefuck)
+  * [Batcat](https://github.com/sharkdp/bat)
+  * [direnv](https://direnv.net/)
+  * [z](https://github.com/rupa/z)
+  * [Jekyll](https://jekyllrb.com/), [Bundler](https://bundler.io/)
 
 # Other Cloud Native tools
 
