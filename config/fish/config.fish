@@ -24,7 +24,7 @@ set -x GEM_HOME "$HOME/.gem"
 set -x PATH "$HOME/.gem/bin:$PATH"
 
 # ## npm
-# set -x PATH "$HOME/.npm-global/bin:$PATH"
+set -x PATH "$HOME/node_modules/.bin:$PATH"
 
 # ## Dot Net
 set -x DOTNET_CLI_TELEMETRY_OPTOUT 1

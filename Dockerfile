@@ -317,6 +317,9 @@ RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-
 # Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli
 RUN pip install --user kube-hunter detect-secrets yubikey-manager thefuck sdccli
 
+# Snyk
+RUN npm install snyk
+
 ENV DEBIAN_FRONTEND=
 ENV DEFAULT_SHELL="${shell}"
 CMD $DEFAULT_SHELL
