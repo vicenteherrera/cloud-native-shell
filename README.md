@@ -18,7 +18,7 @@ A command line environment configured with tools for cloud-native development
   * Kubens
   * OpenShift 4 cli
   * eksctl
-  * Helm
+  * [Helmfile](https://github.com/roboll/helmfile)
   * Stern
   * Minikube
   * Minishift
@@ -55,6 +55,7 @@ A command line environment configured with tools for cloud-native development
   * zsh shell
 * Command line utilities, miscelaneous
   * make, curl, wget, git, vim, nano and others
+  * jq, [yq](https://github.com/mikefarah/yq)
   * [GitHub cli](https://cli.github.com/)
   * [JLess](https://github.com/PaulJuliusMartinez/jless)
   * [Starship prompt](https://starship.rs/)

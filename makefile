@@ -18,6 +18,7 @@ build:
 		--build-arg stern_ver=1.11.0 \
 		--build-arg gcloud_ver=378.0.0 \
 		--build-arg jless_ver=0.8.0 \
+		--build-arg yq_version=4.25.1 \
 		--build-arg 1password_ver=2.0.0 \
 		--build-arg roxctl_ver=3.68.1 \
 		--build-arg kubeaudit_ver=0.17.0 \

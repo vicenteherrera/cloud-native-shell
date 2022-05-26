@@ -9,7 +9,7 @@ RUN apt-get update && apt-get -y upgrade && \
     apt-get install -y \
         apt-utils software-properties-common  apt-transport-https lsb-release \
         gnupg gnupg2 curl wget unzip sudo \
-        zsh nano \
+        zsh nano jq \
         swig libpcsclite-dev
 # Last line for Yubikey manager
         
@@ -195,6 +195,16 @@ RUN curl -sLo jless.zip https://github.com/PaulJuliusMartinez/jless/releases/dow
     chmod +x jless && \
     mv jless /usr/local/bin/ && \
     rm jless.zip
+
+# yq
+ARG yq_version=4.25.1
+RUN wget https://github.com/mikefarah/yq/releases/download/v${yq_version}/yq_linux_amd64.tar.gz -O - |\
+        tar xz && mv yq_linux_amd64 /usr/bin/yq
+
+# helmfile
+ARG helmfile_ver=0.144.0
+RUN curl -sLo helmfile https://github.com/roboll/helmfile/releases/download/v${helmfile_ver}/helmfile_linux_amd64 && \
+    chmod +x helmfile && mv helmfile /usr/local/bin/
 
 # Fish shell
 RUN echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /' \
