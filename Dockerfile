@@ -206,6 +206,10 @@ ARG helmfile_ver=0.144.0
 RUN curl -sLo helmfile https://github.com/roboll/helmfile/releases/download/v${helmfile_ver}/helmfile_linux_amd64 && \
     chmod +x helmfile && mv helmfile /usr/local/bin/
 
+# Tetragon
+RUN wget https://github.com/cilium/tetragon/releases/download/tetragon-cli/tetragon-linux-amd64.tar.gz -O - |\
+        tar xz && mv tetragon /usr/bin/tetragon
+
 # Fish shell
 RUN echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /' \
     | tee /etc/apt/sources.list.d/shells:fish:release:3.list && \
