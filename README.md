@@ -21,6 +21,7 @@ A command line environment configured with tools for cloud-native development.
   * [Helmfile](https://github.com/roboll/helmfile)
   * [Stern](https://github.com/wercker/stern)
   * [Tekton cli](https://tekton.dev/docs/cli/)
+  * [Okteto cli](https://www.okteto.com/docs/cloud/okteto-cli)
   * [crictl](https://github.com/kubernetes-sigs/cri-tools/blob/master/docs/crictl.md)
   * [Minikube](https://minikube.sigs.k8s.io/docs/start/)
   * [Minishift](https://github.com/minishift/minishift)
