@@ -33,6 +33,7 @@ A command line environment configured with tools for cloud-native development.
 * Observability
   * [Prometheus (promtool)](https://prometheus.io/docs/prometheus/latest/configuration/unit_testing_rules/)
   * [Alertmanager (amtool)](https://github.com/prometheus/alertmanager)
+  * [Robusta cli](https://docs.robusta.dev/master/installation.html)
 * Programming
   * Python, pip, PyEnv, Poetry
   * node, npm, nvm
@@ -79,6 +80,7 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
 * [Hubble](https://github.com/cilium/hubble)
 * [RBAC-Police](https://github.com/PaloAltoNetworks/rbac-police)
 * [Gatekeeper](https://github.com/open-policy-agent/gatekeeper)
+* [ThreatMapper](https://github.com/deepfence/ThreatMapper)
 
 ## Build locally and launch
 
