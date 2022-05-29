@@ -71,16 +71,19 @@ A command line environment configured with tools for cloud-native development.
   * [z](https://github.com/rupa/z)
   * [Jekyll](https://jekyllrb.com/), [Bundler](https://bundler.io/)
 
-## Other Cloud Native tools not installed
+## Other open source Cloud Native tools for a cluster
 
 The following Cloud Native tools should be installed in the cluster/nodes to be able to use them.
 
 * [Falco](https://github.com/falcosecurity/falco)
 * [KubeBench](https://github.com/aquasecurity/kube-bench)
+* [Gatekeeper](https://github.com/open-policy-agent/gatekeeper)
+* [Hashicorp Vault](https://www.vaultproject.io/)
+* [Notary](https://github.com/notaryproject/notary)
+* [Chains](https://github.com/tektoncd/chains)
+* [RBAC-Police](https://github.com/PaloAltoNetworks/rbac-police)
 * [Tracee](https://github.com/aquasecurity/tracee)
 * [Hubble](https://github.com/cilium/hubble)
-* [RBAC-Police](https://github.com/PaloAltoNetworks/rbac-police)
-* [Gatekeeper](https://github.com/open-policy-agent/gatekeeper)
 * [ThreatMapper](https://github.com/deepfence/ThreatMapper)
 
 ## Build locally and launch
