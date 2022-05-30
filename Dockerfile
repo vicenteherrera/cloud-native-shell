@@ -19,10 +19,18 @@ RUN apt-get -y install \
         python3-dev python3-pip python3-setuptools \
         npm \
         ruby-full zlib1g-dev \
-        podman buildah skopeo \
+        podman buildah skopeo yamllint shellcheck \
         prometheus prometheus-alertmanager \
         conntrack
 # conntrack is a Kubernetes 1.20.2 requirement
+
+# Dotnet
+ARG dotnet_ver=6.0
+RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
+    dpkg -i packages-microsoft-prod.deb && rm packages-microsoft-prod.deb && \
+    apt-get update && \
+    apt-get install -y dotnet-sdk-${dotnet_ver}
+ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 # Kubectl
 RUN apt-get install -y apt-transport-https ca-certificates curl && \
@@ -58,10 +66,6 @@ RUN wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key \
     apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/trivy.list && \
     apt-get install trivy
 
-# Grype
-RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh \
-        | sh -s -- -b /usr/local/bin
-
 # Terraform, Vagrant
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg \
         | gpg --dearmor | tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null && \
@@ -84,6 +88,10 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3EFE0E0A2F2F60AA &&
         | tee /etc/apt/sources.list.d/tektoncd-ubuntu-cli.list && \
     apt update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/tektoncd-ubuntu-cli.list && \
     apt install -y tektoncd-cli
+
+# Grype
+RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh \
+        | sh -s -- -b /usr/local/bin
 
 # Kubectx, Kubens
 RUN curl -sLo kubectx https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx && \
@@ -116,10 +124,15 @@ RUN curl --silent --location "https://github.com/weaveworks/eksctl/releases/late
         | tar xz -C /tmp && \
     mv /tmp/eksctl /usr/local/bin
 
+# Tetragon
+RUN wget https://github.com/cilium/tetragon/releases/download/tetragon-cli/tetragon-linux-amd64.tar.gz -O - |\
+        tar xz && mv tetragon /usr/bin/tetragon
 
 # Docker Slim
 RUN curl -sL https://raw.githubusercontent.com/docker-slim/docker-slim/master/scripts/install-dockerslim.sh | sudo -E bash -
 
+# Okteto cli
+RUN curl https://get.okteto.com -sSfL | sh
 
 # Minikube
 ARG minikube_ver=1.23.2
@@ -208,13 +221,6 @@ ARG helmfile_ver=0.144.0
 RUN curl -sLo helmfile https://github.com/roboll/helmfile/releases/download/v${helmfile_ver}/helmfile_linux_amd64 && \
     chmod +x helmfile && mv helmfile /usr/local/bin/
 
-# Tetragon
-RUN wget https://github.com/cilium/tetragon/releases/download/tetragon-cli/tetragon-linux-amd64.tar.gz -O - |\
-        tar xz && mv tetragon /usr/bin/tetragon
-
-# Okteto cli
-RUN curl https://get.okteto.com -sSfL | sh
-
 # Fish shell
 RUN echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /' \
     | tee /etc/apt/sources.list.d/shells:fish:release:3.list && \
@@ -248,14 +254,22 @@ RUN groupadd -g ${gid} ${group} && \
 
 RUN mkdir -p /home/${user}/.config/fish/completions \
         /home/${user}/.config/fish/conf.d \
-        /home/${user}/.config/fish/functions && \
+        /home/${user}/.config/fish/functions \
+        /home/${user}/.gem/bin \
+        /home/${user}/.local/bin \
+        /home/${user}/.go/bin \
+        /home/.keys && \
     chown -R ${user}:${group} /home/${user}
 
 # Switch to user
 USER ${uid}:${gid}
 WORKDIR /home/${user}
-RUN mkdir -p "$HOME/.local/bin" "$HOME/.go/bin" "$HOME/.keys"
 
+# "$HOME/.local/bin"
+# "$HOME/.go/bin"
+# "$HOME/node_modules/.bin"
+# "$HOME/.pyenv/bin"
+# export PATH="$HOME/.gem/bin:$PATH"
 # --------------------------------------------------------------------------------------
 
 # Fish shell configuration files
@@ -272,17 +286,44 @@ RUN git clone https://github.com/jethrokuan/z.git && \
 # Kubectl completions for fish
 # Kubens completions for fish
 # Kubectx completions for fish
+# ...
 
 # Bash shell specifics
 
 # Kubectl completions for bash
-RUN echo 'source <(kubectl completion bash)' >>/home/${user}/.bashrc && \
+RUN echo '# Created in Dockerfile' >>/home/${user}/.bashrc && \
+    echo 'source <(kubectl completion bash)' >>/home/${user}/.bashrc && \
     echo 'alias k=kubectl' >>/home/${user}/.bashrc && \
     echo 'complete -F __start_kubectl k' >>/home/${user}/.bashrc
 
+# Bash paths for local bins and Ruby
+RUN echo 'export GEM_PATH="$HOME/.gem/bin"' >>/home/${user}/.bashrc && \
+    echo 'export GEM_HOME="$HOME/.gem"' >>/home/${user}/.bashrc && \
+    echo 'export PATH="$HOME/.gem/bin:$PATH"' >>/home/${user}/.bashrc && \
+    echo 'export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"' >>/home/${user}/.bashrc && \
+    echo 'export PATH="$HOME/.local/bin:$PATH"' >>/home/${user}/.bashrc && \
+    echo 'export PATH="$HOME/.go/bin:$PATH"' >>/home/${user}/.bashrc && \
+    echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >>/home/${user}/.bashrc
+
 # Zsh shell specifics
+# ...
 
 # Programs that install on user profile
+
+# rvm (Ruby Version Manager)
+
+RUN command curl -sSL https://rvm.io/mpapis.asc | gpg2 --import - && \
+    command curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import - && \
+    curl -sSL https://get.rvm.io | bash -s stable --ruby
+
+# nvm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+# Pyenv
+RUN curl https://pyenv.run | bash
+
+# Poetry
+RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -
 
 # Jekyll, Bundler
 RUN gem install --user jekyll bundler
@@ -305,16 +346,8 @@ RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cl
     ./google-cloud-sdk/install.sh --usage-reporting false -q && \
     rm -r ./google-cloud-sdk google-cloud-sdk-${gcloud_ver}-linux-x86_64.tar.gz
 
-# nvm
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
-# Pyenv
-RUN curl https://pyenv.run | bash
-
-# Poetry
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -
-
-# Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli
+# Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), robusta
 RUN pip install --user kube-hunter detect-secrets yubikey-manager thefuck sdccli robusta-cli
 
 # Snyk

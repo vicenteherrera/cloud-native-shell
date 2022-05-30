@@ -4,13 +4,13 @@ end
 
 # Installed programs configurations -----------------------------------------
 
-## Local Python/PIP3 binary path
-set -x PATH "$HOME/.local/bin:$PATH"
-
 ## Starship
 starship init fish | source
 
-# ## Go
+## Local Python/PIP3 binary path
+set -x PATH "$HOME/.local/bin:$PATH"
+
+## Go
 set -x GOPATH "$HOME/.go/"
 set -x PATH "$GOPATH/bin:/usr/local/go/bin:$PATH"
 
@@ -18,15 +18,15 @@ set -x PATH "$GOPATH/bin:/usr/local/go/bin:$PATH"
 alias k kubectl
 set -gx PATH $PATH $HOME/.krew/bin
 
-# # Ruby
+## Ruby
 set -x GEM_PATH "$HOME/.gem/bin"
 set -x GEM_HOME "$HOME/.gem"
 set -x PATH "$HOME/.gem/bin:$PATH"
 
-# ## npm
+## npm
 set -x PATH "$HOME/node_modules/.bin:$PATH"
 
-# ## Dot Net
+## Dot Net
 set -x DOTNET_CLI_TELEMETRY_OPTOUT 1
 
 ## direnv
