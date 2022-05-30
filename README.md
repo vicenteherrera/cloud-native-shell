@@ -39,11 +39,11 @@ A command line environment configured with tools for cloud-native development.
   * [Alertmanager (amtool)](https://github.com/prometheus/alertmanager)
   * [Robusta cli](https://docs.robusta.dev/master/installation.html)
 * Programming
-  * Python, pip, PyEnv, Poetry
-  * node, npm, nvm
-  * Go
-  * Ruby, Jekyll, Bundler
-  * Dot Net 6
+  * [Python](https://www.python.org/), [pip](https://pypi.org/project/pip/), [PyEnv](https://github.com/pyenv/pyenv), [Poetry](https://python-poetry.org/docs/)
+  * [Node](https://nodejs.org/en/), [npm](https://www.npmjs.com/), [nvm](https://github.com/nvm-sh/nvm)
+  * [Go](https://go.dev/)
+  * [Ruby](https://www.ruby-lang.org/en/documentation/), [Jekyll](https://jekyllrb.com/), [Bundler](https://bundler.io/docs.html)
+  * [Dot Net 6](https://docs.microsoft.com/en-us/dotnet/core/install/linux-debian)
   * [YAML lint](https://github.com/adrienverge/yamllint)
   * [Shellcheck](https://github.com/koalaman/shellcheck)
 * Local security
