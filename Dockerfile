@@ -1,5 +1,5 @@
 ARG debian_ver=11
-FROM debian:${debian_ver}
+FROM debian:${debian_ver} as build
 
 WORKDIR /install
 
@@ -88,6 +88,18 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3EFE0E0A2F2F60AA &&
         | tee /etc/apt/sources.list.d/tektoncd-ubuntu-cli.list && \
     apt update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/tektoncd-ubuntu-cli.list && \
     apt install -y tektoncd-cli
+
+# Fish shell
+RUN echo 'deb [signed-by=/usr/share/keyrings/shells_fish_release_3.gpg] http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /' \
+    | tee /etc/apt/sources.list.d/shells:fish:release:3.list && \
+    curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_11/Release.key \
+    | gpg --dearmor | tee /usr/share/keyrings/shells_fish_release_3.gpg > /dev/null && \
+    apt-get update && \
+    apt-get install -y fish
+
+# Clean APT cache
+RUN apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# This in fact doesn't decrease image size because cache is inside hidden layers
 
 # Grype
 RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh \
@@ -221,20 +233,10 @@ ARG helmfile_ver=0.144.0
 RUN curl -sLo helmfile https://github.com/roboll/helmfile/releases/download/v${helmfile_ver}/helmfile_linux_amd64 && \
     chmod +x helmfile && mv helmfile /usr/local/bin/
 
-# Fish shell
-RUN echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /' \
-    | tee /etc/apt/sources.list.d/shells:fish:release:3.list && \
-    curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_11/Release.key \
-    | gpg --dearmor | tee /etc/apt/trusted.gpg.d/shells_fish_release_3.gpg > /dev/null && \
-    apt-get update && apt-get install -y fish
-
 # Starship prompt
 RUN curl -sS https://starship.rs/install.sh >./install.sh && \
     sh ./install.sh --yes && \
     rm install.sh
-
-# Clean APT cache
-RUN apt clean
 
 # ------------------------------------------------------------------------------------
 
@@ -338,13 +340,13 @@ RUN gem install jekyll bundler
 
 # Krew
 RUN ( \
-        set -x; cd "$(mktemp -d)" && \
-        OS="$(uname | tr '[:upper:]' '[:lower:]')" && \
-        ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" && \
-        KREW="krew-${OS}_${ARCH}" && \
-        curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" && \
-        tar zxvf "${KREW}.tar.gz" && \
-        ./"${KREW}" install krew \
+    set -x; cd "$(mktemp -d)" && \
+    OS="$(uname | tr '[:upper:]' '[:lower:]')" && \
+    ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" && \
+    KREW="krew-${OS}_${ARCH}" && \
+    curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" && \
+    tar zxvf "${KREW}.tar.gz" && \
+    ./"${KREW}" install krew \
     )
 
 # GCloud cli
@@ -360,6 +362,12 @@ RUN pip install --user kube-hunter detect-secrets yubikey-manager thefuck sdccli
 # Snyk
 RUN npm install snyk
 
+
+# Squash all layers in a single one
+FROM scratch
+COPY --from=build / /
+USER ${uid}:${gid}
+WORKDIR /home/${user}
 ENV DEBIAN_FRONTEND=
 ENV DEFAULT_SHELL="${shell}"
 CMD $DEFAULT_SHELL
