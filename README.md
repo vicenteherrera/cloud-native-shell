@@ -11,6 +11,7 @@ A command line environment configured with tools for cloud-native development.
   * [Buildah](https://buildah.io/)
   * [Skopeo](https://github.com/containers/skopeo)
   * [Vagrant](https://www.vagrantup.com/)
+  * [Docker slim](https://github.com/docker-slim/docker-slim)
 * Kubernetes
   * [Kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/), aliases
   * [Krew](https://krew.sigs.k8s.io/)
@@ -39,8 +40,10 @@ A command line environment configured with tools for cloud-native development.
   * Python, pip, PyEnv, Poetry
   * node, npm, nvm
   * Go
-  * Ruby, Jekyll
+  * Ruby, Jekyll, Bundler
   * Dot Net 6
+  * [YAML lint](https://github.com/adrienverge/yamllint)
+  * [Shellcheck](https://github.com/koalaman/shellcheck)
 * Local security
   * [1Password cli](https://1password.com/downloads/command-line/)
   * [Yubikey manager](https://github.com/Yubico/yubikey-manager)
@@ -81,6 +84,7 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
 * [Hashicorp Vault](https://www.vaultproject.io/)
 * [Notary](https://github.com/notaryproject/notary)
 * [Chains](https://github.com/tektoncd/chains)
+* [Calico](https://projectcalico.docs.tigera.io/about/about-calico)
 * [RBAC-Police](https://github.com/PaloAltoNetworks/rbac-police)
 * [Tracee](https://github.com/aquasecurity/tracee)
 * [Hubble](https://github.com/cilium/hubble)
