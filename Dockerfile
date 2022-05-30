@@ -354,8 +354,8 @@ RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cl
     ./google-cloud-sdk/install.sh --usage-reporting false -q && \
     rm -r ./google-cloud-sdk google-cloud-sdk-${gcloud_ver}-linux-x86_64.tar.gz
 
-# Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), robusta
-RUN pip install --user kube-hunter detect-secrets yubikey-manager thefuck sdccli robusta-cli
+# Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), robusta, docker-squash
+RUN pip install --user kube-hunter detect-secrets yubikey-manager thefuck sdccli robusta-cli docker-squash
 
 # Snyk
 RUN npm install snyk

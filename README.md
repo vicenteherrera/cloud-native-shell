@@ -12,6 +12,7 @@ A command line environment configured with tools for cloud-native development.
   * [Skopeo](https://github.com/containers/skopeo)
   * [Vagrant](https://www.vagrantup.com/)
   * [Docker slim](https://github.com/docker-slim/docker-slim)
+  * [Docker squash](https://github.com/goldmann/docker-squash)
 * Kubernetes
   * [Kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/), aliases
   * [Krew](https://krew.sigs.k8s.io/)
