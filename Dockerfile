@@ -9,7 +9,7 @@ RUN apt-get update && apt-get -y upgrade && \
     apt-get install -y \
         apt-utils software-properties-common  apt-transport-https lsb-release \
         gnupg gnupg2 curl wget unzip sudo \
-        zsh nano jq \
+        zsh nano jq procps \
         swig libpcsclite-dev
 # Last line for Yubikey manager
         
@@ -249,33 +249,53 @@ ARG shell=/usr/bin/fish
 RUN groupadd -g ${gid} ${group} && \
     useradd -u ${uid} -g ${group} -s ${shell} -m ${user} && \
     usermod -aG sudo ${user} && \
-    usermod -aG docker ${user} && newgrp docker && \
-    echo "${user}:${pass}" | chpasswd
+    usermod -aG docker ${user} && newgrp docker
 
-RUN mkdir -p /home/${user}/.config/fish/completions \
+# rvm (Ruby Version Manager)
+# Needs sudo and installs on user, so we do it before setting password
+RUN PATH="$HOME/.gem/bin:$PATH" && \
+    command curl -sSL https://rvm.io/mpapis.asc | gpg2 --import - && \
+    command curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import - && \
+    curl -sSL https://get.rvm.io | bash -s stable --ruby
+
+RUN echo "${user}:${pass}" | chpasswd
+
+RUN mkdir -p \
+        /home/${user}/.config/fish/completions \
         /home/${user}/.config/fish/conf.d \
         /home/${user}/.config/fish/functions \
         /home/${user}/.gem/bin \
         /home/${user}/.local/bin \
         /home/${user}/.go/bin \
-        /home/.keys && \
+        /home/${user}/.keys && \
     chown -R ${user}:${group} /home/${user}
 
 # Switch to user
 USER ${uid}:${gid}
 WORKDIR /home/${user}
 
-# "$HOME/.local/bin"
-# "$HOME/.go/bin"
-# "$HOME/node_modules/.bin"
-# "$HOME/.pyenv/bin"
-# export PATH="$HOME/.gem/bin:$PATH"
-# --------------------------------------------------------------------------------------
+# Tell image to use bash shell so new paths take effect
+SHELL ["/bin/bash", "-c"]
+# Warning, 'bash' is not completely POSIX as default 'sh' is
+
+# Paths for local bins
+ENV GEM_PATH="/home/${user}/.gem/bin"
+ENV GEM_HOME="/home/${user}/.gem"
+# ENV PATH="/home/${user}/.gem/ruby/2.7.0/bin:$PATH"
+ENV PATH="/home/${user}/.gem/bin:$PATH"
+ENV PATH="/home/${user}/.local/bin:$PATH" 
+ENV PATH="/home/${user}/.go/bin:$PATH"
+ENV PATH="/home/${user}/.pyenv/bin:$PATH"
+ENV PATH="/home/${user}/node_modules/.bin:$PATH"
 
 # Fish shell configuration files
 COPY --chown=${user}:${group} config/fish/config.fish ./.config/fish/config.fish
 COPY --chown=${user}:${group} config/fish/config-alias.fish ./.config/fish/config-alias.fish
 COPY --chown=${user}:${group} config/starship.toml ./.config/starship.toml
+
+# --------------------------------------------------------------------------------------
+
+# Fish shell specifics
 
 # Z for the fish shell
 RUN git clone https://github.com/jethrokuan/z.git && \
@@ -296,25 +316,12 @@ RUN echo '# Created in Dockerfile' >>/home/${user}/.bashrc && \
     echo 'alias k=kubectl' >>/home/${user}/.bashrc && \
     echo 'complete -F __start_kubectl k' >>/home/${user}/.bashrc
 
-# Bash paths for local bins and Ruby
-RUN echo 'export GEM_PATH="$HOME/.gem/bin"' >>/home/${user}/.bashrc && \
-    echo 'export GEM_HOME="$HOME/.gem"' >>/home/${user}/.bashrc && \
-    echo 'export PATH="$HOME/.gem/bin:$PATH"' >>/home/${user}/.bashrc && \
-    echo 'export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"' >>/home/${user}/.bashrc && \
-    echo 'export PATH="$HOME/.local/bin:$PATH"' >>/home/${user}/.bashrc && \
-    echo 'export PATH="$HOME/.go/bin:$PATH"' >>/home/${user}/.bashrc && \
-    echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >>/home/${user}/.bashrc
-
 # Zsh shell specifics
 # ...
 
+# --------------------------------------------------------------------------------------
+
 # Programs that install on user profile
-
-# rvm (Ruby Version Manager)
-
-RUN command curl -sSL https://rvm.io/mpapis.asc | gpg2 --import - && \
-    command curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import - && \
-    curl -sSL https://get.rvm.io | bash -s stable --ruby
 
 # nvm
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
@@ -326,7 +333,8 @@ RUN curl https://pyenv.run | bash
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -
 
 # Jekyll, Bundler
-RUN gem install --user jekyll bundler
+RUN gem install jekyll bundler
+# This takes long to install, you may want to skip it
 
 # Krew
 RUN ( \
@@ -345,7 +353,6 @@ RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cl
     tar -xf google-cloud-sdk-${gcloud_ver}-linux-x86_64.tar.gz && \
     ./google-cloud-sdk/install.sh --usage-reporting false -q && \
     rm -r ./google-cloud-sdk google-cloud-sdk-${gcloud_ver}-linux-x86_64.tar.gz
-
 
 # Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), robusta
 RUN pip install --user kube-hunter detect-secrets yubikey-manager thefuck sdccli robusta-cli
