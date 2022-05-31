@@ -250,7 +250,7 @@ ARG user=vicente
 ARG group=developer
 ARG uid=1000
 ARG gid=1000
-ARG pass=changeme
+
 ARG shell=/usr/bin/fish
 
 RUN groupadd -g ${gid} ${group} && \
@@ -264,8 +264,6 @@ RUN PATH="$HOME/.gem/bin:$PATH" && \
     command curl -sSL https://rvm.io/mpapis.asc | gpg2 --import - && \
     command curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import - && \
     curl -sSL https://get.rvm.io | bash -s stable --ruby
-
-RUN echo "${user}:${pass}" | chpasswd
 
 RUN mkdir -p \
         /home/${user}/.config/fish/completions \
@@ -288,7 +286,6 @@ SHELL ["/bin/bash", "-c"]
 # Paths for local bins
 ENV GEM_PATH="/home/${user}/.gem/bin"
 ENV GEM_HOME="/home/${user}/.gem"
-# ENV PATH="/home/${user}/.gem/ruby/2.7.0/bin:$PATH"
 ENV PATH="/home/${user}/.gem/bin:$PATH"
 ENV PATH="/home/${user}/.local/bin:$PATH" 
 ENV PATH="/home/${user}/.go/bin:$PATH"
@@ -367,12 +364,36 @@ RUN pip install --user kube-hunter detect-secrets yubikey-manager thefuck sdccli
 # Snyk
 RUN npm install snyk
 
+# --------------------------------------------------------------------------------------
+
+
 
 # Squash all layers in a single one
 FROM scratch
 COPY --from=build / /
+
+RUN sudo apt clean && sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /install
+
+ARG user=vicente
+ARG uid=1000
+ARG gid=1000
+ARG pass=changeme
+ARG shell=/usr/bin/fish
+
+RUN echo "${user}:${pass}" | chpasswd
 USER ${uid}:${gid}
 WORKDIR /home/${user}
+
+ENV GEM_PATH="/home/${user}/.gem/bin"
+ENV GEM_HOME="/home/${user}/.gem"
+ENV PATH="/home/${user}/.gem/bin:$PATH"
+ENV PATH="/home/${user}/.local/bin:$PATH" 
+ENV PATH="/home/${user}/.go/bin:$PATH"
+ENV PATH="/home/${user}/.pyenv/bin:$PATH"
+ENV PATH="/home/${user}/node_modules/.bin:$PATH"
+
+SHELL ["/bin/bash", "-c"]
+
 ENV DEBIAN_FRONTEND=
 ENV DEFAULT_SHELL="${shell}"
 CMD $DEFAULT_SHELL
