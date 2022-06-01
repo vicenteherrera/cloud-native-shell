@@ -187,7 +187,7 @@ RUN curl -sLo helmfile https://github.com/roboll/helmfile/releases/download/v0.1
 # Go
 ARG go_ver=1.18
 RUN curl -sLo go.tar.gz https://go.dev/dl/go${go_ver}.linux-amd64.tar.gz && \
-    tar -C /usr/local -xzf go.tar.gz && \
+    rm -rf /usr/local/go && tar -C /usr/local -xzf go.tar.gz && \
     rm go.tar.gz
 
 # 1Password
@@ -289,6 +289,7 @@ ENV GEM_HOME="/home/${user}/.gem"
 ENV PATH="/home/${user}/.gem/bin:$PATH"
 ENV PATH="/home/${user}/.local/bin:$PATH" 
 ENV PATH="/home/${user}/.go/bin:$PATH"
+ENV PATH="$PATH:/usr/local/go/bin"
 ENV PATH="/home/${user}/.pyenv/bin:$PATH"
 ENV PATH="/home/${user}/node_modules/.bin:$PATH"
 
@@ -340,6 +341,9 @@ RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-
 RUN gem install jekyll bundler
 # This takes long to install, you may want to skip it
 
+# tfk8s
+RUN go install github.com/jrhouston/tfk8s@latest
+
 # Krew
 RUN ( \
     set -x; cd "$(mktemp -d)" && \
@@ -367,7 +371,6 @@ RUN npm install snyk
 # --------------------------------------------------------------------------------------
 
 
-
 # Squash all layers in a single one
 FROM scratch
 COPY --from=build / /
@@ -389,6 +392,7 @@ ENV GEM_HOME="/home/${user}/.gem"
 ENV PATH="/home/${user}/.gem/bin:$PATH"
 ENV PATH="/home/${user}/.local/bin:$PATH" 
 ENV PATH="/home/${user}/.go/bin:$PATH"
+ENV PATH="$PATH:/usr/local/go/bin"
 ENV PATH="/home/${user}/.pyenv/bin:$PATH"
 ENV PATH="/home/${user}/node_modules/.bin:$PATH"
 
