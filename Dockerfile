@@ -151,6 +151,11 @@ RUN curl -sL https://raw.githubusercontent.com/docker-slim/docker-slim/master/sc
 # Okteto cli
 RUN curl https://get.okteto.com -sSfL | sh
 
+# Oracle Cloud cli
+RUN wget https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh && \
+    chmod +x ./install.sh && \
+    ./install.sh --accept-all-defaults
+
 # Minikube
 ARG minikube_ver=1.23.2
 RUN curl -sLo minikube https://storage.googleapis.com/minikube/releases/v${minikube_ver}/minikube-linux-amd64 \
@@ -376,8 +381,8 @@ RUN gem install jekyll bundler
 # tfk8s
 RUN go install github.com/jrhouston/tfk8s@latest
 
-# Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), robusta, docker-squash, checkov, oci-cli
-RUN pip install --user kube-hunter detect-secrets yubikey-manager thefuck sdccli robusta-cli docker-squash checkov oci-cli
+# Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), robusta, docker-squash, checkov
+RUN pip install --user kube-hunter detect-secrets yubikey-manager thefuck sdccli robusta-cli docker-squash checkov
 
 # Snyk
 RUN npm install snyk
