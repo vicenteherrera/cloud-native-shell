@@ -376,8 +376,8 @@ RUN gem install jekyll bundler
 # tfk8s
 RUN go install github.com/jrhouston/tfk8s@latest
 
-# Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), robusta, docker-squash
-RUN pip install --user kube-hunter detect-secrets yubikey-manager thefuck sdccli robusta-cli docker-squash
+# Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), robusta, docker-squash, checkov, oci-cli
+RUN pip install --user kube-hunter detect-secrets yubikey-manager thefuck sdccli robusta-cli docker-squash checkov oci-cli
 
 # Snyk
 RUN npm install snyk

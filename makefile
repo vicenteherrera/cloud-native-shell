@@ -25,6 +25,7 @@ build:
 		--build-arg helmfile_ver=0.144.0 \
 		--build-arg audit2rbac_ver=0.9.0 \
 		--build-arg crictl_ver=1.24.1 \
+		--build-arg tfscan_ver=0.6.3 \
 		--build-arg go_ver=1.18 \
 		--build-arg dotnet_ver=6.0 \
 		--build-arg user=$$(id -un) \
