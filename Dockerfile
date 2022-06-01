@@ -190,6 +190,14 @@ RUN curl -sLo go.tar.gz https://go.dev/dl/go${go_ver}.linux-amd64.tar.gz && \
     rm -rf /usr/local/go && tar -C /usr/local -xzf go.tar.gz && \
     rm go.tar.gz
 
+# pint
+RUN git clone https://github.com/cloudflare/pint.git && \
+    cd pint && \
+    export PATH="/usr/local/go/bin:$PATH" && \
+    make && \
+    sudo mv pint /usr/local/bin && \
+    cd .. && rm -rf pint
+
 # 1Password
 ARG 1password_ver=2.0.0
 RUN curl -sLo op.zip https://cache.agilebits.com/dist/1P/op2/pkg/v2.0.0/op_linux_amd64_v2.0.0.zip && \
@@ -238,6 +246,11 @@ ARG helmfile_ver=0.144.0
 RUN curl -sLo helmfile https://github.com/roboll/helmfile/releases/download/v${helmfile_ver}/helmfile_linux_amd64 && \
     chmod +x helmfile && mv helmfile /usr/local/bin/
 
+# tfscan
+ARG tfscan_ver=0.6.3
+RUN wget https://github.com/wils0ns/tfscan/releases/download/v${tfscan_ver}/tfscan_${tfscan_ver}_linux_amd64.tar.gz -O - |\
+    tar xz && mv tfscan /usr/local/bin/
+
 # Starship prompt
 RUN curl -sS https://starship.rs/install.sh >./install.sh && \
     sh ./install.sh --yes && \
@@ -284,14 +297,15 @@ SHELL ["/bin/bash", "-c"]
 # Warning, 'bash' is not completely POSIX as default 'sh' is
 
 # Paths for local bins
+ENV PATH="$PATH:/home/${user}/.local/bin" 
 ENV GEM_PATH="/home/${user}/.gem/bin"
 ENV GEM_HOME="/home/${user}/.gem"
-ENV PATH="/home/${user}/.gem/bin:$PATH"
-ENV PATH="/home/${user}/.local/bin:$PATH" 
-ENV PATH="/home/${user}/.go/bin:$PATH"
+ENV PATH="$PATH:/home/${user}/.gem/bin"
 ENV PATH="$PATH:/usr/local/go/bin"
-ENV PATH="/home/${user}/.pyenv/bin:$PATH"
-ENV PATH="/home/${user}/node_modules/.bin:$PATH"
+ENV GOPATH="/home/${user}/.go/"
+ENV PATH="$PATH:/home/${user}/.go/bin"
+ENV PATH="$PATH:/home/${user}/.pyenv/bin"
+ENV PATH="$PATH:/home/${user}/node_modules/.bin"
 
 # Fish shell configuration files
 COPY --chown=${user}:${group} config/fish/config.fish ./.config/fish/config.fish
@@ -328,22 +342,6 @@ RUN echo '# Created in Dockerfile' >>/home/${user}/.bashrc && \
 
 # Programs that install on user profile
 
-# nvm
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-
-# Pyenv
-RUN curl https://pyenv.run | bash
-
-# Poetry
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -
-
-# Jekyll, Bundler
-RUN gem install jekyll bundler
-# This takes long to install, you may want to skip it
-
-# tfk8s
-RUN go install github.com/jrhouston/tfk8s@latest
-
 # Krew
 RUN ( \
     set -x; cd "$(mktemp -d)" && \
@@ -361,6 +359,23 @@ RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cl
     tar -xf google-cloud-sdk-${gcloud_ver}-linux-x86_64.tar.gz && \
     ./google-cloud-sdk/install.sh --usage-reporting false -q && \
     rm -r ./google-cloud-sdk google-cloud-sdk-${gcloud_ver}-linux-x86_64.tar.gz
+
+
+# nvm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+# Pyenv
+RUN curl https://pyenv.run | bash
+
+# Poetry
+RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -
+
+# Jekyll, Bundler
+RUN gem install jekyll bundler
+# This takes long to install, you may want to skip it
+
+# tfk8s
+RUN go install github.com/jrhouston/tfk8s@latest
 
 # Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), robusta, docker-squash
 RUN pip install --user kube-hunter detect-secrets yubikey-manager thefuck sdccli robusta-cli docker-squash
@@ -387,14 +402,15 @@ RUN echo "${user}:${pass}" | chpasswd
 USER ${uid}:${gid}
 WORKDIR /home/${user}
 
+ENV PATH="$PATH:/home/${user}/.local/bin" 
 ENV GEM_PATH="/home/${user}/.gem/bin"
 ENV GEM_HOME="/home/${user}/.gem"
-ENV PATH="/home/${user}/.gem/bin:$PATH"
-ENV PATH="/home/${user}/.local/bin:$PATH" 
-ENV PATH="/home/${user}/.go/bin:$PATH"
+ENV PATH="$PATH:/home/${user}/.gem/bin"
 ENV PATH="$PATH:/usr/local/go/bin"
-ENV PATH="/home/${user}/.pyenv/bin:$PATH"
-ENV PATH="/home/${user}/node_modules/.bin:$PATH"
+ENV GOPATH="/home/${user}/.go/"
+ENV PATH="$PATH:/home/${user}/.go/bin"
+ENV PATH="$PATH:/home/${user}/.pyenv/bin"
+ENV PATH="$PATH:/home/${user}/node_modules/.bin"
 
 SHELL ["/bin/bash", "-c"]
 

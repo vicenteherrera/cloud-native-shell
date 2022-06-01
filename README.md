@@ -37,6 +37,7 @@ A command line environment configured with tools for cloud-native development.
 * Observability
   * [Prometheus (promtool)](https://prometheus.io/docs/prometheus/latest/configuration/unit_testing_rules/)
   * [Alertmanager (amtool)](https://github.com/prometheus/alertmanager)
+  * [pint](https://cloudflare.github.io/pint/)
   * [Robusta cli](https://docs.robusta.dev/master/installation.html)
 * Programming
   * [Python](https://www.python.org/), [pip](https://pypi.org/project/pip/), [PyEnv](https://github.com/pyenv/pyenv), [Poetry](https://python-poetry.org/docs/)
