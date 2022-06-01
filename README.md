@@ -42,7 +42,7 @@ A command line environment configured with tools for cloud-native development.
   * [pint](https://cloudflare.github.io/pint/)
   * [Robusta cli](https://docs.robusta.dev/master/installation.html)
 * Programming
-  * [Python](https://www.python.org/), [pip](https://pypi.org/project/pip/), [PyEnv](https://github.com/pyenv/pyenv), [Poetry](https://python-poetry.org/docs/)
+  * [Python](https://www.python.org/), [pip](https://pypi.org/project/pip/), [pipx](https://github.com/pypa/pipx), [PyEnv](https://github.com/pyenv/pyenv), [Poetry](https://python-poetry.org/docs/)
   * [Node](https://nodejs.org/en/), [npm](https://www.npmjs.com/), [nvm](https://github.com/nvm-sh/nvm)
   * [Go](https://go.dev/)
   * [Ruby](https://www.ruby-lang.org/en/documentation/), [Jekyll](https://jekyllrb.com/), [Bundler](https://bundler.io/docs.html)

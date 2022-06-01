@@ -374,6 +374,9 @@ RUN curl https://pyenv.run | bash
 # Poetry
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -
 
+# Pipx
+RUN python3 -m pip install --user pipx
+
 # Jekyll, Bundler
 RUN gem install jekyll bundler
 # This takes long to install, you may want to skip it
