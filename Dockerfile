@@ -203,6 +203,10 @@ RUN git clone https://github.com/cloudflare/pint.git && \
     sudo mv pint /usr/local/bin && \
     cd .. && rm -rf pint
 
+# Carvel tools
+RUN wget -O- https://carvel.dev/install.sh > install.sh && \
+    sudo bash ./install.sh
+
 # 1Password
 ARG 1password_ver=2.0.0
 RUN curl -sLo op.zip https://cache.agilebits.com/dist/1P/op2/pkg/v2.0.0/op_linux_amd64_v2.0.0.zip && \
