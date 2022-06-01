@@ -297,15 +297,15 @@ SHELL ["/bin/bash", "-c"]
 # Warning, 'bash' is not completely POSIX as default 'sh' is
 
 # Paths for local bins
-ENV PATH="$PATH:/home/${user}/.local/bin" 
+ENV PATH="/usr/local/go/bin:$PATH"
+ENV PATH="/home/${user}/.local/bin:$PATH" 
 ENV GEM_PATH="/home/${user}/.gem/bin"
 ENV GEM_HOME="/home/${user}/.gem"
-ENV PATH="$PATH:/home/${user}/.gem/bin"
-ENV PATH="$PATH:/usr/local/go/bin"
+ENV PATH="/home/${user}/.gem/bin:$PATH"
 ENV GOPATH="/home/${user}/.go/"
-ENV PATH="$PATH:/home/${user}/.go/bin"
-ENV PATH="$PATH:/home/${user}/.pyenv/bin"
-ENV PATH="$PATH:/home/${user}/node_modules/.bin"
+ENV PATH="/home/${user}/.go/bin:$PATH"
+ENV PATH="/home/${user}/.pyenv/bin:$PATH"
+ENV PATH="/home/${user}/node_modules/.bin:$PATH"
 
 # Fish shell configuration files
 COPY --chown=${user}:${group} config/fish/config.fish ./.config/fish/config.fish
@@ -360,7 +360,6 @@ RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cl
     ./google-cloud-sdk/install.sh --usage-reporting false -q && \
     rm -r ./google-cloud-sdk google-cloud-sdk-${gcloud_ver}-linux-x86_64.tar.gz
 
-
 # nvm
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
@@ -402,15 +401,15 @@ RUN echo "${user}:${pass}" | chpasswd
 USER ${uid}:${gid}
 WORKDIR /home/${user}
 
-ENV PATH="$PATH:/home/${user}/.local/bin" 
+ENV PATH="/usr/local/go/bin:$PATH"
+ENV PATH="/home/${user}/.local/bin:$PATH" 
 ENV GEM_PATH="/home/${user}/.gem/bin"
 ENV GEM_HOME="/home/${user}/.gem"
-ENV PATH="$PATH:/home/${user}/.gem/bin"
-ENV PATH="$PATH:/usr/local/go/bin"
+ENV PATH="/home/${user}/.gem/bin:$PATH"
 ENV GOPATH="/home/${user}/.go/"
-ENV PATH="$PATH:/home/${user}/.go/bin"
-ENV PATH="$PATH:/home/${user}/.pyenv/bin"
-ENV PATH="$PATH:/home/${user}/node_modules/.bin"
+ENV PATH="/home/${user}/.go/bin:$PATH"
+ENV PATH="/home/${user}/.pyenv/bin:$PATH"
+ENV PATH="/home/${user}/node_modules/.bin:$PATH"
 
 SHELL ["/bin/bash", "-c"]
 
