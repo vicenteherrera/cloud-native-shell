@@ -46,7 +46,7 @@ A command line environment configured with tools for cloud-native development.
 * Programming
   * [Python](https://www.python.org/), [pip](https://pypi.org/project/pip/), [pipx](https://github.com/pypa/pipx), [PyEnv](https://github.com/pyenv/pyenv), [Poetry](https://python-poetry.org/docs/)
   * [Node](https://nodejs.org/en/), [npm](https://www.npmjs.com/), [nvm](https://github.com/nvm-sh/nvm)
-  * [Go](https://go.dev/)
+  * [Go](https://go.dev/), [golangci-lint](https://golangci-lint.run/usage/install/#local-installation)
   * [Ruby](https://www.ruby-lang.org/en/documentation/), [Jekyll](https://jekyllrb.com/), [Bundler](https://bundler.io/docs.html)
   * [Dot Net 6](https://docs.microsoft.com/en-us/dotnet/core/install/linux-debian)
   * [YAML lint](https://github.com/adrienverge/yamllint)
