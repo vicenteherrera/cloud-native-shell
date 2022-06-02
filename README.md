@@ -11,6 +11,7 @@ A command line environment configured with tools for cloud-native development.
   * [Buildah](https://buildah.io/)
   * [Skopeo](https://github.com/containers/skopeo)
   * [Vagrant](https://www.vagrantup.com/)
+  * [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-with-pip), paramiko
   * [Docker slim](https://github.com/docker-slim/docker-slim)
   * [Docker squash](https://github.com/goldmann/docker-squash)
   * [Dive](https://github.com/wagoodman/dive)

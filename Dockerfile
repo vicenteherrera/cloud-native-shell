@@ -394,6 +394,8 @@ RUN pip install --user --no-cache \
     detect-secrets \ 
     yubikey-manager \
     thefuck \
+    docker-squash \
+    ansible paramiko
 
 # Robusta
 # pipx because it requires old packages incompatible with previous installations
