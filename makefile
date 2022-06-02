@@ -28,6 +28,9 @@ build:
 		--build-arg tfscan_ver=0.6.3 \
 		--build-arg go_ver=1.18 \
 		--build-arg dotnet_ver=6.0 \
+		--build-arg robusta_minver=0.9.11 \
+		--build-arg sdccli_minver=0.7.14 \
+		--build-arg checkov_minver=2.0.1184 \
 		--build-arg user=$$(id -un) \
 		--build-arg group=$$(id -un) \
 		--build-arg uid=$$(id -u) \

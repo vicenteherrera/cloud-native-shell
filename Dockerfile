@@ -16,7 +16,7 @@ RUN apt-get update && apt-get -y upgrade && \
 # Development (git, vim, build, python, ruby)
 RUN apt-get -y install \
         git vim build-essential direnv bat \
-        python3-dev python3-pip python3-setuptools \
+        python3-dev python3-pip python3-setuptools python3-venv \
         npm \
         ruby-full zlib1g-dev \
         podman buildah skopeo yamllint shellcheck \
@@ -389,7 +389,25 @@ RUN gem install jekyll bundler
 RUN go install github.com/jrhouston/tfk8s@latest
 
 # Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), robusta, docker-squash, checkov
-RUN pip install --user kube-hunter detect-secrets yubikey-manager thefuck sdccli robusta-cli docker-squash checkov
+RUN pip install --user --no-cache \
+    kube-hunter \
+    detect-secrets \ 
+    yubikey-manager \
+    thefuck \
+
+# Robusta
+# pipx because it requires old packages incompatible with previous installations
+ARG robusta_minver=0.9.11
+RUN pipx install "robusta-cli>=${robusta_minver}"
+
+# Sysdig cli
+# We specify minimum versions to avoid downloading full history of binaries
+ARG sdccli_minver=0.7.14
+RUN pipx install "sdccli>=${sdccli_minver}"
+
+# Checkov
+ARG checkov_minver=2.0.1184
+RUN pipx install "checkov>=${checkov_minver}"
 
 # Snyk
 RUN npm install snyk
