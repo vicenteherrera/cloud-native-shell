@@ -156,6 +156,11 @@ RUN wget https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install
     chmod +x ./install.sh && \
     ./install.sh --accept-all-defaults
 
+RUN curl -L "$(curl -s https://api.github.com/repos/tenable/terrascan/releases/latest \
+        | grep -o -E "https://.+?_Linux_x86_64.tar.gz")" > terrascan.tar.gz && \
+        tar -xf terrascan.tar.gz terrascan && rm terrascan.tar.gz && \
+        install terrascan /usr/local/bin && rm terrascan
+
 # Minikube
 ARG minikube_ver=1.23.2
 RUN curl -sLo minikube https://storage.googleapis.com/minikube/releases/v${minikube_ver}/minikube-linux-amd64 \
@@ -195,7 +200,7 @@ RUN curl -sLo go.tar.gz https://go.dev/dl/go${go_ver}.linux-amd64.tar.gz && \
     rm -rf /usr/local/go && tar -C /usr/local -xzf go.tar.gz && \
     rm go.tar.gz
 
-# pint
+# pint (requires go)
 RUN git clone https://github.com/cloudflare/pint.git && \
     cd pint && \
     export PATH="/usr/local/go/bin:$PATH" && \

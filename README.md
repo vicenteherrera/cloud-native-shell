@@ -65,6 +65,7 @@ A command line environment configured with tools for cloud-native development.
   * [detect-secrets](https://github.com/Yelp/detect-secrets)
   * [Checkov](https://www.checkov.io/1.Welcome/Quick%20Start.html)
   * [TFScan](https://github.com/wils0ns/tfscan)
+  * [Terrascan](https://github.com/tenable/terrascan#install)
   * [Tetragon cli](https://github.com/cilium/tetragon)
   * [sdc-cli (Sysdig cli)](https://sysdiglabs.github.io/sysdig-platform-cli/)
   * [roxctl](https://docs.openshift.com/acs/3.66/cli/getting-started-cli.html)
