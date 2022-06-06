@@ -378,6 +378,7 @@ RUN ( \
     tar zxvf "${KREW}.tar.gz" && \
     ./"${KREW}" install krew \
     )
+ENV PATH="/home/${user}/.krew/bin:$PATH"
 
 # Kubesec (Krew plugin)
 RUN kubectl krew install kubesec-scan
