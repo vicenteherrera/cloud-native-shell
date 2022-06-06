@@ -10,7 +10,8 @@ PASSWORD=changeme
 all: build run
 
 build:
-	sudo docker build . -t cli-dev-shell \
+	if groups $$USER | grep -q '\bdocker\b'; then RUNSUDO="" ; else RUNSUDO="sudo" ; fi && \
+		$$RUNSUDO docker build . -t cli-dev-shell \
 		--build-arg debian_ver=11.3 \
 		--build-arg minikube_ver=1.23.2 \
 		--build-arg minishift_ver=1.34.3 \
@@ -40,7 +41,8 @@ build:
 		--build-arg pass=${PASSWORD}
 
 run:
-	sudo docker run --rm -it \
+	if groups $$USER | grep -q '\bdocker\b'; then RUNSUDO="" ; else RUNSUDO="sudo" ; fi && \
+		$$RUNSUDO docker run --rm -it \
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		-v $$(pwd):/home/$$(id -un)/data \
 		-v /dev/bus/usb:/dev/bus/usb \
