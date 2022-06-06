@@ -277,6 +277,12 @@ ARG tfscan_ver=0.6.3
 RUN wget https://github.com/wils0ns/tfscan/releases/download/v${tfscan_ver}/tfscan_${tfscan_ver}_linux_amd64.tar.gz -O - |\
     tar xz && mv tfscan /usr/local/bin/
 
+# ClamAV
+ARG clamav_ver=0.105.0
+RUN wget http://www.clamav.net/downloads/production/clamav-${clamav_ver}.linux.x86_64.deb && \
+    sudo dpkg -i clamav-${clamav_ver}.linux.x86_64.deb && \
+    rm clamav-${clamav_ver}.linux.x86_64.deb
+
 # Starship prompt
 RUN curl -sS https://starship.rs/install.sh >./install.sh && \
     sh ./install.sh --yes && \

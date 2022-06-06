@@ -53,9 +53,10 @@ A command line environment configured with tools for cloud-native development.
   * [Dot Net 6](https://docs.microsoft.com/en-us/dotnet/core/install/linux-debian)
   * [YAML lint](https://github.com/adrienverge/yamllint)
   * [Shellcheck](https://github.com/koalaman/shellcheck)
-* Local security
+* Security
   * [1Password cli](https://1password.com/downloads/command-line/)
   * [Yubikey manager](https://github.com/Yubico/yubikey-manager)
+  * [ClamAV](http://www.clamav.net/downloads)
 * Cloud Native security
   * [KubeAudit](https://github.com/Shopify/kubeaudit)
   * [Kube-hunter](https://github.com/aquasecurity/kube-hunter)
