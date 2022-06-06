@@ -31,6 +31,7 @@ build:
 		--build-arg robusta_minver=0.9.11 \
 		--build-arg sdccli_minver=0.7.14 \
 		--build-arg checkov_minver=2.0.1184 \
+		--build-arg kubesec_ver=2.11.4 \
 		--build-arg user=$$(id -un) \
 		--build-arg group=$$(id -un) \
 		--build-arg uid=$$(id -u) \

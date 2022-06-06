@@ -161,6 +161,13 @@ RUN curl -L "$(curl -s https://api.github.com/repos/tenable/terrascan/releases/l
         tar -xf terrascan.tar.gz terrascan && rm terrascan.tar.gz && \
         install terrascan /usr/local/bin && rm terrascan
 
+# Kubesec (binary)
+ARG kubesec_ver=2.11.4
+RUN curl -sLo kubesec.tgz https://github.com/controlplaneio/kubesec/releases/download/v${kubesec_ver}/kubesec_linux_amd64.tar.gz && \
+    tar -xvf kubesec.tgz && \
+    chmod +x kubesec && \
+    mv kubesec /usr/local/bin/
+
 # Minikube
 ARG minikube_ver=1.23.2
 RUN curl -sLo minikube https://storage.googleapis.com/minikube/releases/v${minikube_ver}/minikube-linux-amd64 \
@@ -366,6 +373,9 @@ RUN ( \
     tar zxvf "${KREW}.tar.gz" && \
     ./"${KREW}" install krew \
     )
+
+# Kubesec (Krew plugin)
+RUN kubectl krew install kubesec-scan
 
 # GCloud cli
 ARG gcloud_ver=378.0.0
