@@ -389,7 +389,10 @@ RUN gem install jekyll bundler
 # This takes long to install, you may want to skip it
 
 # tfk8s
-RUN go install github.com/jrhouston/tfk8s@latest
+RUN go install github.com/jrhouston/tfk8s@latest 
+
+# kubelinter
+RUN go install golang.stackrox.io/kube-linter/cmd/kube-linter@latest
 
 # Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), robusta, docker-squash, checkov
 RUN pip install --user --no-cache \
