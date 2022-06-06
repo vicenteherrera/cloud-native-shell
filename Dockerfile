@@ -13,7 +13,7 @@ RUN apt-get update && apt-get -y upgrade && \
         swig libpcsclite-dev
 # Last line for Yubikey manager
         
-# Development (git, vim, build, python, ruby)
+# git, vim, build, python, ruby, podman, prometheus
 RUN apt-get -y install \
         git vim build-essential direnv bat \
         python3-dev python3-pip python3-setuptools python3-venv \

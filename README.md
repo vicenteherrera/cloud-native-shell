@@ -100,10 +100,16 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
 * [Notary](https://github.com/notaryproject/notary)
 * [Chains](https://github.com/tektoncd/chains)
 * [Calico](https://projectcalico.docs.tigera.io/about/about-calico)
+* [Istio](https://github.com/istio/istio)
 * [RBAC-Police](https://github.com/PaloAltoNetworks/rbac-police)
 * [Tracee](https://github.com/aquasecurity/tracee)
 * [Hubble](https://github.com/cilium/hubble)
 * [ThreatMapper](https://github.com/deepfence/ThreatMapper)
+* [Tekton](https://tekton.dev/docs/getting-started/#tekton-for-kubernetes-cloud-native-cicd-explained), [Chains](https://github.com/tektoncd/chains)
+* [Jenkins in Kubernetes](https://github.com/scriptcamp/kubernetes-jenkins)
+* [Grafeas](https://grafeas.io/)
+* [Artifactory CE](https://jfrog.com/community/download-artifactory-oss/)
+* [GitLab CE](https://gitlab.com/gitlab-org/gitlab)
 
 ## Build locally and launch
 
