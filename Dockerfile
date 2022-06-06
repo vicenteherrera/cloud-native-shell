@@ -396,6 +396,7 @@ RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cl
     ./google-cloud-sdk/install.sh --usage-reporting false -q && \
     rm -r ./google-cloud-sdk google-cloud-sdk-${gcloud_ver}-linux-x86_64.tar.gz
 
+# golangci-lint
 ARG golangci_lint_ver=1.46.2
 RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v${golangci_lint_ver}
 
@@ -421,14 +422,15 @@ RUN go install github.com/jrhouston/tfk8s@latest
 # kubelinter
 RUN go install golang.stackrox.io/kube-linter/cmd/kube-linter@latest
 
-# Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), robusta, docker-squash, checkov
+# Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), robusta, docker-squash, checkov, illuminatio
 RUN pip install --user --no-cache \
     kube-hunter \
     detect-secrets \ 
     yubikey-manager \
     thefuck \
     docker-squash \
-    ansible paramiko
+    ansible paramiko \
+    illuminatio
 
 # Robusta
 # pipx because it requires old packages incompatible with previous installations
