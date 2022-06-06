@@ -219,6 +219,11 @@ RUN git clone https://github.com/cloudflare/pint.git && \
 RUN wget -O- https://carvel.dev/install.sh > install.sh && \
     sudo bash ./install.sh
 
+# kops
+RUN curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest \
+        | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64 && \
+    chmod +x kops && sudo mv kops /usr/local/bin/kops
+
 # 1Password
 ARG 1password_ver=2.0.0
 RUN curl -sLo op.zip https://cache.agilebits.com/dist/1P/op2/pkg/v2.0.0/op_linux_amd64_v2.0.0.zip && \

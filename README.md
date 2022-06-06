@@ -23,6 +23,7 @@ A command line environment configured with tools for cloud-native development.
   * [eksctl](https://eksctl.io/)
   * [Helm](https://helm.sh/)
   * [Helmfile](https://github.com/roboll/helmfile)
+  * [kops](https://kops.sigs.k8s.io/getting_started/install/)
   * [Stern](https://github.com/wercker/stern)
   * [Tekton cli](https://tekton.dev/docs/cli/)
   * [Okteto cli](https://www.okteto.com/docs/cloud/okteto-cli)
