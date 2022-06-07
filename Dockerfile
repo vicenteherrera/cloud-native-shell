@@ -13,7 +13,8 @@ RUN apt-get update && apt-get -y upgrade && \
         swig libpcsclite-dev
 # Last line for Yubikey manager
         
-# git, vim, build, python, ruby, podman, prometheus
+# git, vim, build, python, ruby, podman, prometheus, nmap, ncat, netcat
+# dnsutils (dig, nslookup, nsupdate)
 RUN apt-get -y install \
         git vim build-essential direnv bat \
         python3-dev python3-pip python3-setuptools python3-venv \
@@ -21,6 +22,7 @@ RUN apt-get -y install \
         ruby-full zlib1g-dev \
         podman buildah skopeo yamllint shellcheck \
         prometheus prometheus-alertmanager \
+        nmap ncat netcat dnsutils iputils-ping \
         conntrack
 # conntrack is a Kubernetes 1.20.2 requirement
 

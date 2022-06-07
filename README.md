@@ -53,10 +53,11 @@ A command line environment configured with tools for cloud-native development.
   * [Dot Net 6](https://docs.microsoft.com/en-us/dotnet/core/install/linux-debian)
   * [YAML lint](https://github.com/adrienverge/yamllint)
   * [Shellcheck](https://github.com/koalaman/shellcheck)
-* Security
+* Security and networking
   * [1Password cli](https://1password.com/downloads/command-line/)
   * [Yubikey manager](https://github.com/Yubico/yubikey-manager)
   * [ClamAV](http://www.clamav.net/downloads)
+  * [nmap](https://nmap.org/download), [ncat](https://nmap.org/ncat/), [netcat](https://sectools.org/tool/netcat/), [dig, nslookup, nsupdate](https://packages.debian.org/buster/dnsutils), [ping](https://packages.debian.org/stretch/iputils-ping)
 * Cloud Native security
   * [KubeAudit](https://github.com/Shopify/kubeaudit)
   * [Kube-hunter](https://github.com/aquasecurity/kube-hunter)
