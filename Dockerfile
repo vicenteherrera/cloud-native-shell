@@ -100,9 +100,10 @@ RUN echo 'deb [signed-by=/usr/share/keyrings/shells_fish_release_3.gpg] http://d
     apt-get install -y fish
 
 # Dive
-RUN wget https://github.com/wagoodman/dive/releases/download/v0.9.2/dive_0.9.2_linux_amd64.deb && \
-    sudo apt install ./dive_0.9.2_linux_amd64.deb && \
-    rm ./dive_0.9.2_linux_amd64.deb
+ARG dive_ver=0.9.2
+RUN wget https://github.com/wagoodman/dive/releases/download/v${dive_ver}/dive_${dive_ver}_linux_amd64.deb && \
+    sudo apt install ./dive_${dive_ver}_linux_amd64.deb && \
+    rm ./dive_${dive_ver}_linux_amd64.deb
 
 # Clean APT cache
 RUN apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -158,48 +159,29 @@ RUN wget https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install
     chmod +x ./install.sh && \
     ./install.sh --accept-all-defaults
 
-RUN curl -L "$(curl -s https://api.github.com/repos/tenable/terrascan/releases/latest \
-        | grep -o -E "https://.+?_Linux_x86_64.tar.gz")" > terrascan.tar.gz && \
-        tar -xf terrascan.tar.gz terrascan && rm terrascan.tar.gz && \
-        install terrascan /usr/local/bin && rm terrascan
-
 # Kubesec (binary)
-ARG kubesec_ver=2.11.4
-RUN curl -sLo kubesec.tgz https://github.com/controlplaneio/kubesec/releases/download/v${kubesec_ver}/kubesec_linux_amd64.tar.gz && \
+RUN curl -sLo kubesec.tgz https://github.com/controlplaneio/kubesec/releases/latest/download/kubesec_linux_amd64.tar.gz && \
     tar -xvf kubesec.tgz && \
     chmod +x kubesec && \
-    mv kubesec /usr/local/bin/
+    mv kubesec /usr/local/bin/ && rm kubesec.tgz
 
 # Minikube
-ARG minikube_ver=1.23.2
-RUN curl -sLo minikube https://storage.googleapis.com/minikube/releases/v${minikube_ver}/minikube-linux-amd64 \
+RUN curl -sLo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
   && chmod +x minikube && \
     mv minikube /usr/local/bin/
 
-# Minishift
-# https://github.com/minishift/minishift/releases
-ARG minishift_ver=1.34.3
-RUN curl -sLo ms.tgz https://github.com/minishift/minishift/releases/download/v${minishift_ver}/minishift-${minishift_ver}-linux-amd64.tgz && \
-    tar -xvf ms.tgz && \
-    chmod +x minishift-${minishift_ver}-linux-amd64/minishift && \
-    mv minishift-${minishift_ver}-linux-amd64/minishift /usr/local/bin/ && \
-    rm -r minishift-${minishift_ver}-linux-amd64
-
 # Kind
-ARG kind_ver=0.12.0
-RUN curl -Lo ./kind https://kind.sigs.k8s.io/dl/v${kind_ver}/kind-linux-amd64 && \
+RUN curl -Lo ./kind https://kind.sigs.k8s.io/dl/latest/kind-linux-amd64 && \
     chmod +x ./kind && \
     mv ./kind /usr/local/bin/
 
 # Stern
-ARG stern_ver=1.11.0
-RUN curl -sLo stern https://github.com/wercker/stern/releases/download/${stern_ver}/stern_linux_amd64 && \
+RUN curl -sLo stern https://github.com/wercker/stern/releases/latest/download/stern_linux_amd64 && \
     chmod +x stern && \
     mv stern /usr/local/bin/
 
 # Helmfile
-ARG helmfile_ver=0.144.0
-RUN curl -sLo helmfile https://github.com/roboll/helmfile/releases/download/v0.144.0/helmfile_linux_amd64 && \
+RUN curl -sLo helmfile https://github.com/roboll/helmfile/releases/latest/download/helmfile_linux_amd64 && \
     chmod +x helmfile && \
     mv helmfile /usr/local/bin/
 
@@ -221,10 +203,36 @@ RUN git clone https://github.com/cloudflare/pint.git && \
 RUN wget -O- https://carvel.dev/install.sh > install.sh && \
     sudo bash ./install.sh
 
+
+# Audit2RBAC
+RUN curl -sLo audit2rbac.tar.gz https://github.com/liggitt/audit2rbac/releases/latest/download/audit2rbac-linux-amd64.tar.gz && \
+    tar -xvf audit2rbac.tar.gz && \
+    chmod +x audit2rbac && \
+    mv audit2rbac /usr/local/bin/ && rm audit2rbac.tar.gz
+    
+# yq
+RUN wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64.tar.gz -O - |\
+        tar xz && mv yq_linux_amd64 /usr/local/bin/yq
+
+# Terrascan
+RUN curl -L "$(curl -s https://api.github.com/repos/tenable/terrascan/releases/latest \
+        | grep -o -E "https://.+?_Linux_x86_64.tar.gz")" > terrascan.tar.gz && \
+        tar -xf terrascan.tar.gz terrascan && rm terrascan.tar.gz && \
+        install terrascan /usr/local/bin && rm terrascan
+
 # kops
 RUN curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest \
         | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64 && \
     chmod +x kops && sudo mv kops /usr/local/bin/kops
+
+# Minishift
+# https://github.com/minishift/minishift/releases
+ARG minishift_ver=1.34.3
+RUN curl -sLo ms.tgz https://github.com/minishift/minishift/releases/download/v${minishift_ver}/minishift-${minishift_ver}-linux-amd64.tgz && \
+    tar -xvf ms.tgz && \
+    chmod +x minishift-${minishift_ver}-linux-amd64/minishift && \
+    mv minishift-${minishift_ver}-linux-amd64/minishift /usr/local/bin/ && \
+    rm -r minishift-${minishift_ver}-linux-amd64
 
 # 1Password
 ARG 1password_ver=2.0.0
@@ -244,13 +252,6 @@ RUN curl -sLo kubeaudit.tar.gz https://github.com/Shopify/kubeaudit/releases/dow
     tar -xvf kubeaudit.tar.gz && chmod +x kubeaudit && \
     mv kubeaudit /usr/local/bin/ && rm kubeaudit.tar.gz README.md
 
-# Audit2RBAC
-ARG audit2rbac_ver 0.9.0
-RUN curl -sLo audit2rbac.tar.gz https://github.com/liggitt/audit2rbac/releases/download/v${audit2rbac_ver}/audit2rbac-linux-amd64.tar.gz && \
-    tar -xvf audit2rbac.tar.gz && \
-    chmod +x audit2rbac && \
-    mv audit2rbac /usr/local/bin/ && rm audit2rbac.tar.gz
-
 # JLess
 ARG jless_ver=0.8.0
 RUN curl -sLo jless.zip https://github.com/PaulJuliusMartinez/jless/releases/download/v${jless_ver}/jless-v${jless_ver}-x86_64-unknown-linux-gnu.zip && \
@@ -259,19 +260,13 @@ RUN curl -sLo jless.zip https://github.com/PaulJuliusMartinez/jless/releases/dow
     mv jless /usr/local/bin/ && \
     rm jless.zip
 
-# yq
-ARG yq_version=4.25.1
-RUN wget https://github.com/mikefarah/yq/releases/download/v${yq_version}/yq_linux_amd64.tar.gz -O - |\
-        tar xz && mv yq_linux_amd64 /usr/local/bin/yq
-
 # crictl
 ARG crictl_ver=1.24.1
 RUN wget https://github.com/kubernetes-sigs/cri-tools/releases/download/v${crictl_ver}/crictl-v${crictl_ver}-linux-amd64.tar.gz -O - |\
         tar xz && mv crictl /usr/local/bin/
 
 # helmfile
-ARG helmfile_ver=0.144.0
-RUN curl -sLo helmfile https://github.com/roboll/helmfile/releases/download/v${helmfile_ver}/helmfile_linux_amd64 && \
+RUN curl -sLo helmfile https://github.com/roboll/helmfile/releases/latest/download/helmfile_linux_amd64 && \
     chmod +x helmfile && mv helmfile /usr/local/bin/
 
 # tfscan
