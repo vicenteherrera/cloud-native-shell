@@ -7,7 +7,7 @@ ZSH_SHELL=/usr/bin/zsh
 DEFAULT_SHELL=${FISH_SHELL}
 PASSWORD=changeme
 
-all: build run
+all: build tag run
 
 build:
 	if groups $$USER | grep -q '\bdocker\b'; then RUNSUDO="" ; else RUNSUDO="sudo" ; fi && \
@@ -34,6 +34,10 @@ build:
 			--build-arg shell=${DEFAULT_SHELL} \
 			--build-arg pass=${PASSWORD}
 
+tag:
+	if groups $$USER | grep -q '\bdocker\b'; then RUNSUDO="" ; else RUNSUDO="sudo" ; fi && \
+		$$RUNSUDO docker tag cli-dev-shell quay.io/vicenteherrera/cli-dev-shell
+
 run:
 	if groups $$USER | grep -q '\bdocker\b'; then RUNSUDO="" ; else RUNSUDO="sudo" ; fi && \
 		$$RUNSUDO docker run --rm -it \
@@ -44,7 +48,7 @@ run:
 			-v /sys/devices/:/sys/devices/ \
 			-v /dev/hidraw1:/dev/hidraw1 \
 			--privileged \
-			--hostname awing --name cli-dev-shell cli-dev-shell
+			--hostname awing --name cli-dev-shell quay.io/vicenteherrera/cli-dev-shell
 
 # /dev/hidraw1 mounted to access Yubikey, with /dev/bus/usb, /sys/bus/usb and /sys/devices
 # May be in a different number for you, check https://forum.yubico.com/viewtopic61c9.html?p=8058
@@ -53,3 +57,7 @@ push:
 	if groups $$USER | grep -q '\bdocker\b'; then RUNSUDO="" ; else RUNSUDO="sudo" ; fi && \
 		$$RUNSUDO docker tag cli-dev-shell quay.io/vicenteherrera/cli-dev-shell && \
 		$$RUNSUDO docker push quay.io/vicenteherrera/cli-dev-shell
+
+pull:
+	if groups $$USER | grep -q '\bdocker\b'; then RUNSUDO="" ; else RUNSUDO="sudo" ; fi && \
+	$$RUNSUDO docker pull quay.io/vicenteherrera/cli-dev-shell
