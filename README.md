@@ -66,6 +66,7 @@ A command line environment configured with tools for cloud-native development.
   * [Grype](https://github.com/anchore/grype)
   * [Snyk](https://docs.snyk.io/snyk-cli/install-the-snyk-cli)
   * [Kubesec](https://kubesec.io/)
+  * [Vault cli](https://www.vaultproject.io/docs/commands)
   * [detect-secrets](https://github.com/Yelp/detect-secrets)
   * [Checkov](https://www.checkov.io/1.Welcome/Quick%20Start.html)
   * [TFScan](https://github.com/wils0ns/tfscan)

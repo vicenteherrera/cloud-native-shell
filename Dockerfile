@@ -419,7 +419,8 @@ RUN go install github.com/jrhouston/tfk8s@latest
 # kubelinter
 RUN go install golang.stackrox.io/kube-linter/cmd/kube-linter@latest
 
-# Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), robusta, docker-squash, checkov, illuminatio
+# Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), robusta, 
+# docker-squash, checkov, illuminatio, vault-cli
 RUN pip install --user --no-cache \
     kube-hunter \
     detect-secrets \ 
@@ -427,7 +428,8 @@ RUN pip install --user --no-cache \
     thefuck \
     docker-squash \
     ansible paramiko \
-    illuminatio
+    illuminatio \
+    vault-cli
 
 # Robusta
 # pipx because it requires old packages incompatible with previous installations
