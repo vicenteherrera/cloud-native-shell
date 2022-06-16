@@ -383,8 +383,8 @@ RUN ( \
     )
 ENV PATH="/home/${user}/.krew/bin:$PATH"
 
-# Kubesec (Krew plugin)
-RUN kubectl krew install kubesec-scan
+# Krew plugins: kube-scan, lineage
+RUN kubectl krew install kubesec-scan lineage
 
 # GCloud cli
 ARG gcloud_ver=378.0.0

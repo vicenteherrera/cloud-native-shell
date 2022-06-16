@@ -31,6 +31,7 @@ A command line environment configured with tools for cloud-native development.
   * [tfk8s](https://github.com/jrhouston/tfk8s)
   * [Carvel tools](https://carvel.dev/ytt/docs/v0.41.0/install/) (kapp-controller, ytt, kapp, kbld, imgpkg, vendir)
   * [kube-linter](https://github.com/stackrox/kube-linter)
+  * [kube-lineage](https://github.com/tohjustin/kube-lineage/)
   * [Minikube](https://minikube.sigs.k8s.io/docs/start/)
   * [Minishift](https://github.com/minishift/minishift)
   * [Kind](https://kind.sigs.k8s.io/)
