@@ -100,8 +100,8 @@ RUN echo 'deb [signed-by=/usr/share/keyrings/shells_fish_release_3.gpg] http://d
     apt-get install -y fish
 
 # Dive
-ARG dive_ver=0.9.2
-RUN wget https://github.com/wagoodman/dive/releases/download/v${dive_ver}/dive_${dive_ver}_linux_amd64.deb && \
+RUN dive_ver=$(curl -s https://api.github.com/repos/wagoodman/dive/releases/latest | jq ".tag_name" | xargs | cut -c2-) && \
+    wget https://github.com/wagoodman/dive/releases/download/v${dive_ver}/dive_${dive_ver}_linux_amd64.deb && \
     sudo apt install ./dive_${dive_ver}_linux_amd64.deb && \
     rm ./dive_${dive_ver}_linux_amd64.deb
 
@@ -204,6 +204,10 @@ RUN wget -O- https://carvel.dev/install.sh > install.sh && \
     sudo bash ./install.sh
 
 
+# helmfile
+RUN curl -sLo helmfile https://github.com/roboll/helmfile/releases/latest/download/helmfile_linux_amd64 && \
+    chmod +x helmfile && mv helmfile /usr/local/bin/
+
 # Audit2RBAC
 RUN curl -sLo audit2rbac.tar.gz https://github.com/liggitt/audit2rbac/releases/latest/download/audit2rbac-linux-amd64.tar.gz && \
     tar -xvf audit2rbac.tar.gz && \
@@ -226,53 +230,49 @@ RUN curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s
     chmod +x kops && sudo mv kops /usr/local/bin/kops
 
 # Minishift
-# https://github.com/minishift/minishift/releases
-ARG minishift_ver=1.34.3
-RUN curl -sLo ms.tgz https://github.com/minishift/minishift/releases/download/v${minishift_ver}/minishift-${minishift_ver}-linux-amd64.tgz && \
+RUN minishift_ver=$(curl -s https://api.github.com/repos/minishift/minishift/releases/latest | jq ".tag_name" | xargs | cut -c2-) && \
+    curl -sLo ms.tgz https://github.com/minishift/minishift/releases/download/v${minishift_ver}/minishift-${minishift_ver}-linux-amd64.tgz && \
     tar -xvf ms.tgz && \
     chmod +x minishift-${minishift_ver}-linux-amd64/minishift && \
     mv minishift-${minishift_ver}-linux-amd64/minishift /usr/local/bin/ && \
     rm -r minishift-${minishift_ver}-linux-amd64
 
-# 1Password
-ARG 1password_ver=2.0.0
-RUN curl -sLo op.zip https://cache.agilebits.com/dist/1P/op2/pkg/v2.0.0/op_linux_amd64_v2.0.0.zip && \
-    unzip op.zip && mv op /usr/local/bin/ && rm op.zip op.sig
-# gpg --verify op.sig op
-
-# StackRox cli
-ARG roxctl_ver=3.68.1
-RUN curl -O https://mirror.openshift.com/pub/rhacs/assets/${roxctl_ver}/bin/Linux/roxctl && \
-    chmod +x roxctl && \
-    mv roxctl /usr/local/bin/
-
 # KubeAudit
-ARG kubeaudit_ver=0.17.0
-RUN curl -sLo kubeaudit.tar.gz https://github.com/Shopify/kubeaudit/releases/download/${kubeaudit_ver}/kubeaudit_${kubeaudit_ver}_linux_amd64.tar.gz && \
+RUN kubeaudit_ver=$(curl -s https://api.github.com/repos/Shopify/kubeaudit/releases/latest | jq ".tag_name" | xargs | cut -c2-) && \
+    echo "$kubeaudit_ver" && \
+    echo "https://github.com/Shopify/kubeaudit/releases/download/${kubeaudit_ver}/kubeaudit_${kubeaudit_ver}_linux_amd64.tar.gz" && \
+    curl -sLo kubeaudit.tar.gz https://github.com/Shopify/kubeaudit/releases/download/v${kubeaudit_ver}/kubeaudit_${kubeaudit_ver}_linux_amd64.tar.gz && \
     tar -xvf kubeaudit.tar.gz && chmod +x kubeaudit && \
     mv kubeaudit /usr/local/bin/ && rm kubeaudit.tar.gz README.md
 
 # JLess
-ARG jless_ver=0.8.0
-RUN curl -sLo jless.zip https://github.com/PaulJuliusMartinez/jless/releases/download/v${jless_ver}/jless-v${jless_ver}-x86_64-unknown-linux-gnu.zip && \
+RUN jless_ver=$(curl -s https://api.github.com/repos/PaulJuliusMartinez/jless/releases/latest | jq ".tag_name" | xargs | cut -c2- ) && \
+    curl -sLo jless.zip https://github.com/PaulJuliusMartinez/jless/releases/download/v${jless_ver}/jless-v${jless_ver}-x86_64-unknown-linux-gnu.zip && \
     unzip jless.zip && \
     chmod +x jless && \
     mv jless /usr/local/bin/ && \
     rm jless.zip
 
 # crictl
-ARG crictl_ver=1.24.1
-RUN wget https://github.com/kubernetes-sigs/cri-tools/releases/download/v${crictl_ver}/crictl-v${crictl_ver}-linux-amd64.tar.gz -O - |\
+RUN crictl_ver=$(curl -s https://api.github.com/repos/kubernetes-sigs/cri-tools/releases/latest | jq ".tag_name" | xargs | cut -c2- ) && \
+    wget https://github.com/kubernetes-sigs/cri-tools/releases/download/v${crictl_ver}/crictl-v${crictl_ver}-linux-amd64.tar.gz -O - |\
         tar xz && mv crictl /usr/local/bin/
 
-# helmfile
-RUN curl -sLo helmfile https://github.com/roboll/helmfile/releases/latest/download/helmfile_linux_amd64 && \
-    chmod +x helmfile && mv helmfile /usr/local/bin/
-
 # tfscan
-ARG tfscan_ver=0.6.3
-RUN wget https://github.com/wils0ns/tfscan/releases/download/v${tfscan_ver}/tfscan_${tfscan_ver}_linux_amd64.tar.gz -O - |\
+RUN tfscan_ver=$(curl -s https://api.github.com/repos/wils0ns/tfscan/releases/latest | jq ".tag_name" | xargs | cut -c2- ) && \
+    wget https://github.com/wils0ns/tfscan/releases/download/v${tfscan_ver}/tfscan_${tfscan_ver}_linux_amd64.tar.gz -O - |\
     tar xz && mv tfscan /usr/local/bin/
+
+# 1Password
+ARG 1password_ver=2.0.0
+RUN curl -sLo op.zip https://cache.agilebits.com/dist/1P/op2/pkg/v2.0.0/op_linux_amd64_v2.0.0.zip && \
+    unzip op.zip && mv op /usr/local/bin/ && rm op.zip op.sig
+
+# StackRox cli
+ARG roxctl_ver=3.68.1
+RUN curl -O https://mirror.openshift.com/pub/rhacs/assets/${roxctl_ver}/bin/Linux/roxctl && \
+    chmod +x roxctl && \
+    mv roxctl /usr/local/bin/
 
 # ClamAV
 ARG clamav_ver=0.105.0

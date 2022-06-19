@@ -13,17 +13,11 @@ build:
 	if groups $$USER | grep -q '\bdocker\b'; then RUNSUDO="" ; else RUNSUDO="sudo" ; fi && \
 		$$RUNSUDO docker build . -t cli-dev-shell \
 			--build-arg debian_ver=11.3 \
-			--build-arg minishift_ver=1.34.3 \
 			--build-arg gcloud_ver=378.0.0 \
-			--build-arg jless_ver=0.8.0 \
 			--build-arg 1password_ver=2.0.0 \
 			--build-arg roxctl_ver=3.68.1 \
-			--build-arg kubeaudit_ver=0.17.0 \
-			--build-arg crictl_ver=1.24.1 \
-			--build-arg tfscan_ver=0.6.3 \
 			--build-arg go_ver=1.18 \
 			--build-arg dotnet_ver=6.0 \
-			--build-arg dive_ver=0.9.2 \
 			--build-arg robusta_minver=0.9.11 \
 			--build-arg sdccli_minver=0.7.14 \
 			--build-arg checkov_minver=2.0.1184 \
