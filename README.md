@@ -16,7 +16,7 @@ A command line environment configured with tools for cloud-native development.
   * [Docker squash](https://github.com/goldmann/docker-squash)
   * [Dive](https://github.com/wagoodman/dive)
 * Kubernetes
-  * [Kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/), aliases
+  * [Kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/), [kubectl-convert](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-convert-plugin), aliases
   * [Krew](https://krew.sigs.k8s.io/)
   * [Kubectx, Kubens](https://github.com/ahmetb/kubectx)
   * [OpenShift 4 cli (oc)](https://docs.openshift.com/container-platform/4.7/cli_reference/openshift_cli/getting-started-cli.html)

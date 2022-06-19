@@ -42,6 +42,11 @@ RUN apt-get install -y apt-transport-https ca-certificates curl && \
     apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/kubernetes.list && \
     apt-get install -y kubectl
 
+# Kubectl-convert
+RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl-convert" && \
+    sudo install -o root -g root -m 0755 kubectl-convert /usr/local/bin/kubectl-convert && \
+    rm kubectl-convert
+
 # Docker (in Docker)
 RUN apt-get install -y lsb-release && \
     curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
