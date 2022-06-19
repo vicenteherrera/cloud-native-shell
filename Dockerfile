@@ -113,6 +113,10 @@ RUN apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh \
         | sh -s -- -b /usr/local/bin
 
+# Syft
+RUN curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh \
+        | sh -s -- -b /usr/local/bin
+
 # Kubectx, Kubens
 RUN curl -sLo kubectx https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx && \
     chmod +x kubectx && mv kubectx /usr/local/bin/ && \

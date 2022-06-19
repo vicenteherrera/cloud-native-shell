@@ -65,6 +65,7 @@ A command line environment configured with tools for cloud-native development.
   * [audit2rbac](https://github.com/liggitt/audit2rbac)
   * [Trivy](https://github.com/aquasecurity/trivy)
   * [Grype](https://github.com/anchore/grype)
+  * [Syft](https://github.com/anchore/syft)
   * [Snyk](https://docs.snyk.io/snyk-cli/install-the-snyk-cli)
   * [Kubesec](https://kubesec.io/)
   * [Vault cli](https://www.vaultproject.io/docs/commands)
