@@ -2,6 +2,21 @@
 
 A command line environment configured with tools for cloud-native development.
 
+Default shell is [fish](https://fishshell.com/) with [starship](https://starship.rs/) prompt requiring a [nerd font](https://www.nerdfonts.com/), but this can be changed on build or run.
+
+See `makefile` for more options.
+
+## Examples
+
+```bash
+# build and run using default fish shell
+make build
+make run
+
+# run but with bash shell
+make run SHELL=/bin/bash
+```
+
 ## Software included
 
 * [Debian 11 "Bullseye"](https://www.debian.org/News/2021/20210814)
@@ -115,8 +130,7 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
 * [Artifactory CE](https://jfrog.com/community/download-artifactory-oss/)
 * [GitLab CE](https://gitlab.com/gitlab-org/gitlab)
 
-## Build locally and launch
+Additional tools not installed
 
-```bash
-make
-```
+* [Cloud mapper](https://github.com/duo-labs/cloudmapper)
+

@@ -7,6 +7,8 @@ ZSH_SHELL=/usr/bin/zsh
 DEFAULT_SHELL=${FISH_SHELL}
 PASSWORD=changeme
 
+SHELL=${SHELL:-/bin/fish}
+
 all: build tag run
 
 build:
@@ -42,7 +44,9 @@ run:
 			-v /sys/devices/:/sys/devices/ \
 			-v /dev/hidraw1:/dev/hidraw1 \
 			--privileged \
-			--hostname awing --name cli-dev-shell quay.io/vicenteherrera/cli-dev-shell
+			--hostname awing --name cli-dev-shell \
+			quay.io/vicenteherrera/cli-dev-shell \
+			${SHELL}
 
 # /dev/hidraw1 mounted to access Yubikey, with /dev/bus/usb, /sys/bus/usb and /sys/devices
 # May be in a different number for you, check https://forum.yubico.com/viewtopic61c9.html?p=8058
