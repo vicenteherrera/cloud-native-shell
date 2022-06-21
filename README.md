@@ -83,6 +83,7 @@ make run SHELL=/bin/bash
   * [Syft](https://github.com/anchore/syft)
   * [Snyk](https://docs.snyk.io/snyk-cli/install-the-snyk-cli)
   * [Kubesec](https://kubesec.io/)
+  * [cve-bin-tool](https://github.com/intel/cve-bin-tool)
   * [Vault cli](https://www.vaultproject.io/docs/commands)
   * [detect-secrets](https://github.com/Yelp/detect-secrets)
   * [Checkov](https://www.checkov.io/1.Welcome/Quick%20Start.html)
