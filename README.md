@@ -72,27 +72,31 @@ make run SHELL=/bin/bash
 * Security and networking
   * [1Password cli](https://1password.com/downloads/command-line/)
   * [Yubikey manager](https://github.com/Yubico/yubikey-manager)
-  * [ClamAV](http://www.clamav.net/downloads)
+  * [ClamAV](http://www.clamav.net/downloads): Detect malware and virus
   * [nmap](https://nmap.org/download), [ncat](https://nmap.org/ncat/), [netcat](https://sectools.org/tool/netcat/), [dig, nslookup, nsupdate](https://packages.debian.org/buster/dnsutils), [ping](https://packages.debian.org/stretch/iputils-ping)
 * Cloud Native security
-  * [KubeAudit](https://github.com/Shopify/kubeaudit)
-  * [Kube-hunter](https://github.com/aquasecurity/kube-hunter)
-  * [audit2rbac](https://github.com/liggitt/audit2rbac)
-  * [Trivy](https://github.com/aquasecurity/trivy)
-  * [Grype](https://github.com/anchore/grype)
-  * [Syft](https://github.com/anchore/syft)
-  * [Snyk](https://docs.snyk.io/snyk-cli/install-the-snyk-cli)
-  * [Kubesec](https://kubesec.io/)
-  * [cve-bin-tool](https://github.com/intel/cve-bin-tool)
-  * [Vault cli](https://www.vaultproject.io/docs/commands)
-  * [detect-secrets](https://github.com/Yelp/detect-secrets)
-  * [Checkov](https://www.checkov.io/1.Welcome/Quick%20Start.html)
-  * [TFScan](https://github.com/wils0ns/tfscan)
-  * [Terrascan](https://github.com/tenable/terrascan#install)
-  * [Illuminatio](https://github.com/inovex/illuminatio)
-  * [Tetragon cli](https://github.com/cilium/tetragon)
-  * [sdc-cli (Sysdig cli)](https://sysdiglabs.github.io/sysdig-platform-cli/)
-  * [roxctl](https://docs.openshift.com/acs/3.66/cli/getting-started-cli.html)
+  * [audit2rbac](https://github.com/liggitt/audit2rbac): generate RBAC based on audit log activity
+  * [Syft](https://github.com/anchore/syft): Generate SBOM from container
+  * [Vault cli](https://www.vaultproject.io/docs/commands): secure, store and control secrets
+  * [detect-secrets](https://github.com/Yelp/detect-secrets): detecting secrets within a code base
+  * [Illuminatio](https://github.com/inovex/illuminatio): automatically testing kubernetes network policies
+  * [Tetragon cli](https://github.com/cilium/tetragon): eBPF-based security observability and runtime enforcement
+  * Kubernetes security posture analyzer
+    * [KubeAudit](https://github.com/Shopify/kubeaudit)
+    * [Kube-hunter](https://github.com/aquasecurity/kube-hunter)
+    * [Kubesec](https://kubesec.io/)
+  * Container vulnerability scanners
+    * [Trivy](https://github.com/aquasecurity/trivy)
+    * [Grype](https://github.com/anchore/grype)
+    * [Snyk](https://docs.snyk.io/snyk-cli/install-the-snyk-cli)
+    * [cve-bin-tool](https://github.com/intel/cve-bin-tool)
+  * Infrastructure vulnerability scanners
+    * [Checkov](https://www.checkov.io/1.Welcome/Quick%20Start.html)
+    * [TFScan](https://github.com/wils0ns/tfscan)
+    * [Terrascan](https://github.com/tenable/terrascan#install)
+  * Security platform's CLI
+    * [sdc-cli (Sysdig cli)](https://sysdiglabs.github.io/sysdig-platform-cli/)
+    * [roxctl](https://docs.openshift.com/acs/3.66/cli/getting-started-cli.html)
 * Shells
   * Bash shell
   * Fish shell (default)
@@ -130,6 +134,7 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
 * [Grafeas](https://grafeas.io/)
 * [Artifactory CE](https://jfrog.com/community/download-artifactory-oss/)
 * [GitLab CE](https://gitlab.com/gitlab-org/gitlab)
+* [Factory for Repeatable Secure Creation of Artifacts (FRSCA)](https://github.com/buildsec/frsca)
 
 Additional tools not installed
 
