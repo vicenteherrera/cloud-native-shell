@@ -395,6 +395,9 @@ ENV PATH="/home/${user}/.krew/bin:$PATH"
 # Krew plugins: kube-scan, lineage
 RUN kubectl krew install kubesec-scan lineage
 
+# Helm plugins: helm-diff
+RUN helm plugin install https://github.com/databus23/helm-diff
+
 # GCloud cli
 ARG gcloud_ver=378.0.0
 RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${gcloud_ver}-linux-x86_64.tar.gz && \

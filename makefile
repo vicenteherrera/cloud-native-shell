@@ -59,4 +59,4 @@ push:
 
 pull:
 	RUNSUDO="" && groups | grep ' docker ' 1>/dev/null || RUNSUDO="sudo" ; \
-	$$RUNSUDO docker pull quay.io/vicenteherrera/cli-dev-shell
+		$$RUNSUDO docker pull quay.io/vicenteherrera/cli-dev-shell

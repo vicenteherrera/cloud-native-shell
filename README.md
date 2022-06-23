@@ -36,7 +36,7 @@ make run RUN_SHELL=/bin/bash
   * [Kubectx, Kubens](https://github.com/ahmetb/kubectx)
   * [OpenShift 4 cli (oc)](https://docs.openshift.com/container-platform/4.7/cli_reference/openshift_cli/getting-started-cli.html)
   * [eksctl](https://eksctl.io/)
-  * [Helm](https://helm.sh/)
+  * [Helm](https://helm.sh/), [Helm diff plugin](https://github.com/databus23/helm-diff)
   * [Helmfile](https://github.com/roboll/helmfile)
   * [kops](https://kops.sigs.k8s.io/getting_started/install/)
   * [Stern](https://github.com/wercker/stern)
