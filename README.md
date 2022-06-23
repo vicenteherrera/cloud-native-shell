@@ -14,7 +14,7 @@ make build
 make run
 
 # run but with bash shell
-make run SHELL=/bin/bash
+make run RUN_SHELL=/bin/bash
 ```
 
 ## Software included

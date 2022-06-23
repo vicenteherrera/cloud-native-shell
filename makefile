@@ -4,20 +4,21 @@ BASH_SHELL=/bin/bash
 FISH_SHELL=/usr/bin/fish
 ZSH_SHELL=/usr/bin/zsh
 
+# Default shell to use when building the image
 DEFAULT_SHELL=${FISH_SHELL}
+# Password for sudo to use when building the image
 PASSWORD=changeme
-
-SHELL=${SHELL:-/bin/fish}
+# Shell to use when running the image, unless a different one state in SHELL environment variable
+RUN_SHELL=${FISH_SHELL}
 
 all: build tag run
 
 build:
-	if groups $$USER | grep -q '\bdocker\b'; then RUNSUDO="" ; else RUNSUDO="sudo" ; fi && \
+	RUNSUDO="" && groups | grep ' docker ' 1>/dev/null || RUNSUDO="sudo" ; \
 		$$RUNSUDO docker build . -t cli-dev-shell \
 			--build-arg debian_ver=11.3 \
 			--build-arg gcloud_ver=378.0.0 \
-			--build-arg 1password_ver=2.0.0 \
-			--build-arg roxctl_ver=3.68.1 \
+			--build-arg one_password_ver=2.0.0 \
 			--build-arg go_ver=1.18 \
 			--build-arg dotnet_ver=6.0 \
 			--build-arg robusta_minver=0.9.11 \
@@ -31,11 +32,11 @@ build:
 			--build-arg pass=${PASSWORD}
 
 tag:
-	if groups $$USER | grep -q '\bdocker\b'; then RUNSUDO="" ; else RUNSUDO="sudo" ; fi && \
+	RUNSUDO="" && groups | grep ' docker ' 1>/dev/null || RUNSUDO="sudo" ; \
 		$$RUNSUDO docker tag cli-dev-shell quay.io/vicenteherrera/cli-dev-shell
 
 run:
-	if groups $$USER | grep -q '\bdocker\b'; then RUNSUDO="" ; else RUNSUDO="sudo" ; fi && \
+	RUNSUDO="" && groups | grep ' docker ' 1>/dev/null || RUNSUDO="sudo" ; \
 		$$RUNSUDO docker run --rm -it \
 			-v /var/run/docker.sock:/var/run/docker.sock \
 			-v $$(pwd):/home/$$(id -un)/data \
@@ -46,16 +47,16 @@ run:
 			--privileged \
 			--hostname awing --name cli-dev-shell \
 			quay.io/vicenteherrera/cli-dev-shell \
-			${SHELL}
+			${RUN_SHELL}
 
 # /dev/hidraw1 mounted to access Yubikey, with /dev/bus/usb, /sys/bus/usb and /sys/devices
 # May be in a different number for you, check https://forum.yubico.com/viewtopic61c9.html?p=8058
 
 push:
-	if groups $$USER | grep -q '\bdocker\b'; then RUNSUDO="" ; else RUNSUDO="sudo" ; fi && \
+	RUNSUDO="" && groups | grep ' docker ' 1>/dev/null || RUNSUDO="sudo" ; \
 		$$RUNSUDO docker tag cli-dev-shell quay.io/vicenteherrera/cli-dev-shell && \
 		$$RUNSUDO docker push quay.io/vicenteherrera/cli-dev-shell
 
 pull:
-	if groups $$USER | grep -q '\bdocker\b'; then RUNSUDO="" ; else RUNSUDO="sudo" ; fi && \
+	RUNSUDO="" && groups | grep ' docker ' 1>/dev/null || RUNSUDO="sudo" ; \
 	$$RUNSUDO docker pull quay.io/vicenteherrera/cli-dev-shell

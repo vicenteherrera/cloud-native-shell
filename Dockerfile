@@ -196,7 +196,8 @@ RUN curl -sLo helmfile https://github.com/roboll/helmfile/releases/latest/downlo
 
 # Go
 ARG go_ver=1.18
-RUN curl -sLo go.tar.gz https://go.dev/dl/go${go_ver}.linux-amd64.tar.gz && \
+RUN go_latest_ver=$(curl -s https://golang.org/VERSION?m=text) && \
+    curl -sLo go.tar.gz https://go.dev/dl/go${go_ver}.linux-amd64.tar.gz && \
     rm -rf /usr/local/go && tar -C /usr/local -xzf go.tar.gz && \
     rm go.tar.gz
 
@@ -272,16 +273,15 @@ RUN tfscan_ver=$(curl -s https://api.github.com/repos/wils0ns/tfscan/releases/la
     wget https://github.com/wils0ns/tfscan/releases/download/v${tfscan_ver}/tfscan_${tfscan_ver}_linux_amd64.tar.gz -O - |\
     tar xz && mv tfscan /usr/local/bin/
 
-# 1Password
-ARG 1password_ver=2.0.0
-RUN curl -sLo op.zip https://cache.agilebits.com/dist/1P/op2/pkg/v2.0.0/op_linux_amd64_v2.0.0.zip && \
-    unzip op.zip && mv op /usr/local/bin/ && rm op.zip op.sig
-
 # StackRox cli
-ARG roxctl_ver=3.68.1
-RUN curl -O https://mirror.openshift.com/pub/rhacs/assets/${roxctl_ver}/bin/Linux/roxctl && \
+RUN curl -O https://mirror.openshift.com/pub/rhacs/assets/latest/bin/Linux/roxctl && \
     chmod +x roxctl && \
     mv roxctl /usr/local/bin/
+
+# 1Password
+ARG one_password_ver=2.0.0
+RUN curl -sLo op.zip https://cache.agilebits.com/dist/1P/op2/pkg/v${one_password_ver}/op_linux_amd64_v${one_password_ver}.zip && \
+    unzip op.zip && mv op /usr/local/bin/ && rm op.zip op.sig
 
 # ClamAV
 ARG clamav_ver=0.105.0
@@ -403,8 +403,8 @@ RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cl
     rm -r ./google-cloud-sdk google-cloud-sdk-${gcloud_ver}-linux-x86_64.tar.gz
 
 # golangci-lint
-ARG golangci_lint_ver=1.46.2
-RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v${golangci_lint_ver}
+RUN golangci_lint_ver=$(curl -s https://api.github.com/repos/golangci/golangci-lint/releases/latest | jq ".tag_name" | xargs | cut -c2- ) && \
+    curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v${golangci_lint_ver}
 
 # nvm
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
