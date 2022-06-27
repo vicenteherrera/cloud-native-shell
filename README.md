@@ -26,7 +26,7 @@ make run RUN_SHELL=/bin/bash
   * [Buildah](https://buildah.io/)
   * [Skopeo](https://github.com/containers/skopeo)
   * [Vagrant](https://www.vagrantup.com/)
-  * [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-with-pip), paramiko
+  * [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-with-pip), Paramiko
   * [Docker slim](https://github.com/docker-slim/docker-slim)
   * [Docker squash](https://github.com/goldmann/docker-squash)
   * [Dive](https://github.com/wagoodman/dive)
@@ -70,10 +70,10 @@ make run RUN_SHELL=/bin/bash
   * [YAML lint](https://github.com/adrienverge/yamllint)
   * [Shellcheck](https://github.com/koalaman/shellcheck)
 * Security and networking
+  * [nmap](https://nmap.org/download), [ncat](https://nmap.org/ncat/), [netcat](https://sectools.org/tool/netcat/), [dig, nslookup, nsupdate](https://packages.debian.org/buster/dnsutils), [ping](https://packages.debian.org/stretch/iputils-ping)
+  * [ClamAV](http://www.clamav.net/downloads): Detect malware and virus  
   * [1Password cli](https://1password.com/downloads/command-line/)
   * [Yubikey manager](https://github.com/Yubico/yubikey-manager)
-  * [ClamAV](http://www.clamav.net/downloads): Detect malware and virus
-  * [nmap](https://nmap.org/download), [ncat](https://nmap.org/ncat/), [netcat](https://sectools.org/tool/netcat/), [dig, nslookup, nsupdate](https://packages.debian.org/buster/dnsutils), [ping](https://packages.debian.org/stretch/iputils-ping)
 * Cloud Native security
   * [audit2rbac](https://github.com/liggitt/audit2rbac): generate RBAC based on audit log activity
   * [Syft](https://github.com/anchore/syft): Generate SBOM from container
@@ -96,16 +96,16 @@ make run RUN_SHELL=/bin/bash
     * [Terrascan](https://github.com/tenable/terrascan#install)
   * Security platform's CLI
     * [sdc-cli (Sysdig cli)](https://sysdiglabs.github.io/sysdig-platform-cli/)
-    * [roxctl](https://docs.openshift.com/acs/3.66/cli/getting-started-cli.html)
+    * [roxctl (StackRox cli)](https://docs.openshift.com/acs/3.66/cli/getting-started-cli.html)
 * Shells
+  * [Fish shell](https://fishshell.com/) (default)
   * Bash shell
-  * Fish shell (default)
   * zsh shell
 * Command line utilities, miscelaneous
-  * make, curl, wget, git, vim, nano and others
+  * make, curl, wget, git, vim, nano and others...
   * [jq](https://stedolan.github.io/jq/), [yq](https://github.com/mikefarah/yq)
+  * [JLess](https://github.com/PaulJuliusMartinez/jless)  
   * [GitHub cli](https://cli.github.com/)
-  * [JLess](https://github.com/PaulJuliusMartinez/jless)
   * [Starship prompt](https://starship.rs/)
   * [Thef*ck](https://github.com/nvbn/thefuck)
   * [Batcat](https://github.com/sharkdp/bat)
@@ -135,6 +135,9 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
 * [Artifactory CE](https://jfrog.com/community/download-artifactory-oss/)
 * [GitLab CE](https://gitlab.com/gitlab-org/gitlab)
 * [Factory for Repeatable Secure Creation of Artifacts (FRSCA)](https://github.com/buildsec/frsca)
+* [Polaris](https://github.com/FairwindsOps/polaris)
+* [ArgoCD](https://github.com/argoproj/argo-cd)
+* [Robusta](https://github.com/robusta-dev/robusta)
 
 Additional tools not installed
 
