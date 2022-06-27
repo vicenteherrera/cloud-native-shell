@@ -409,6 +409,18 @@ RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cl
 RUN golangci_lint_ver=$(curl -s https://api.github.com/repos/golangci/golangci-lint/releases/latest | jq ".tag_name" | xargs | cut -c2- ) && \
     curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v${golangci_lint_ver}
 
+# Ginkgo
+RUN go install -mod=mod github.com/onsi/ginkgo/v2/ginkgo
+
+# Gomock
+RUN go install github.com/golang/mock/mockgen@latest
+
+# tfk8s
+RUN go install github.com/jrhouston/tfk8s@latest 
+
+# kubelinter
+RUN go install golang.stackrox.io/kube-linter/cmd/kube-linter@latest
+
 # nvm
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
