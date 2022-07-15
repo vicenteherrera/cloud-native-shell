@@ -42,21 +42,21 @@ make run RUN_SHELL=/bin/bash
   * [Kubectx, Kubens](https://github.com/ahmetb/kubectx): easely change Kubernetes config context and current namespace
   * [OpenShift 4 cli (oc)](https://docs.openshift.com/container-platform/4.7/cli_reference/openshift_cli/getting-started-cli.html)
   * [eksctl](https://eksctl.io/): create and manage EKS clusters on AWS
-  * [Helm](https://helm.sh/), [Helm diff plugin](https://github.com/databus23/helm-diff)
-  * [Helmfile](https://github.com/roboll/helmfile)
-  * [kops](https://kops.sigs.k8s.io/getting_started/install/)
+  * [Helm](https://helm.sh/), [Helm diff plugin](https://github.com/databus23/helm-diff): manage apps in Kubernetes with deploy templates packaged as charts
+  * [Helmfile](https://github.com/roboll/helmfile): deploy several Helm charts at once
+  * [kops](https://kops.sigs.k8s.io/getting_started/install/): provision Kubernetes clusters on cloud providers
   * [Stern](https://github.com/wercker/stern): tail multiple pod logs on Kubernetes
-  * [Tekton cli](https://tekton.dev/docs/cli/)
-  * [Okteto cli](https://www.okteto.com/docs/cloud/okteto-cli)
+  * [Tekton cli](https://tekton.dev/docs/cli/): cli to Tekton cloud native CI/CD system
+  * [Okteto cli](https://www.okteto.com/docs/cloud/okteto-cli): cli to Okteto shareable preview environments
   * [crictl](https://github.com/kubernetes-sigs/cri-tools/blob/master/docs/crictl.md): inspect and debug CRI-compatible container runtimes and applications on a Kubernetes node
   * [tfk8s](https://github.com/jrhouston/tfk8s): migrate YAML manifests to the [Terraform Kubernetes Provider](https://github.com/hashicorp/terraform-provider-kubernetes)
   * [Carvel tools](https://carvel.dev/ytt/docs/v0.41.0/install/) (kapp-controller, ytt, kapp, kbld, imgpkg, vendir)
   * [kube-lineage](https://github.com/tohjustin/kube-lineage/): display all dependencies or dependents of an object in a Kubernetes cluster
   * [polaris](https://github.com/fairwindsops/polaris/): CLI to check Kubernetes pods and controllers using best practices
   * [Crossplane cli](https://crossplane.io/docs/v1.9/getting-started/install-configure.html): provision, compose, and consume infrastructure using the Kubernetes API
-  * [Minikube](https://minikube.sigs.k8s.io/docs/start/)
-  * [Minishift](https://github.com/minishift/minishift)
-  * [Kind](https://kind.sigs.k8s.io/)
+  * [Minikube](https://minikube.sigs.k8s.io/docs/start/): deploy a local Kubernetes cluster using different hypervisor drivers
+  * [Kind](https://kind.sigs.k8s.io/): deploy a local Kubernetes cluster using Docker
+  * [Minishift](https://github.com/minishift/minishift): deploy a local OpenShift cluster
 * Cloud
   * [AWS cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
   * [Google Cloud cli](https://cloud.google.com/sdk/gcloud)
@@ -67,7 +67,7 @@ make run RUN_SHELL=/bin/bash
   * [Prometheus (promtool)](https://prometheus.io/docs/prometheus/latest/configuration/unit_testing_rules/)
   * [Alertmanager (amtool)](https://github.com/prometheus/alertmanager)
   * [pint](https://cloudflare.github.io/pint/)
-  * [Robusta cli](https://docs.robusta.dev/master/installation.html)
+  * [Robusta cli](https://docs.robusta.dev/master/installation.html): cli to Robusta Kubernetes troubleshooting and automation platform
 * Security and networking
   * [nmap](https://nmap.org/download), [ncat](https://nmap.org/ncat/), [netcat](https://sectools.org/tool/netcat/), [dig, nslookup, nsupdate](https://packages.debian.org/buster/dnsutils), [ping](https://packages.debian.org/stretch/iputils-ping)
   * [testssl.sh](https://testssl.sh): checks a server ports for TLS/SSL ciphers, protocols, recent cryptographic flaws, etc
@@ -87,13 +87,13 @@ make run RUN_SHELL=/bin/bash
   * [Kubewarden cli](https://github.com/kubewarden/kwctl): policy engine for Kubernetes
   * [kube-linter](https://github.com/stackrox/kube-linter): checks Kubernetes YAML files and Helm charts against a variety of best practices
   * Kubernetes security posture analyzer
-    * [KubeAudit](https://github.com/Shopify/kubeaudit)
-    * [Kube-hunter](https://github.com/aquasecurity/kube-hunter)
+    * [KubeAudit](https://github.com/Shopify/kubeaudit): audit Kubernetes clusters for security concerns
+    * [Kube-hunter](https://github.com/aquasecurity/kube-hunter): hunt for security weaknesses in Kubernetes clusters
     * [Kube-score](https://github.com/zegl/kube-score): static code analysis of your Kubernetes object definitions
-    * [kubectl kubesec-scan](https://github.com/controlplaneio/kubectl-kubesec)
+    * [kubectl kubesec-scan](https://github.com/controlplaneio/kubectl-kubesec): security risk analysis
     * [kubectl score](https://github.com/zegl/kube-score): static code analysis for Kubernetes object definitions
     * [kubectl popeye](https://popeyecli.io/): scan cluster for issues
-    * [kubectl doctor](https://github.com/emirozer/kubectl-doctor) scan cluster for anomalies
+    * [kubectl doctor](https://github.com/emirozer/kubectl-doctor): scan cluster for anomalies
   * Container vulnerability scanners
     * [Trivy](https://github.com/aquasecurity/trivy)
     * [Grype](https://github.com/anchore/grype)
@@ -123,11 +123,11 @@ make run RUN_SHELL=/bin/bash
   * [jq](https://stedolan.github.io/jq/), [yq](https://github.com/mikefarah/yq)
   * [JLess](https://github.com/PaulJuliusMartinez/jless)  
   * [GitHub cli](https://cli.github.com/)
-  * [Starship prompt](https://starship.rs/)
-  * [Thef*ck](https://github.com/nvbn/thefuck)
-  * [Batcat](https://github.com/sharkdp/bat)
-  * [direnv](https://direnv.net/)
-  * [z](https://github.com/rupa/z)
+  * [Starship prompt](https://starship.rs/): powerful prompt
+  * [Thef*ck](https://github.com/nvbn/thefuck): correct errors in the previous console command
+  * [Batcat](https://github.com/sharkdp/bat): prettier cat replacement
+  * [direnv](https://direnv.net/): load and unload environment variables depending on the current directory
+  * [z](https://github.com/rupa/z): smart directory changer
   * [Jekyll](https://jekyllrb.com/), [Bundler](https://bundler.io/)
 
 ## Other open source Cloud Native tools for a cluster
