@@ -487,7 +487,7 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | b
 RUN curl https://pyenv.run | bash
 
 # Poetry
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3 -
+RUN curl -sSL https://install.python-poetry.org | python3 -
 
 # Pipx
 RUN python3 -m pip install --user pipx
