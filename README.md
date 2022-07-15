@@ -21,37 +21,39 @@ make run RUN_SHELL=/bin/bash
 
 * [Debian 11 "Bullseye"](https://www.debian.org/News/2021/20210814)
 * Containers and VM
-  * [Docker](https://docs.docker.com/engine/reference/commandline/cli/)
-  * [Podman](https://podman.io/)
-  * [Buildah](https://buildah.io/)
-  * [Skopeo](https://github.com/containers/skopeo)
-  * [Vagrant](https://www.vagrantup.com/)
+  * [Docker](https://docs.docker.com/engine/reference/commandline/cli/) (includes 'compose' command)
+  * [Podman](https://podman.io/): run container images without sudo
+  * [Buildah](https://buildah.io/): build container images without sudo
+  * [Skopeo](https://github.com/containers/skopeo): move container images between different types of container storages
+  * [Vagrant](https://www.vagrantup.com/): virtual machines manager
   * [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-with-pip), Paramiko
-  * [Docker slim](https://github.com/docker-slim/docker-slim)
-  * [Docker squash](https://github.com/goldmann/docker-squash)
-  * [Dive](https://github.com/wagoodman/dive)
+  * [docker-slim](https://github.com/docker-slim/docker-slim): reduce footprint of container images
+  * [docker-squash](https://github.com/goldmann/docker-squash): squash layers of a container image reducing size
+  * [dive](https://github.com/wagoodman/dive): explore container image and layers
+  * [act](https://github.com/nektos/act): test GitHub actions locally
 * Kubernetes
   * [Kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/), [kubectl-convert](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-convert-plugin), aliases
   * [Krew](https://krew.sigs.k8s.io/)   
-    * [kubectl node-shell](https://github.com/kvaps/kubectl-node-shell): Start a root shell in a node    
+    * [kubectl node-shell](https://github.com/kvaps/kubectl-node-shell): start a root shell in a node    
     * [kubectl example](https://github.com/seredot/kubectl-example): resource example YAMLs
     * [kubectl neat](https://github.com/itaysk/kubectl-neat): remove clutter from manifests
     * [kubectl ktop](https://github.com/vladimirvivien/ktop): top like tool for Kubernetes
     * [kubectl nsenter](https://github.com/towolf/kubectl-nsenter): SSH onto node and spawn an nsenter shell into a pod
-  * [Kubectx, Kubens](https://github.com/ahmetb/kubectx)
+  * [Kubectx, Kubens](https://github.com/ahmetb/kubectx): easely change Kubernetes config context and current namespace
   * [OpenShift 4 cli (oc)](https://docs.openshift.com/container-platform/4.7/cli_reference/openshift_cli/getting-started-cli.html)
-  * [eksctl](https://eksctl.io/)
+  * [eksctl](https://eksctl.io/): create and manage EKS clusters on AWS
   * [Helm](https://helm.sh/), [Helm diff plugin](https://github.com/databus23/helm-diff)
   * [Helmfile](https://github.com/roboll/helmfile)
   * [kops](https://kops.sigs.k8s.io/getting_started/install/)
-  * [Stern](https://github.com/wercker/stern)
+  * [Stern](https://github.com/wercker/stern): tail multiple pod logs on Kubernetes
   * [Tekton cli](https://tekton.dev/docs/cli/)
   * [Okteto cli](https://www.okteto.com/docs/cloud/okteto-cli)
-  * [crictl](https://github.com/kubernetes-sigs/cri-tools/blob/master/docs/crictl.md)
-  * [tfk8s](https://github.com/jrhouston/tfk8s)
+  * [crictl](https://github.com/kubernetes-sigs/cri-tools/blob/master/docs/crictl.md): inspect and debug CRI-compatible container runtimes and applications on a Kubernetes node
+  * [tfk8s](https://github.com/jrhouston/tfk8s): migrate YAML manifests to the [Terraform Kubernetes Provider](https://github.com/hashicorp/terraform-provider-kubernetes)
   * [Carvel tools](https://carvel.dev/ytt/docs/v0.41.0/install/) (kapp-controller, ytt, kapp, kbld, imgpkg, vendir)
-  * [kube-linter](https://github.com/stackrox/kube-linter)
-  * [kube-lineage](https://github.com/tohjustin/kube-lineage/)
+  * [kube-lineage](https://github.com/tohjustin/kube-lineage/): display all dependencies or dependents of an object in a Kubernetes cluster
+  * [polaris](https://github.com/fairwindsops/polaris/): CLI to check Kubernetes pods and controllers using best practices
+  * [Crossplane cli](https://crossplane.io/docs/v1.9/getting-started/install-configure.html): provision, compose, and consume infrastructure using the Kubernetes API
   * [Minikube](https://minikube.sigs.k8s.io/docs/start/)
   * [Minishift](https://github.com/minishift/minishift)
   * [Kind](https://kind.sigs.k8s.io/)
@@ -66,14 +68,6 @@ make run RUN_SHELL=/bin/bash
   * [Alertmanager (amtool)](https://github.com/prometheus/alertmanager)
   * [pint](https://cloudflare.github.io/pint/)
   * [Robusta cli](https://docs.robusta.dev/master/installation.html)
-* Programming
-  * [Python](https://www.python.org/), [pip](https://pypi.org/project/pip/), [pipx](https://github.com/pypa/pipx), [PyEnv](https://github.com/pyenv/pyenv), [Poetry](https://python-poetry.org/docs/)
-  * [Node](https://nodejs.org/en/), [npm](https://www.npmjs.com/), [nvm](https://github.com/nvm-sh/nvm)
-  * [Go](https://go.dev/), [golangci-lint](https://golangci-lint.run/usage/install/#local-installation), [Ginkgo](https://github.com/onsi/ginkgo), [Gomock](https://github.com/golang/mock)
-  * [Ruby](https://www.ruby-lang.org/en/documentation/), [Jekyll](https://jekyllrb.com/), [Bundler](https://bundler.io/docs.html)
-  * [Dot Net 6](https://docs.microsoft.com/en-us/dotnet/core/install/linux-debian)
-  * [YAML lint](https://github.com/adrienverge/yamllint)
-  * [Shellcheck](https://github.com/koalaman/shellcheck)
 * Security and networking
   * [nmap](https://nmap.org/download), [ncat](https://nmap.org/ncat/), [netcat](https://sectools.org/tool/netcat/), [dig, nslookup, nsupdate](https://packages.debian.org/buster/dnsutils), [ping](https://packages.debian.org/stretch/iputils-ping)
   * [ClamAV](http://www.clamav.net/downloads): Detect malware and virus  
@@ -86,13 +80,19 @@ make run RUN_SHELL=/bin/bash
   * [detect-secrets](https://github.com/Yelp/detect-secrets): detecting secrets within a code base
   * [Illuminatio](https://github.com/inovex/illuminatio): automatically testing kubernetes network policies
   * [Tetragon cli](https://github.com/cilium/tetragon): eBPF-based security observability and runtime enforcement
+  * [chain-bench](https://github.com/aquasecurity/chain-bench): CIS Software Supply Chain benchmark
+  * [cmctl](https://cert-manager.io/docs/usage/cmctl/#installation): cert-manager cli
+  * [KubiScan](https://github.com/cyberark/KubiScan): Scan for risky permissions in RBAC
+  * [Kubewarden cli](https://github.com/kubewarden/kwctl): policy engine for Kubernetes
+  * [kube-linter](https://github.com/stackrox/kube-linter): checks Kubernetes YAML files and Helm charts against a variety of best practices
   * Kubernetes security posture analyzer
     * [KubeAudit](https://github.com/Shopify/kubeaudit)
     * [Kube-hunter](https://github.com/aquasecurity/kube-hunter)
+    * [Kube-score](https://github.com/zegl/kube-score): static code analysis of your Kubernetes object definitions
     * [kubectl kubesec-scan](https://github.com/controlplaneio/kubectl-kubesec)
     * [kubectl score](https://github.com/zegl/kube-score): static code analysis for Kubernetes object definitions
     * [kubectl popeye](https://popeyecli.io/): scan cluster for issues
-    * [kubectl doctor](https://github.com/emirozer/kubectl-doctor) scan cluster for anomalies 
+    * [kubectl doctor](https://github.com/emirozer/kubectl-doctor) scan cluster for anomalies
   * Container vulnerability scanners
     * [Trivy](https://github.com/aquasecurity/trivy)
     * [Grype](https://github.com/anchore/grype)
@@ -105,6 +105,14 @@ make run RUN_SHELL=/bin/bash
   * Security platform's CLI
     * [sdc-cli (Sysdig cli)](https://sysdiglabs.github.io/sysdig-platform-cli/)
     * [roxctl (StackRox cli)](https://docs.openshift.com/acs/3.66/cli/getting-started-cli.html)
+* Programming
+  * [Python](https://www.python.org/), [pip](https://pypi.org/project/pip/), [pipx](https://github.com/pypa/pipx), [PyEnv](https://github.com/pyenv/pyenv), [Poetry](https://python-poetry.org/docs/)
+  * [Node](https://nodejs.org/en/), [npm](https://www.npmjs.com/), [nvm](https://github.com/nvm-sh/nvm), [npx](https://www.npmjs.com/package/npx), [yarn](https://yarnpkg.com/getting-started/)
+  * [Go](https://go.dev/), [golangci-lint](https://golangci-lint.run/usage/install/#local-installation), [Ginkgo](https://github.com/onsi/ginkgo), [Gomock](https://github.com/golang/mock)
+  * [Ruby](https://www.ruby-lang.org/en/documentation/), [Jekyll](https://jekyllrb.com/), [Bundler](https://bundler.io/docs.html)
+  * [Dot Net 6](https://docs.microsoft.com/en-us/dotnet/core/install/linux-debian)
+  * [YAML lint](https://github.com/adrienverge/yamllint)
+  * [Shellcheck](https://github.com/koalaman/shellcheck)
 * Shells
   * [Fish shell](https://fishshell.com/) (default)
   * Bash shell
@@ -127,13 +135,14 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
 
 * [Falco](https://github.com/falcosecurity/falco)
 * [KubeBench](https://github.com/aquasecurity/kube-bench)
-* [Gatekeeper](https://github.com/open-policy-agent/gatekeeper)
+* [Gatekeeper](https://github.com/open-policy-agent/gatekeeper): admission controller OPA based
 * [Hashicorp Vault](https://www.vaultproject.io/)
 * [Notary](https://github.com/notaryproject/notary)
 * [Chains](https://github.com/tektoncd/chains)
 * [Calico](https://projectcalico.docs.tigera.io/about/about-calico)
 * [Istio](https://github.com/istio/istio)
 * [RBAC-Police](https://github.com/PaloAltoNetworks/rbac-police)
+* [Kyverno](https://github.com/kyverno/kyverno): policy engine and admission controller
 * [Tracee](https://github.com/aquasecurity/tracee)
 * [Hubble](https://github.com/cilium/hubble)
 * [ThreatMapper](https://github.com/deepfence/ThreatMapper)
@@ -143,11 +152,19 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
 * [Artifactory CE](https://jfrog.com/community/download-artifactory-oss/)
 * [GitLab CE](https://gitlab.com/gitlab-org/gitlab)
 * [Factory for Repeatable Secure Creation of Artifacts (FRSCA)](https://github.com/buildsec/frsca)
-* [Polaris](https://github.com/FairwindsOps/polaris)
-* [ArgoCD](https://github.com/argoproj/argo-cd)
-* [Robusta](https://github.com/robusta-dev/robusta)
+* [ArgoCD](https://github.com/argoproj/argo-cd): gitops CD platform
+* [Robusta](https://github.com/robusta-dev/robusta): observability reporting
+* [Wazuh](https://github.com/wazuh/wazuh-kubernetes/blob/master/instructions.md): open source Kubernetes security platform
+* [cert-manager](https://cert-manager.io/docs/usage/cmctl/#installation): certificate manager
+* [Kubewarden](https://github.com/kubewarden): policy engine for Kubernetes
+* [Polaris](https://github.com/FairwindsOps/polaris/): admission controller to check Kubernetes pods and controllers using best practices
+* [Crossplane](https://crossplane.io/docs/v1.9/getting-started/install-configure.html): provision, compose, and consume infrastructure using the Kubernetes API
+* [gitgat](https://github.com/scribe-public/gitgat): OPA policies that verify SCM (currently GitHub's) organization/repositories/user accounts security
 
 Additional tools not installed
 
-* [Cloud mapper](https://github.com/duo-labs/cloudmapper)
+The following tools have huge requirements that would make the container image even bigger than it already is
 
+* [Cloud mapper](https://github.com/duo-labs/cloudmapper)
+* [OpenSCAP base](https://www.open-scap.org/tools/openscap-base/#download), [SCAP Workbench](https://www.open-scap.org/tools/scap-workbench/#download)
+* [Dagda](https://github.com/eliasgranderubio/dagda): static analysis of known vulnerabilities, trojans, viruses, malware in container images and running containers on Docker.

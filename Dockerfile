@@ -271,12 +271,61 @@ RUN crictl_ver=$(curl -s https://api.github.com/repos/kubernetes-sigs/cri-tools/
 # tfscan
 RUN tfscan_ver=$(curl -s https://api.github.com/repos/wils0ns/tfscan/releases/latest | jq ".tag_name" | xargs | cut -c2- ) && \
     wget https://github.com/wils0ns/tfscan/releases/download/v${tfscan_ver}/tfscan_${tfscan_ver}_linux_amd64.tar.gz -O - |\
-    tar xz && mv tfscan /usr/local/bin/
+    tar xz && mv tfscan /usr/local/bin/ && rm LICENSE README.md
+
+# chain-bench
+RUN chain_bench_ver=$(curl -s https://api.github.com/repos/aquasecurity/chain-bench/releases/latest | jq ".tag_name" | xargs | cut -c2- ) && \
+    wget https://github.com/aquasecurity/chain-bench/releases/download/v${chain_bench_ver}/chain-bench_${chain_bench_ver}_Linux_64bit.tar.gz -O - |\
+    tar xz && mv chain-bench /usr/local/bin/
+
+# cmctl
+RUN cmctl_ver=$(curl -s https://api.github.com/repos/cert-manager/cert-manager/releases/latest | jq ".tag_name" | xargs | cut -c2- ) && \
+    export PATH="/usr/local/go/bin:$PATH" && OS=$(go env GOOS) && ARCH=$(go env GOARCH) && \
+    curl -sSL -o cmctl.tar.gz https://github.com/cert-manager/cert-manager/releases/download/v${cmctl_ver}/cmctl-$OS-$ARCH.tar.gz && \
+    tar xzf cmctl.tar.gz && mv cmctl /usr/local/bin && rm cmctl.tar.gz
+
+# polaris
+RUN repo="fairwindsops/polaris" && cutv="1" && usev="" && \
+    version=$(curl -s https://api.github.com/repos/${repo}/releases/latest | jq ".tag_name" | xargs | cut -c${cutv}- ) && \
+    gzfile="polaris_linux_amd64.tar.gz" && file="polaris" && \
+    wget https://github.com/${repo}/releases/download/${usev}${version}/${gzfile} -O - |\
+    tar xz && mv ${file} /usr/local/bin/
+
+# kube-score
+RUN repo="zegl/kube-score" && cutv="2" && usev="v" && \
+    version=$(curl -s https://api.github.com/repos/${repo}/releases/latest | jq ".tag_name" | xargs | cut -c${cutv}- ) && \
+    gzfile="kube-score_${version}_linux_amd64.tar.gz" && file="kube-score" && \
+    wget https://github.com/${repo}/releases/download/${usev}${version}/${gzfile} -O - |\
+    tar xz && mv ${file} /usr/local/bin/
+
+# kwctl (Kubewarden cli)
+RUN repo="kubewarden/kwctl" && cutv="2" && usev="v" && \
+    version=$(curl -s https://api.github.com/repos/${repo}/releases/latest | jq ".tag_name" | xargs | cut -c${cutv}- ) && \
+    gzfile="kwctl-linux-x86_64.zip" && file="kwctl-linux-x86_64" && targetfile="kwctl" \
+    wget https://github.com/${repo}/releases/download/${usev}${version}/${gzfile} && \
+    unzip ${gzfile} && rm ${gzfile} && \
+    mv ${file} /usr/local/bin/${targetfile}
+
+# KubiScan
+RUN pip install --user --no-cache kubernetes PrettyTable urllib3 && \
+    repo="cyberark/KubiScan" && cutv="2" && usev="v" && \
+    version=$(curl -s https://api.github.com/repos/${repo}/releases/latest | jq ".tag_name" | xargs | cut -c${cutv}- ) && \
+    gzfile="source.code.zip" && \
+    wget https://github.com/${repo}/releases/download/${usev}${version}/${gzfile} && \
+    unzip source.code.zip && rm source.code.zip && \
+    sudo mv ./KubiScan-master /usr/local/kubiscan && sudo chmod -R a+rX /usr/local/kubiscan && \
+    alias kubiscan="python3 /usr/local/kubiscan/KubiScan.py"
 
 # StackRox cli
 RUN curl -O https://mirror.openshift.com/pub/rhacs/assets/latest/bin/Linux/roxctl && \
     chmod +x roxctl && \
     mv roxctl /usr/local/bin/
+
+# Crossplane cli
+RUN curl -sL https://raw.githubusercontent.com/crossplane/crossplane/master/install.sh | sh
+
+# act
+RUN curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
 
 # 1Password
 ARG one_password_ver=2.0.0
@@ -470,8 +519,8 @@ RUN pipx install "sdccli>=${sdccli_minver}"
 ARG checkov_minver=2.0.1184
 RUN pipx install "checkov>=${checkov_minver}"
 
-# Snyk
-RUN npm install snyk
+# Snyk, npx, yarn
+RUN npm install snyk npx yarn
 
 # --------------------------------------------------------------------------------------
 

@@ -29,3 +29,6 @@ alias gc "git commit -m"
 alias sf 'say "process has finished"'
 alias w3 "/usr/local/bin/watch -n3"
 alias ek 'eksctl'
+
+# KubiScan
+alias kubiscan "python3 /usr/local/kubiscan/KubiScan.py"
