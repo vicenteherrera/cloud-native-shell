@@ -380,6 +380,13 @@ RUN echo '# Created in Dockerfile' >>/home/${user}/.bashrc && \
 
 # Programs that install on user profile
 
+# GCloud cli
+ARG gcloud_ver=378.0.0
+RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${gcloud_ver}-linux-x86_64.tar.gz && \
+    tar -xf google-cloud-sdk-${gcloud_ver}-linux-x86_64.tar.gz && \
+    ./google-cloud-sdk/install.sh --usage-reporting false -q && \
+    rm -r ./google-cloud-sdk google-cloud-sdk-${gcloud_ver}-linux-x86_64.tar.gz
+
 # Krew
 RUN ( \
     set -x; cd "$(mktemp -d)" && \
@@ -392,18 +399,17 @@ RUN ( \
     )
 ENV PATH="/home/${user}/.krew/bin:$PATH"
 
-# Krew plugins: kube-scan, lineage
-RUN kubectl krew install kubesec-scan lineage
+# Krew plugins: kube-scan, lineage, example, neat, score, popeye
+#               example, ktop, nsenter, doctor
+RUN kubectl krew install kubesec-scan lineage example neat score popeye \
+        ktop nsenter doctor
+
+# Krew plugin: Nodeshell
+RUN kubectl krew index add kvaps https://github.com/kvaps/krew-index && \
+    kubectl krew install kvaps/node-shell
 
 # Helm plugins: helm-diff
 RUN helm plugin install https://github.com/databus23/helm-diff
-
-# GCloud cli
-ARG gcloud_ver=378.0.0
-RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${gcloud_ver}-linux-x86_64.tar.gz && \
-    tar -xf google-cloud-sdk-${gcloud_ver}-linux-x86_64.tar.gz && \
-    ./google-cloud-sdk/install.sh --usage-reporting false -q && \
-    rm -r ./google-cloud-sdk google-cloud-sdk-${gcloud_ver}-linux-x86_64.tar.gz
 
 # golangci-lint
 RUN golangci_lint_ver=$(curl -s https://api.github.com/repos/golangci/golangci-lint/releases/latest | jq ".tag_name" | xargs | cut -c2- ) && \
@@ -437,12 +443,6 @@ RUN python3 -m pip install --user pipx
 RUN gem install jekyll bundler
 # This takes long to install, you may want to skip it
 
-# tfk8s
-RUN go install github.com/jrhouston/tfk8s@latest 
-
-# kubelinter
-RUN go install golang.stackrox.io/kube-linter/cmd/kube-linter@latest
-
 # Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), robusta, 
 # docker-squash, checkov, illuminatio, vault-cli, cve-bin-tool
 RUN pip install --user --no-cache \
@@ -474,7 +474,6 @@ RUN pipx install "checkov>=${checkov_minver}"
 RUN npm install snyk
 
 # --------------------------------------------------------------------------------------
-
 
 # Squash all layers in a single one
 FROM scratch

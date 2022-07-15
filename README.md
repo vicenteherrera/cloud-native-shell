@@ -32,7 +32,12 @@ make run RUN_SHELL=/bin/bash
   * [Dive](https://github.com/wagoodman/dive)
 * Kubernetes
   * [Kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/), [kubectl-convert](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-convert-plugin), aliases
-  * [Krew](https://krew.sigs.k8s.io/)
+  * [Krew](https://krew.sigs.k8s.io/)   
+    * [kubectl node-shell](https://github.com/kvaps/kubectl-node-shell): Start a root shell in a node    
+    * [kubectl example](https://github.com/seredot/kubectl-example): resource example YAMLs
+    * [kubectl neat](https://github.com/itaysk/kubectl-neat): remove clutter from manifests
+    * [kubectl ktop](https://github.com/vladimirvivien/ktop): top like tool for Kubernetes
+    * [kubectl nsenter](https://github.com/towolf/kubectl-nsenter): SSH onto node and spawn an nsenter shell into a pod
   * [Kubectx, Kubens](https://github.com/ahmetb/kubectx)
   * [OpenShift 4 cli (oc)](https://docs.openshift.com/container-platform/4.7/cli_reference/openshift_cli/getting-started-cli.html)
   * [eksctl](https://eksctl.io/)
@@ -84,7 +89,10 @@ make run RUN_SHELL=/bin/bash
   * Kubernetes security posture analyzer
     * [KubeAudit](https://github.com/Shopify/kubeaudit)
     * [Kube-hunter](https://github.com/aquasecurity/kube-hunter)
-    * [Kubesec](https://kubesec.io/)
+    * [kubectl kubesec-scan](https://github.com/controlplaneio/kubectl-kubesec)
+    * [kubectl score](https://github.com/zegl/kube-score): static code analysis for Kubernetes object definitions
+    * [kubectl popeye](https://popeyecli.io/): scan cluster for issues
+    * [kubectl doctor](https://github.com/emirozer/kubectl-doctor) scan cluster for anomalies 
   * Container vulnerability scanners
     * [Trivy](https://github.com/aquasecurity/trivy)
     * [Grype](https://github.com/anchore/grype)
