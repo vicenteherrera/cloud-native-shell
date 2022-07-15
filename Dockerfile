@@ -529,10 +529,9 @@ RUN npm install snyk npx yarn
 # --------------------------------------------------------------------------------------
 
 # Squash all layers in a single one
+RUN sudo apt clean && sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /install
 FROM scratch
 COPY --from=build / /
-
-RUN sudo apt clean && sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /install
 
 ARG user=vicente
 ARG uid=1000
