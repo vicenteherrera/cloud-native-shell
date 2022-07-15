@@ -70,6 +70,7 @@ make run RUN_SHELL=/bin/bash
   * [Robusta cli](https://docs.robusta.dev/master/installation.html)
 * Security and networking
   * [nmap](https://nmap.org/download), [ncat](https://nmap.org/ncat/), [netcat](https://sectools.org/tool/netcat/), [dig, nslookup, nsupdate](https://packages.debian.org/buster/dnsutils), [ping](https://packages.debian.org/stretch/iputils-ping)
+  * [testssl.sh](https://testssl.sh): checks a server ports for TLS/SSL ciphers, protocols, recent cryptographic flaws, etc
   * [ClamAV](http://www.clamav.net/downloads): Detect malware and virus  
   * [1Password cli](https://1password.com/downloads/command-line/)
   * [Yubikey manager](https://github.com/Yubico/yubikey-manager)

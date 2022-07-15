@@ -327,6 +327,10 @@ RUN curl -sL https://raw.githubusercontent.com/crossplane/crossplane/master/inst
 # act
 RUN curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
 
+# testssl.sh
+RUN wget https://testssl.sh/testssl.sh && \
+    sudo chmod +x testssl.sh && mv testssl.sh /usr/local/bin
+
 # 1Password
 ARG one_password_ver=2.0.0
 RUN curl -sLo op.zip https://cache.agilebits.com/dist/1P/op2/pkg/v${one_password_ver}/op_linux_amd64_v${one_password_ver}.zip && \
