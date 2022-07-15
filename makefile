@@ -43,8 +43,16 @@ tag:
 
 run:
 	RUNSUDO="" && groups | grep ' docker ' 1>/dev/null || RUNSUDO="sudo" ; \
+		KUBEDIR_PARAM=""  && [ -d "$$HOME/.kube" ]     && KUBEDIR_PARAM="-v $$HOME/.kube:/home/$$(id -un)/.kube"; \
+		AWS_PARAM=""      && [ -d "$$HOME/.aws" ]      && AWS_PARAM="-v $$HOME/.aws:/home/$$(id -un)/.aws"; \
+		MINIKUBE_PARAM="" && [ -d "$$HOME/.minikube" ] && MINIKUBE_PARAM="-v $$HOME/.minikube:/home/$$(id -un)/.minikube"; \
+		SSH_PARAM=""      && [ -d "$$HOME/.ssh" ]      && MINIKUBE_PARAM="-v $$HOME/.ssh:/home/$$(id -un)/.ssh"; \
 		$$RUNSUDO docker run --rm -it \
 			-v /var/run/docker.sock:/var/run/docker.sock \
+			$$KUBEDIR_PARAM \
+			$$AWS_PARAM \
+			$$MINIKUBE_PARAM \
+			$$SSH_PARAM \
 			-v $$(pwd):/home/$$(id -un)/data \
 			-v /dev/bus/usb:/dev/bus/usb \
 			-v /sys/bus/usb/:/sys/bus/usb/ \
