@@ -107,7 +107,7 @@ RUN dive_ver=$(curl -s https://api.github.com/repos/wagoodman/dive/releases/late
     sudo apt install ./dive_${dive_ver}_linux_amd64.deb && \
     rm ./dive_${dive_ver}_linux_amd64.deb
 
-## Go and go required global installation
+## Golang, and go required global installation
 
 # Go
 ARG go_ver=1.18
@@ -128,6 +128,9 @@ RUN git clone https://github.com/cloudflare/pint.git && \
 ## Installed binaries from GitHub
 
 COPY ./gh_install.sh .
+
+# Dive
+RUN REPO="wagoodman/dive" ZFILE="dive_VERSION_linux_amd64.deb" ./gh_install.sh
 
 # Kubectx, Kubens
 RUN REPO="ahmetb/kubectx" ZFILE="kubectx_vVERSION_linux_x86_64.tar.gz" FILE="kubectx" ./gh_install.sh
@@ -213,8 +216,8 @@ RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/s
     rm kubectl-convert
 
 # Tetragon
-RUN wget https://github.com/cilium/tetragon/releases/download/tetragon-cli/tetragon-linux-amd64.tar.gz -O - |\
-        tar xz && mv tetragon /usr/bin/tetragon
+RUN wget https://github.com/cilium/tetragon/releases/download/tetragon-cli/tetragon-linux-amd64.tar.gz -O - \
+        | tar xz && mv tetragon /usr/bin/tetragon
 
 # StackRox cli
 RUN curl -O https://mirror.openshift.com/pub/rhacs/assets/latest/bin/Linux/roxctl && \
@@ -282,7 +285,7 @@ RUN curl -sLo op.zip https://cache.agilebits.com/dist/1P/op2/pkg/v${one_password
 
 # ClamAV
 ARG clamav_ver=0.105.0
-RUN wget http://www.clamav.net/downloads/production/clamav-${clamav_ver}.linux.x86_64.deb && \
+RUN wget https://www.clamav.net/downloads/production/clamav-${clamav_ver}.linux.x86_64.deb && \
     sudo dpkg -i clamav-${clamav_ver}.linux.x86_64.deb && \
     rm clamav-${clamav_ver}.linux.x86_64.deb
 
