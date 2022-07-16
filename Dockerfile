@@ -26,6 +26,8 @@ RUN apt-get -y install \
         conntrack
 # conntrack is a Kubernetes 1.20.2 requirement
 
+## Install using custom apt sources
+
 # Dotnet
 ARG dotnet_ver=6.0
 RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
@@ -41,11 +43,6 @@ RUN apt-get install -y apt-transport-https ca-certificates curl && \
     | tee /etc/apt/sources.list.d/kubernetes.list > /dev/null && \
     apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/kubernetes.list && \
     apt-get install -y kubectl
-
-# Kubectl-convert
-RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl-convert" && \
-    sudo install -o root -g root -m 0755 kubectl-convert /usr/local/bin/kubectl-convert && \
-    rm kubectl-convert
 
 # Docker (in Docker)
 RUN apt-get install -y lsb-release && \
@@ -110,6 +107,125 @@ RUN dive_ver=$(curl -s https://api.github.com/repos/wagoodman/dive/releases/late
     sudo apt install ./dive_${dive_ver}_linux_amd64.deb && \
     rm ./dive_${dive_ver}_linux_amd64.deb
 
+## Go and go required global installation
+
+# Go
+ARG go_ver=1.18
+RUN go_latest_ver=$(curl -s https://golang.org/VERSION?m=text) && \
+    curl -sLo go.tar.gz https://go.dev/dl/go${go_ver}.linux-amd64.tar.gz && \
+    rm -rf /usr/local/go && tar -C /usr/local -xzf go.tar.gz && \
+    rm go.tar.gz
+ENV PATH="/usr/local/go/bin:$PATH"
+
+# pint (requires go)
+RUN git clone https://github.com/cloudflare/pint.git && \
+    cd pint && \
+    export PATH="/usr/local/go/bin:$PATH" && \
+    make && \
+    sudo mv pint /usr/local/bin && \
+    cd .. && rm -rf pint
+
+## Installed binaries from GitHub
+
+COPY ./gh_install.sh .
+
+# Kubectx, Kubens
+RUN REPO="ahmetb/kubectx" ZFILE="kubectx_vVERSION_linux_x86_64.tar.gz" FILE="kubectx" ./gh_install.sh
+RUN REPO="ahmetb/kubectx" ZFILE="kubens_vVERSION_linux_x86_64.tar.gz" FILE="kubens" ./gh_install.sh
+
+# eksctl
+RUN REPO="weaveworks/eksctl" ZFILE="eksctl_$(uname -s)_amd64.tar.gz" FILE="eksctl" ./gh_install.sh
+
+# Kubesec (binary)
+RUN REPO="controlplaneio/kubesec" ZFILE="kubesec_linux_amd64.tar.gz" FILE="kubesec" ./gh_install.sh
+
+# Stern
+RUN REPO="wercker/stern" ZFILE="stern_linux_amd64" XFILE="stern" ./gh_install.sh
+
+# helmfile
+RUN REPO="roboll/helmfile" ZFILE="helmfile_linux_amd64" XFILE="helmfile" ./gh_install.sh
+
+# Audit2RBAC
+RUN REPO="liggitt/audit2rbac" ZFILE="audit2rbac-linux-amd64.tar.gz" FILE="audit2rbac" ./gh_install.sh
+
+# yq
+RUN REPO="mikefarah/yq" ZFILE="yq_linux_amd64.tar.gz" FILE="yq_linux_amd64" XFILE="yq" ./gh_install.sh
+
+# Terrascan
+RUN REPO="tenable/terrascan" ZFILE="terrascan_VERSION_Linux_x86_64.tar.gz" FILE="terrascan" ./gh_install.sh
+
+# kops
+RUN REPO="kubernetes/kops" ZFILE="kops-linux-amd64" XFILE="kops" ./gh_install.sh
+
+# Minishift
+RUN REPO="minishift/minishift" ZFILE="minishift-VERSION-linux-amd64.tgz" FILE="minishift-VERSION-linux-amd64/minishift" XFILE="minishift" ./gh_install.sh
+
+# KubeAudit
+RUN REPO="Shopify/kubeaudit" ZFILE="kubeaudit_VERSION_linux_amd64.tar.gz" FILE="kubeaudit" ./gh_install.sh
+
+# JLess
+RUN REPO="PaulJuliusMartinez/jless" ZFILE="jless-vVERSION-x86_64-unknown-linux-gnu.zip" FILE="jless" ./gh_install.sh
+
+# crictl
+RUN REPO="kubernetes-sigs/cri-tools" ZFILE="crictl-vVERSION-linux-amd64.tar.gz" FILE="crictl" ./gh_install.sh
+
+# tfscan
+RUN REPO="wils0ns/tfscan" ZFILE="tfscan_VERSION_linux_amd64.tar.gz" FILE="tfscan" ./gh_install.sh
+
+# chain-bench
+RUN REPO="aquasecurity/chain-bench" ZFILE="chain-bench_VERSION_Linux_64bit.tar.gz" FILE="chain-bench" ./gh_install.sh
+
+# cmctl
+RUN REPO="cert-manager/cert-manager" OS=$(go env GOOS) ARCH=$(go env GOARCH) ZFILE="cmctl-$OS-$ARCH.tar.gz" FILE="cmctl" ./gh_install.sh
+
+# polaris
+RUN REPO="fairwindsops/polaris" ZFILE="polaris_linux_amd64.tar.gz" FILE="polaris" ./gh_install.sh
+
+# kube-score
+RUN REPO="zegl/kube-score" ZFILE="kube-score_VERSION_linux_amd64.tar.gz" FILE="kube-score" ./gh_install.sh
+
+# kwctl (Kubewarden cli)
+RUN REPO="kubewarden/kwctl" ZFILE="kwctl-linux-x86_64.zip" FILE="kwctl-linux-x86_64" XFILE="kwctl" ./gh_install.sh
+
+# KubiScan
+RUN REPO="cyberark/KubiScan" ZFILE="source.code.zip" FILE="KubiScan-master" XFILE="kubiscan" ./gh_install.sh
+# Will additional require install: pip install --user --no-cache kubernetes PrettyTable urllib3
+
+## Custom origin binaries
+
+# Minikube
+RUN curl -sLo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
+  && chmod +x minikube && mv minikube /usr/local/bin/
+
+# Kind
+RUN curl -Lo ./kind https://kind.sigs.k8s.io/dl/latest/kind-linux-amd64 && \
+    chmod +x ./kind && mv ./kind /usr/local/bin/
+
+# OpenShift 4 cli
+RUN curl -sLo oc.tar.gz https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/oc.tar.gz && \
+    tar -xvf oc.tar.gz && \
+    chmod +x oc && mv oc /usr/local/bin/ && \
+    rm README.md kubectl oc.tar.gz
+
+# Kubectl-convert
+RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl-convert" && \
+    sudo install -o root -g root -m 0755 kubectl-convert /usr/local/bin/kubectl-convert && \
+    rm kubectl-convert
+
+# Tetragon
+RUN wget https://github.com/cilium/tetragon/releases/download/tetragon-cli/tetragon-linux-amd64.tar.gz -O - |\
+        tar xz && mv tetragon /usr/bin/tetragon
+
+# StackRox cli
+RUN curl -O https://mirror.openshift.com/pub/rhacs/assets/latest/bin/Linux/roxctl && \
+    chmod +x roxctl && \
+    mv roxctl /usr/local/bin/
+
+# testssl.sh
+RUN wget https://testssl.sh/testssl.sh && chmod +x testssl.sh && mv testssl.sh /usr/local/bin
+
+## Installers
+
 # Grype
 RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh \
         | sh -s -- -b /usr/local/bin
@@ -117,12 +233,6 @@ RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh \
 # Syft
 RUN curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh \
         | sh -s -- -b /usr/local/bin
-
-# Kubectx, Kubens
-RUN curl -sLo kubectx https://raw.githubusercontent.com/ahmetb/kubectx/master/kubectx && \
-    chmod +x kubectx && mv kubectx /usr/local/bin/ && \
-    curl -sLo kubens https://raw.githubusercontent.com/ahmetb/kubectx/master/kubens && \
-    chmod +x kubens && mv kubens /usr/local/bin/
 
 # Helm 3
 RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 && \
@@ -138,21 +248,6 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 # # Sysdig
 # RUN curl -s https://s3.amazonaws.com/download.draios.com/stable/install-sysdig | bash
 
-# OpenShift 4 cli
-RUN curl -sLo oc.tar.gz https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/oc.tar.gz && \
-    tar -xvf oc.tar.gz && \
-    chmod +x oc && mv oc /usr/local/bin/ && \
-    rm README.md kubectl oc.tar.gz
-
-# eksctl
-RUN curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" \
-        | tar xz -C /tmp && \
-    mv /tmp/eksctl /usr/local/bin
-
-# Tetragon
-RUN wget https://github.com/cilium/tetragon/releases/download/tetragon-cli/tetragon-linux-amd64.tar.gz -O - |\
-        tar xz && mv tetragon /usr/bin/tetragon
-
 # Docker Slim
 RUN curl -sL https://raw.githubusercontent.com/docker-slim/docker-slim/master/scripts/install-dockerslim.sh | sudo -E bash -
 
@@ -164,158 +259,8 @@ RUN wget https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install
     chmod +x ./install.sh && \
     ./install.sh --accept-all-defaults
 
-# Kubesec (binary)
-RUN curl -sLo kubesec.tgz https://github.com/controlplaneio/kubesec/releases/latest/download/kubesec_linux_amd64.tar.gz && \
-    tar -xvf kubesec.tgz && \
-    chmod +x kubesec && \
-    mv kubesec /usr/local/bin/ && rm kubesec.tgz
-
-# Minikube
-RUN curl -sLo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
-  && chmod +x minikube && \
-    mv minikube /usr/local/bin/
-
-# Kind
-RUN curl -Lo ./kind https://kind.sigs.k8s.io/dl/latest/kind-linux-amd64 && \
-    chmod +x ./kind && \
-    mv ./kind /usr/local/bin/
-
-# Stern
-RUN curl -sLo stern https://github.com/wercker/stern/releases/latest/download/stern_linux_amd64 && \
-    chmod +x stern && \
-    mv stern /usr/local/bin/
-
-# Helmfile
-RUN curl -sLo helmfile https://github.com/roboll/helmfile/releases/latest/download/helmfile_linux_amd64 && \
-    chmod +x helmfile && \
-    mv helmfile /usr/local/bin/
-
-# Go
-ARG go_ver=1.18
-RUN go_latest_ver=$(curl -s https://golang.org/VERSION?m=text) && \
-    curl -sLo go.tar.gz https://go.dev/dl/go${go_ver}.linux-amd64.tar.gz && \
-    rm -rf /usr/local/go && tar -C /usr/local -xzf go.tar.gz && \
-    rm go.tar.gz
-
-# pint (requires go)
-RUN git clone https://github.com/cloudflare/pint.git && \
-    cd pint && \
-    export PATH="/usr/local/go/bin:$PATH" && \
-    make && \
-    sudo mv pint /usr/local/bin && \
-    cd .. && rm -rf pint
-
 # Carvel tools
-RUN wget -O- https://carvel.dev/install.sh > install.sh && \
-    sudo bash ./install.sh
-
-
-# helmfile
-RUN curl -sLo helmfile https://github.com/roboll/helmfile/releases/latest/download/helmfile_linux_amd64 && \
-    chmod +x helmfile && mv helmfile /usr/local/bin/
-
-# Audit2RBAC
-RUN curl -sLo audit2rbac.tar.gz https://github.com/liggitt/audit2rbac/releases/latest/download/audit2rbac-linux-amd64.tar.gz && \
-    tar -xvf audit2rbac.tar.gz && \
-    chmod +x audit2rbac && \
-    mv audit2rbac /usr/local/bin/ && rm audit2rbac.tar.gz
-    
-# yq
-RUN wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64.tar.gz -O - |\
-        tar xz && mv yq_linux_amd64 /usr/local/bin/yq
-
-# Terrascan
-RUN curl -L "$(curl -s https://api.github.com/repos/tenable/terrascan/releases/latest \
-        | grep -o -E "https://.+?_Linux_x86_64.tar.gz")" > terrascan.tar.gz && \
-        tar -xf terrascan.tar.gz terrascan && rm terrascan.tar.gz && \
-        install terrascan /usr/local/bin && rm terrascan
-
-# kops
-RUN curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest \
-        | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64 && \
-    chmod +x kops && sudo mv kops /usr/local/bin/kops
-
-# Minishift
-RUN minishift_ver=$(curl -s https://api.github.com/repos/minishift/minishift/releases/latest | jq ".tag_name" | xargs | cut -c2-) && \
-    curl -sLo ms.tgz https://github.com/minishift/minishift/releases/download/v${minishift_ver}/minishift-${minishift_ver}-linux-amd64.tgz && \
-    tar -xvf ms.tgz && \
-    chmod +x minishift-${minishift_ver}-linux-amd64/minishift && \
-    mv minishift-${minishift_ver}-linux-amd64/minishift /usr/local/bin/ && \
-    rm -r minishift-${minishift_ver}-linux-amd64
-
-# KubeAudit
-RUN kubeaudit_ver=$(curl -s https://api.github.com/repos/Shopify/kubeaudit/releases/latest | jq ".tag_name" | xargs | cut -c2-) && \
-    echo "$kubeaudit_ver" && \
-    echo "https://github.com/Shopify/kubeaudit/releases/download/${kubeaudit_ver}/kubeaudit_${kubeaudit_ver}_linux_amd64.tar.gz" && \
-    curl -sLo kubeaudit.tar.gz https://github.com/Shopify/kubeaudit/releases/download/v${kubeaudit_ver}/kubeaudit_${kubeaudit_ver}_linux_amd64.tar.gz && \
-    tar -xvf kubeaudit.tar.gz && chmod +x kubeaudit && \
-    mv kubeaudit /usr/local/bin/ && rm kubeaudit.tar.gz README.md
-
-# JLess
-RUN jless_ver=$(curl -s https://api.github.com/repos/PaulJuliusMartinez/jless/releases/latest | jq ".tag_name" | xargs | cut -c2- ) && \
-    curl -sLo jless.zip https://github.com/PaulJuliusMartinez/jless/releases/download/v${jless_ver}/jless-v${jless_ver}-x86_64-unknown-linux-gnu.zip && \
-    unzip jless.zip && \
-    chmod +x jless && \
-    mv jless /usr/local/bin/ && \
-    rm jless.zip
-
-# crictl
-RUN crictl_ver=$(curl -s https://api.github.com/repos/kubernetes-sigs/cri-tools/releases/latest | jq ".tag_name" | xargs | cut -c2- ) && \
-    wget https://github.com/kubernetes-sigs/cri-tools/releases/download/v${crictl_ver}/crictl-v${crictl_ver}-linux-amd64.tar.gz -O - |\
-        tar xz && mv crictl /usr/local/bin/
-
-# tfscan
-RUN tfscan_ver=$(curl -s https://api.github.com/repos/wils0ns/tfscan/releases/latest | jq ".tag_name" | xargs | cut -c2- ) && \
-    wget https://github.com/wils0ns/tfscan/releases/download/v${tfscan_ver}/tfscan_${tfscan_ver}_linux_amd64.tar.gz -O - |\
-    tar xz && mv tfscan /usr/local/bin/ && rm LICENSE README.md
-
-# chain-bench
-RUN chain_bench_ver=$(curl -s https://api.github.com/repos/aquasecurity/chain-bench/releases/latest | jq ".tag_name" | xargs | cut -c2- ) && \
-    wget https://github.com/aquasecurity/chain-bench/releases/download/v${chain_bench_ver}/chain-bench_${chain_bench_ver}_Linux_64bit.tar.gz -O - |\
-    tar xz && mv chain-bench /usr/local/bin/
-
-# cmctl
-RUN cmctl_ver=$(curl -s https://api.github.com/repos/cert-manager/cert-manager/releases/latest | jq ".tag_name" | xargs | cut -c2- ) && \
-    export PATH="/usr/local/go/bin:$PATH" && OS=$(go env GOOS) && ARCH=$(go env GOARCH) && \
-    curl -sSL -o cmctl.tar.gz https://github.com/cert-manager/cert-manager/releases/download/v${cmctl_ver}/cmctl-$OS-$ARCH.tar.gz && \
-    tar xzf cmctl.tar.gz && mv cmctl /usr/local/bin && rm cmctl.tar.gz
-
-# polaris
-RUN repo="fairwindsops/polaris" && cutv="1" && usev="" && \
-    version=$(curl -s https://api.github.com/repos/${repo}/releases/latest | jq ".tag_name" | xargs | cut -c${cutv}- ) && \
-    gzfile="polaris_linux_amd64.tar.gz" && file="polaris" && \
-    wget https://github.com/${repo}/releases/download/${usev}${version}/${gzfile} -O - |\
-    tar xz && mv ${file} /usr/local/bin/
-
-# kube-score
-RUN repo="zegl/kube-score" && cutv="2" && usev="v" && \
-    version=$(curl -s https://api.github.com/repos/${repo}/releases/latest | jq ".tag_name" | xargs | cut -c${cutv}- ) && \
-    gzfile="kube-score_${version}_linux_amd64.tar.gz" && file="kube-score" && \
-    wget https://github.com/${repo}/releases/download/${usev}${version}/${gzfile} -O - |\
-    tar xz && mv ${file} /usr/local/bin/
-
-# kwctl (Kubewarden cli)
-RUN repo="kubewarden/kwctl" && cutv="2" && usev="v" && \
-    version=$(curl -s https://api.github.com/repos/${repo}/releases/latest | jq ".tag_name" | xargs | cut -c${cutv}- ) && \
-    gzfile="kwctl-linux-x86_64.zip" && file="kwctl-linux-x86_64" && targetfile="kwctl" \
-    wget https://github.com/${repo}/releases/download/${usev}${version}/${gzfile} && \
-    unzip ${gzfile} && rm ${gzfile} && \
-    mv ${file} /usr/local/bin/${targetfile}
-
-# KubiScan
-RUN pip install --user --no-cache kubernetes PrettyTable urllib3 && \
-    repo="cyberark/KubiScan" && cutv="2" && usev="v" && \
-    version=$(curl -s https://api.github.com/repos/${repo}/releases/latest | jq ".tag_name" | xargs | cut -c${cutv}- ) && \
-    gzfile="source.code.zip" && \
-    wget https://github.com/${repo}/releases/download/${usev}${version}/${gzfile} && \
-    unzip source.code.zip && rm source.code.zip && \
-    sudo mv ./KubiScan-master /usr/local/kubiscan && sudo chmod -R a+rX /usr/local/kubiscan && \
-    alias kubiscan="python3 /usr/local/kubiscan/KubiScan.py"
-
-# StackRox cli
-RUN curl -O https://mirror.openshift.com/pub/rhacs/assets/latest/bin/Linux/roxctl && \
-    chmod +x roxctl && \
-    mv roxctl /usr/local/bin/
+RUN wget -O- https://carvel.dev/install.sh > install.sh && sudo bash ./install.sh
 
 # Crossplane cli
 RUN curl -sL https://raw.githubusercontent.com/crossplane/crossplane/master/install.sh | sh
@@ -323,9 +268,12 @@ RUN curl -sL https://raw.githubusercontent.com/crossplane/crossplane/master/inst
 # act
 RUN curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
 
-# testssl.sh
-RUN wget https://testssl.sh/testssl.sh && \
-    sudo chmod +x testssl.sh && mv testssl.sh /usr/local/bin
+# Starship prompt
+RUN curl -sS https://starship.rs/install.sh >./install.sh && \
+    sh ./install.sh --yes && \
+    rm install.sh
+
+## Fixed versioned
 
 # 1Password
 ARG one_password_ver=2.0.0
@@ -337,11 +285,6 @@ ARG clamav_ver=0.105.0
 RUN wget http://www.clamav.net/downloads/production/clamav-${clamav_ver}.linux.x86_64.deb && \
     sudo dpkg -i clamav-${clamav_ver}.linux.x86_64.deb && \
     rm clamav-${clamav_ver}.linux.x86_64.deb
-
-# Starship prompt
-RUN curl -sS https://starship.rs/install.sh >./install.sh && \
-    sh ./install.sh --yes && \
-    rm install.sh
 
 # ------------------------------------------------------------------------------------
 
@@ -374,7 +317,6 @@ RUN mkdir -p \
         /home/${user}/.go/bin \
         /home/${user}/.keys && \
     chown -R ${user}:${group} /home/${user}
-
 
 RUN echo "${user}:${pass}" | chpasswd
 
@@ -507,6 +449,9 @@ RUN pip install --user --no-cache \
     illuminatio \
     vault-cli \
     cve-bin-tool
+
+# For KubiScan
+RUN pip install --user --no-cache kubernetes PrettyTable urllib3
 
 # Robusta
 # pipx because it requires old packages incompatible with previous installations
