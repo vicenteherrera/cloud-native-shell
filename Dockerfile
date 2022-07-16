@@ -279,7 +279,7 @@ RUN curl -sS https://starship.rs/install.sh >./install.sh && \
 ## Fixed versioned
 
 # 1Password
-ARG one_password_ver=2.0.0
+ARG one_password_ver=2.5.1
 RUN curl -sLo op.zip https://cache.agilebits.com/dist/1P/op2/pkg/v${one_password_ver}/op_linux_amd64_v${one_password_ver}.zip && \
     unzip op.zip && mv op /usr/local/bin/ && rm op.zip op.sig
 
