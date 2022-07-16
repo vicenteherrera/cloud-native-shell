@@ -7,7 +7,8 @@ WORKDIR /install
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get -y upgrade && \
     apt-get install -y \
-        apt-utils software-properties-common  apt-transport-https lsb-release \
+        apt-utils software-properties-common \
+        apt-transport-https ca-certificates lsb-release \
         gnupg gnupg2 curl wget unzip sudo \
         zsh nano jq procps \
         swig libpcsclite-dev
@@ -31,81 +32,75 @@ RUN apt-get -y install \
 # Dotnet
 ARG dotnet_ver=6.0
 RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
-    dpkg -i packages-microsoft-prod.deb && rm packages-microsoft-prod.deb && \
-    apt-get update && \
-    apt-get install -y dotnet-sdk-${dotnet_ver}
+    sudo dpkg -i packages-microsoft-prod.deb && \
+    rm packages-microsoft-prod.deb && \
+    sudo apt-get update && \
+    sudo apt-get install -y dotnet-sdk-${dotnet_ver}
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 
+# Fish shell
+RUN curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_11/Release.key \
+        | gpg --dearmor | sudo tee /usr/share/keyrings/shells_fish_release_3.gpg > /dev/null && \
+    echo 'deb [signed-by=/usr/share/keyrings/shells_fish_release_3.gpg] http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /' \
+        | sudo tee /etc/apt/sources.list.d/shells:fish:release:3.list > /dev/null && \
+    sudo apt-get update && \
+    sudo apt-get install -y fish
+
 # Kubectl
-RUN apt-get install -y apt-transport-https ca-certificates curl && \
-    curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg && \
+RUN curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg \
+        | tee /usr/share/keyrings/kubernetes-archive-keyring.gpg > /dev/null && \
     echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" \
-    | tee /etc/apt/sources.list.d/kubernetes.list > /dev/null && \
-    apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/kubernetes.list && \
-    apt-get install -y kubectl
+        | sudo tee /etc/apt/sources.list.d/kubernetes.list > /dev/null && \
+    sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/kubernetes.list && \
+    sudo apt-get install -y kubectl
 
 # Docker (in Docker)
-RUN apt-get install -y lsb-release && \
-    curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg \
+        | gpg --dearmor | sudo tee /usr/share/keyrings/docker-archive-keyring.gpg > /dev/null && \
     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" \
-    | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
-    apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/docker.list && \
-    apt-get install -y docker-ce docker-ce-cli containerd.io 
+        | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+    sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/docker.list && \
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io 
 
 # Azure cli
-RUN curl -sL https://packages.microsoft.com/keys/microsoft.asc \
-        | gpg --dearmor \
-        | tee /usr/share/keyrings/microsoft-archive-keyring.gpg > /dev/null && \
-    AZ_REPO=$(lsb_release -cs) && \
-    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" \
-        | tee /etc/apt/sources.list.d/azure-cli.list && \
-    apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/azure-cli.list && \
-    apt-get install azure-cli
+RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc \
+        | gpg --dearmor | sudo tee /usr/share/keyrings/microsoft-archive-keyring.gpg > /dev/null && \
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" \
+        | sudo tee /etc/apt/sources.list.d/azure-cli.list > /dev/null && \
+    sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/azure-cli.list && \
+    sudo apt-get install -y azure-cli
 
 # Trivy
 RUN wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key \
         | gpg --dearmor | sudo tee /usr/share/keyrings/trivy-archive-keyring.gpg > /dev/null && \
     echo "deb [signed-by=/usr/share/keyrings/trivy-archive-keyring.gpg] https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" \
-        | tee -a /etc/apt/sources.list.d/trivy.list && \
-    apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/trivy.list && \
-    apt-get install trivy
+        | sudo tee -a /etc/apt/sources.list.d/trivy.list > /dev/null && \
+    sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/trivy.list && \
+    sudo apt-get install -y trivy
 
 # Terraform, Vagrant
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg \
-        | gpg --dearmor | tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null && \
+        | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null && \
     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" \
-        | tee /etc/apt/sources.list.d/hashicorp.list > /dev/null && \
-    apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/hashicorp.list && \
-    apt-get install -y vagrant terraform
+        | sudo tee /etc/apt/sources.list.d/hashicorp.list > /dev/null && \
+    sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/hashicorp.list && \
+    sudo apt-get install -y vagrant terraform
 # Vagrant will require an additional virtualization hypervisor
 
 # GitHub cli
-RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg && \
+RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+        | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg && \
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
-        | tee /etc/apt/sources.list.d/github-cli.list > /dev/null && \
-    apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/github-cli.list && \ 
-    apt install gh
+        | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null && \
+    sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/github-cli.list && \ 
+    sudo apt-get install -y gh
 
 # Tekton cli
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3EFE0E0A2F2F60AA && \
     echo "deb http://ppa.launchpad.net/tektoncd/cli/ubuntu eoan main" \
-        | tee /etc/apt/sources.list.d/tektoncd-ubuntu-cli.list && \
-    apt update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/tektoncd-ubuntu-cli.list && \
-    apt install -y tektoncd-cli
-
-# Fish shell
-RUN echo 'deb [signed-by=/usr/share/keyrings/shells_fish_release_3.gpg] http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /' \
-    | tee /etc/apt/sources.list.d/shells:fish:release:3.list && \
-    curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_11/Release.key \
-    | gpg --dearmor | tee /usr/share/keyrings/shells_fish_release_3.gpg > /dev/null && \
-    apt-get update && \
-    apt-get install -y fish
-
-# Dive
-RUN dive_ver=$(curl -s https://api.github.com/repos/wagoodman/dive/releases/latest | jq ".tag_name" | xargs | cut -c2-) && \
-    wget https://github.com/wagoodman/dive/releases/download/v${dive_ver}/dive_${dive_ver}_linux_amd64.deb && \
-    sudo apt install ./dive_${dive_ver}_linux_amd64.deb && \
-    rm ./dive_${dive_ver}_linux_amd64.deb
+        | sudo tee /etc/apt/sources.list.d/tektoncd-ubuntu-cli.list > /dev/null && \
+    sudo apt update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/tektoncd-ubuntu-cli.list && \
+    sudo apt install -y tektoncd-cli
 
 ## Golang, and go required global installation
 
