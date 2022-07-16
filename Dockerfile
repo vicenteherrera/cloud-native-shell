@@ -110,10 +110,6 @@ RUN dive_ver=$(curl -s https://api.github.com/repos/wagoodman/dive/releases/late
     sudo apt install ./dive_${dive_ver}_linux_amd64.deb && \
     rm ./dive_${dive_ver}_linux_amd64.deb
 
-# Clean APT cache
-RUN apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-# This in fact doesn't decrease image size because cache is inside hidden layers
-
 # Grype
 RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh \
         | sh -s -- -b /usr/local/bin
@@ -354,7 +350,7 @@ ARG user=vicente
 ARG group=developer
 ARG uid=1000
 ARG gid=1000
-
+ARG pass=changeme
 ARG shell=/usr/bin/fish
 
 RUN groupadd -g ${gid} ${group} && \
@@ -378,6 +374,9 @@ RUN mkdir -p \
         /home/${user}/.go/bin \
         /home/${user}/.keys && \
     chown -R ${user}:${group} /home/${user}
+
+
+RUN echo "${user}:${pass}" | chpasswd
 
 # Switch to user
 USER ${uid}:${gid}
@@ -527,31 +526,7 @@ RUN pipx install "checkov>=${checkov_minver}"
 RUN npm install snyk npx yarn
 
 # --------------------------------------------------------------------------------------
-
-# Squash all layers in a single one
-RUN sudo apt clean && sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /install
-FROM scratch
-COPY --from=build / /
-
-ARG user=vicente
-ARG uid=1000
-ARG gid=1000
-ARG pass=changeme
-ARG shell=/usr/bin/fish
-
-RUN echo "${user}:${pass}" | chpasswd
-USER ${uid}:${gid}
-WORKDIR /home/${user}
-
-ENV PATH="/usr/local/go/bin:$PATH"
-ENV PATH="/home/${user}/.local/bin:$PATH" 
-ENV GEM_PATH="/home/${user}/.gem/bin"
-ENV GEM_HOME="/home/${user}/.gem"
-ENV PATH="/home/${user}/.gem/bin:$PATH"
-ENV GOPATH="/home/${user}/.go/"
-ENV PATH="/home/${user}/.go/bin:$PATH"
-ENV PATH="/home/${user}/.pyenv/bin:$PATH"
-ENV PATH="/home/${user}/node_modules/.bin:$PATH"
+# --------------------------------------------------------------------------------------
 
 SHELL ["/bin/bash", "-c"]
 
