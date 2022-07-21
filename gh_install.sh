@@ -3,7 +3,7 @@
 # Install a binary file from compressed GitHub repo releases channel
 # by Vicente Herrera
 
-set -e pipefail
+set -e
 
 # repository as username/reponame in GitHub URL
 [ "$REPO" == "" ] && echo "REPO env variable required" && exit 1
@@ -59,22 +59,25 @@ extension="${ZFILE##*.}"
 if [[ "$ZFILE" != *"."* ]]; then
   echo "file is not compressed"
 elif [ "$extension" == "deb" ]; then
-  sudo apt install ./"$ZFILE"
+  sudo apt-get install ./"$ZFILE"
   rm "$ZFILE"
 elif [ "$extension" == "zip" ]; then
   unzip ${ZFILE}
   rm ${ZFILE}
   sudo chmod a+x ${FILE}
+  sudo chmod -R a+rX ${FILE}
   sudo mv ${FILE} /usr/local/bin/${XFILE}
 elif [ "$extension" == "gz" ]; then
   tar -xvzf ${ZFILE}
   rm ${ZFILE}
   sudo chmod a+x ${FILE}
+  sudo chmod -R a+rX ${FILE}
   sudo mv ${FILE} /usr/local/bin/${XFILE}
 elif [ "$extension" == "tgz" ]; then
   tar -xvzf ${ZFILE}
   rm ${ZFILE}
   sudo chmod a+x ${FILE}
+  sudo chmod -R a+rX ${FILE}
   sudo mv ${FILE} /usr/local/bin/${XFILE}
 else
   echo "unknown file type"

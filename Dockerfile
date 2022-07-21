@@ -103,6 +103,14 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
     sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/github-cli.list && \ 
     sudo apt-get install -y gh
 
+# GCloud SDK
+RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg \
+        | tee /usr/share/keyrings/cloud.google.gpg > /dev/null && \
+    echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" \
+        | tee /etc/apt/sources.list.d/google-cloud-sdk.list > /dev/null && \
+    apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/google-cloud-sdk.list && \
+    apt-get install google-cloud-sdk -y
+
 # Tekton cli
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3EFE0E0A2F2F60AA && \
     echo "deb http://ppa.launchpad.net/tektoncd/cli/ubuntu eoan main" \
@@ -395,13 +403,6 @@ RUN echo '# Created in Dockerfile' >>/home/${user}/.bashrc && \
 
 # Programs that install on user profile
 
-# GCloud cli
-ARG gcloud_ver=378.0.0
-RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${gcloud_ver}-linux-x86_64.tar.gz && \
-    tar -xf google-cloud-sdk-${gcloud_ver}-linux-x86_64.tar.gz && \
-    ./google-cloud-sdk/install.sh --usage-reporting false -q && \
-    rm -r ./google-cloud-sdk google-cloud-sdk-${gcloud_ver}-linux-x86_64.tar.gz
-
 # Krew
 RUN ( \
     set -x; cd "$(mktemp -d)" && \
@@ -458,8 +459,12 @@ RUN python3 -m pip install --user pipx
 RUN gem install jekyll bundler
 # This takes long to install, you may want to skip it
 
-# Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), robusta, 
+# Snyk, npx, yarn
+RUN npm install snyk npx yarn
+
+# Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), 
 # docker-squash, checkov, illuminatio, vault-cli, cve-bin-tool, Cloud Custodian
+# robusta
 RUN pip install --user --no-cache \
     kube-hunter \
     detect-secrets \ 
@@ -470,27 +475,18 @@ RUN pip install --user --no-cache \
     illuminatio \
     vault-cli \
     cve-bin-tool \
-    c7n
+    c7n \
+    robusta
 
 # For KubiScan
 RUN pip install --user --no-cache kubernetes PrettyTable urllib3
 
-# Robusta
-# pipx because it requires old packages incompatible with previous installations
-ARG robusta_minver=0.9.11
-RUN pipx install "robusta-cli>=${robusta_minver}"
-
-# Sysdig cli
-# We specify minimum versions to avoid downloading full history of binaries
-ARG sdccli_minver=0.7.14
-RUN pipx install "sdccli>=${sdccli_minver}"
+# Sysdig cli, checkov
+# We use pix as these require old incompatible version libraries
+RUN pipx install sdccli
 
 # Checkov
-ARG checkov_minver=2.0.1184
-RUN pipx install "checkov>=${checkov_minver}"
-
-# Snyk, npx, yarn
-RUN npm install snyk npx yarn
+RUN pipx install checkov
 
 # --------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------
