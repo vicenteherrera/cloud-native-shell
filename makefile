@@ -49,7 +49,7 @@ run:
 	MINIKUBE_PARAM="" && [ -d "$$HOME/.minikube" ] && MINIKUBE_PARAM="-v $$HOME/.minikube:/home/$$(id -un)/.minikube"; \
 	SSH_PARAM=""      && [ -d "$$HOME/.ssh" ]      &&      SSH_PARAM="-v $$HOME/.ssh:/home/$$(id -un)/.ssh"; \
 	AZURE_PARAM=""    && [ -d "$$HOME/.azure" ]    &&    AZURE_PARAM="-v $$HOME/.azure:/home/$$(id -un)/.azure"; \
-	GCLOUD_PARAM="" && [ -d "$$HOME/.azure" ]      &&   GCLOUD_PARAM="-v $$HOME/.config/gcloud:/home/$$(id -un)/.config/gcloud "; \
+	GCLOUD_PARAM=""   && [ -d "$$HOME/.config/gcloud" ] && GCLOUD_PARAM="-v $$HOME/.config/gcloud:/home/$$(id -un)/.config/gcloud "; \
 	${RUNSUDO} docker run --rm -it \
 		-v /var/run/docker.sock:/var/run/docker.sock \
 		$$KUBEDIR_PARAM $$AWS_PARAM $$MINIKUBE_PARAM \
