@@ -15,6 +15,9 @@ all: build tag run
 
 NOCACHE_PARAM=""
 
+lint:
+	dockerlint
+
 build:
 	RUNSUDO="" && groups | grep ' docker ' 1>/dev/null || RUNSUDO="sudo" ; \
 		$$RUNSUDO docker build . -t cli-dev-shell \

@@ -558,6 +558,6 @@ ENV PATH="/home/${user}/node_modules/.bin:$PATH"
 
 SHELL ["/bin/bash", "-c"]
 
-ENV DEBIAN_FRONTEND=
+ENV DEBIAN_FRONTEND=""
 ENV DEFAULT_SHELL="${shell}"
-CMD $DEFAULT_SHELL
+CMD ["$DEFAULT_SHELL"]
