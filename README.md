@@ -62,16 +62,19 @@ make run RUN_SHELL=/bin/bash
   * [Google Cloud cli](https://cloud.google.com/sdk/gcloud)
   * [Azure cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
   * [Oracle Cloud cli](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm)
-  * [Terraform](https://github.com/hashicorp/terraform)
+  * [Terraform](https://github.com/hashicorp/terraform): manage cloud assest with a standard language for all providers
+  * [CloudQuery](https://github.com/cloudquery/cloudquery/): query cloud resources using SQL
+  * [SteamPipe](https://github.com/turbot/steampipe/): query cloud resources using SQL
+  * [CloudCustodian](https://cloudcustodian.io/docs/quickstart/index.html): query cloud assests with a standard language for all providers
 * Observability
-  * [Prometheus (promtool)](https://prometheus.io/docs/prometheus/latest/configuration/unit_testing_rules/)
-  * [Alertmanager (amtool)](https://github.com/prometheus/alertmanager)
-  * [pint](https://cloudflare.github.io/pint/)
+  * [promtool](https://prometheus.io/docs/prometheus/latest/configuration/unit_testing_rules/): Prometheus CLI
+  * [amtool](https://github.com/prometheus/alertmanager): Alertmanager CLI
+  * [pint](https://cloudflare.github.io/pint/): PromQL rule linter
   * [Robusta cli](https://docs.robusta.dev/master/installation.html): cli to Robusta Kubernetes troubleshooting and automation platform
 * Security and networking
   * [nmap](https://nmap.org/download), [ncat](https://nmap.org/ncat/), [netcat](https://sectools.org/tool/netcat/), [dig, nslookup, nsupdate](https://packages.debian.org/buster/dnsutils), [ping](https://packages.debian.org/stretch/iputils-ping)
   * [testssl.sh](https://testssl.sh): checks a server ports for TLS/SSL ciphers, protocols, recent cryptographic flaws, etc
-  * [ClamAV](http://www.clamav.net/downloads): Detect malware and virus  
+  * [ClamAV](http://www.clamav.net/downloads): Detect malware and virus on Windows or Linux hosts
   * [1Password cli](https://1password.com/downloads/command-line/)
   * [Yubikey manager](https://github.com/Yubico/yubikey-manager)
 * Cloud Native security
@@ -104,8 +107,8 @@ make run RUN_SHELL=/bin/bash
     * [TFScan](https://github.com/wils0ns/tfscan)
     * [Terrascan](https://github.com/tenable/terrascan#install)
   * Security platform's CLI
-    * [sdc-cli (Sysdig cli)](https://sysdiglabs.github.io/sysdig-platform-cli/)
-    * [roxctl (StackRox cli)](https://docs.openshift.com/acs/3.66/cli/getting-started-cli.html)
+    * [sdc-cli](https://sysdiglabs.github.io/sysdig-platform-cli/): Sysdig CLI
+    * [roxctl](https://docs.openshift.com/acs/3.66/cli/getting-started-cli.html): StackRox CLI
 * Programming
   * [Python](https://www.python.org/), [pip](https://pypi.org/project/pip/), [pipx](https://github.com/pypa/pipx), [PyEnv](https://github.com/pyenv/pyenv), [Poetry](https://python-poetry.org/docs/)
   * [Node](https://nodejs.org/en/), [npm](https://www.npmjs.com/), [nvm](https://github.com/nvm-sh/nvm), [npx](https://www.npmjs.com/package/npx), [yarn](https://yarnpkg.com/getting-started/)
@@ -113,7 +116,7 @@ make run RUN_SHELL=/bin/bash
   * [Ruby](https://www.ruby-lang.org/en/documentation/), [Jekyll](https://jekyllrb.com/), [Bundler](https://bundler.io/docs.html)
   * [Dot Net 6](https://docs.microsoft.com/en-us/dotnet/core/install/linux-debian)
   * [YAML lint](https://github.com/adrienverge/yamllint)
-  * [Shellcheck](https://github.com/koalaman/shellcheck)
+  * [Shellcheck](https://github.com/koalaman/shellcheck): lint Bash scripts
 * Shells
   * [Fish shell](https://fishshell.com/) (default)
   * Bash shell
@@ -123,7 +126,7 @@ make run RUN_SHELL=/bin/bash
   * [jq](https://stedolan.github.io/jq/), [yq](https://github.com/mikefarah/yq)
   * [JLess](https://github.com/PaulJuliusMartinez/jless)  
   * [GitHub cli](https://cli.github.com/)
-  * [Starship prompt](https://starship.rs/): powerful prompt
+  * [Starship prompt](https://starship.rs/): powerful shell prompt
   * [Thef*ck](https://github.com/nvbn/thefuck): correct errors in the previous console command
   * [Batcat](https://github.com/sharkdp/bat): prettier cat replacement
   * [direnv](https://direnv.net/): load and unload environment variables depending on the current directory
@@ -169,3 +172,4 @@ The following tools have huge requirements that would make the container image e
 * [Cloud mapper](https://github.com/duo-labs/cloudmapper)
 * [OpenSCAP base](https://www.open-scap.org/tools/openscap-base/#download), [SCAP Workbench](https://www.open-scap.org/tools/scap-workbench/#download)
 * [Dagda](https://github.com/eliasgranderubio/dagda): static analysis of known vulnerabilities, trojans, viruses, malware in container images and running containers on Docker.
+* [Resoto](https://github.com/someengineering/resoto): maps out your cloud infrastructure, generate reports, automate tasks

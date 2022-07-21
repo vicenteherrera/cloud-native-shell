@@ -99,8 +99,8 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3EFE0E0A2F2F60AA && \
     echo "deb http://ppa.launchpad.net/tektoncd/cli/ubuntu eoan main" \
         | sudo tee /etc/apt/sources.list.d/tektoncd-ubuntu-cli.list > /dev/null && \
-    sudo apt update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/tektoncd-ubuntu-cli.list && \
-    sudo apt install -y tektoncd-cli
+    sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/tektoncd-ubuntu-cli.list && \
+    sudo apt-get install -y tektoncd-cli
 
 ## Golang, and go required global installation
 
@@ -188,6 +188,12 @@ RUN REPO="kubewarden/kwctl" ZFILE="kwctl-linux-x86_64.zip" FILE="kwctl-linux-x86
 # KubiScan
 RUN REPO="cyberark/KubiScan" ZFILE="source.code.zip" FILE="KubiScan-master" XFILE="kubiscan" ./gh_install.sh
 # Will additional require install: pip install --user --no-cache kubernetes PrettyTable urllib3
+
+# CloudQuery
+RUN REPO="cloudquery/cloudquery" ZFILE="cloudquery_Linux_x86_64.zip" FILE="cloudquery" ./gh_install.sh
+
+# Steampipe
+RUN REPO="turbot/steampipe" ZFILE="steampipe_linux_amd64.tar.gz" FILE="steampipe" ./gh_install.sh
 
 ## Custom origin binaries
 
@@ -318,6 +324,9 @@ RUN mkdir -p \
 
 RUN echo "${user}:${pass}" | chpasswd
 
+# Add user to RVM group for Ruby Version Manager
+RUN sudo usermod -a -G rvm ${user}
+
 # Switch to user
 USER ${uid}:${gid}
 WORKDIR /home/${user}
@@ -439,7 +448,7 @@ RUN gem install jekyll bundler
 # This takes long to install, you may want to skip it
 
 # Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), robusta, 
-# docker-squash, checkov, illuminatio, vault-cli, cve-bin-tool
+# docker-squash, checkov, illuminatio, vault-cli, cve-bin-tool, Cloud Custodian
 RUN pip install --user --no-cache \
     kube-hunter \
     detect-secrets \ 
@@ -449,7 +458,8 @@ RUN pip install --user --no-cache \
     ansible paramiko \
     illuminatio \
     vault-cli \
-    cve-bin-tool
+    cve-bin-tool \
+    c7n
 
 # For KubiScan
 RUN pip install --user --no-cache kubernetes PrettyTable urllib3

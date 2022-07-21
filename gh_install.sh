@@ -39,11 +39,12 @@ ZFILE=$(echo ${ZFILE/VERSION/$version})
 FILE=$(echo ${FILE/VERSION/$version})
 XFILE=$(echo ${XFILE/VERSION/$version})
 
-# wget -q --show-progress https://github.com/${REPO}/releases/download/${usev}${version}/${ZFILE}
-
 url="https://github.com/${REPO}/releases/download/${usev}${version}/${ZFILE}"
 echo "URL: $url"
 echo "Download: $ZFILE, Extract: $FILE, Install as: $XFILE"
+
+mkdir -p temp
+cd temp
 
 http_code=$(curl --silent -L --max-time 30 --output ${ZFILE} --write-out "%{http_code}" "$url")
 if [[ ${http_code} -lt 200 || ${http_code} -gt 299 ]]; then
@@ -79,5 +80,8 @@ else
   echo "unknown file type"
   exit 1
 fi
+
+cd ..
+rm -rf ./temp
 
 # if $FILE is a directory, you must change mode to the bin files in it manually
