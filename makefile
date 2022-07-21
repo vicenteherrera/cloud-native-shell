@@ -36,6 +36,7 @@ build:
 			--build-arg gid=$$(id -g) \
 			--build-arg shell=${DEFAULT_SHELL} \
 			--build-arg pass=${PASSWORD}
+	docker image ls quay.io/vicenteherrera/cli-dev-shell
 
 upgrade:
 	@$(MAKE) -s build NOCACHE_PARAM="--no-cache"
