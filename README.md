@@ -74,6 +74,7 @@ make run RUN_SHELL=/bin/bash
 * Security and networking
   * [nmap](https://nmap.org/download), [ncat](https://nmap.org/ncat/), [netcat](https://sectools.org/tool/netcat/), [dig, nslookup, nsupdate](https://packages.debian.org/buster/dnsutils), [ping](https://packages.debian.org/stretch/iputils-ping)
   * [testssl.sh](https://testssl.sh): checks a server ports for TLS/SSL ciphers, protocols, recent cryptographic flaws, etc
+  * [tor, torify](https://gitlab.torproject.org/tpo/team): use a different IP for requests via a p2p connection sharing network 
   * [ClamAV](http://www.clamav.net/downloads): Detect malware and virus on Windows or Linux hosts
   * [1Password cli](https://1password.com/downloads/command-line/)
   * [Yubikey manager](https://github.com/Yubico/yubikey-manager)

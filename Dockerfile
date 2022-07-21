@@ -22,7 +22,7 @@ RUN apt-get install -y software-properties-common \
 # Last line for Yubikey manager
         
 # git, vim, build, python, ruby, podman, prometheus, nmap, ncat, netcat
-# dnsutils (dig, nslookup, nsupdate)
+# dnsutils (dig, nslookup, nsupdate), iputils (ping), tor, torify
 RUN apt-get -y install \
         git vim build-essential direnv bat \
         python3-dev python3-pip python3-setuptools python3-venv \
@@ -31,6 +31,7 @@ RUN apt-get -y install \
         podman buildah skopeo yamllint shellcheck \
         prometheus prometheus-alertmanager \
         nmap ncat netcat dnsutils iputils-ping \
+        tor \
         conntrack
 # conntrack is a Kubernetes 1.20.2 requirement
 
