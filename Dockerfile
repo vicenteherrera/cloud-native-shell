@@ -403,6 +403,9 @@ COPY --chown=${user}:${group} config/fish/config.fish ./.config/fish/config.fish
 COPY --chown=${user}:${group} config/fish/config-alias.fish ./.config/fish/config-alias.fish
 COPY --chown=${user}:${group} config/starship.toml ./.config/starship.toml
 
+# Other config files
+COPY --chown=${user}:${group} .vimrc ./.vimrc
+
 # --------------------------------------------------------------------------------------
 
 # Fish shell specifics
