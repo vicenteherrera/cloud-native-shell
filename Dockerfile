@@ -3,11 +3,18 @@ FROM debian:${debian_ver} as build
 
 WORKDIR /install
 
-# General
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get -y upgrade && \
-    apt-get install -y \
-        apt-utils software-properties-common \
+# Do not ask interactive questions while installing using apt or dpkg
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+
+RUN apt-get update
+
+# Instead of increasing the Debian image version, you may upgrade it,
+# but the image size will be larger
+# RUN apt-get -y upgrade
+
+# Start with apt-utils so other installations can configure on the fly
+RUN apt-get install -y apt-utils 
+RUN apt-get install -y software-properties-common \
         apt-transport-https ca-certificates lsb-release \
         gnupg gnupg2 curl wget unzip sudo \
         zsh nano jq procps \
@@ -327,6 +334,9 @@ RUN echo "${user}:${pass}" | chpasswd
 # Add user to RVM group for Ruby Version Manager
 RUN sudo usermod -a -G rvm ${user}
 
+# Restore dialog apt frontend
+RUN echo 'debconf debconf/frontend select Dialog' | debconf-set-selections
+
 # Switch to user
 USER ${uid}:${gid}
 WORKDIR /home/${user}
@@ -486,6 +496,5 @@ RUN npm install snyk npx yarn
 
 SHELL ["/bin/bash", "-c"]
 
-ENV DEBIAN_FRONTEND=""
 ENV DEFAULT_SHELL="${shell}"
 CMD ["$DEFAULT_SHELL"]

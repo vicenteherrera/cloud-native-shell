@@ -22,7 +22,7 @@ build:
 	RUNSUDO="" && groups | grep ' docker ' 1>/dev/null || RUNSUDO="sudo" ; \
 		$$RUNSUDO docker build . -t cli-dev-shell \
 			$$NOCACHE_PARAM \
-			--build-arg debian_ver=11.3 \
+			--build-arg debian_ver=11.4 \
 			--build-arg gcloud_ver=378.0.0 \
 			--build-arg one_password_ver=2.0.0 \
 			--build-arg go_ver=1.18 \
@@ -35,8 +35,8 @@ build:
 			--build-arg uid=$$(id -u) \
 			--build-arg gid=$$(id -g) \
 			--build-arg shell=${DEFAULT_SHELL} \
-			--build-arg pass=${PASSWORD}
-	docker image ls cli-dev-shell
+			--build-arg pass=${PASSWORD} && \
+	$$RUNSUDO docker image ls cli-dev-shell
 
 upgrade:
 	@$(MAKE) -s build NOCACHE_PARAM="--no-cache"
