@@ -90,10 +90,12 @@ make run RUN_SHELL=/bin/bash
   * [KubiScan](https://github.com/cyberark/KubiScan): Scan for risky permissions in RBAC
   * [Kubewarden cli](https://github.com/kubewarden/kwctl): policy engine for Kubernetes
   * [kube-linter](https://github.com/stackrox/kube-linter): checks Kubernetes YAML files and Helm charts against a variety of best practices
+  * [in-toto](https://github.com/in-toto/in-toto): verify signed tasks in a pipeline
   * Kubernetes security posture analyzer
     * [KubeAudit](https://github.com/Shopify/kubeaudit): audit Kubernetes clusters for security concerns
     * [Kube-hunter](https://github.com/aquasecurity/kube-hunter): hunt for security weaknesses in Kubernetes clusters
     * [Kube-score](https://github.com/zegl/kube-score): static code analysis of your Kubernetes object definitions
+    * [KubeScape](https://github.com/armosec/kubescape): multi-cloud K8s risk analysis, security compliance, RBAC visualizer and image vulnerabilities scanning
     * [kubectl kubesec-scan](https://github.com/controlplaneio/kubectl-kubesec): security risk analysis
     * [kubectl score](https://github.com/zegl/kube-score): static code analysis for Kubernetes object definitions
     * [kubectl popeye](https://popeyecli.io/): scan cluster for issues
@@ -116,8 +118,10 @@ make run RUN_SHELL=/bin/bash
   * [Go](https://go.dev/), [golangci-lint](https://golangci-lint.run/usage/install/#local-installation), [Ginkgo](https://github.com/onsi/ginkgo), [Gomock](https://github.com/golang/mock)
   * [Ruby](https://www.ruby-lang.org/en/documentation/), [Jekyll](https://jekyllrb.com/), [Bundler](https://bundler.io/docs.html)
   * [Dot Net 6](https://docs.microsoft.com/en-us/dotnet/core/install/linux-debian)
-  * [YAML lint](https://github.com/adrienverge/yamllint)
-  * [Shellcheck](https://github.com/koalaman/shellcheck): lint Bash scripts
+  * Tools
+    * [YAML lint](https://github.com/adrienverge/yamllint): lint YAML files
+    * [Shellcheck](https://github.com/koalaman/shellcheck): lint Bash scripts
+    * [mmake](https://github.com/tj/mmake): like make but prints help for targets from comments
 * Shells
   * [Fish shell](https://fishshell.com/) (default)
   * Bash shell
@@ -138,33 +142,43 @@ make run RUN_SHELL=/bin/bash
 
 The following Cloud Native tools should be installed in the cluster/nodes to be able to use them.
 
-* [Falco](https://github.com/falcosecurity/falco)
-* [KubeBench](https://github.com/aquasecurity/kube-bench)
-* [Gatekeeper](https://github.com/open-policy-agent/gatekeeper): admission controller OPA based
-* [Hashicorp Vault](https://www.vaultproject.io/)
+* Security
+  * Runtime security
+    * [Falco](https://github.com/falcosecurity/falco): runtime security based on kernel driver or eBPF
+    * [Tracee](https://github.com/aquasecurity/tracee): runtime security based on eBPF
+  * Security posture check
+    * [KubeBench](https://github.com/aquasecurity/kube-bench): check CIS benchmarks for Kubernetes clusters
+    * [Polaris](https://github.com/FairwindsOps/polaris/): admission controller to check Kubernetes pods and controllers using best practices
+    * [RBAC-Police](https://github.com/PaloAltoNetworks/rbac-police): evaluate RBAC permissions of serviceAccounts, pods and nodes using Rego policies
+    * [gitgat](https://github.com/scribe-public/gitgat): OPA policies that verify SCM (currently GitHub's) organization/repositories/user accounts security
+  * Security Platforms (inc vulnerability assesment)
+    * [ThreatMapper](https://github.com/deepfence/ThreatMapper): open source Kubernetes security platform
+    * [Wazuh](https://github.com/wazuh/wazuh-kubernetes/blob/master/instructions.md): open source Kubernetes security platform
+* Policy / Admission Controller
+  * [Gatekeeper](https://github.com/open-policy-agent/gatekeeper): admission controller OPA based
+  * [Kyverno](https://github.com/kyverno/kyverno): policy engine and admission controller
+  * [Kubewarden](https://github.com/kubewarden): policy engine for Kubernetes
+  * [K-rail](https://github.com/cruise-automation/k-rail): workload policy enforcement to secure a multi tenant cluster
+* Secrets
+  * [Hashicorp Vault](https://www.vaultproject.io/)
+* CI/CD / Supply chain
+  * [Tekton](https://tekton.dev/docs/getting-started/#tekton-for-kubernetes-cloud-native-cicd-explained)
+    * [Chains](https://github.com/tektoncd/chains): observs Tekton tasksruns completion to sign them
+  * [Jenkins in Kubernetes](https://github.com/scriptcamp/kubernetes-jenkins)
+  * [ArgoCD](https://github.com/argoproj/argo-cd): gitops CD platform
+  * [Factory for Repeatable Secure Creation of Artifacts (FRSCA)](https://github.com/buildsec/frsca)  
+* Observability
+  * [Prometheus, Grafana, Alertmanager](https://github.com/prometheus-community/helm-charts): observability platform
+  * [Robusta](https://github.com/robusta-dev/robusta): observability reporting
 * [Notary](https://github.com/notaryproject/notary)
-* [Chains](https://github.com/tektoncd/chains)
 * [Calico](https://projectcalico.docs.tigera.io/about/about-calico)
 * [Istio](https://github.com/istio/istio)
-* [RBAC-Police](https://github.com/PaloAltoNetworks/rbac-police)
-* [Kyverno](https://github.com/kyverno/kyverno): policy engine and admission controller
-* [Tracee](https://github.com/aquasecurity/tracee)
 * [Hubble](https://github.com/cilium/hubble)
-* [ThreatMapper](https://github.com/deepfence/ThreatMapper)
-* [Tekton](https://tekton.dev/docs/getting-started/#tekton-for-kubernetes-cloud-native-cicd-explained), [Chains](https://github.com/tektoncd/chains)
-* [Jenkins in Kubernetes](https://github.com/scriptcamp/kubernetes-jenkins)
-* [Grafeas](https://grafeas.io/)
 * [Artifactory CE](https://jfrog.com/community/download-artifactory-oss/)
 * [GitLab CE](https://gitlab.com/gitlab-org/gitlab)
-* [Factory for Repeatable Secure Creation of Artifacts (FRSCA)](https://github.com/buildsec/frsca)
-* [ArgoCD](https://github.com/argoproj/argo-cd): gitops CD platform
-* [Robusta](https://github.com/robusta-dev/robusta): observability reporting
-* [Wazuh](https://github.com/wazuh/wazuh-kubernetes/blob/master/instructions.md): open source Kubernetes security platform
+* [Grafeas](https://grafeas.io/)  
 * [cert-manager](https://cert-manager.io/docs/usage/cmctl/#installation): certificate manager
-* [Kubewarden](https://github.com/kubewarden): policy engine for Kubernetes
-* [Polaris](https://github.com/FairwindsOps/polaris/): admission controller to check Kubernetes pods and controllers using best practices
 * [Crossplane](https://crossplane.io/docs/v1.9/getting-started/install-configure.html): provision, compose, and consume infrastructure using the Kubernetes API
-* [gitgat](https://github.com/scribe-public/gitgat): OPA policies that verify SCM (currently GitHub's) organization/repositories/user accounts security
 
 Additional tools not installed
 

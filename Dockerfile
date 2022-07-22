@@ -293,6 +293,9 @@ RUN curl -sS https://starship.rs/install.sh >./install.sh && \
     sh ./install.sh --yes && \
     rm install.sh
 
+# Kubescape
+RUN curl -s https://raw.githubusercontent.com/armosec/kubescape/master/install.sh | /bin/bash
+
 ## Fixed versioned
 
 # 1Password
@@ -443,6 +446,9 @@ RUN go install github.com/jrhouston/tfk8s@latest
 # kubelinter
 RUN go install golang.stackrox.io/kube-linter/cmd/kube-linter@latest
 
+# mmake
+RUN go install github.com/tj/mmake/cmd/mmake@latest
+
 # nvm
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
@@ -464,7 +470,7 @@ RUN npm install snyk npx yarn
 
 # Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), 
 # docker-squash, checkov, illuminatio, vault-cli, cve-bin-tool, Cloud Custodian
-# robusta
+# robusta, in-toto
 RUN pip install --user --no-cache \
     kube-hunter \
     detect-secrets \ 
@@ -476,7 +482,8 @@ RUN pip install --user --no-cache \
     vault-cli \
     cve-bin-tool \
     c7n \
-    robusta
+    robusta \
+    in-toto
 
 # For KubiScan
 RUN pip install --user --no-cache kubernetes PrettyTable urllib3

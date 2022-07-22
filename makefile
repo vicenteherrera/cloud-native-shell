@@ -15,18 +15,21 @@ RUN_SHELL=${FISH_SHELL}
 
 RUNSUDO := $(shell groups | grep ' sudo ' 1>/dev/null && echo "sudo")
 
+# build the image, tag it and run it
 all: build tag run
 
 NOCACHE_PARAM=""
 
+# lint Dockerfile using dockerlint
 lint:
 	dockerlint
 
+# build the container image cli-dev-shell
 build:
 	${RUNSUDO} docker build . -t cli-dev-shell \
 		$$NOCACHE_PARAM \
 		--build-arg debian_ver=11.4 \
-		--build-arg one_password_ver=2.0.0 \
+		--build-arg one_password_ver=2.5.1 \
 		--build-arg go_ver=1.18 \
 		--build-arg dotnet_ver=6.0 \
 		--build-arg user=$$(id -un) \
@@ -37,12 +40,15 @@ build:
 		--build-arg pass=${PASSWORD}
 	${RUNSUDO} docker image ls cli-dev-shell
 
+# rebuild the container image ignoring cache
 upgrade:
 	@$(MAKE) -s build NOCACHE_PARAM="--no-cache"
 
+# tag the container image for pushing as quay.io/vicenteherrera/cli-dev-shell
 tag:
 	${RUNSUDO} docker tag cli-dev-shell quay.io/vicenteherrera/cli-dev-shell
 
+# run the container image, mounting local directories with credentials for CLI tools
 run:
 	KUBEDIR_PARAM=""  && [ -d "$$HOME/.kube" ]     &&  KUBEDIR_PARAM="-v $$HOME/.kube:/home/$$(id -un)/.kube"; \
 	AWS_PARAM=""      && [ -d "$$HOME/.aws" ]      &&      AWS_PARAM="-v $$HOME/.aws:/home/$$(id -un)/.aws"; \
@@ -64,11 +70,14 @@ run:
 		quay.io/vicenteherrera/cli-dev-shell \
 		${RUN_SHELL}
 
-# /dev/hidraw1 mounted to access Yubikey, with /dev/bus/usb, /sys/bus/usb and /sys/devices
-# May be in a different number for you, check https://forum.yubico.com/viewtopic61c9.html?p=8058
+#-  /dev/hidraw1 mounted to access Yubikey, with /dev/bus/usb, /sys/bus/usb and /sys/devices
+#-  May be in a different number for you, check https://forum.yubico.com/viewtopic61c9.html?p=8058
 
+
+# push the container image to quay.io/vicenteherrera/cli-dev-shell
 push: tag
 	${RUNSUDO} docker push quay.io/vicenteherrera/cli-dev-shell
 
+# pull the container image from quay.io/vicenteherrera/cli-dev-shell
 pull:
 	${RUNSUDO} docker pull quay.io/vicenteherrera/cli-dev-shell
