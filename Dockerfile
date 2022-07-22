@@ -132,6 +132,9 @@ RUN REPO="cloudquery/cloudquery" ZFILE="cloudquery_Linux_x86_64.zip" FILE="cloud
 # Steampipe
 RUN REPO="turbot/steampipe" ZFILE="steampipe_linux_amd64.tar.gz" FILE="steampipe" ./gh_install.sh
 
+# Cosign
+RUN REPO="sigstore/cosign" ZFILE="cosign-linux-amd64" ./gh_install.sh
+
 ## Install using custom apt sources
 # These includes optiona chmod of keyring file in case your system hardening prevent reading for all that is required
 
@@ -491,7 +494,7 @@ RUN npm install snyk npx yarn
 
 # Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), 
 # docker-squash, checkov, illuminatio, vault-cli, cve-bin-tool, Cloud Custodian
-# robusta, in-toto
+# robusta, in-toto, vexy
 RUN pip install --user --no-cache \
     kube-hunter \
     detect-secrets \ 
@@ -515,6 +518,9 @@ RUN pipx install sdccli
 
 # Checkov
 RUN pipx install checkov
+
+# Vexy
+RUN pipx install vexy
 
 # --------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------

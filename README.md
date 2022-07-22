@@ -44,6 +44,10 @@ make run-without-sharing
     * [kubectl neat](https://github.com/itaysk/kubectl-neat): remove clutter from manifests
     * [kubectl ktop](https://github.com/vladimirvivien/ktop): top like tool for Kubernetes
     * [kubectl nsenter](https://github.com/towolf/kubectl-nsenter): SSH onto node and spawn an nsenter shell into a pod
+  * Local cluster
+    * [Minikube](https://minikube.sigs.k8s.io/docs/start/): deploy a local Kubernetes cluster using different hypervisor drivers
+    * [Kind](https://kind.sigs.k8s.io/): deploy a local Kubernetes cluster using Docker
+    * [Minishift](https://github.com/minishift/minishift): deploy a local OpenShift cluster
   * [Kubectx, Kubens](https://github.com/ahmetb/kubectx): easely change Kubernetes config context and current namespace
   * [OpenShift 4 cli (oc)](https://docs.openshift.com/container-platform/4.7/cli_reference/openshift_cli/getting-started-cli.html)
   * [eksctl](https://eksctl.io/): create and manage EKS clusters on AWS
@@ -55,13 +59,10 @@ make run-without-sharing
   * [Okteto cli](https://www.okteto.com/docs/cloud/okteto-cli): cli to Okteto shareable preview environments
   * [crictl](https://github.com/kubernetes-sigs/cri-tools/blob/master/docs/crictl.md): inspect and debug CRI-compatible container runtimes and applications on a Kubernetes node
   * [tfk8s](https://github.com/jrhouston/tfk8s): migrate YAML manifests to the [Terraform Kubernetes Provider](https://github.com/hashicorp/terraform-provider-kubernetes)
-  * [Carvel tools](https://carvel.dev/ytt/docs/v0.41.0/install/) (kapp-controller, ytt, kapp, kbld, imgpkg, vendir)
+  * [Carvel tools](https://carvel.dev/ytt/docs/v0.41.0/install/): misc tools (kapp-controller, ytt, kapp, kbld, imgpkg, vendir)
   * [kube-lineage](https://github.com/tohjustin/kube-lineage/): display all dependencies or dependents of an object in a Kubernetes cluster
   * [polaris](https://github.com/fairwindsops/polaris/): CLI to check Kubernetes pods and controllers using best practices
   * [Crossplane cli](https://crossplane.io/docs/v1.9/getting-started/install-configure.html): provision, compose, and consume infrastructure using the Kubernetes API
-  * [Minikube](https://minikube.sigs.k8s.io/docs/start/): deploy a local Kubernetes cluster using different hypervisor drivers
-  * [Kind](https://kind.sigs.k8s.io/): deploy a local Kubernetes cluster using Docker
-  * [Minishift](https://github.com/minishift/minishift): deploy a local OpenShift cluster
 * Cloud
   * [AWS cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
   * [Google Cloud cli](https://cloud.google.com/sdk/gcloud)
@@ -83,6 +84,7 @@ make run-without-sharing
   * [ClamAV](http://www.clamav.net/downloads): Detect malware and virus on Windows or Linux hosts
   * [1Password cli](https://1password.com/downloads/command-line/)
   * [Yubikey manager](https://github.com/Yubico/yubikey-manager)
+  * [Vexy](https://github.com/madpah/vexy): generate VEX (Vulnerability Exploitability Exchange) in CycloneDX format
 * Cloud Native security
   * [audit2rbac](https://github.com/liggitt/audit2rbac): generate RBAC based on audit log activity
   * [Syft](https://github.com/anchore/syft): Generate SBOM from container
@@ -96,6 +98,7 @@ make run-without-sharing
   * [Kubewarden cli](https://github.com/kubewarden/kwctl): policy engine for Kubernetes
   * [kube-linter](https://github.com/stackrox/kube-linter): checks Kubernetes YAML files and Helm charts against a variety of best practices
   * [in-toto](https://github.com/in-toto/in-toto): verify signed tasks in a pipeline
+  * [cosign](https://github.com/sigstore/cosign): container signing, verification andstorage in an OCI registry
   * Kubernetes security posture analyzer
     * [KubeAudit](https://github.com/Shopify/kubeaudit): audit Kubernetes clusters for security concerns
     * [Kube-hunter](https://github.com/aquasecurity/kube-hunter): hunt for security weaknesses in Kubernetes clusters
@@ -121,12 +124,14 @@ make run-without-sharing
   * [Python](https://www.python.org/), [pip](https://pypi.org/project/pip/), [pipx](https://github.com/pypa/pipx), [PyEnv](https://github.com/pyenv/pyenv), [Poetry](https://python-poetry.org/docs/)
   * [Node](https://nodejs.org/en/), [npm](https://www.npmjs.com/), [nvm](https://github.com/nvm-sh/nvm), [npx](https://www.npmjs.com/package/npx), [yarn](https://yarnpkg.com/getting-started/)
   * [Go](https://go.dev/), [golangci-lint](https://golangci-lint.run/usage/install/#local-installation), [Ginkgo](https://github.com/onsi/ginkgo), [Gomock](https://github.com/golang/mock)
-  * [Ruby](https://www.ruby-lang.org/en/documentation/), [Jekyll](https://jekyllrb.com/), [Bundler](https://bundler.io/docs.html)
+  * [Ruby](https://www.ruby-lang.org/en/documentation/), [Bundler](https://bundler.io/docs.html)
   * [Dot Net 6](https://docs.microsoft.com/en-us/dotnet/core/install/linux-debian)
   * Tools
+    * [Jekyll](https://jekyllrb.com/): static web generator written in Ruby
     * [YAML lint](https://github.com/adrienverge/yamllint): lint YAML files
     * [Shellcheck](https://github.com/koalaman/shellcheck): lint Bash scripts
     * [mmake](https://github.com/tj/mmake): like make but prints help for targets from comments
+    
 * Shells
   * [Fish shell](https://fishshell.com/) (default)
   * Bash shell
@@ -141,7 +146,7 @@ make run-without-sharing
   * [Batcat](https://github.com/sharkdp/bat): prettier cat replacement
   * [direnv](https://direnv.net/): load and unload environment variables depending on the current directory
   * [z](https://github.com/rupa/z): smart directory changer
-  * [Jekyll](https://jekyllrb.com/), [Bundler](https://bundler.io/)
+
 
 ## Other open source Cloud Native tools for a cluster
 
@@ -159,6 +164,10 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
   * Security Platforms (inc vulnerability assesment)
     * [ThreatMapper](https://github.com/deepfence/ThreatMapper): open source Kubernetes security platform
     * [Wazuh](https://github.com/wazuh/wazuh-kubernetes/blob/master/instructions.md): open source Kubernetes security platform
+* Networking
+  * [Calico](https://projectcalico.docs.tigera.io/about/about-calico): network security solution dataplane
+  * [Istio](https://github.com/istio/istio): service mesh to integrate microservices and manage traffic flow
+  * [Hubble](https://github.com/cilium/hubble): networking and security observability platform built on top of Cilium and eBPF    
 * Policy / Admission Controller
   * [Gatekeeper](https://github.com/open-policy-agent/gatekeeper): admission controller OPA based
   * [Kyverno](https://github.com/kyverno/kyverno): policy engine and admission controller
@@ -172,18 +181,16 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
   * [Jenkins in Kubernetes](https://github.com/scriptcamp/kubernetes-jenkins)
   * [ArgoCD](https://github.com/argoproj/argo-cd): gitops CD platform
   * [Factory for Repeatable Secure Creation of Artifacts (FRSCA)](https://github.com/buildsec/frsca)  
+  * [SPIFFE SPIRE](https://github.com/spiffe/spire): agent and server for establishing trust between software systems
+  * [Notary](https://github.com/notaryproject/notary): agent and server to share signed verified content
+  * [cert-manager](https://cert-manager.io/docs/usage/cmctl/#installation): certificate manager
 * Observability
   * [Prometheus, Grafana, Alertmanager](https://github.com/prometheus-community/helm-charts): observability platform
   * [Robusta](https://github.com/robusta-dev/robusta): observability reporting
-* [Notary](https://github.com/notaryproject/notary)
-* [Calico](https://projectcalico.docs.tigera.io/about/about-calico)
-* [Istio](https://github.com/istio/istio)
-* [Hubble](https://github.com/cilium/hubble)
-* [Artifactory CE](https://jfrog.com/community/download-artifactory-oss/)
-* [GitLab CE](https://gitlab.com/gitlab-org/gitlab)
-* [Grafeas](https://grafeas.io/)  
-* [cert-manager](https://cert-manager.io/docs/usage/cmctl/#installation): certificate manager
-* [Crossplane](https://crossplane.io/docs/v1.9/getting-started/install-configure.html): provision, compose, and consume infrastructure using the Kubernetes API
+* Other
+  * [JFrog Artifactory CE](https://jfrog.com/community/download-artifactory-oss/): binary artifact repositories
+  * [GitLab CE](https://gitlab.com/gitlab-org/gitlab): software development platform with version control, issue tracking, code review, CI/CD, and more
+  * [Crossplane](https://crossplane.io/docs/v1.9/getting-started/install-configure.html): provision, compose, and consume infrastructure using the Kubernetes API
 
 Additional tools not installed
 
@@ -193,3 +200,7 @@ The following tools have huge requirements that would make the container image e
 * [OpenSCAP base](https://www.open-scap.org/tools/openscap-base/#download), [SCAP Workbench](https://www.open-scap.org/tools/scap-workbench/#download)
 * [Dagda](https://github.com/eliasgranderubio/dagda): static analysis of known vulnerabilities, trojans, viruses, malware in container images and running containers on Docker.
 * [Resoto](https://github.com/someengineering/resoto): maps out your cloud infrastructure, generate reports, automate tasks
+
+Libraries and other links:
+* [Grafeas](https://grafeas.io/): metadata for software supply chain
+* [Vulnerability Exploitability Exchange (VEX)](https://cyclonedx.org/capabilities/vex/): assess the exploitability of vulnerabilities in products
