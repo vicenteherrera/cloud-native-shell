@@ -9,12 +9,17 @@ See `makefile` for more options.
 ## Examples
 
 ```bash
-# build and run using default fish shell
+# build and run using default fish shell and sharing credential dirs and current dir as ./data
 make build
 make run
 
 # run but with bash shell
 make run RUN_SHELL=/bin/bash
+
+# pull from quay.io with default built values for user/pass
+make pull
+# run without sharing any local directory
+make run-without-sharing
 ```
 
 ## Software included

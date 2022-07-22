@@ -73,6 +73,12 @@ run:
 #-  /dev/hidraw1 mounted to access Yubikey, with /dev/bus/usb, /sys/bus/usb and /sys/devices
 #-  May be in a different number for you, check https://forum.yubico.com/viewtopic61c9.html?p=8058
 
+# run the container image without sharing any local file with it
+run-no-sharing:
+	${RUNSUDO} docker run --rm -it \
+		--hostname awing --name cli-dev-shell \
+		quay.io/vicenteherrera/cli-dev-shell \
+		${RUN_SHELL}
 
 # push the container image to quay.io/vicenteherrera/cli-dev-shell
 push: tag
