@@ -13,7 +13,7 @@ RUN_SHELL=${FISH_SHELL}
 
 # -----------------------------------------------------------------------------------------------
 
-RUNSUDO := $(shell groups | grep ' sudo ' 1>/dev/null && echo "sudo")
+RUNSUDO := $(shell groups | grep ' docker ' 1>/dev/null || echo "sudo")
 
 # build the image, tag it and run it
 all: build tag run
