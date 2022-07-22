@@ -3,6 +3,9 @@ FROM debian:${debian_ver} as build
 
 WORKDIR /install
 
+# Many of the installation commands are left as they would be run from a host machine
+# so you can copy and paste on your main system, including sudo instruction where needed.
+
 # Do not ask interactive questions while installing using apt or dpkg
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
@@ -35,108 +38,26 @@ RUN apt-get -y install \
         conntrack
 # conntrack is a Kubernetes 1.20.2 requirement
 
-## Install using custom apt sources
+# rvm installation is greedy trying to create group rvm first which will cosume GID 1000
+# so we start creating our first desired group
+ARG group=developer
+ARG gid=1000
+RUN groupadd -g ${gid} ${group}
 
-# Dotnet
-ARG dotnet_ver=6.0
-RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
-    sudo dpkg -i packages-microsoft-prod.deb && \
-    rm packages-microsoft-prod.deb && \
-    sudo apt-get update && \
-    sudo apt-get install -y dotnet-sdk-${dotnet_ver}
-ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
+# rvm (Ruby Version Manager)
+# Takes a long time to compile Ruby binary, so we do it at the beginning
+# to cache and fasten further modifications of the Dockerfile
+RUN PATH="$HOME/.gem/bin:$PATH" && \
+    command curl -sSL https://rvm.io/mpapis.asc | gpg2 --import - && \
+    command curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import - && \
+    curl -sSL https://get.rvm.io | bash -s stable --ruby
 
-# Fish shell
-RUN curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_11/Release.key \
-        | gpg --dearmor | sudo tee /usr/share/keyrings/shells_fish_release_3.gpg > /dev/null && \
-    echo 'deb [signed-by=/usr/share/keyrings/shells_fish_release_3.gpg] http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /' \
-        | sudo tee /etc/apt/sources.list.d/shells:fish:release:3.list > /dev/null && \
-    sudo apt-get update && \
-    sudo apt-get install -y fish
 
-# Kubectl
-RUN curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg \
-        | tee /usr/share/keyrings/kubernetes-archive-keyring.gpg > /dev/null && \
-    echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" \
-        | sudo tee /etc/apt/sources.list.d/kubernetes.list > /dev/null && \
-    sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/kubernetes.list && \
-    sudo apt-get install -y kubectl
+## Install binaries from GitHub
 
-# Docker (in Docker)
-RUN curl -fsSL https://download.docker.com/linux/debian/gpg \
-        | gpg --dearmor | sudo tee /usr/share/keyrings/docker-archive-keyring.gpg > /dev/null && \
-    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" \
-        | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null && \
-    sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/docker.list && \
-    sudo apt-get install -y docker-ce docker-ce-cli containerd.io 
-
-# Azure cli
-RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc \
-        | gpg --dearmor | sudo tee /usr/share/keyrings/microsoft-archive-keyring.gpg > /dev/null && \
-    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" \
-        | sudo tee /etc/apt/sources.list.d/azure-cli.list > /dev/null && \
-    sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/azure-cli.list && \
-    sudo apt-get install -y azure-cli
-
-# Trivy
-RUN wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key \
-        | gpg --dearmor | sudo tee /usr/share/keyrings/trivy-archive-keyring.gpg > /dev/null && \
-    echo "deb [signed-by=/usr/share/keyrings/trivy-archive-keyring.gpg] https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" \
-        | sudo tee -a /etc/apt/sources.list.d/trivy.list > /dev/null && \
-    sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/trivy.list && \
-    sudo apt-get install -y trivy
-
-# Terraform, Vagrant
-RUN curl -fsSL https://apt.releases.hashicorp.com/gpg \
-        | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null && \
-    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" \
-        | sudo tee /etc/apt/sources.list.d/hashicorp.list > /dev/null && \
-    sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/hashicorp.list && \
-    sudo apt-get install -y vagrant terraform
-# Vagrant will require an additional virtualization hypervisor
-
-# GitHub cli
-RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
-        | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg && \
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
-        | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null && \
-    sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/github-cli.list && \ 
-    sudo apt-get install -y gh
-
-# GCloud SDK
-RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg \
-        | tee /usr/share/keyrings/cloud.google.gpg > /dev/null && \
-    echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" \
-        | tee /etc/apt/sources.list.d/google-cloud-sdk.list > /dev/null && \
-    apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/google-cloud-sdk.list && \
-    apt-get install google-cloud-sdk -y
-
-# Tekton cli
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3EFE0E0A2F2F60AA && \
-    echo "deb http://ppa.launchpad.net/tektoncd/cli/ubuntu eoan main" \
-        | sudo tee /etc/apt/sources.list.d/tektoncd-ubuntu-cli.list > /dev/null && \
-    sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/tektoncd-ubuntu-cli.list && \
-    sudo apt-get install -y tektoncd-cli
-
-## Golang, and go required global installation
-
-# Go
-ARG go_ver=1.18
-RUN go_latest_ver=$(curl -s https://golang.org/VERSION?m=text) && \
-    curl -sLo go.tar.gz https://go.dev/dl/go${go_ver}.linux-amd64.tar.gz && \
-    rm -rf /usr/local/go && tar -C /usr/local -xzf go.tar.gz && \
-    rm go.tar.gz
-ENV PATH="/usr/local/go/bin:$PATH"
-
-# pint (requires go)
-RUN git clone https://github.com/cloudflare/pint.git && \
-    cd pint && \
-    export PATH="/usr/local/go/bin:$PATH" && \
-    make && \
-    sudo mv pint /usr/local/bin && \
-    cd .. && rm -rf pint
-
-## Installed binaries from GitHub
+# Requests to GitHub API to know which is the latest version are throttled, 
+# if you run this several times you will get 403 errors so this is at beginning
+# of the Dockerfile to cache in case of modifications to it
 
 COPY ./gh_install.sh .
 
@@ -190,7 +111,7 @@ RUN REPO="wils0ns/tfscan" ZFILE="tfscan_VERSION_linux_amd64.tar.gz" FILE="tfscan
 RUN REPO="aquasecurity/chain-bench" ZFILE="chain-bench_VERSION_Linux_64bit.tar.gz" FILE="chain-bench" ./gh_install.sh
 
 # cmctl
-RUN REPO="cert-manager/cert-manager" OS=$(go env GOOS) ARCH=$(go env GOARCH) ZFILE="cmctl-$OS-$ARCH.tar.gz" FILE="cmctl" ./gh_install.sh
+RUN REPO="cert-manager/cert-manager" GOOS="linux" GOARCH="amd64" ZFILE="cmctl-$GOOS-$GOARCH.tar.gz" FILE="cmctl" ./gh_install.sh
 
 # polaris
 RUN REPO="fairwindsops/polaris" ZFILE="polaris_linux_amd64.tar.gz" FILE="polaris" ./gh_install.sh
@@ -211,7 +132,117 @@ RUN REPO="cloudquery/cloudquery" ZFILE="cloudquery_Linux_x86_64.zip" FILE="cloud
 # Steampipe
 RUN REPO="turbot/steampipe" ZFILE="steampipe_linux_amd64.tar.gz" FILE="steampipe" ./gh_install.sh
 
-## Custom origin binaries
+## Install using custom apt sources
+# These includes optiona chmod of keyring file in case your system hardening prevent reading for all that is required
+
+# Dotnet
+ARG dotnet_ver=6.0
+RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
+    sudo dpkg -i packages-microsoft-prod.deb && \
+    rm packages-microsoft-prod.deb && \
+    sudo apt-get update && \
+    sudo apt-get install -y dotnet-sdk-${dotnet_ver}
+ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
+
+# Fish shell
+RUN curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_11/Release.key \
+        | gpg --dearmor | sudo tee /usr/share/keyrings/shells_fish_release_3.gpg > /dev/null && \
+    sudo chmod a+r /usr/share/keyrings/shells_fish_release_3.gpg && \
+    echo 'deb [signed-by=/usr/share/keyrings/shells_fish_release_3.gpg] http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /' \
+        | sudo tee /etc/apt/sources.list.d/shells:fish:release:3.list > /dev/null && \
+    sudo apt-get update && \
+    sudo apt-get install -y fish
+
+# Kubectl
+RUN curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg \
+        | tee /usr/share/keyrings/kubernetes-archive-keyring.gpg > /dev/null && \
+    sudo chmod a+r /usr/share/keyrings/kubernetes-archive-keyring.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" \
+        | sudo tee /etc/apt/sources.list.d/kubernetes.list > /dev/null && \
+    sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/kubernetes.list && \
+    sudo apt-get install -y kubectl
+
+# Docker (in Docker)
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg \
+        | gpg --dearmor | sudo tee /usr/share/keyrings/docker-archive-keyring.gpg > /dev/null && \
+    sudo chmod a+r /usr/share/keyrings/docker-archive-keyring.gpg && \
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" \
+        | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null && \
+    sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/docker.list && \
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io 
+
+# Azure cli
+RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc \
+        | gpg --dearmor | sudo tee /usr/share/keyrings/microsoft-archive-keyring.gpg > /dev/null && \
+    sudo chmod a+r /usr/share/keyrings/microsoft-archive-keyring.gpg && \        
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" \
+        | sudo tee /etc/apt/sources.list.d/azure-cli.list > /dev/null && \
+    sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/azure-cli.list && \
+    sudo apt-get install -y azure-cli
+
+# Trivy
+RUN wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key \
+        | gpg --dearmor | sudo tee /usr/share/keyrings/trivy-archive-keyring.gpg > /dev/null && \
+    sudo chmod a+r /usr/share/keyrings/trivy-archive-keyring.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/trivy-archive-keyring.gpg] https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" \
+        | sudo tee -a /etc/apt/sources.list.d/trivy.list > /dev/null && \
+    sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/trivy.list && \
+    sudo apt-get install -y trivy
+
+# Terraform, Vagrant
+RUN curl -fsSL https://apt.releases.hashicorp.com/gpg \
+        | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null && \
+    sudo chmod a+r /usr/share/keyrings/hashicorp-archive-keyring.gpg && \
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" \
+        | sudo tee /etc/apt/sources.list.d/hashicorp.list > /dev/null && \
+    sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/hashicorp.list && \
+    sudo apt-get install -y vagrant terraform
+# Vagrant will require an additional virtualization hypervisor
+
+# GitHub cli
+RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+        | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg && \
+    sudo chmod a+r /usr/share/keyrings/githubcli-archive-keyring.gpg && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
+        | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null && \
+    sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/github-cli.list && \ 
+    sudo apt-get install -y gh
+
+# GCloud SDK
+RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg \
+        | tee /usr/share/keyrings/cloud.google.gpg > /dev/null && \
+    sudo chmod a+r /usr/share/keyrings/cloud.google.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" \
+        | tee /etc/apt/sources.list.d/google-cloud-sdk.list > /dev/null && \
+    apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/google-cloud-sdk.list && \
+    apt-get install google-cloud-sdk -y
+
+# Tekton cli
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3EFE0E0A2F2F60AA && \
+    echo "deb http://ppa.launchpad.net/tektoncd/cli/ubuntu eoan main" \
+        | sudo tee /etc/apt/sources.list.d/tektoncd-ubuntu-cli.list > /dev/null && \
+    sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/tektoncd-ubuntu-cli.list && \
+    sudo apt-get install -y tektoncd-cli
+
+## Golang, and go required global installation
+
+# Go
+ARG go_ver=1.18
+RUN go_latest_ver=$(curl -s https://golang.org/VERSION?m=text) && \
+    curl -sLo go.tar.gz https://go.dev/dl/go${go_ver}.linux-amd64.tar.gz && \
+    rm -rf /usr/local/go && tar -C /usr/local -xzf go.tar.gz && \
+    rm go.tar.gz
+ENV PATH="/usr/local/go/bin:$PATH"
+
+# pint (requires go)
+RUN git clone https://github.com/cloudflare/pint.git && \
+    cd pint && \
+    export PATH="/usr/local/go/bin:$PATH" && \
+    make && \
+    sudo mv pint /usr/local/bin && \
+    cd .. && rm -rf pint
+
+## Install from custom origin binaries
 
 # Minikube
 RUN curl -sLo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
@@ -244,7 +275,7 @@ RUN curl -O https://mirror.openshift.com/pub/rhacs/assets/latest/bin/Linux/roxct
 # testssl.sh
 RUN wget https://testssl.sh/testssl.sh && chmod +x testssl.sh && mv testssl.sh /usr/local/bin
 
-## Installers
+## Install using installers
 
 # Grype
 RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh \
@@ -313,23 +344,13 @@ RUN wget https://www.clamav.net/downloads/production/clamav-${clamav_ver}.linux.
 
 # Set user and group
 ARG user=vicente
-ARG group=developer
 ARG uid=1000
-ARG gid=1000
 ARG pass=changeme
 ARG shell=/usr/bin/fish
 
-RUN groupadd -g ${gid} ${group} && \
-    useradd -u ${uid} -g ${group} -s ${shell} -m ${user} && \
+RUN useradd -u ${uid} -g ${group} -s ${shell} -m ${user} && \
     usermod -aG sudo ${user} && \
     usermod -aG docker ${user} && newgrp docker
-
-# rvm (Ruby Version Manager)
-# Needs sudo and installs on user, so we do it before setting password
-RUN PATH="$HOME/.gem/bin:$PATH" && \
-    command curl -sSL https://rvm.io/mpapis.asc | gpg2 --import - && \
-    command curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import - && \
-    curl -sSL https://get.rvm.io | bash -s stable --ruby
 
 RUN mkdir -p \
         /home/${user}/.config/fish/completions \
@@ -499,6 +520,5 @@ RUN pipx install checkov
 # --------------------------------------------------------------------------------------
 
 SHELL ["/bin/bash", "-c"]
-
 ENV DEFAULT_SHELL="${shell}"
 CMD ["$DEFAULT_SHELL"]
