@@ -36,6 +36,7 @@ make run-without-sharing
   * [docker-squash](https://github.com/goldmann/docker-squash): squash layers of a container image reducing size
   * [dive](https://github.com/wagoodman/dive): explore container image and layers
   * [act](https://github.com/nektos/act): test GitHub actions locally
+  * [Docker bench](https://github.com/docker/docker-bench-security): checks for best-practices deploying Docker based on the CIS Benchmark
 * Kubernetes
   * [Kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/), [kubectl-convert](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-convert-plugin), aliases
   * [Krew](https://krew.sigs.k8s.io/)   
@@ -55,14 +56,16 @@ make run-without-sharing
   * [Helmfile](https://github.com/roboll/helmfile): deploy several Helm charts at once
   * [kops](https://kops.sigs.k8s.io/getting_started/install/): provision Kubernetes clusters on cloud providers
   * [Stern](https://github.com/wercker/stern): tail multiple pod logs on Kubernetes
-  * [Tekton cli](https://tekton.dev/docs/cli/): cli to Tekton cloud native CI/CD system
-  * [Okteto cli](https://www.okteto.com/docs/cloud/okteto-cli): cli to Okteto shareable preview environments
-  * [crictl](https://github.com/kubernetes-sigs/cri-tools/blob/master/docs/crictl.md): inspect and debug CRI-compatible container runtimes and applications on a Kubernetes node
+  * [kubeval](https://github.com/instrumenta/kubeval): validate Kubernetes YAML using schemas generated from the Kubernetes OpenAPI specification
   * [tfk8s](https://github.com/jrhouston/tfk8s): migrate YAML manifests to the [Terraform Kubernetes Provider](https://github.com/hashicorp/terraform-provider-kubernetes)
   * [Carvel tools](https://carvel.dev/ytt/docs/v0.41.0/install/): misc tools (kapp-controller, ytt, kapp, kbld, imgpkg, vendir)
   * [kube-lineage](https://github.com/tohjustin/kube-lineage/): display all dependencies or dependents of an object in a Kubernetes cluster
   * [polaris](https://github.com/fairwindsops/polaris/): CLI to check Kubernetes pods and controllers using best practices
+  * [skaffold](https://github.com/GoogleContainerTools/skaffold): deploy source code to Kubernetes clusters building, pushing and deploying your application
+  * [Tekton cli](https://tekton.dev/docs/cli/): cli to Tekton cloud native CI/CD system
+  * [Okteto cli](https://www.okteto.com/docs/cloud/okteto-cli): cli to Okteto shareable preview environments
   * [Crossplane cli](https://crossplane.io/docs/v1.9/getting-started/install-configure.html): provision, compose, and consume infrastructure using the Kubernetes API
+  * [crictl](https://github.com/kubernetes-sigs/cri-tools/blob/master/docs/crictl.md): inspect and debug CRI-compatible container runtimes and applications on a Kubernetes node  
 * Cloud
   * [AWS cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
   * [Google Cloud cli](https://cloud.google.com/sdk/gcloud)

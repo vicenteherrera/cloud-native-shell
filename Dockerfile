@@ -84,7 +84,7 @@ RUN REPO="roboll/helmfile" ZFILE="helmfile_linux_amd64" XFILE="helmfile" ./gh_in
 RUN REPO="liggitt/audit2rbac" ZFILE="audit2rbac-linux-amd64.tar.gz" FILE="audit2rbac" ./gh_install.sh
 
 # yq
-RUN REPO="mikefarah/yq" ZFILE="yq_linux_amd64.tar.gz" FILE="yq_linux_amd64" XFILE="yq" ./gh_install.sh
+RUN REPO="mikefarah/yq" ZFILE="yq_linux_amd64" FILE="yq_linux_amd64" XFILE="yq" ./gh_install.sh
 
 # Terrascan
 RUN REPO="tenable/terrascan" ZFILE="terrascan_VERSION_Linux_x86_64.tar.gz" FILE="terrascan" ./gh_install.sh
@@ -122,10 +122,6 @@ RUN REPO="zegl/kube-score" ZFILE="kube-score_VERSION_linux_amd64.tar.gz" FILE="k
 # kwctl (Kubewarden cli)
 RUN REPO="kubewarden/kwctl" ZFILE="kwctl-linux-x86_64.zip" FILE="kwctl-linux-x86_64" XFILE="kwctl" ./gh_install.sh
 
-# KubiScan
-RUN REPO="cyberark/KubiScan" ZFILE="source.code.zip" FILE="KubiScan-master" XFILE="kubiscan" ./gh_install.sh
-# Will additional require install: pip install --user --no-cache kubernetes PrettyTable urllib3
-
 # CloudQuery
 RUN REPO="cloudquery/cloudquery" ZFILE="cloudquery_Linux_x86_64.zip" FILE="cloudquery" ./gh_install.sh
 
@@ -135,8 +131,33 @@ RUN REPO="turbot/steampipe" ZFILE="steampipe_linux_amd64.tar.gz" FILE="steampipe
 # Cosign
 RUN REPO="sigstore/cosign" ZFILE="cosign-linux-amd64" ./gh_install.sh
 
+# Kubeval
+RUN REPO="instrumenta/kubeval" ZFILE="kubeval-linux-amd64.tar.gz" FILE="kubeval" ./gh_install.sh
+
+# Skaffold
+RUN REPO="GoogleContainerTools/skaffold" ZFILE="skaffold-linux-amd64" XFILE="skaffold" ./gh_install.sh
+
+# Custom installation from GitHub
+
+# Docker Bench
+RUN VERSION=$(curl -Ls https://api.github.com/repos/docker/docker-bench-security/releases/latest | jq ".tag_name" | xargs | cut -c2-) && \
+    wget "https://github.com/docker/docker-bench-security/archive/refs/tags/v${VERSION}.tar.gz" -O - \
+        | tar xz && \
+    sudo mv "docker-bench-security-${VERSION}" /usr/bin/docker-bench-security
+
+# KubiScan
+# Will additional require install: pip install --user --no-cache kubernetes PrettyTable urllib3
+RUN VERSION=$(curl -Ls https://api.github.com/repos/cyberark/KubiScan/releases/latest | jq ".tag_name" | xargs | cut -c2-) && \
+    URL="https://github.com/cyberark/KubiScan/releases/download/v${VERSION}/source.code.zip" && \
+    wget "$URL" && \
+    unzip -o source.code.zip && sudo mv "KubiScan-master" /usr/bin/kubiscan && sudo chmod -R a+rX /usr/bin/kubiscan && \
+    rm source.code.zip
+
+
 ## Install using custom apt sources
-# These includes optiona chmod of keyring file in case your system hardening prevent reading for all that is required
+
+# These includes optiona chmod of keyring file in case you use this on your host computer and
+# your system hardening prevents newly created files to have "read all" that is needed on gpg keys.
 
 # Dotnet
 ARG dotnet_ver=6.0
@@ -249,31 +270,31 @@ RUN git clone https://github.com/cloudflare/pint.git && \
 
 # Minikube
 RUN curl -sLo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
-  && chmod +x minikube && mv minikube /usr/local/bin/
+  && chmod +x minikube && sudo mv minikube /usr/local/bin/
 
 # Kind
 RUN curl -Lo ./kind https://kind.sigs.k8s.io/dl/latest/kind-linux-amd64 && \
-    chmod +x ./kind && mv ./kind /usr/local/bin/
+    chmod +x ./kind && sudo mv ./kind /usr/local/bin/
 
 # OpenShift 4 cli
-RUN curl -sLo oc.tar.gz https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/oc.tar.gz && \
+RUN curl -sLO https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/oc.tar.gz && \
     tar -xvf oc.tar.gz && \
-    chmod +x oc && mv oc /usr/local/bin/ && \
+    chmod +x oc && sudo mv oc /usr/local/bin/ && \
     rm README.md kubectl oc.tar.gz
 
 # Kubectl-convert
-RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl-convert" && \
+RUN curl -sLO "https://dl.k8s.io/release/$(curl -Ls https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl-convert" && \
     sudo install -o root -g root -m 0755 kubectl-convert /usr/local/bin/kubectl-convert && \
     rm kubectl-convert
 
 # Tetragon
 RUN wget https://github.com/cilium/tetragon/releases/download/tetragon-cli/tetragon-linux-amd64.tar.gz -O - \
-        | tar xz && mv tetragon /usr/bin/tetragon
+        | tar xz && sudo mv tetragon /usr/bin/tetragon
 
 # StackRox cli
-RUN curl -O https://mirror.openshift.com/pub/rhacs/assets/latest/bin/Linux/roxctl && \
+RUN curl -sLO https://mirror.openshift.com/pub/rhacs/assets/latest/bin/Linux/roxctl && \
     chmod +x roxctl && \
-    mv roxctl /usr/local/bin/
+    sudo mv roxctl /usr/local/bin/
 
 # testssl.sh
 RUN wget https://testssl.sh/testssl.sh && chmod +x testssl.sh && mv testssl.sh /usr/local/bin

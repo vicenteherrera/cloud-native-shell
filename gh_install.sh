@@ -14,14 +14,14 @@ set -e
 # Name of the file or directory after moving to /usr/local/bin if different
 : "${XFILE:=$FILE}"
 
-http_code=$(curl --silent -L --max-time 30 --output version.txt --write-out "%{http_code}" "https://api.github.com/repos/${REPO}/releases/latest")
+http_code=$(curl --silent -L --max-time 30 --output version.txt --write-out "%{http_code}" "https://api.github.com/repos/${REPO}/releases/latest" ||:)
 if [[ ${http_code} -eq 403 ]] ; then
   echo "Error 403: Forbidden"
-  echo "Check URL is correct and you are not API rate limited by your IP address"
+  echo "GitHub API may have rate limited your IP address. Please wait and retry build."
   echo $url
   exit 1
 elif [[ ${http_code} -lt 200 || ${http_code} -gt 299 ]] ; then
-  echo "Error ${http_code} getting version"
+  echo "Error $http_code getting version"
   echo "Check URL is correct: $url"
   exit 1
 fi
@@ -46,41 +46,40 @@ echo "Download: $ZFILE, Extract: $FILE, Install as: $XFILE"
 mkdir -p temp
 cd temp
 
-http_code=$(curl --silent -L --max-time 30 --output ${ZFILE} --write-out "%{http_code}" "$url")
+http_code=$(curl --silent -L --max-time 30 --output ${ZFILE} --write-out "%{http_code}" "$url" ||:)
 if [[ ${http_code} -lt 200 || ${http_code} -gt 299 ]]; then
-  echo "Error downloading file"
+  echo "Error $http_code downloading file"
   echo "Check URL is correct and you are not API rate limited by your IP address"
-  echo $url
+  echo "URL: $url"
   exit 1
 fi
 
-extension="${ZFILE##*.}"
+echo "File downloaded"
+[ ! -s "${ZFILE}" ] && echo "Error: file is empty, please wait and retry building to download again" && exit 1
 
-if [[ "$ZFILE" != *"."* ]]; then
-  echo "file is not compressed"
+extension="${ZFILE##*.}"
+if [[ "${ZFILE}" != *"."* ]]; then
+  echo "File is not compressed"
 elif [ "$extension" == "deb" ]; then
-  sudo apt-get install ./"$ZFILE"
-  rm "$ZFILE"
+  echo "File is a deb package"
+  sudo apt-get install ./"${ZFILE}"
+  rm "${ZFILE}"
 elif [ "$extension" == "zip" ]; then
-  unzip ${ZFILE}
-  rm ${ZFILE}
+  echo "File is a zip"
+  unzip "${ZFILE}" ${FILE} -d ./
+  rm "${ZFILE}"
   sudo chmod a+x ${FILE}
   sudo chmod -R a+rX ${FILE}
   sudo mv ${FILE} /usr/local/bin/${XFILE}
-elif [ "$extension" == "gz" ]; then
-  tar -xvzf ${ZFILE}
-  rm ${ZFILE}
-  sudo chmod a+x ${FILE}
-  sudo chmod -R a+rX ${FILE}
-  sudo mv ${FILE} /usr/local/bin/${XFILE}
-elif [ "$extension" == "tgz" ]; then
-  tar -xvzf ${ZFILE}
-  rm ${ZFILE}
+elif [ "$extension" == "gz" ] || [ "$extension" == "tgz" ]; then
+  echo "File is gzipped"
+  tar -xvzf "${ZFILE}" ${FILE}
+  rm "${ZFILE}"
   sudo chmod a+x ${FILE}
   sudo chmod -R a+rX ${FILE}
   sudo mv ${FILE} /usr/local/bin/${XFILE}
 else
-  echo "unknown file type"
+  echo "Unknown file type"
   exit 1
 fi
 
