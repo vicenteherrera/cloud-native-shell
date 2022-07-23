@@ -1,25 +1,43 @@
 # command-line-env
 
-A command line environment configured with tools for cloud-native development.
+A cloud-native "Tardis" container image... "it's bigger in the inside".
 
-Default shell is [fish](https://fishshell.com/) with [starship](https://starship.rs/) prompt requiring a [nerd font](https://www.nerdfonts.com/), but this can be changed on build or run.
+A command line environment configured with many tools for cloud-native development and security. The container is 10+ Gb in size.
 
-See `makefile` for more options.
+Default shell is [fish](https://fishshell.com/) with [starship](https://starship.rs/) prompt requiring a [nerd font](https://www.nerdfonts.com/) to correctly see prompt glyphs.
+See `makefile` for more configuration options while building or running the image.
+
+Aim is to include as many cloud-native tools as possible, specially if related with security. 
+But the goal isn't to fill it just with plain security tools (you already have Kali Linux for that).
 
 ## Examples
 
+After cloning this repo:
+
 ```bash
-# build and run using default fish shell and sharing credential dirs and current dir as ./data
+# Build using currently active user name, id and default password.
+# It can take up to 30 minutes, and while installing binaries from GitHub, 
+# it may return error or throttle connection. 
+# Just wait and rerun picking at the last correct layer.
 make build
+
+# Run using Fish shell and sharing credential dirs (.ssh, .aws, .kube, ...), 
+# and current dir as ./data
 make run
 
-# run but with bash shell
+# Run same but with bash shell
 make run RUN_SHELL=/bin/bash
+```
 
-# pull from quay.io with default built values for user/pass
-make pull
-# run without sharing any local directory
-make run-without-sharing
+Without having to clone this repo:
+
+```bash
+# Pull from quay.io with default built values for user/pass
+docker pull quay.io/vicenteherrera/cli-dev-shell
+
+# Run without sharing any local directory
+docker run --rm -it --hostname tardis --name cli-dev-shell \
+  quay.io/vicenteherrera/cli-dev-shell
 ```
 
 ## Software included
