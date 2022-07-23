@@ -66,7 +66,7 @@ run:
 		-v /sys/devices/:/sys/devices/ \
 		-v /dev/hidraw1:/dev/hidraw1 \
 		--privileged \
-		--hostname awing --name cli-dev-shell \
+		--hostname tardis --name cli-dev-shell \
 		quay.io/vicenteherrera/cli-dev-shell \
 		${RUN_SHELL}
 
@@ -76,7 +76,7 @@ run:
 # run the container image without sharing any local file with it
 run-no-sharing:
 	${RUNSUDO} docker run --rm -it \
-		--hostname awing --name cli-dev-shell \
+		--hostname tardis --name cli-dev-shell \
 		quay.io/vicenteherrera/cli-dev-shell \
 		${RUN_SHELL}
 

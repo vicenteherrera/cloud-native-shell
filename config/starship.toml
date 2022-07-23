@@ -1,12 +1,15 @@
 format = """
 $username\
 $hostname\
+$kubernetes\
+$aws\
+$line_break\
+$directory\
 $shlvl\
 $git_branch\
 $git_commit\
 $git_state\
 $git_status\
-$kubernetes\
 $hg_branch\
 $docker_context\
 $cmake\
@@ -36,15 +39,13 @@ $zig\
 $nix_shell\
 $conda\
 $memory_usage\
-$aws\
-$line_break\
-$directory\
+$env_var\
 $line_break\
 $character"""
 
 # $package\
 # $openstack\
-# $env_var\
+# 
 # $crystal\
 # $custom\
 # $cmd_duration\
@@ -60,6 +61,11 @@ scan_timeout = 10
 
 # Disable the newline at the start of the prompt
 # add_newline = false
+
+[hostname]
+ssh_only = false
+format="[@$hostname]($style) "
+
 
 [directory]
 truncation_length = 3
@@ -77,7 +83,7 @@ vicmd_symbol = "[V](bold green) "
 symbol = " "
 # symbol = ""
 # symbol = "🌱        "
-format="[$symbol$branch]($style) "
+format="[$symbol$branch]($style)"
 style = "fg:103"
 
 [git_status]
@@ -88,7 +94,7 @@ staged = '[++\($count\)](green)'
 format = '([\[$all_status$ahead_behind\]]($style) )'
 
 [kubernetes]
-symbol = "謁 "
+symbol = "謁"
 # ⛵   
 format='[$symbol$context(\($namespace\))]($style) '
 style = "fg:105"
@@ -99,6 +105,7 @@ disabled = false
 
 [python]
 symbol = "🐍"
+#🐍 🦖 🐉
 format = '[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style) '
 style = "bright-yellow"
 
@@ -114,6 +121,15 @@ us-east-1 = "us-e1"
 us-west-1 = "us-w1"
 us-east-2 = "us-e2"
 us-west-2 = "us-w2"
+eu-east-1 = "eu-e1"
+eu-east-2 = "eu-e2"
+eu-west-1 = "eu-w1"
+eu-west-2 = "eu-w2"
+eu-north-1 = "eu-n1"
+eu-north-2 = "eu-n2"
+eu-central-1 = "eu-c1"
+eu-central-2 = "eu-c2"
+eu-central-3 = "eu-c3"
 
 [golang]
 symbol = " "
@@ -128,3 +144,17 @@ style = "red"
 
 [perl]
 format = "[$symbol($version)]($style) "
+
+[terraform]
+format = "[$symbol$workspace]($style) "
+symbol = "💠"
+
+[env_var.OP_AWS]
+symbol = ""
+format = "[$env_value]($style)"
+style = "bold dimmed green"
+variable = "OP_AWS"
+default = ""
+
+[nodejs]
+format="[$symbol($version )]($style)"
