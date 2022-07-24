@@ -98,30 +98,11 @@ docker run --rm -it --hostname tardis --name cli-dev-shell \
   * [amtool](https://github.com/prometheus/alertmanager): Alertmanager CLI
   * [pint](https://cloudflare.github.io/pint/): PromQL rule linter
   * [Robusta cli](https://docs.robusta.dev/master/installation.html): cli to Robusta Kubernetes troubleshooting and automation platform
-* Security and networking
-  * [nmap](https://nmap.org/download), [ncat](https://nmap.org/ncat/), [netcat](https://sectools.org/tool/netcat/), [dig, nslookup, nsupdate](https://packages.debian.org/buster/dnsutils), [ping](https://packages.debian.org/stretch/iputils-ping)
-  * [testssl.sh](https://testssl.sh): checks a server ports for TLS/SSL ciphers, protocols, recent cryptographic flaws, etc
-  * [tor, torify](https://gitlab.torproject.org/tpo/team): use a different IP for requests via a p2p connection sharing network 
-  * [ClamAV](http://www.clamav.net/downloads): Detect malware and virus on Windows or Linux hosts
-  * [1Password cli](https://1password.com/downloads/command-line/)
-  * [Yubikey manager](https://github.com/Yubico/yubikey-manager)
-  * [Vexy](https://github.com/madpah/vexy): generate VEX (Vulnerability Exploitability Exchange) in CycloneDX format
 * Cloud Native security
-  * [audit2rbac](https://github.com/liggitt/audit2rbac): generate RBAC based on audit log activity
-  * [Syft](https://github.com/anchore/syft): Generate SBOM from container
-  * [Vault cli](https://www.vaultproject.io/docs/commands): secure, store and control secrets
-  * [detect-secrets](https://github.com/Yelp/detect-secrets): detecting secrets within a code base
-  * [Illuminatio](https://github.com/inovex/illuminatio): automatically testing kubernetes network policies
-  * [Tetragon cli](https://github.com/cilium/tetragon): eBPF-based security observability and runtime enforcement
-  * [chain-bench](https://github.com/aquasecurity/chain-bench): CIS Software Supply Chain benchmark
-  * [cmctl](https://cert-manager.io/docs/usage/cmctl/#installation): cert-manager cli
-  * [KubiScan](https://github.com/cyberark/KubiScan): Scan for risky permissions in RBAC
-  * [Kubewarden cli](https://github.com/kubewarden/kwctl): policy engine for Kubernetes
-  * [kube-linter](https://github.com/stackrox/kube-linter): checks Kubernetes YAML files and Helm charts against a variety of best practices
-  * [in-toto](https://github.com/in-toto/in-toto): verify signed tasks in a pipeline
-  * [cosign](https://github.com/sigstore/cosign): container signing, verification andstorage in an OCI registry
-  * Kubernetes security posture analyzer
+  * Linters
+    * [kube-linter](https://github.com/stackrox/kube-linter): checks Kubernetes YAML files and Helm charts against a variety of best practices
     * [KubeAudit](https://github.com/Shopify/kubeaudit): audit Kubernetes clusters for security concerns
+  * Kubernetes general security posture analyzers
     * [Kube-hunter](https://github.com/aquasecurity/kube-hunter): hunt for security weaknesses in Kubernetes clusters
     * [Kube-score](https://github.com/zegl/kube-score): static code analysis of your Kubernetes object definitions
     * [KubeScape](https://github.com/armosec/kubescape): multi-cloud K8s risk analysis, security compliance, RBAC visualizer and image vulnerabilities scanning
@@ -129,6 +110,15 @@ docker run --rm -it --hostname tardis --name cli-dev-shell \
     * [kubectl score](https://github.com/zegl/kube-score): static code analysis for Kubernetes object definitions
     * [kubectl popeye](https://popeyecli.io/): scan cluster for issues
     * [kubectl doctor](https://github.com/emirozer/kubectl-doctor): scan cluster for anomalies
+  * RBAC analyzers
+    * [KubiScan](https://github.com/cyberark/KubiScan): Scan for risky permissions in RBAC
+    * [audit2rbac](https://github.com/liggitt/audit2rbac): generate RBAC based on audit log activity
+  * Supply chain
+     * [cosign](https://github.com/sigstore/cosign): container signing, verification andstorage in an OCI registry
+     * [in-toto](https://github.com/in-toto/in-toto): verify signed tasks in a pipeline
+     * [chain-bench](https://github.com/aquasecurity/chain-bench): CIS Software Supply Chain benchmark
+     * [Syft](https://github.com/anchore/syft): generate SBOM from container
+     * [Vexy](https://github.com/madpah/vexy): generate VEX (Vulnerability Exploitability Exchange) in CycloneDX format
   * Container vulnerability scanners
     * [Trivy](https://github.com/aquasecurity/trivy)
     * [Grype](https://github.com/anchore/grype)
@@ -141,6 +131,20 @@ docker run --rm -it --hostname tardis --name cli-dev-shell \
   * Security platform's CLI
     * [sdc-cli](https://sysdiglabs.github.io/sysdig-platform-cli/): Sysdig CLI
     * [roxctl](https://docs.openshift.com/acs/3.66/cli/getting-started-cli.html): StackRox CLI
+  * Misc
+    * [detect-secrets](https://github.com/Yelp/detect-secrets): detecting secrets within a code base
+    * [Illuminatio](https://github.com/inovex/illuminatio): automatically testing kubernetes network policies
+    * [cmctl](https://cert-manager.io/docs/usage/cmctl/#installation): cert-manager cli
+    * [Vault cli](https://www.vaultproject.io/docs/commands): secure, store and control secrets  
+    * [Tetragon cli](https://github.com/cilium/tetragon): eBPF-based security observability and runtime enforcement
+    * [Kubewarden cli](https://github.com/kubewarden/kwctl): policy engine for Kubernetes
+* General security and networking
+  * [ClamAV](http://www.clamav.net/downloads): Detect malware and virus on Windows or Linux hosts
+  * [testssl.sh](https://testssl.sh): checks a server ports for TLS/SSL ciphers, protocols, recent cryptographic flaws, etc
+  * [tor, torify](https://gitlab.torproject.org/tpo/team): use a different IP for requests via a p2p connection sharing network 
+  * [1Password cli](https://1password.com/downloads/command-line/)
+  * [Yubikey manager](https://github.com/Yubico/yubikey-manager)
+  * [nmap](https://nmap.org/download), [ncat](https://nmap.org/ncat/), [netcat](https://sectools.org/tool/netcat/), [dig, nslookup, nsupdate](https://packages.debian.org/buster/dnsutils), [ping](https://packages.debian.org/stretch/iputils-ping)
 * Programming
   * [Python](https://www.python.org/), [pip](https://pypi.org/project/pip/), [pipx](https://github.com/pypa/pipx), [PyEnv](https://github.com/pyenv/pyenv), [Poetry](https://python-poetry.org/docs/)
   * [Node](https://nodejs.org/en/), [npm](https://www.npmjs.com/), [nvm](https://github.com/nvm-sh/nvm), [npx](https://www.npmjs.com/package/npx), [yarn](https://yarnpkg.com/getting-started/)
@@ -152,7 +156,6 @@ docker run --rm -it --hostname tardis --name cli-dev-shell \
     * [YAML lint](https://github.com/adrienverge/yamllint): lint YAML files
     * [Shellcheck](https://github.com/koalaman/shellcheck): lint Bash scripts
     * [mmake](https://github.com/tj/mmake): like make but prints help for targets from comments
-    
 * Shells
   * [Fish shell](https://fishshell.com/) (default)
   * Bash shell
