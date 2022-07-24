@@ -32,7 +32,6 @@ RUN apt-get -y install \
         npm \
         ruby-full zlib1g-dev \
         podman buildah skopeo yamllint shellcheck \
-        prometheus prometheus-alertmanager \
         nmap ncat netcat dnsutils iputils-ping \
         tor \
         conntrack
@@ -136,6 +135,9 @@ RUN REPO="instrumenta/kubeval" ZFILE="kubeval-linux-amd64.tar.gz" FILE="kubeval"
 
 # Skaffold
 RUN REPO="GoogleContainerTools/skaffold" ZFILE="skaffold-linux-amd64" XFILE="skaffold" ./gh_install.sh
+
+# promtool (Prometheus CLI)
+RUN REPO="prometheus/prometheus" ZFILE="prometheus-VERSION.linux-amd64.tar.gz" FILE="prometheus-VERSION.linux-amd64/promtool" XFILE="promtool" ./gh_install.sh
 
 # Custom installation from GitHub
 
@@ -493,6 +495,9 @@ RUN go install golang.stackrox.io/kube-linter/cmd/kube-linter@latest
 
 # mmake
 RUN go install github.com/tj/mmake/cmd/mmake@latest
+
+# amtool (Alertmanager CLI)
+RUN go install github.com/prometheus/alertmanager/cmd/amtool@latest
 
 # nvm
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
