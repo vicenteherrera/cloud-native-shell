@@ -499,6 +499,9 @@ RUN go install github.com/tj/mmake/cmd/mmake@latest
 # amtool (Alertmanager CLI)
 RUN go install github.com/prometheus/alertmanager/cmd/amtool@latest
 
+# Bad Robot
+RUN go install github.com/controlplaneio/badrobot@latest
+
 # nvm
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
