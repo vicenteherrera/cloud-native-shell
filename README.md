@@ -219,12 +219,13 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
 
 Additional tools not installed
 
-The following tools have huge requirements that would make the container image even bigger than it already is
+The following tools have big requirements that would make the container image even bigger than it already is, or are meant to run graphical UI.
 
-* [Cloud mapper](https://github.com/duo-labs/cloudmapper)
-* [OpenSCAP base](https://www.open-scap.org/tools/openscap-base/#download), [SCAP Workbench](https://www.open-scap.org/tools/scap-workbench/#download)
+* [Cloud mapper](https://github.com/duo-labs/cloudmapper#installation): analyze AWS environments auditing for security issues
 * [Dagda](https://github.com/eliasgranderubio/dagda): static analysis of known vulnerabilities, trojans, viruses, malware in container images and running containers on Docker.
-* [Resoto](https://github.com/someengineering/resoto): maps out your cloud infrastructure, generate reports, automate tasks
+* [Resoto](https://resoto.com/docs/getting-started/install-resoto): maps out your cloud infrastructure, generate reports, automate tasks
+* [OpenSCAP base](https://www.open-scap.org/tools/openscap-base/#download): cli to parse and evaluate the SCAP standard
+* [SCAP Workbench](https://www.open-scap.org/tools/scap-workbench/#download): graphical utility to perform oscap tasks
 
 Libraries and other links:
 * [Grafeas](https://grafeas.io/): metadata for software supply chain
