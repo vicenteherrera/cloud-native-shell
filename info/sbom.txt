@@ -45,12 +45,15 @@ skaffold 1.39.1 (https://github.com/GoogleContainerTools/skaffold)
 promtool 2.37.0 (https://github.com/prometheus/prometheus)
 amtool 0.24.0 (https://github.com/prometheus/alertmanager)
 pint 0.26.0 (https://github.com/cloudflare/pint)
+kube-linter 0.4.0 (https://github.com/stackrox/kube-linter)
+mmake 1.4.0 (https://github.com/tj/mmake)
+badrobot 0.1.2 (https://github.com/controlplaneio/badrobot)
 tetragon (initial release)
 fish, version 3.5.1
 kubectl Client Version: v1.24.3 Kustomize Version: v4.5.4
 docker Docker version 20.10.17, build 100c701
 azure-cli 2.38.0 core 2.38.0 telemetry 1.0.6 Dependencies: msal 1.18.0b1 azure-mgmt-resource 21.1.0b1 Python location '/opt/az/bin/python3' Extensions directory '/root/.azure/cliextensions' Python (Linux) 3.10.5 (main, Jul 1 2022, 04:14:49) [GCC 10.2.1 20210110] Legal docs and information: aka.ms/AzureCliLegal Your CLI is up-to-date.
-trivy Version: 0.30.2
+trivy Version: 0.30.3
 vagrant Vagrant 2.2.19
 gh version 2.14.2 (2022-07-14) https://github.com/cli/cli/releases/tag/v2.14.2
 gcloud Google Cloud SDK 394.0.0 alpha 2022.07.19 beta 2022.07.19 bq 2.0.75 bundled-python3-unix 3.9.12 core 2022.07.19 gsutil 5.11
@@ -61,15 +64,15 @@ oc Client Version: 4.8.11
 **Error: don't know how to get version information from kubectl-convert
 roxctl 3.71.0
 aws-cli/2.7.18 Python/3.9.11 Linux/5.10.102.1-microsoft-standard-WSL2 exe/x86_64.debian.11 prompt/off
-grype Application: grype Version: 0.43.0 Syft Version: v0.51.0 BuildDate: 2022-07-18T21:07:27Z GitCommit: addbd07b4f8cbfea283e10ffbd30e4cc6bfbfc0a GitDescription: v0.43.0 Platform: linux/amd64 GoVersion: go1.18.3 Compiler: gc Supported DB Schema: 4
+grype Application: grype Version: 0.44.0 Syft Version: v0.52.0 BuildDate: 2022-07-25T16:28:13Z GitCommit: a6ec8f11be5fdc116dc7bbfebdc03bfc13cd2005 GitDescription: v0.44.0 Platform: linux/amd64 GoVersion: go1.18.4 Compiler: gc Supported DB Schema: 4
 syft 0.52.0
 helm version.BuildInfo{Version:"v3.9.2", GitCommit:"1addefbfe665c350f4daf868a9adc5600cc064fd", GitTreeState:"clean", GoVersion:"go1.17.12"}
 docker-slim version linux|Transformer|1.37.5|86fbd29ab3549fa564e87e4770178480cb0542d3|2022-03-21_06:10:20AM
 okteto version 2.5.0 
 /root/lib/oracle-cli/bin/oci 3.11.1
-kapp version 0.49.0 Succeeded
+kapp version 0.50.0 Succeeded
 ytt version 0.41.1
-kapp version 0.49.0 Succeeded
+kapp version 0.50.0 Succeeded
 kbld version 0.34.0 Succeeded
 imgpkg version 0.30.0 Succeeded
 vendir version 0.29.0 Succeeded
@@ -78,18 +81,18 @@ kubescape Your current version is: v2.0.164
 act version 0.2.29
 kubectl-crossplane v1.9.0
 kubectl krew plugins:
-PLUGIN            VERSION
-doctor            v0.3.0
-example           v1.1.0
-krew              v0.4.3
-ktop              v0.3.0
-kubesec-scan      v1.0.2
-kvaps/node-shell  v1.6.0
-lineage           v0.5.0
-neat              v2.0.3
-nsenter           v0.2.0
-popeye            v0.7.1
-score             v1.10.0
+PLUGIN VERSION
+doctor v0.3.0
+example v1.1.0
+krew v0.4.3
+ktop v0.3.0
+kubesec-scan v1.0.2
+kvaps/node-shell v1.6.0
+lineage v0.5.0
+neat v2.0.3
+nsenter v0.2.0
+popeye v0.7.1
+score v1.10.0
 helm plugins:
 NAME	VERSION	DESCRIPTION                           
 diff	3.5.0  	Preview helm upgrade changes as a diff
@@ -97,30 +100,27 @@ golangci-lint has version 1.47.2 built from 61673b34 on 2022-07-21T10:53:45Z
 ginkgo Ginkgo Version 2.1.4
 mockgen v1.6.0
 **Error: don't know how to get version information from tfk8s
-kube-linter development
-**Error: don't know how to get version information from mmake
-badrobot Unknown flag: --version
 **Error: don't know how to get version information from nvm
 pyenv 2.3.2
 poetry Poetry version 1.1.14
 pipx 1.1.0
-snyk 1.980.0
+snyk 1.981.0
 npx 10.2.2
 yarn 1.22.19
-ansible             6.1.0
-ansible-core        2.13.2
-c7n                 0.9.17
-cve-bin-tool        3.1.1
-detect-secrets      1.3.0
-docker-squash       1.0.9
-illuminatio         1.4.0
-in-toto             1.2.0
-kube-hunter         0.6.8
-paramiko            2.11.0
-robusta             0.0.1
-thefuck             3.32
-vault-cli           3.1.0
-yubikey-manager     4.0.9
-checkov 2.1.73
+ansible 6.1.0
+ansible-core 2.13.2
+c7n 0.9.17
+cve-bin-tool 3.1.1
+detect-secrets 1.3.0
+docker-squash 1.0.9
+illuminatio 1.4.0
+in-toto 1.2.0
+kube-hunter 0.6.8
+paramiko 2.11.0
+robusta 0.0.1
+thefuck 3.32
+vault-cli 3.1.0
+yubikey-manager 4.0.9
+checkov 2.1.74
 sdccli 0.7.14
 vexy 0.2.0

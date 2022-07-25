@@ -204,6 +204,15 @@ RUN REPO="prometheus/alertmanager" ZFILE="alertmanager-VERSION.linux-amd64.tar.g
 # pint
 RUN REPO="cloudflare/pint" ZFILE="pint-VERSION-linux-x86_64.tar.gz" FILE="pint-linux-amd64" XFILE="pint" gh_install
 
+# kube-linter
+RUN REPO="stackrox/kube-linter" ZFILE="kube-linter-linux.tar.gz" FILE="kube-linter" gh_install
+
+# mmake
+RUN REPO="tj/mmake" ZFILE="mmake_VERSION_linux_x86_64.tar.gz" FILE="mmake" gh_install
+
+# Bad Robot
+RUN REPO="controlplaneio/badrobot" ZFILE="badrobot_linux_amd64.tar.gz" FILE="badrobot" gh_install
+
 # Custom installation from GitHub
 
 # Tetragon
@@ -519,7 +528,7 @@ RUN kubectl krew index add kvaps https://github.com/kvaps/krew-index && \
 RUN kubectl krew install \
     kubesec-scan lineage example neat score popeye ktop nsenter doctor && \
     echo "kubectl krew plugins:" | tee -a sbom.txt && \
-    script -qc 'kubectl krew list' | tee -a sbom.txt
+    script -qc 'kubectl krew list' | tr -s ' ' | tee -a sbom.txt
 
 # Helm plugins: helm-diff
 RUN helm plugin install https://github.com/databus23/helm-diff && \
@@ -535,25 +544,13 @@ RUN golangci_lint_ver=$(curl -s https://api.github.com/repos/golangci/golangci-l
 RUN go install -mod=mod github.com/onsi/ginkgo/v2/ginkgo && \
     version ginkgo | tee -a sbom.txt
 
-# Gomock ?
+# mockgen (Gomock framework)
 RUN go install github.com/golang/mock/mockgen@latest && \
     version mockgen | tee -a sbom.txt
 
 # tfk8s
 RUN go install github.com/jrhouston/tfk8s@latest  && \
     version tfk8s | tee -a sbom.txt
-
-# kubelinter
-RUN go install golang.stackrox.io/kube-linter/cmd/kube-linter@latest && \
-    version kube-linter | tee -a sbom.txt
-
-# mmake
-RUN go install github.com/tj/mmake/cmd/mmake@latest && \
-    version mmake | tee -a sbom.txt
-
-# Bad Robot
-RUN go install github.com/controlplaneio/badrobot@latest && \
-    version badrobot | tee -a sbom.txt
 
 # nvm
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash && \
@@ -585,7 +582,8 @@ RUN SOFTWARE="kube-hunter detect-secrets yubikey-manager thefuck docker-squash \
         ansible paramiko illuminatio vault-cli cve-bin-tool c7n \
         robusta in-toto" && \
     pip install --user --no-cache $SOFTWARE && \
-    pip list | grep -F "$(echo "$SOFTWARE" | tr -s ' ' | tr " " '\n')" - | tee -a sbom.txt
+    pip list | grep -F "$(echo "$SOFTWARE" | tr -s ' ' | tr " " '\n')" - | tr -s ' ' \
+        | tee -a sbom.txt
 
 # For KubiScan
 RUN pip install --user --no-cache kubernetes PrettyTable urllib3 && \
