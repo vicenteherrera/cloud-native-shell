@@ -147,7 +147,7 @@ docker run --rm -it --hostname tardis --name cli-dev-shell \
 * Programming
   * [Python](https://www.python.org/), [pip](https://pypi.org/project/pip/), [pipx](https://github.com/pypa/pipx), [PyEnv](https://github.com/pyenv/pyenv), [Poetry](https://python-poetry.org/docs/)
   * [Node](https://nodejs.org/en/), [npm](https://www.npmjs.com/), [nvm](https://github.com/nvm-sh/nvm), [npx](https://www.npmjs.com/package/npx), [yarn](https://yarnpkg.com/getting-started/)
-  * [Go](https://go.dev/), [golangci-lint](https://golangci-lint.run/usage/install/#local-installation), [Ginkgo](https://github.com/onsi/ginkgo), [Gomock](https://github.com/golang/mock)
+  * [Go](https://go.dev/), [golangci-lint](https://golangci-lint.run/usage/install/#local-installation), [Ginkgo](https://github.com/onsi/ginkgo), [mockgen (Gomock)](https://github.com/golang/mock)
   * [Ruby](https://www.ruby-lang.org/en/documentation/), [Bundler](https://bundler.io/docs.html)
   * [Dot Net 6](https://docs.microsoft.com/en-us/dotnet/core/install/linux-debian)
   * Tools
@@ -231,7 +231,13 @@ Other miscellaneous links:
 * [Grafeas](https://grafeas.io/): metadata for software supply chain
 * [Vulnerability Exploitability Exchange (VEX)](https://cyclonedx.org/capabilities/vex/): assess the exploitability of vulnerabilities in products
 * [Yaradare](https://github.com/deepfence/YaRadare): YAR malware container image scanner
+* [SecretScanner](https://github.com/deepfence/SecretScanner): find unprotected secrets in container images or file systems
+* [PacketStreamer](https://github.com/deepfence/PacketStreamer): remote packet capture and collection tool
 * [OKD](https://www.okd.io/installation/): Kubernetes distribution base for OpenShift
 * [KubeAdm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/): Kubernetes installation tool
 * [k3s](k3s.io): lightweight Kubernetes installation tool
 * [k0s](https://docs.k0sproject.io/v1.24.2+k0s.0/install/): lightweight Kubernetes installation tool
+* [markmap](https://markmap.js.org/docs#markmap-cli): markdown mindmap generation
+* [plantuml](https://plantuml.com/starting): markdown UML diagram generation
+* [secwiki.cloud](https://www.secwiki.cloud/): cloud vulnerability wiki
+* [cloudvulndb.org](https://www.cloudvulndb.org/): open cloud vulnerability & security issue database
