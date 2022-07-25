@@ -32,9 +32,6 @@ make run RUN_SHELL=/bin/bash
 Without having to clone this repo:
 
 ```bash
-# Pull from quay.io with default built values for user/pass
-docker pull quay.io/vicenteherrera/cli-dev-shell
-
 # Run without sharing any local directory
 docker run --rm -it --hostname tardis --name cli-dev-shell \
   quay.io/vicenteherrera/cli-dev-shell
@@ -70,7 +67,8 @@ docker run --rm -it --hostname tardis --name cli-dev-shell \
   * [Kubectx, Kubens](https://github.com/ahmetb/kubectx): easely change Kubernetes config context and current namespace
   * [OpenShift 4 cli (oc)](https://docs.openshift.com/container-platform/4.7/cli_reference/openshift_cli/getting-started-cli.html)
   * [eksctl](https://eksctl.io/): create and manage EKS clusters on AWS
-  * [Helm](https://helm.sh/), [Helm diff plugin](https://github.com/databus23/helm-diff): manage apps in Kubernetes with deploy templates packaged as charts
+  * [Helm](https://helm.sh/): manage apps in Kubernetes with deploy templates packaged as charts
+    * [Helm diff plugin](https://github.com/databus23/helm-diff): plugin to preview what a helm upgrade would change
   * [Helmfile](https://github.com/roboll/helmfile): deploy several Helm charts at once
   * [kops](https://kops.sigs.k8s.io/getting_started/install/): provision Kubernetes clusters on cloud providers
   * [Stern](https://github.com/wercker/stern): tail multiple pod logs on Kubernetes
@@ -189,6 +187,7 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
   * Security Platforms (inc vulnerability assesment)
     * [ThreatMapper](https://github.com/deepfence/ThreatMapper): open source Kubernetes security platform
     * [Wazuh](https://github.com/wazuh/wazuh-kubernetes/blob/master/instructions.md): open source Kubernetes security platform
+    * [SUSE Open Security Platform](https://github.com/neuvector/neuvector): formerly known as NeuVector when it wasn't open source
 * Networking
   * [Calico](https://projectcalico.docs.tigera.io/about/about-calico): network security solution dataplane
   * [Istio](https://github.com/istio/istio): service mesh to integrate microservices and manage traffic flow
@@ -227,6 +226,12 @@ The following tools have big requirements that would make the container image ev
 * [OpenSCAP base](https://www.open-scap.org/tools/openscap-base/#download): cli to parse and evaluate the SCAP standard
 * [SCAP Workbench](https://www.open-scap.org/tools/scap-workbench/#download): graphical utility to perform oscap tasks
 
-Libraries and other links:
+Other miscellaneous links:
+
 * [Grafeas](https://grafeas.io/): metadata for software supply chain
 * [Vulnerability Exploitability Exchange (VEX)](https://cyclonedx.org/capabilities/vex/): assess the exploitability of vulnerabilities in products
+* [Yaradare](https://github.com/deepfence/YaRadare): YAR malware container image scanner
+* [OKD](https://www.okd.io/installation/): Kubernetes distribution base for OpenShift
+* [KubeAdm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/): Kubernetes installation tool
+* [k3s](k3s.io): lightweight Kubernetes installation tool
+* [k0s](https://docs.k0sproject.io/v1.24.2+k0s.0/install/): lightweight Kubernetes installation tool
