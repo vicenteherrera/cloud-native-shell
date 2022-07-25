@@ -39,6 +39,14 @@ build:
 		--build-arg shell=${DEFAULT_SHELL} \
 		--build-arg pass=${PASSWORD}
 	${RUNSUDO} docker image ls cli-dev-shell
+	@$(MAKE) -s sbom-cp
+	@$(MAKE) -s layer-size
+
+# extract sbom from the container image
+sbom-cp:
+	docker create --name cli-dev-shell-test-copy-sbom cli-dev-shell && \
+		docker cp cli-dev-shell-test-copy-sbom:/home/$$(id -un)/sbom.txt ./sbom.txt ||: && \
+		docker rm cli-dev-shell-test-copy-sbom
 
 # rebuild the container image ignoring cache
 upgrade:
@@ -47,6 +55,16 @@ upgrade:
 # tag the container image for pushing as quay.io/vicenteherrera/cli-dev-shell
 tag:
 	${RUNSUDO} docker tag cli-dev-shell quay.io/vicenteherrera/cli-dev-shell
+
+# generate file with layer size information
+layer-size:
+	@ echo "generating layer-size.txt" && \
+	  docker history --no-trunc quay.io/vicenteherrera/cli-dev-shell:latest --format "table {{.Size}}\t{{.CreatedBy}}" \
+	  | ./str_replace.pl "dotnet_ver=6.0 " "" | ./str_replace.pl "go_ver=1.18 " "" | ./str_replace.pl "clamav_ver=0.105.0 " "" \
+		| ./str_replace.pl "group=vicen gid=1000 " "" | ./str_replace.pl "one_password_ver=2.5.1 " "" \
+		| ./str_replace.pl "dotnet_ver=6.0 go_ver=1.18 clamav_ver=0.105.0 one_password_ver=2.5.1 " "" \
+		| ./str_replace.pl "user=vicen uid=1000 pass=changeme shell=/usr/bin/fish " "" \
+		> layer-size.txt
 
 # run the container image, mounting local directories with credentials for CLI tools
 run:
