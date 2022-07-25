@@ -8,13 +8,19 @@ set -e
 # repository as username/reponame in GitHub URL
 [ "$REPO" == "" ] && echo "REPO env variable required" && exit 1
 # filename to download from releseas channel, include VERSION when it is part of the name
-[ "$ZFILE" == "" ] && echo "ZFILE env variable required" && exit 1
+: "${ZFILE:=vVERSION.tar.gz}"
 # File or directory you want to move to /usr/local/bin if downloaded is a compressed file 
 : "${FILE:=$ZFILE}"
 # Name of the file or directory after moving to /usr/local/bin if different
 : "${XFILE:=$FILE}"
 
-http_code=$(curl --silent -L --max-time 30 --output version.txt --write-out "%{http_code}" "https://api.github.com/repos/${REPO}/releases/latest" ||:)
+ghtoken_param=""
+if [ "$GHTOKEN" != "" ]; then
+  ghtoken_param="-u $GHTOKEN"
+  echo "Using GitHub API token"
+fi
+
+http_code=$(curl --silent -L $ghtoken_param --max-time 30 --output version.txt --write-out "%{http_code}" "https://api.github.com/repos/${REPO}/releases/latest" ||:)
 if [[ ${http_code} -eq 403 ]] ; then
   echo "Error 403: Forbidden"
   echo "GitHub API may have rate limited your IP address. Please wait and retry build."
@@ -33,13 +39,24 @@ if [ "${version:0:1}" == "v" ]; then
   usev="v"
 fi
 
-echo "$XFILE $version (https://github.com/$REPO)" | tee sbom.txt
+echo "$XFILE $version (https://github.com/$REPO)" | tee -a sbom.txt
 
+# Download from automatic source code attached to tag
+url=""
+if [ "$ZFILE" == 'vVERSION.tar.gz' ]; then
+  url="https://github.com/${REPO}/archive/refs/tags/v$version.tar.gz"
+fi
+
+# Substitue 'VERSION' for the version tag in file names
 ZFILE=$(echo ${ZFILE/VERSION/$version})
 FILE=$(echo ${FILE/VERSION/$version})
 XFILE=$(echo ${XFILE/VERSION/$version})
 
-url="https://github.com/${REPO}/releases/download/${usev}${version}/${ZFILE}"
+# Download from specific file attached to tag
+if [ "$url" == "" ]; then
+  url="https://github.com/${REPO}/releases/download/${usev}${version}/${ZFILE}"
+fi
+
 echo "URL: $url"
 echo "Download: $ZFILE, Extract: $FILE, Install as: $XFILE"
 
@@ -55,7 +72,7 @@ if [[ ${http_code} -lt 200 || ${http_code} -gt 299 ]]; then
 fi
 
 echo "File downloaded"
-[ ! -s "${ZFILE}" ] && echo "Error: file is empty, please wait and retry building to download again" && exit 1
+https://github.com/drwetter/testssl.sh/archive/refs/tags/v3.0.7.zip && echo "Error: file is empty, please wait and retry building to download again" && exit 1
 
 extension="${ZFILE##*.}"
 if [[ "${ZFILE}" != *"."* ]]; then

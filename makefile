@@ -28,6 +28,7 @@ lint:
 build:
 	${RUNSUDO} docker build . -t cli-dev-shell \
 		$$NOCACHE_PARAM \
+		--build-arg GHTOKEN="$$GHTOKEN" \
 		--build-arg debian_ver=11.4 \
 		--build-arg one_password_ver=2.5.1 \
 		--build-arg go_ver=1.18 \
@@ -38,14 +39,17 @@ build:
 		--build-arg gid=$$(id -g) \
 		--build-arg shell=${DEFAULT_SHELL} \
 		--build-arg pass=${PASSWORD}
+	@echo ""
 	${RUNSUDO} docker image ls cli-dev-shell
+	@echo ""
 	@$(MAKE) -s sbom-cp
+	@echo ""
 	@$(MAKE) -s layer-size
 
 # extract sbom from the container image
 sbom-cp:
 	docker create --name cli-dev-shell-test-copy-sbom cli-dev-shell && \
-		docker cp cli-dev-shell-test-copy-sbom:/home/$$(id -un)/sbom.txt ./sbom.txt ||: && \
+		docker cp cli-dev-shell-test-copy-sbom:/home/$$(id -un)/sbom.txt ./info/sbom.txt ||: && \
 		docker rm cli-dev-shell-test-copy-sbom
 
 # rebuild the container image ignoring cache
@@ -60,11 +64,11 @@ tag:
 layer-size:
 	@ echo "generating layer-size.txt" && \
 	  docker history --no-trunc quay.io/vicenteherrera/cli-dev-shell:latest --format "table {{.Size}}\t{{.CreatedBy}}" \
-	  | ./str_replace.pl "dotnet_ver=6.0 " "" | ./str_replace.pl "go_ver=1.18 " "" | ./str_replace.pl "clamav_ver=0.105.0 " "" \
-		| ./str_replace.pl "group=vicen gid=1000 " "" | ./str_replace.pl "one_password_ver=2.5.1 " "" \
-		| ./str_replace.pl "dotnet_ver=6.0 go_ver=1.18 clamav_ver=0.105.0 one_password_ver=2.5.1 " "" \
-		| ./str_replace.pl "user=vicen uid=1000 pass=changeme shell=/usr/bin/fish " "" \
-		> layer-size.txt
+	  | ./scripts/str_replace.pl "dotnet_ver=6.0 " "" | ./scripts/str_replace.pl "go_ver=1.18 " "" | ./scripts/str_replace.pl "clamav_ver=0.105.0 " "" \
+		| ./scripts/str_replace.pl "group=vicen gid=1000 " "" | ./scripts/str_replace.pl "one_password_ver=2.5.1 " "" \
+		| ./scripts/str_replace.pl "dotnet_ver=6.0 go_ver=1.18 clamav_ver=0.105.0 one_password_ver=2.5.1 " "" \
+		| ./scripts/str_replace.pl "user=vicen uid=1000 pass=changeme shell=/usr/bin/fish " "" \
+		> info/layer-size.txt
 
 # run the container image, mounting local directories with credentials for CLI tools
 run:
