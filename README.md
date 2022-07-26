@@ -52,6 +52,7 @@ docker run --rm -it --hostname tardis --name cli-dev-shell \
   * [dive](https://github.com/wagoodman/dive): explore container image and layers
   * [act](https://github.com/nektos/act): test GitHub actions locally
   * [Docker bench](https://github.com/docker/docker-bench-security): checks for best-practices deploying Docker based on the CIS Benchmark
+  * [Hadolint](https://github.com/hadolint/hadolint): dockerfile linter
 * Kubernetes
   * [Kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/), [kubectl-convert](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-convert-plugin), aliases
   * [Krew](https://krew.sigs.k8s.io/)   

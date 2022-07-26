@@ -213,6 +213,9 @@ RUN REPO="tj/mmake" ZFILE="mmake_VERSION_linux_x86_64.tar.gz" FILE="mmake" gh_in
 # Bad Robot
 RUN REPO="controlplaneio/badrobot" ZFILE="badrobot_linux_amd64.tar.gz" FILE="badrobot" gh_install
 
+# Hadolint
+RUN REPO="hadolint/hadolint" ZFILE="hadolint-Linux-x86_64" XFILE="hadolint" gh_install
+
 # Custom installation from GitHub
 
 # Tetragon
