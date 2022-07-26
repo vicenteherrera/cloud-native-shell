@@ -41,7 +41,7 @@ RUN apt-get -y install \
         podman buildah skopeo yamllint shellcheck \
         tor && \
     echo "npm" $(npm --version) | tee -a sbom.txt && \
-    version python3 ruby podman buildah skopeo yamllint shellcheck tor | tee -a sbom.txt
+    version python3 pip ruby podman buildah skopeo yamllint shellcheck tor | tee -a sbom.txt
 # conntrack is a Kubernetes 1.20.2 requirement
 # net-tools installs netstat that is a requirements of kube-hunter?
 
@@ -69,7 +69,7 @@ RUN gem install jekyll bundler && \
 
 # Dotnet
 ARG dotnet_ver=6.0
-RUN wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
+RUN curl -fsSLo packages-microsoft-prod.deb https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb && \
     sudo dpkg -i packages-microsoft-prod.deb && \
     rm packages-microsoft-prod.deb && \
     sudo apt-get update && \
@@ -90,9 +90,9 @@ ENV PATH="/usr/local/go/bin:$PATH"
 
 # ClamAV
 ARG clamav_ver=0.105.0
-RUN wget https://www.clamav.net/downloads/production/clamav-${clamav_ver}.linux.x86_64.deb && \
-    sudo dpkg -i clamav-${clamav_ver}.linux.x86_64.deb && \
-    rm clamav-${clamav_ver}.linux.x86_64.deb && \
+RUN curl -fsSLo clamav.deb https://www.clamav.net/downloads/production/clamav-${clamav_ver}.linux.x86_64.deb && \
+    sudo dpkg -i clamav.deb && \
+    rm clamav.deb && \
     version clamav-config | tee -a sbom.txt
     
 # 1Password
@@ -169,7 +169,7 @@ RUN REPO="wils0ns/tfscan" ZFILE="tfscan_VERSION_linux_amd64.tar.gz" FILE="tfscan
 RUN REPO="aquasecurity/chain-bench" ZFILE="chain-bench_VERSION_Linux_64bit.tar.gz" FILE="chain-bench" gh_install
 
 # cmctl
-RUN REPO="cert-manager/cert-manager" GOOS="linux" GOARCH="amd64" ZFILE="cmctl-$GOOS-$GOARCH.tar.gz" FILE="cmctl" gh_install
+RUN REPO="cert-manager/cert-manager" ZFILE="cmctl-linux-amd64.tar.gz" FILE="cmctl" gh_install
 
 # polaris
 RUN REPO="fairwindsops/polaris" ZFILE="polaris_linux_amd64.tar.gz" FILE="polaris" gh_install
@@ -216,10 +216,16 @@ RUN REPO="controlplaneio/badrobot" ZFILE="badrobot_linux_amd64.tar.gz" FILE="bad
 # Hadolint
 RUN REPO="hadolint/hadolint" ZFILE="hadolint-Linux-x86_64" XFILE="hadolint" gh_install
 
+# mockgen
+RUN REPO="golang/mock" ZFILE="mock_VERSION_linux_amd64.tar.gz" FILE="mock_VERSION_linux_amd64/mockgen" XFILE="mockgen" gh_install
+
+# golangci-lint
+RUN REPO="golangci/golangci-lint" ZFILE="golangci-lint-VERSION-linux-amd64.deb" gh_install
+
 # Custom installation from GitHub
 
 # Tetragon
-RUN wget https://github.com/cilium/tetragon/releases/download/tetragon-cli/tetragon-linux-amd64.tar.gz -O - \
+RUN curl -fsSL https://github.com/cilium/tetragon/releases/download/tetragon-cli/tetragon-linux-amd64.tar.gz \
         | tar xz && sudo mv tetragon /usr/bin/tetragon && \
    echo "tetragon (initial release)" | tee -a sbom.txt
 
@@ -306,7 +312,7 @@ RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg \
     echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" \
         | tee /etc/apt/sources.list.d/google-cloud-sdk.list > /dev/null && \
     apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/google-cloud-sdk.list && \
-    apt-get install google-cloud-sdk -y && \
+    apt-get install -y google-cloud-sdk && \
     version gcloud | tee -a sbom.txt
 
 # Tekton cli
@@ -411,7 +417,7 @@ RUN curl -sSfL https://raw.githubusercontent.com/nektos/act/master/install.sh \
 # It also requires docker to run
 
 # Crossplane cli (kubectl plugin installer)
-RUN curl -sL https://raw.githubusercontent.com/crossplane/crossplane/master/install.sh | sh && \
+RUN curl -sSfL https://raw.githubusercontent.com/crossplane/crossplane/master/install.sh | sh && \
     sudo mv kubectl-crossplane /usr/local/bin/ && \
     version kubectl-crossplane | tee -a sbom.txt
 
@@ -510,6 +516,11 @@ RUN echo '# Created in Dockerfile' >>/home/${user}/.bashrc && \
 
 # Programs that install on user profile
 
+# Miniconda
+RUN curl -sSfLo install.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+    chmod +x install.sh && ./install.sh -b -p $HOME/miniconda && rm ./install.sh \
+    version conda | tee -a sbom.txt 
+
 # Krew
 RUN ( \
     set -x; cd "$(mktemp -d)" && \
@@ -538,18 +549,9 @@ RUN helm plugin install https://github.com/databus23/helm-diff && \
     echo "helm plugins:" | tee -a sbom.txt && \
     helm plugin list | tee -a sbom.txt
 
-# golangci-lint
-RUN golangci_lint_ver=$(curl -s https://api.github.com/repos/golangci/golangci-lint/releases/latest | jq ".tag_name" | xargs | cut -c2- ) && \
-    curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v${golangci_lint_ver} && \
-    version golangci-lint | tee -a sbom.txt
-
 # Ginkgo
 RUN go install -mod=mod github.com/onsi/ginkgo/v2/ginkgo && \
     version ginkgo | tee -a sbom.txt
-
-# mockgen (Gomock framework)
-RUN go install github.com/golang/mock/mockgen@latest && \
-    version mockgen | tee -a sbom.txt
 
 # tfk8s
 RUN go install github.com/jrhouston/tfk8s@latest  && \
@@ -572,13 +574,11 @@ RUN python3 -m pip install --user pipx && \
     echo "pipx" $(pipx --version) | tee -a sbom.txt
 
 # Snyk, npx, yarn
-RUN npm install \
-        snyk npx yarn && \
-    version \
-        snyk npx yarn \
-        | tee -a sbom.txt
+RUN SOFTWARE="snyk npx yarn" && \ 
+    npm install $SOFTWARE && \
+    version $SOFTWARE | tee -a sbom.txt
 
-# Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), 
+# Pip: Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), 
 # docker-squash, checkov, illuminatio, vault-cli, cve-bin-tool, Cloud Custodian
 # robusta, in-toto, vexy
 RUN SOFTWARE="kube-hunter detect-secrets yubikey-manager thefuck docker-squash \
@@ -606,6 +606,7 @@ RUN pipx install vexy
 
 # List pipx packages
 RUN pipx list --short | tee -a sbom.txt 
+
 # --------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------
 

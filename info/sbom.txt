@@ -1,5 +1,6 @@
 npm 7.5.2
 python3 Python 3.9.2
+pip 20.3.4 from /usr/lib/python3/dist-packages/pip (python 3.9)
 ruby 2.7.4p191 (2021-07-07 revision a21a3b7d23) [x86_64-linux-gnu]
 podman version 3.0.1
 buildah version 1.19.6 (image-spec 1.0.1, runtime-spec 1.0.2-dev)
@@ -48,6 +49,9 @@ pint 0.26.0 (https://github.com/cloudflare/pint)
 kube-linter 0.4.0 (https://github.com/stackrox/kube-linter)
 mmake 1.4.0 (https://github.com/tj/mmake)
 badrobot 0.1.2 (https://github.com/controlplaneio/badrobot)
+hadolint 2.10.0 (https://github.com/hadolint/hadolint)
+mockgen 1.6.0 (https://github.com/golang/mock)
+golangci-lint-VERSION-linux-amd64.deb 1.47.2 (https://github.com/golangci/golangci-lint)
 tetragon (initial release)
 fish, version 3.5.1
 kubectl Client Version: v1.24.3 Kustomize Version: v4.5.4
@@ -59,7 +63,7 @@ gh version 2.14.2 (2022-07-14) https://github.com/cli/cli/releases/tag/v2.14.2
 gcloud Google Cloud SDK 394.0.0 alpha 2022.07.19 beta 2022.07.19 bq 2.0.75 bundled-python3-unix 3.9.12 core 2022.07.19 gsutil 5.11
 tkn Client version: 2020-04-01T10:57:38Z
 minikube version: v1.26.0 commit: f4b412861bb746be73053c9f6d2895f12cf78565
-kind version 0.15.0-alpha+982df26f902085
+kind version 0.15.0-alpha+8fd587886e195a
 oc Client Version: 4.8.11
 **Error: don't know how to get version information from kubectl-convert
 roxctl 3.71.0
@@ -96,9 +100,7 @@ score v1.10.0
 helm plugins:
 NAME	VERSION	DESCRIPTION                           
 diff	3.5.0  	Preview helm upgrade changes as a diff
-golangci-lint has version 1.47.2 built from 61673b34 on 2022-07-21T10:53:45Z
 ginkgo Ginkgo Version 2.1.4
-mockgen v1.6.0
 **Error: don't know how to get version information from tfk8s
 **Error: don't know how to get version information from nvm
 pyenv 2.3.2
@@ -121,6 +123,6 @@ robusta 0.0.1
 thefuck 3.32
 vault-cli 3.1.0
 yubikey-manager 4.0.9
-checkov 2.1.74
+checkov 2.1.75
 sdccli 0.7.14
 vexy 0.2.0

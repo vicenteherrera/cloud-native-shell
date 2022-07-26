@@ -22,7 +22,7 @@ NOCACHE_PARAM=""
 
 # lint Dockerfile using dockerlint
 lint:
-	dockerlint
+	hadolint ./Dockerfile
 
 # build the container image cli-dev-shell
 build:
