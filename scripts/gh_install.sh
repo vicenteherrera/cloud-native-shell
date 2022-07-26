@@ -3,7 +3,7 @@
 # Install a binary file from compressed GitHub repo releases channel
 # by Vicente Herrera
 
-set -e
+set -euo pipefail
 
 # repository as username/reponame in GitHub URL
 [ "$REPO" == "" ] && echo "REPO env variable required" && exit 1
@@ -72,15 +72,19 @@ if [[ ${http_code} -lt 200 || ${http_code} -gt 299 ]]; then
 fi
 
 echo "File downloaded"
-https://github.com/drwetter/testssl.sh/archive/refs/tags/v3.0.7.zip && echo "Error: file is empty, please wait and retry building to download again" && exit 1
+[ ! -s "${ZFILE}" ] && echo "Error: file is empty, please wait and retry building to download again" && exit 1
 
 extension="${ZFILE##*.}"
 if [[ "${ZFILE}" != *"."* ]]; then
   echo "File is not compressed"
+  sudo chmod a+x ${ZFILE}
+  sudo mv ${ZFILE} /usr/local/bin/${XFILE}
+  echo "Installed as /usr/local/bin/${XFILE}"
 elif [ "$extension" == "deb" ]; then
   echo "File is a deb package"
   sudo apt-get install ./"${ZFILE}"
   rm "${ZFILE}"
+  echo "Installed deb package ${ZFILE}"
 elif [ "$extension" == "zip" ]; then
   echo "File is a zip"
   unzip "${ZFILE}" ${FILE} -d ./
@@ -88,6 +92,7 @@ elif [ "$extension" == "zip" ]; then
   sudo chmod a+x ${FILE}
   sudo chmod -R a+rX ${FILE}
   sudo mv ${FILE} /usr/local/bin/${XFILE}
+  echo "Installed as /usr/local/bin/${XFILE}"
 elif [ "$extension" == "gz" ] || [ "$extension" == "tgz" ]; then
   echo "File is gzipped"
   tar -xvzf "${ZFILE}" ${FILE}
@@ -95,6 +100,7 @@ elif [ "$extension" == "gz" ] || [ "$extension" == "tgz" ]; then
   sudo chmod a+x ${FILE}
   sudo chmod -R a+rX ${FILE}
   sudo mv ${FILE} /usr/local/bin/${XFILE}
+  echo "Installed as /usr/local/bin/${XFILE}"
 else
   echo "Unknown file type"
   exit 1
