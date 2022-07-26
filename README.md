@@ -218,7 +218,7 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
   * [GitLab CE](https://gitlab.com/gitlab-org/gitlab): software development platform with version control, issue tracking, code review, CI/CD, and more
   * [Crossplane](https://crossplane.io/docs/v1.9/getting-started/install-configure.html): provision, compose, and consume infrastructure using the Kubernetes API
 
-Additional tools not installed
+## Additional tools not installed
 
 The following tools have big requirements that would make the container image even bigger than it already is, or are meant to run graphical UI.
 
@@ -228,7 +228,7 @@ The following tools have big requirements that would make the container image ev
 * [OpenSCAP base](https://www.open-scap.org/tools/openscap-base/#download): cli to parse and evaluate the SCAP standard
 * [SCAP Workbench](https://www.open-scap.org/tools/scap-workbench/#download): graphical utility to perform oscap tasks
 
-Other miscellaneous links:
+## Other miscellaneous links:
 
 * [Grafeas](https://grafeas.io/): metadata for software supply chain
 * [Vulnerability Exploitability Exchange (VEX)](https://cyclonedx.org/capabilities/vex/): assess the exploitability of vulnerabilities in products
