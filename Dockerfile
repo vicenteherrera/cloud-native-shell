@@ -222,6 +222,9 @@ RUN REPO="golang/mock" ZFILE="mock_VERSION_linux_amd64.tar.gz" FILE="mock_VERSIO
 # golangci-lint
 RUN REPO="golangci/golangci-lint" ZFILE="golangci-lint-VERSION-linux-amd64.deb" gh_install
 
+# k6
+RUN REPO="grafana/k6" ZFILE="k6-vVERSION-linux-amd64.tar.gz" FILE="k6-vVERSION-linux-amd64/k6" XFILE="k6" gh_install
+
 # Custom installation from GitHub
 
 # Tetragon
@@ -540,7 +543,7 @@ RUN kubectl krew index add kvaps https://github.com/kvaps/krew-index && \
 # Krew plugins: kube-scan, lineage, example, neat, score, popeye
 #               example, ktop, nsenter, doctor
 RUN kubectl krew install \
-    kubesec-scan lineage example neat score popeye ktop nsenter doctor && \
+    kubesec-scan lineage example neat score popeye ktop nsenter doctor who-can && \
     echo "kubectl krew plugins:" | tee -a sbom.txt && \
     script -qc 'kubectl krew list' | tr -s ' ' | tee -a sbom.txt
 

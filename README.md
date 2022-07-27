@@ -61,6 +61,7 @@ docker run --rm -it --hostname tardis --name cli-dev-shell \
     * [kubectl neat](https://github.com/itaysk/kubectl-neat): remove clutter from manifests
     * [kubectl ktop](https://github.com/vladimirvivien/ktop): top like tool for Kubernetes
     * [kubectl nsenter](https://github.com/towolf/kubectl-nsenter): SSH onto node and spawn an nsenter shell into a pod
+    * [kubectl who-can](https://github.com/aquasecurity/kubectl-who-can): shows which subjects have RBAC permissions to VERB
   * Local cluster
     * [Minikube](https://minikube.sigs.k8s.io/docs/start/): deploy a local Kubernetes cluster using different hypervisor drivers
     * [Kind](https://kind.sigs.k8s.io/): deploy a local Kubernetes cluster using Docker
@@ -142,8 +143,9 @@ docker run --rm -it --hostname tardis --name cli-dev-shell \
   * [ClamAV](http://www.clamav.net/downloads): Detect malware and virus on Windows or Linux hosts
   * [testssl.sh](https://testssl.sh): checks a server ports for TLS/SSL ciphers, protocols, recent cryptographic flaws, etc
   * [tor, torify](https://gitlab.torproject.org/tpo/team): use a different IP for requests via a p2p connection sharing network 
-  * [1Password cli](https://1password.com/downloads/command-line/)
-  * [Yubikey manager](https://github.com/Yubico/yubikey-manager)
+  * [1Password cli](https://1password.com/downloads/command-line/): cli to 1Password secret manager
+  * [Yubikey manager](https://github.com/Yubico/yubikey-manager): configure Yubikey
+  * [k6](https://github.com/grafana/k6): load testing tool
   * [nmap](https://nmap.org/download), [ncat](https://nmap.org/ncat/), [netcat](https://sectools.org/tool/netcat/), [dig, nslookup, nsupdate](https://packages.debian.org/buster/dnsutils), [ping](https://packages.debian.org/stretch/iputils-ping)
 * Programming
   * [Python](https://www.python.org/), [pip](https://pypi.org/project/pip/), [pipx](https://github.com/pypa/pipx), [PyEnv](https://github.com/pyenv/pyenv), [Poetry](https://python-poetry.org/docs/)
@@ -227,6 +229,7 @@ The following tools have big requirements that would make the container image ev
 * [Resoto](https://resoto.com/docs/getting-started/install-resoto): maps out your cloud infrastructure, generate reports, automate tasks
 * [OpenSCAP base](https://www.open-scap.org/tools/openscap-base/#download): cli to parse and evaluate the SCAP standard
 * [SCAP Workbench](https://www.open-scap.org/tools/scap-workbench/#download): graphical utility to perform oscap tasks
+* [iamspy](https://github.com/WithSecureLabs/iamspy): load IAM policies and convert them to Z3 prover constraints and a model for querings if actions are allowed
 
 ## Other miscellaneous links:
 
