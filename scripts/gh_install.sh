@@ -14,6 +14,7 @@ set -euo pipefail
 # Name of the file or directory after moving to /usr/local/bin if different
 : "${XFILE:=$FILE}"
 
+GHTOKEN="${GHTOKEN:-}"
 ghtoken_param=""
 if [ "$GHTOKEN" != "" ]; then
   ghtoken_param="-u $GHTOKEN"
