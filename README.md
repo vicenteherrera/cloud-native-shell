@@ -78,8 +78,8 @@ docker run --rm -it --hostname tardis --name cli-dev-shell \
   * [tfk8s](https://github.com/jrhouston/tfk8s): migrate YAML manifests to the [Terraform Kubernetes Provider](https://github.com/hashicorp/terraform-provider-kubernetes)
   * [Carvel tools](https://carvel.dev/ytt/docs/v0.41.0/install/): misc tools (kapp-controller, ytt, kapp, kbld, imgpkg, vendir)
   * [kube-lineage](https://github.com/tohjustin/kube-lineage/): display all dependencies or dependents of an object in a Kubernetes cluster
-  * [polaris](https://github.com/fairwindsops/polaris/): CLI to check Kubernetes pods and controllers using best practices
   * [skaffold](https://github.com/GoogleContainerTools/skaffold): deploy source code to Kubernetes clusters building, pushing and deploying your application
+  * [Artifact Hub cli (ah)](https://github.com/artifacthub/hub): lint packages for publishing them to Artifact Hub for CNCF projects
   * [Tekton cli](https://tekton.dev/docs/cli/): cli to Tekton cloud native CI/CD system
   * [Okteto cli](https://www.okteto.com/docs/cloud/okteto-cli): cli to Okteto shareable preview environments
   * [Crossplane cli](https://crossplane.io/docs/v1.9/getting-started/install-configure.html): provision, compose, and consume infrastructure using the Kubernetes API
@@ -92,7 +92,7 @@ docker run --rm -it --hostname tardis --name cli-dev-shell \
   * [Terraform](https://github.com/hashicorp/terraform): manage cloud assest with a standard language for all providers
   * [CloudQuery](https://github.com/cloudquery/cloudquery/): query cloud resources using SQL
   * [SteamPipe](https://github.com/turbot/steampipe/): query cloud resources using SQL
-  * [CloudCustodian](https://cloudcustodian.io/docs/quickstart/index.html): query cloud assests with a standard language for all providers
+  * [Cloud Custodian](https://cloudcustodian.io/docs/quickstart/index.html): query cloud assests with a standard language for all providers
 * Observability
   * [promtool](https://prometheus.io/docs/prometheus/latest/configuration/unit_testing_rules/): Prometheus CLI
   * [amtool](https://github.com/prometheus/alertmanager): Alertmanager CLI
@@ -107,6 +107,7 @@ docker run --rm -it --hostname tardis --name cli-dev-shell \
     * [Kube-hunter](https://github.com/aquasecurity/kube-hunter): hunt for security weaknesses in Kubernetes clusters
     * [Kube-score](https://github.com/zegl/kube-score): static code analysis of your Kubernetes object definitions
     * [KubeScape](https://github.com/armosec/kubescape): multi-cloud K8s risk analysis, security compliance, RBAC visualizer and image vulnerabilities scanning
+    * [polaris](https://github.com/fairwindsops/polaris/): CLI to check Kubernetes pods and controllers using best practices    
     * [kubectl kubesec-scan](https://github.com/controlplaneio/kubectl-kubesec): security risk analysis
     * [kubectl score](https://github.com/zegl/kube-score): static code analysis for Kubernetes object definitions
     * [kubectl popeye](https://popeyecli.io/): scan cluster for issues
@@ -230,6 +231,7 @@ The following tools have big requirements that would make the container image ev
 * [OpenSCAP base](https://www.open-scap.org/tools/openscap-base/#download): cli to parse and evaluate the SCAP standard
 * [SCAP Workbench](https://www.open-scap.org/tools/scap-workbench/#download): graphical utility to perform oscap tasks
 * [iamspy](https://github.com/WithSecureLabs/iamspy): load IAM policies and convert them to Z3 prover constraints and a model for querings if actions are allowed
+* [GitLab cli](https://gitlab.com/gitlab-org/cli#installation)
 
 ## Other miscellaneous links:
 
@@ -246,3 +248,4 @@ The following tools have big requirements that would make the container image ev
 * [plantuml](https://plantuml.com/starting): markdown UML diagram generation
 * [secwiki.cloud](https://www.secwiki.cloud/): cloud vulnerability wiki
 * [cloudvulndb.org](https://www.cloudvulndb.org/): open cloud vulnerability & security issue database
+* [CIRCL hashlookup](https://www.circl.lu/services/hashlookup/): free lookup hash values against known database of files (malicious/non malicious)
