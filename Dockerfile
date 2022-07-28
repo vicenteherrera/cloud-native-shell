@@ -58,9 +58,9 @@ RUN groupadd -g ${gid} ${group}
 # Takes a long time to compile Ruby binary, so we do it at the beginning
 # to cache and fasten further modifications of the Dockerfile
 RUN PATH="$HOME/.gem/bin:$PATH" && \
-    command curl -sSL https://rvm.io/mpapis.asc | gpg2 --import - && \
-    command curl -sSL https://rvm.io/pkuczynski.asc | gpg2 --import - && \
-    curl -sSL https://get.rvm.io | bash -s stable --ruby && \
+    command curl -fsSL https://rvm.io/mpapis.asc | gpg2 --import - && \
+    command curl -fsSL https://rvm.io/pkuczynski.asc | gpg2 --import - && \
+    curl -fsSL https://get.rvm.io | bash -s stable --ruby && \
     version ruby | tee -a sbom.txt
 
 # Jekyll, Bundler
@@ -79,8 +79,8 @@ ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 # Golang
 ARG go_ver=1.18
-RUN go_latest_ver=$(curl -Ls https://go.dev/VERSION?m=text  | cut -c 3-) && \
-    curl -sLo go.tar.gz https://go.dev/dl/go${go_ver}.linux-amd64.tar.gz && \
+RUN go_latest_ver=$(curl -fsSL https://go.dev/VERSION?m=text  | cut -c 3-) && \
+    curl -fsSLo go.tar.gz https://go.dev/dl/go${go_ver}.linux-amd64.tar.gz && \
     rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go.tar.gz && \
     rm go.tar.gz && \
     /usr/local/go/bin/go version | tee -a sbom.txt
@@ -97,7 +97,7 @@ RUN curl -fsSLo clamav.deb https://www.clamav.net/downloads/production/clamav-${
     
 # 1Password
 ARG one_password_ver=2.5.1
-RUN curl -sSf -o op.zip https://cache.agilebits.com/dist/1P/op2/pkg/v${one_password_ver}/op_linux_amd64_v${one_password_ver}.zip && \
+RUN curl -fsSL -o op.zip https://cache.agilebits.com/dist/1P/op2/pkg/v${one_password_ver}/op_linux_amd64_v${one_password_ver}.zip && \
     unzip op.zip && sudo mv op /usr/local/bin/ && rm op.zip op.sig \
     version op | tee -a sbom.txt
 
@@ -228,6 +228,15 @@ RUN REPO="grafana/k6" ZFILE="k6-vVERSION-linux-amd64.tar.gz" FILE="k6-vVERSION-l
 # ah (Artifact Hub cli)
 RUN REPO="artifacthub/hub" ZFILE="ah_VERSION_linux_amd64.tar.gz" FILE="ah" gh_install
 
+# config-lint
+RUN REPO="stelligent/config-lint" ZFILE="config-lint_Linux_x86_64.tar.gz" FILE="config-lint" gh_install
+
+# copper
+RUN REPO="cloud66-oss/copper" ZFILE="linux_amd64_2.0.1" FILE="linux_amd64_2.0.1" XFILE="copper" gh_install
+
+# conftest
+RUN REPO="open-policy-agent/conftest" ZFILE="conftest_VERSION_Linux_x86_64.tar.gz" FILE="conftest" gh_install
+
 # Custom installation from GitHub
 
 # Tetragon
@@ -312,7 +321,7 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
     version gh | tee -a sbom.txt
 
 # GCloud SDK
-RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg \
+RUN curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg \
         | tee /usr/share/keyrings/cloud.google.gpg > /dev/null && \
     sudo chmod a+r /usr/share/keyrings/cloud.google.gpg && \
     echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" \
@@ -332,30 +341,30 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3EFE0E0A2F2F60AA &&
 ## Install from custom origin binaries
 
 # Minikube
-RUN curl -sLo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
+RUN curl -fsSLo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
   && chmod +x minikube && sudo mv minikube /usr/local/bin/ && \
     version minikube | tee -a sbom.txt
 
 # Kind
-RUN curl -Lo ./kind https://kind.sigs.k8s.io/dl/latest/kind-linux-amd64 && \
+RUN curl -fsSLo ./kind https://kind.sigs.k8s.io/dl/latest/kind-linux-amd64 && \
     chmod +x ./kind && sudo mv ./kind /usr/local/bin/ && \
     version kind | tee -a sbom.txt
 
 # OpenShift 4 cli
-RUN curl -sLO https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/oc.tar.gz && \
+RUN curl -fsSLO https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/oc.tar.gz && \
     tar -xvf oc.tar.gz && \
     chmod +x oc && sudo mv oc /usr/local/bin/ && \
     rm README.md kubectl oc.tar.gz && \
     version oc | tee -a sbom.txt
 
 # Kubectl-convert
-RUN curl -sLO "https://dl.k8s.io/release/$(curl -Ls https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl-convert" && \
+RUN curl -fsSLO "https://dl.k8s.io/release/$(curl -fsSL https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl-convert" && \
     sudo install -o root -g root -m 0755 kubectl-convert /usr/local/bin/kubectl-convert && \
     rm kubectl-convert && \
     version kubectl-convert | tee -a sbom.txt
 
 # StackRox cli
-RUN curl -sLO https://mirror.openshift.com/pub/rhacs/assets/latest/bin/Linux/roxctl && \
+RUN curl -fsSLO https://mirror.openshift.com/pub/rhacs/assets/latest/bin/Linux/roxctl && \
     chmod +x roxctl && \
     sudo mv roxctl /usr/local/bin/ && \
     version roxctl | tee -a sbom.txt
@@ -363,7 +372,7 @@ RUN curl -sLO https://mirror.openshift.com/pub/rhacs/assets/latest/bin/Linux/rox
 ## Install using installers
 
 # AWS cli 2
-RUN curl -sSfL -o aws.zip "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" && \
+RUN curl -fsSL -o aws.zip "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" && \
     unzip ./aws.zip && ./aws/install && \
     rm -r ./aws aws.zip && \
     version aws | tee -a sbom.txt
@@ -372,58 +381,58 @@ RUN curl -sSfL -o aws.zip "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.
 # RUN curl -s https://s3.amazonaws.com/download.draios.com/stable/install-sysdig | bash
 
 # Grype
-RUN curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh \
+RUN curl -fsSL https://raw.githubusercontent.com/anchore/grype/main/install.sh \
         | sudo sh -s -- -b /usr/local/bin && \
     version grype | tee -a sbom.txt
 
 # Syft
-RUN curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh \
+RUN curl -fsSL https://raw.githubusercontent.com/anchore/syft/main/install.sh \
         | sudo sh -s -- -b /usr/local/bin && \
     version syft | tee -a sbom.txt
 
 # Helm 3
-RUN curl -sSfL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 \
+RUN curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 \
         | sudo -E bash - && \
     version helm | tee -a sbom.txt
 
 # Docker Slim
-RUN curl -sSfL https://raw.githubusercontent.com/docker-slim/docker-slim/master/scripts/install-dockerslim.sh \
+RUN curl -fsSL https://raw.githubusercontent.com/docker-slim/docker-slim/master/scripts/install-dockerslim.sh \
         | sudo -E bash - && \
     version docker-slim | tee -a sbom.txt
 
 # Okteto cli
-RUN curl -sSfL https://get.okteto.com -sSfL \
+RUN curl -fsSL https://get.okteto.com \
         | sudo sh && \
     okteto version | tee -a sbom.txt
 
 # Oracle Cloud cli
-RUN curl -sSfL https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh \
+RUN curl -fsSL https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh \
         | sudo bash -s --  --accept-all-defaults && \
     version /root/lib/oracle-cli/bin/oci | tee -a sbom.txt
 # Installs to /root/lib/oracle-cli/bin
 
 # Carvel tools
-RUN curl -sSfL https://carvel.dev/install.sh | sudo bash - && \
+RUN curl -fsSL https://carvel.dev/install.sh | sudo bash - && \
     version kapp ytt kapp kbld imgpkg vendir | tee -a sbom.txt
 
 # Starship prompt
-RUN curl -sSfL https://starship.rs/install.sh \
+RUN curl -fsSL https://starship.rs/install.sh \
         | sudo sh -s -- --yes && \
     version starship | tee -a sbom.txt
 
 # Kubescape
-RUN curl -sSfL https://raw.githubusercontent.com/armosec/kubescape/master/install.sh \
+RUN curl -fsSL https://raw.githubusercontent.com/armosec/kubescape/master/install.sh \
         | sudo /bin/bash && \
     version kubescape | tee -a sbom.txt
 
 # act
-RUN curl -sSfL https://raw.githubusercontent.com/nektos/act/master/install.sh \
+RUN curl -fsSL https://raw.githubusercontent.com/nektos/act/master/install.sh \
         | sudo sh -s -- -b /usr/local/bin && \
     version act | tee -a sbom.txt
 # It also requires docker to run
 
 # Crossplane cli (kubectl plugin installer)
-RUN curl -sSfL https://raw.githubusercontent.com/crossplane/crossplane/master/install.sh | sh && \
+RUN curl -fsSL https://raw.githubusercontent.com/crossplane/crossplane/master/install.sh | sh && \
     sudo mv kubectl-crossplane /usr/local/bin/ && \
     version kubectl-crossplane | tee -a sbom.txt
 

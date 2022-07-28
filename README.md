@@ -102,7 +102,10 @@ docker run --rm -it --hostname tardis --name cli-dev-shell \
   * Linters
     * [kube-linter](https://github.com/stackrox/kube-linter): checks Kubernetes YAML files and Helm charts against a variety of best practices
     * [KubeAudit](https://github.com/Shopify/kubeaudit): audit Kubernetes clusters for security concerns
-    * [Bad Robot](https://github.com/controlplaneio/badrobot): Kubernetes Operator static analys for high risk configurations    
+    * [Bad Robot](https://github.com/controlplaneio/badrobot): Kubernetes Operator static analys for high risk configurations
+    * [config-lint](https://github.com/stelligent/config-lint): validate configuration files using YAML rules, including Terraform (built in), Kubernetes (using custom YAML rule files)
+    * [copper](cloud66-oss/copper): validate configuration files using JS rules
+    * [conftest](open-policy-agent/conftest): validate configuration files using Rego rules
   * Kubernetes general security posture analyzers
     * [Kube-hunter](https://github.com/aquasecurity/kube-hunter): hunt for security weaknesses in Kubernetes clusters
     * [Kube-score](https://github.com/zegl/kube-score): static code analysis of your Kubernetes object definitions

@@ -63,7 +63,7 @@ tag:
 # generate file with layer size information
 layer-size:
 	@ echo "generating layer-size.txt" && \
-	  docker history --no-trunc quay.io/vicenteherrera/cli-dev-shell:latest \
+	  docker history --no-trunc cli-dev-shell \
 			--format "table {{.Size}}\t{{.CreatedBy}}" \
 		| ./scripts/str_replace.pl "GHTOKEN=$$GHTOKEN " ""  \
 	  | ./scripts/str_replace.pl "dotnet_ver=6.0 " "" | ./scripts/str_replace.pl "go_ver=1.18 " "" | ./scripts/str_replace.pl "clamav_ver=0.105.0 " "" \

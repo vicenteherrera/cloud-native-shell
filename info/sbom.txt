@@ -10,14 +10,14 @@ shellcheck ShellCheck - shell script analysis tool version: 0.7.1 license: GNU G
 tor Tor version 0.4.5.10.
 ruby 2.7.4p191 (2021-07-07 revision a21a3b7d23) [x86_64-linux-gnu]
 jekyll 4.2.2
-bundler Bundler version 2.3.18
+bundler Bundler version 2.3.19
 dotnet 6.0.302
 go version go1.18 linux/amd64
 clamav-config 0.105.0
 docker-bench-security 1.3.6 (https://github.com/docker/docker-bench-security)
 kubiscan 1.4 (https://github.com/cyberark/KubiScan)
 testssl 3.0.7 (https://github.com/drwetter/testssl.sh)
-dive_VERSION_linux_amd64.deb 0.10.0 (https://github.com/wagoodman/dive)
+dive_0.10.0_linux_amd64.deb 0.10.0 (https://github.com/wagoodman/dive)
 kubectx 0.9.4 (https://github.com/ahmetb/kubectx)
 kubens 0.9.4 (https://github.com/ahmetb/kubectx)
 eksctl 0.106.0 (https://github.com/weaveworks/eksctl)
@@ -51,9 +51,12 @@ mmake 1.4.0 (https://github.com/tj/mmake)
 badrobot 0.1.2 (https://github.com/controlplaneio/badrobot)
 hadolint 2.10.0 (https://github.com/hadolint/hadolint)
 mockgen 1.6.0 (https://github.com/golang/mock)
-golangci-lint-VERSION-linux-amd64.deb 1.47.2 (https://github.com/golangci/golangci-lint)
+golangci-lint-1.47.2-linux-amd64.deb 1.47.2 (https://github.com/golangci/golangci-lint)
 k6 0.39.0 (https://github.com/grafana/k6)
 ah 1.9.0 (https://github.com/artifacthub/hub)
+config-lint 1.6.0 (https://github.com/stelligent/config-lint)
+copper 2.0.1 (https://github.com/cloud66-oss/copper)
+conftest 0.33.2 (https://github.com/open-policy-agent/conftest)
 tetragon (initial release)
 fish, version 3.5.1
 kubectl Client Version: v1.24.3 Kustomize Version: v4.5.4
@@ -126,6 +129,6 @@ robusta 0.0.1
 thefuck 3.32
 vault-cli 3.1.0
 yubikey-manager 4.0.9
-checkov 2.1.80
+checkov 2.1.81
 sdccli 0.7.14
 vexy 0.2.0

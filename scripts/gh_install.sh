@@ -40,7 +40,7 @@ if [ "${version:0:1}" == "v" ]; then
   usev="v"
 fi
 
-echo "$XFILE $version (https://github.com/$REPO)" | tee -a sbom.txt
+
 
 # Download from automatic source code attached to tag
 url=""
@@ -53,11 +53,13 @@ ZFILE=$(echo ${ZFILE/VERSION/$version})
 FILE=$(echo ${FILE/VERSION/$version})
 XFILE=$(echo ${XFILE/VERSION/$version})
 
+
 # Download from specific file attached to tag
 if [ "$url" == "" ]; then
   url="https://github.com/${REPO}/releases/download/${usev}${version}/${ZFILE}"
 fi
 
+echo "$XFILE $version (https://github.com/$REPO)" | tee -a sbom.txt
 echo "URL: $url"
 echo "Download: $ZFILE, Extract: $FILE, Install as: $XFILE"
 
@@ -76,7 +78,7 @@ echo "File downloaded"
 [ ! -s "${ZFILE}" ] && echo "Error: file is empty, please wait and retry building to download again" && exit 1
 
 extension="${ZFILE##*.}"
-if [[ "${ZFILE}" != *"."* ]]; then
+if [[ "${ZFILE}" == "${FILE}" || "${ZFILE}" != *"."* ]]; then
   echo "File is not compressed"
   sudo chmod a+x ${ZFILE}
   sudo mv ${ZFILE} /usr/local/bin/${XFILE}
@@ -103,7 +105,7 @@ elif [ "$extension" == "gz" ] || [ "$extension" == "tgz" ]; then
   sudo mv ${FILE} /usr/local/bin/${XFILE}
   echo "Installed as /usr/local/bin/${XFILE}"
 else
-  echo "Unknown file type"
+  echo "Unknown file type: $extension"
   exit 1
 fi
 
