@@ -79,9 +79,9 @@ ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 # Golang
 ARG go_ver=1.18
-RUN go_latest_ver=$(curl -s https://golang.org/VERSION?m=text) && \
+RUN go_latest_ver=$(curl -Ls https://go.dev/VERSION?m=text  | cut -c 3-) && \
     curl -sLo go.tar.gz https://go.dev/dl/go${go_ver}.linux-amd64.tar.gz && \
-    rm -rf /usr/local/go && tar -C /usr/local -xzf go.tar.gz && \
+    rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go.tar.gz && \
     rm go.tar.gz && \
     /usr/local/go/bin/go version | tee -a sbom.txt
 ENV PATH="/usr/local/go/bin:$PATH"
