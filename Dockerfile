@@ -39,9 +39,11 @@ RUN apt-get -y install \
         npm \
         ruby-full zlib1g-dev \
         podman buildah skopeo yamllint shellcheck \
-        tor && \
+        tor \
+        apache2-utils && \
     echo "npm" $(npm --version) | tee -a sbom.txt && \
-    version python3 pip ruby podman buildah skopeo yamllint shellcheck tor | tee -a sbom.txt
+    version python3 pip ruby podman buildah skopeo yamllint shellcheck tor \
+            ab | tee -a sbom.txt
 # conntrack is a Kubernetes 1.20.2 requirement
 # net-tools installs netstat that is a requirements of kube-hunter?
 
@@ -120,9 +122,6 @@ RUN REPO="cyberark/KubiScan" FILE="KubiScan-VERSION" XFILE="kubiscan" gh_install
 RUN REPO="drwetter/testssl.sh" FILE="testssl.sh-VERSION" XFILE="testssl" gh_install
 
 
-
-
-
 # mockgen
 RUN REPO="golang/mock" ZFILE="mock_VERSION_linux_amd64.tar.gz" FILE="mock_VERSION_linux_amd64/mockgen" XFILE="mockgen" gh_install
 
@@ -139,18 +138,11 @@ RUN REPO="grafana/k6" ZFILE="k6-vVERSION-linux-amd64.tar.gz" FILE="k6-vVERSION-l
 RUN REPO="PaulJuliusMartinez/jless" ZFILE="jless-vVERSION-x86_64-unknown-linux-gnu.zip" FILE="jless" gh_install
 
 
-
-
-
 # Dive
 RUN REPO="wagoodman/dive" ZFILE="dive_VERSION_linux_amd64.deb" gh_install
 
 # golangci-lint
 RUN REPO="golangci/golangci-lint" ZFILE="golangci-lint-VERSION-linux-amd64.deb" gh_install
-
-
-
-
 
 
 # copper
@@ -178,17 +170,16 @@ RUN REPO="sigstore/cosign" ZFILE="cosign-linux-amd64" XFILE="cosign" gh_install
 RUN REPO="hadolint/hadolint" ZFILE="hadolint-Linux-x86_64" XFILE="hadolint" gh_install
 
 
-
-
-
 # KubeAudit
 RUN REPO="Shopify/kubeaudit" ZFILE="kubeaudit_VERSION_linux_amd64.tar.gz" FILE="kubeaudit" gh_install
 
 # kwctl (Kubewarden cli)
 RUN REPO="kubewarden/kwctl" ZFILE="kwctl-linux-x86_64.zip" FILE="kwctl-linux-x86_64" XFILE="kwctl" gh_install
 
-# Kubectx, Kubens
+# Kubectx
 RUN REPO="ahmetb/kubectx" ZFILE="kubectx_vVERSION_linux_x86_64.tar.gz" FILE="kubectx" gh_install
+
+# Kubens
 RUN REPO="ahmetb/kubectx" ZFILE="kubens_vVERSION_linux_x86_64.tar.gz" FILE="kubens" gh_install
 
 # eksctl
@@ -253,9 +244,6 @@ RUN REPO="open-policy-agent/conftest" ZFILE="conftest_VERSION_Linux_x86_64.tar.g
 
 # polaris
 RUN REPO="fairwindsops/polaris" ZFILE="polaris_linux_amd64.tar.gz" FILE="polaris" gh_install
-
-
-
 
 # Custom installation from GitHub
 

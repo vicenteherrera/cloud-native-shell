@@ -149,7 +149,8 @@ docker run --rm -it --hostname tardis --name cli-dev-shell \
   * [tor, torify](https://gitlab.torproject.org/tpo/team): use a different IP for requests via a p2p connection sharing network 
   * [1Password cli](https://1password.com/downloads/command-line/): cli to 1Password secret manager
   * [Yubikey manager](https://github.com/Yubico/yubikey-manager): configure Yubikey
-  * [k6](https://github.com/grafana/k6): load testing tool
+  * [k6](https://github.com/grafana/k6): load testing tool with javascript plans
+  * [apache2-utils](https://packages.debian.org/es/sid/apache2-utils): includes ab (load testing), logresolve (ip to host name), htpasswd (auth file manipulation), checkgid (test caller can configurate gid), and more.
   * [nmap](https://nmap.org/download), [ncat](https://nmap.org/ncat/), [netcat](https://sectools.org/tool/netcat/), [dig, nslookup, nsupdate](https://packages.debian.org/buster/dnsutils), [ping](https://packages.debian.org/stretch/iputils-ping)
 * Programming
   * [Python](https://www.python.org/), [pip](https://pypi.org/project/pip/), [pipx](https://github.com/pypa/pipx), [PyEnv](https://github.com/pyenv/pyenv), [Poetry](https://python-poetry.org/docs/)
