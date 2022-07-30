@@ -239,21 +239,35 @@ The following tools have big requirements that would make the container image ev
 * [OpenSCAP base](https://www.open-scap.org/tools/openscap-base/#download): cli to parse and evaluate the SCAP standard
 * [SCAP Workbench](https://www.open-scap.org/tools/scap-workbench/#download): graphical utility to perform oscap tasks
 * [iamspy](https://github.com/WithSecureLabs/iamspy): load IAM policies and convert them to Z3 prover constraints and a model for querings if actions are allowed
-* [GitLab cli](https://gitlab.com/gitlab-org/cli#installation)
 
 ## Other miscellaneous links:
 
-* [Grafeas](https://grafeas.io/): metadata for software supply chain
-* [Vulnerability Exploitability Exchange (VEX)](https://cyclonedx.org/capabilities/vex/): assess the exploitability of vulnerabilities in products
-* [Yaradare](https://github.com/deepfence/YaRadare): YAR malware container image scanner
-* [SecretScanner](https://github.com/deepfence/SecretScanner): find unprotected secrets in container images or file systems
-* [PacketStreamer](https://github.com/deepfence/PacketStreamer): remote packet capture and collection tool
-* [OKD](https://www.okd.io/installation/): Kubernetes distribution base for OpenShift
-* [KubeAdm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/): Kubernetes installation tool
-* [k3s](k3s.io): lightweight Kubernetes installation tool
-* [k0s](https://docs.k0sproject.io/v1.24.2+k0s.0/install/): lightweight Kubernetes installation tool
-* [markmap](https://markmap.js.org/docs#markmap-cli): markdown mindmap generation
-* [plantuml](https://plantuml.com/starting): markdown UML diagram generation
-* [secwiki.cloud](https://www.secwiki.cloud/): cloud vulnerability wiki
-* [cloudvulndb.org](https://www.cloudvulndb.org/): open cloud vulnerability & security issue database
-* [CIRCL hashlookup](https://www.circl.lu/services/hashlookup/): free lookup hash values against known database of files (malicious/non malicious)
+* Security Tools
+  * [Yaradare](https://github.com/deepfence/YaRadare): YAR malware container image scanner
+  * [SecretScanner](https://github.com/deepfence/SecretScanner): find unprotected secrets in container images or file systems
+  * [PacketStreamer](https://github.com/deepfence/PacketStreamer): remote packet capture and collection tool
+* Kubernetes installation and distributions
+  * [KubeAdm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/): Kubernetes installation tool
+  * [OKD](https://www.okd.io/installation/): Kubernetes distribution base for OpenShift
+  * [k3s](k3s.io): lightweight Kubernetes installation tool
+  * [k0s](https://docs.k0sproject.io/v1.24.2+k0s.0/install/): lightweight Kubernetes installation tool
+* Security information
+  * [MITRE ATT&CK](https://attack.mitre.org/), [ATT&CK navigator](https://mitre-attack.github.io/attack-navigator/), and [D3FEND](https://d3fend.mitre.org/)
+  * [MITRE Common Weakness Enumeration (CWE)](https://cwe.mitre.org/): list of software and hardware weakness types
+  * Vulnerability databases
+    * [MITRE Common Vulnerability and Exposures (CVE)](https://www.cve.org/): a catalog of known security threats
+    * [NIST Vulneratibility Database (NVD)](https://nvd.nist.gov/): enhances CVE with scores and exploitation information
+    * [secwiki.cloud](https://www.secwiki.cloud/): cloud vulnerability wiki
+    * [cloudvulndb.org](https://www.cloudvulndb.org/): open cloud vulnerability & security issue database
+    * [CIRCL hashlookup](https://www.circl.lu/services/hashlookup/): free lookup hash values against known database of files (malicious/non malicious)
+  * Malicious binaries and activity samples
+    * [The Zoo](https://github.com/ytisf/theZoo): a live malware repository
+* Standards and metadata formats
+  * [Grafeas](https://grafeas.io/): metadata for software supply chain
+  * [Open Security Controls Assessment Language (OSCAL)](https://csrc.nist.gov/Projects/open-security-controls-assessment-language): standarized formats for the publication, implementation, and assessment of security controls
+  * [Security Content Automation Protocol (SCAP)](): interoperable specifications for security
+  * [Structured Threat Information Expression (STIX)](https://stixproject.github.io/about/): language to exchange cyber threat intelligent
+  * [Vulnerability Exploitability Exchange (VEX)](https://cyclonedx.org/capabilities/vex/): assess the exploitability of vulnerabilities in products
+* Other tools
+  * [markmap](https://markmap.js.org/docs#markmap-cli): markdown mindmap generation
+  * [plantuml](https://plantuml.com/starting): markdown UML diagram generation
