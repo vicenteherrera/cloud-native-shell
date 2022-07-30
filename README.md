@@ -262,6 +262,9 @@ The following tools have big requirements that would make the container image ev
     * [CIRCL hashlookup](https://www.circl.lu/services/hashlookup/): free lookup hash values against known database of files (malicious/non malicious)
   * Malicious binaries and activity samples
     * [The Zoo](https://github.com/ytisf/theZoo): a live malware repository
+    * [Adversary Emulation Library](https://github.com/center-for-threat-informed-defense/adversary_emulation_library): a library of adversary emulation plans to allow organizations to evaluate their defensive capabilities against the real-world threats    
+    * [MITRE Common Attack Pattern Enumerations and Classifications (CAPEC)](https://capec.mitre.org/): comprehensive dictionary of known patterns of attack employed by adversaries to exploit known weaknesses
+    * [MITRE CALDERA](https://github.com/mitre/caldera): cyber security platform designed to easily automate adversary emulation, assist manual red-teams, and automate incident response
 * Standards and metadata formats
   * [Grafeas](https://grafeas.io/): metadata for software supply chain
   * [Open Security Controls Assessment Language (OSCAL)](https://csrc.nist.gov/Projects/open-security-controls-assessment-language): standarized formats for the publication, implementation, and assessment of security controls
