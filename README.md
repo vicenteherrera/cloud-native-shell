@@ -255,6 +255,8 @@ The following tools have big requirements that would make the container image ev
 <details>
   <summary>Click to expand!</summary>
 
+Software
+
 * Security Tools
   * [Yaradare](https://github.com/deepfence/YaRadare): YAR malware container image scanner
   * [SecretScanner](https://github.com/deepfence/SecretScanner): find unprotected secrets in container images or file systems
@@ -264,9 +266,19 @@ The following tools have big requirements that would make the container image ev
   * [OKD](https://www.okd.io/installation/): Kubernetes distribution base for OpenShift
   * [k3s](k3s.io): lightweight Kubernetes installation tool
   * [k0s](https://docs.k0sproject.io/v1.24.2+k0s.0/install/): lightweight Kubernetes installation tool
+* Other tools
+  * [markmap](https://markmap.js.org/docs#markmap-cli): markdown mindmap generation
+  * [plantuml](https://plantuml.com/starting): markdown UML diagram generation
+
+Links and information
+
 * Security information
   * [MITRE ATT&CK](https://attack.mitre.org/), [ATT&CK navigator](https://mitre-attack.github.io/attack-navigator/), and [D3FEND](https://d3fend.mitre.org/)
   * [MITRE Common Weakness Enumeration (CWE)](https://cwe.mitre.org/): list of software and hardware weakness types
+  * [Cloud Security Alliance](https://cloudsecurityalliance.org/): information to define and raise awareness of best practices to ensure a secure cloud computing environment
+  * Benchmarks
+    * [CIS Benchmarks](https://www.cisecurity.org/cis-benchmarks/): security standards for hardening IT systems and data against cyberattacks
+    * [Security Technical Implementation Guides (STIGs)](https://public.cyber.mil/stigs/): checklist to ensure and enhance security in systems
   * Vulnerability databases
     * [MITRE Common Vulnerability and Exposures (CVE)](https://www.cve.org/): a catalog of known security threats
     * [NIST Vulneratibility Database (NVD)](https://nvd.nist.gov/): enhances CVE with scores and exploitation information
@@ -274,19 +286,23 @@ The following tools have big requirements that would make the container image ev
     * [cloudvulndb.org](https://www.cloudvulndb.org/): open cloud vulnerability & security issue database
     * [CIRCL hashlookup](https://www.circl.lu/services/hashlookup/): free lookup hash values against known database of files (malicious/non malicious)
     * [Virustotal API](https://developers.virustotal.com/reference/overview)
+    * [GitHub Advisory Database](https://github.com/github/advisory-database): a free and open source community driven database of CVEs and GitHub-originated security advisories affecting the open source world
+    * [Red Hat Security Updates](https://access.redhat.com/security/security-updates/#/)
+    * [SUSE Update Advisories](https://www.suse.com/support/update/)
+    * [Ubuntu Security Notices](https://ubuntu.com/security/notices)
   * Malicious binaries and activity samples
     * [The Zoo](https://github.com/ytisf/theZoo): a live malware repository
     * [Adversary Emulation Library](https://github.com/center-for-threat-informed-defense/adversary_emulation_library): a library of adversary emulation plans to allow organizations to evaluate their defensive capabilities against the real-world threats    
     * [MITRE Common Attack Pattern Enumerations and Classifications (CAPEC)](https://capec.mitre.org/): comprehensive dictionary of known patterns of attack employed by adversaries to exploit known weaknesses
-    * [MITRE CALDERA](https://github.com/mitre/caldera): cyber security platform designed to easily automate adversary emulation, assist manual red-teams, and automate incident response
+    * [MITRE CALDERA](https://github.com/mitre/caldera): cyber security platform to automate adversary emulation, assist manual red-teams, and automate incident response
 * Standards and metadata formats
   * [Grafeas](https://grafeas.io/): metadata for software supply chain
   * [Open Security Controls Assessment Language (OSCAL)](https://csrc.nist.gov/Projects/open-security-controls-assessment-language): standarized formats for the publication, implementation, and assessment of security controls
-  * [Security Content Automation Protocol (SCAP)](): interoperable specifications for security
+  * [Security Content Automation Protocol (SCAP)](https://csrc.nist.gov/projects/security-content-automation-protocol): interoperable specifications for security
   * [Structured Threat Information Expression (STIX)](https://stixproject.github.io/about/): language to exchange cyber threat intelligent
   * [Vulnerability Exploitability Exchange (VEX)](https://cyclonedx.org/capabilities/vex/): assess the exploitability of vulnerabilities in products
-* Other tools
-  * [markmap](https://markmap.js.org/docs#markmap-cli): markdown mindmap generation
-  * [plantuml](https://plantuml.com/starting): markdown UML diagram generation
+  * Software Bill of Materials (SBOM)
+    * [CycloneDX](https://cyclonedx.org/): lightweight SBOM standard useful for application security contexts and supply chain component analysis
+    * [Software Product Data Exchange (SPDX)](https://spdx.dev/specifications/): international open standard (ISO/IEC 5962:2021) format for communicating the components, licenses, and copyrights associated with a software package
 
 </details>
