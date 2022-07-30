@@ -234,7 +234,6 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
 
 </details>
 
-
 ## Additional tools not installed
 
 The following tools have big requirements that would make the container image even bigger than it already is, or are meant to run graphical UI.
@@ -255,6 +254,7 @@ The following tools have big requirements that would make the container image ev
 
 <details>
   <summary>Click to expand!</summary>
+
 * Security Tools
   * [Yaradare](https://github.com/deepfence/YaRadare): YAR malware container image scanner
   * [SecretScanner](https://github.com/deepfence/SecretScanner): find unprotected secrets in container images or file systems
@@ -288,4 +288,5 @@ The following tools have big requirements that would make the container image ev
 * Other tools
   * [markmap](https://markmap.js.org/docs#markmap-cli): markdown mindmap generation
   * [plantuml](https://plantuml.com/starting): markdown UML diagram generation
+
 </details>
