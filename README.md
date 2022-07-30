@@ -186,6 +186,9 @@ docker run --rm -it --hostname tardis --name cli-dev-shell \
 
 The following Cloud Native tools should be installed in the cluster/nodes to be able to use them.
 
+<details>
+  <summary>Click to expand!</summary>
+
 * Security
   * Runtime security
     * [Falco](https://github.com/falcosecurity/falco): runtime security based on kernel driver or eBPF
@@ -229,9 +232,15 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
   * [GitLab CE](https://gitlab.com/gitlab-org/gitlab): software development platform with version control, issue tracking, code review, CI/CD, and more
   * [Crossplane](https://crossplane.io/docs/v1.9/getting-started/install-configure.html): provision, compose, and consume infrastructure using the Kubernetes API
 
+</details>
+
+
 ## Additional tools not installed
 
 The following tools have big requirements that would make the container image even bigger than it already is, or are meant to run graphical UI.
+
+<details>
+  <summary>Click to expand!</summary>
 
 * [Cloud mapper](https://github.com/duo-labs/cloudmapper#installation): analyze AWS environments auditing for security issues
 * [Dagda](https://github.com/eliasgranderubio/dagda): static analysis of known vulnerabilities, trojans, viruses, malware in container images and running containers on Docker.
@@ -240,8 +249,12 @@ The following tools have big requirements that would make the container image ev
 * [SCAP Workbench](https://www.open-scap.org/tools/scap-workbench/#download): graphical utility to perform oscap tasks
 * [iamspy](https://github.com/WithSecureLabs/iamspy): load IAM policies and convert them to Z3 prover constraints and a model for querings if actions are allowed
 
+</details>
+
 ## Other miscellaneous links:
 
+<details>
+  <summary>Click to expand!</summary>
 * Security Tools
   * [Yaradare](https://github.com/deepfence/YaRadare): YAR malware container image scanner
   * [SecretScanner](https://github.com/deepfence/SecretScanner): find unprotected secrets in container images or file systems
@@ -260,6 +273,7 @@ The following tools have big requirements that would make the container image ev
     * [secwiki.cloud](https://www.secwiki.cloud/): cloud vulnerability wiki
     * [cloudvulndb.org](https://www.cloudvulndb.org/): open cloud vulnerability & security issue database
     * [CIRCL hashlookup](https://www.circl.lu/services/hashlookup/): free lookup hash values against known database of files (malicious/non malicious)
+    * [Virustotal API](https://developers.virustotal.com/reference/overview)
   * Malicious binaries and activity samples
     * [The Zoo](https://github.com/ytisf/theZoo): a live malware repository
     * [Adversary Emulation Library](https://github.com/center-for-threat-informed-defense/adversary_emulation_library): a library of adversary emulation plans to allow organizations to evaluate their defensive capabilities against the real-world threats    
@@ -274,3 +288,4 @@ The following tools have big requirements that would make the container image ev
 * Other tools
   * [markmap](https://markmap.js.org/docs#markmap-cli): markdown mindmap generation
   * [plantuml](https://plantuml.com/starting): markdown UML diagram generation
+</details>
