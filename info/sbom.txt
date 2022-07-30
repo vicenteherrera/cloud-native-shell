@@ -8,6 +8,7 @@ skopeo version 1.2.2
 yamllint 1.26.0
 shellcheck ShellCheck - shell script analysis tool version: 0.7.1 license: GNU General Public License, version 3 website: https://www.shellcheck.net
 tor Tor version 0.4.5.10.
+**Error: don't know how to get version information from ab
 ruby 2.7.4p191 (2021-07-07 revision a21a3b7d23) [x86_64-linux-gnu]
 jekyll 4.2.2
 bundler Bundler version 2.3.19
@@ -29,7 +30,7 @@ yq 4.26.1 (https://github.com/mikefarah/yq)
 skaffold 1.39.1 (https://github.com/GoogleContainerTools/skaffold)
 stern 1.11.0 (https://github.com/wercker/stern)
 helmfile 0.144.0 (https://github.com/roboll/helmfile)
-kops 1.24.0 (https://github.com/kubernetes/kops)
+kops 1.24.1 (https://github.com/kubernetes/kops)
 cosign 1.10.0 (https://github.com/sigstore/cosign)
 hadolint 2.10.0 (https://github.com/hadolint/hadolint)
 kubeaudit 0.19.0 (https://github.com/Shopify/kubeaudit)
@@ -50,13 +51,14 @@ steampipe 0.15.4 (https://github.com/turbot/steampipe)
 kubeval 0.16.1 (https://github.com/instrumenta/kubeval)
 promtool 2.37.0 (https://github.com/prometheus/prometheus)
 amtool 0.24.0 (https://github.com/prometheus/alertmanager)
-pint 0.27.0 (https://github.com/cloudflare/pint)
+pint 0.28.3 (https://github.com/cloudflare/pint)
 kube-linter 0.4.0 (https://github.com/stackrox/kube-linter)
 mmake 1.4.0 (https://github.com/tj/mmake)
 badrobot 0.1.2 (https://github.com/controlplaneio/badrobot)
 config-lint 1.6.0 (https://github.com/stelligent/config-lint)
 conftest 0.33.2 (https://github.com/open-policy-agent/conftest)
 polaris 7.0.1 (https://github.com/fairwindsops/polaris)
+karmor 0.7.12 (https://github.com/kubearmor/kubearmor-client)
 tetragon (initial release)
 fish, version 3.5.1
 kubectl Client Version: v1.24.3 Kustomize Version: v4.5.4
@@ -68,16 +70,16 @@ gh version 2.14.3 (2022-07-26) https://github.com/cli/cli/releases/tag/v2.14.3
 gcloud Google Cloud SDK 395.0.0 alpha 2022.07.22 beta 2022.07.22 bq 2.0.75 bundled-python3-unix 3.9.12 core 2022.07.22 gsutil 5.11
 tkn Client version: 2020-04-01T10:57:38Z
 minikube version: v1.26.0 commit: f4b412861bb746be73053c9f6d2895f12cf78565
-kind version 0.15.0-alpha+9f5ab32250dfa1
+kind version 0.15.0-alpha+db427511586b56
 oc Client Version: 4.8.11
 **Error: don't know how to get version information from kubectl-convert
 roxctl 3.71.0
-aws-cli/2.7.19 Python/3.9.11 Linux/5.10.102.1-microsoft-standard-WSL2 exe/x86_64.debian.11 prompt/off
+aws-cli/2.7.20 Python/3.9.11 Linux/5.10.102.1-microsoft-standard-WSL2 exe/x86_64.debian.11 prompt/off
 grype Application: grype Version: 0.44.0 Syft Version: v0.52.0 BuildDate: 2022-07-25T16:28:13Z GitCommit: a6ec8f11be5fdc116dc7bbfebdc03bfc13cd2005 GitDescription: v0.44.0 Platform: linux/amd64 GoVersion: go1.18.4 Compiler: gc Supported DB Schema: 4
 syft 0.52.0
 helm version.BuildInfo{Version:"v3.9.2", GitCommit:"1addefbfe665c350f4daf868a9adc5600cc064fd", GitTreeState:"clean", GoVersion:"go1.17.12"}
 docker-slim version linux|Transformer|1.37.5|86fbd29ab3549fa564e87e4770178480cb0542d3|2022-03-21_06:10:20AM
-okteto version 2.5.1 
+okteto version 2.5.2 
 /root/lib/oracle-cli/bin/oci 3.12.0
 kapp version 0.50.0 Succeeded
 ytt version 0.42.0

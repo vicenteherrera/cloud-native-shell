@@ -245,6 +245,9 @@ RUN REPO="open-policy-agent/conftest" ZFILE="conftest_VERSION_Linux_x86_64.tar.g
 # polaris
 RUN REPO="fairwindsops/polaris" ZFILE="polaris_linux_amd64.tar.gz" FILE="polaris" gh_install
 
+# karmor (KubeArmor CLI)
+RUN REPO="kubearmor/kubearmor-client" ZFILE="karmor_0.7.12_linux_amd64.tar.gz" FILE="karmor" gh_install
+
 # Custom installation from GitHub
 
 # Tetragon
@@ -443,6 +446,9 @@ RUN curl -fsSL https://raw.githubusercontent.com/nektos/act/master/install.sh \
 RUN curl -fsSL https://raw.githubusercontent.com/crossplane/crossplane/master/install.sh | sh && \
     sudo mv kubectl-crossplane /usr/local/bin/ && \
     version kubectl-crossplane | tee -a sbom.txt
+
+# Gitlab CLI
+RUN curl -fsSL https://gitlab.com/gitlab-org/cli/-/raw/main/scripts/install.sh | sudo sh
 
 # ------------------------------------------------------------------------------------
 

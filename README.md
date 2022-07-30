@@ -110,7 +110,8 @@ docker run --rm -it --hostname tardis --name cli-dev-shell \
     * [Kube-hunter](https://github.com/aquasecurity/kube-hunter): hunt for security weaknesses in Kubernetes clusters
     * [Kube-score](https://github.com/zegl/kube-score): static code analysis of your Kubernetes object definitions
     * [KubeScape](https://github.com/armosec/kubescape): multi-cloud K8s risk analysis, security compliance, RBAC visualizer and image vulnerabilities scanning
-    * [polaris](https://github.com/fairwindsops/polaris/): CLI to check Kubernetes pods and controllers using best practices    
+    * [polaris](https://github.com/fairwindsops/polaris/): CLI to check Kubernetes pods and controllers using best practices
+    * [KubeArmor](https://github.com/kubearmor/KubeArmor): runtime security enforcement (process execution, file access, networking) containers and node using AppArmor, SELinux or BPF-LSM 
     * [kubectl kubesec-scan](https://github.com/controlplaneio/kubectl-kubesec): security risk analysis
     * [kubectl score](https://github.com/zegl/kube-score): static code analysis for Kubernetes object definitions
     * [kubectl popeye](https://popeyecli.io/): scan cluster for issues
@@ -173,6 +174,7 @@ docker run --rm -it --hostname tardis --name cli-dev-shell \
   * [jq](https://stedolan.github.io/jq/), [yq](https://github.com/mikefarah/yq)
   * [JLess](https://github.com/PaulJuliusMartinez/jless)  
   * [GitHub cli](https://cli.github.com/)
+  * [GitLab cli](https://gitlab.com/gitlab-org/cli#installation)
   * [Starship prompt](https://starship.rs/): powerful shell prompt
   * [Thef*ck](https://github.com/nvbn/thefuck): correct errors in the previous console command
   * [Batcat](https://github.com/sharkdp/bat): prettier cat replacement
@@ -197,6 +199,8 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
     * [ThreatMapper](https://github.com/deepfence/ThreatMapper): open source Kubernetes security platform
     * [Wazuh](https://github.com/wazuh/wazuh-kubernetes/blob/master/instructions.md): open source Kubernetes security platform
     * [SUSE Open Security Platform](https://github.com/neuvector/neuvector): formerly known as NeuVector when it wasn't open source
+    * [KubeArmor CLI (karmor)](https://github.com/kubearmor/KubeArmor): runtime security enforcement (process execution, file access, networking) containers and node using AppArmor, SELinux or BPF-LSM
+    * [Security Profiles Operator](https://github.com/kubernetes-sigs/security-profiles-operator): make it easier for users to use SELinux, seccomp and AppArmor in Kubernetes clusters
 * Networking
   * [Calico](https://projectcalico.docs.tigera.io/about/about-calico): network security solution dataplane
   * [Istio](https://github.com/istio/istio): service mesh to integrate microservices and manage traffic flow
