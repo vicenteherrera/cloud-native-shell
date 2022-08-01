@@ -123,8 +123,8 @@ docker run --rm -it --hostname tardis --name cli-dev-shell \
      * [cosign](https://github.com/sigstore/cosign): container signing, verification andstorage in an OCI registry
      * [in-toto](https://github.com/in-toto/in-toto): verify signed tasks in a pipeline
      * [chain-bench](https://github.com/aquasecurity/chain-bench): CIS Software Supply Chain benchmark
-     * [Syft](https://github.com/anchore/syft): generate SBOM from container
-     * [Vexy](https://github.com/madpah/vexy): generate VEX (Vulnerability Exploitability Exchange) in CycloneDX format
+     * [Syft](https://github.com/anchore/syft): generate SBOM from container in different formats
+     * [Vexy](https://github.com/madpah/vexy): generate VEX (Vulnerability Exploitability Exchange) in [CycloneDX](https://cyclonedx.org/) format
   * Container vulnerability scanners
     * [Trivy](https://github.com/aquasecurity/trivy)
     * [Grype](https://github.com/anchore/grype)
@@ -204,10 +204,12 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
     * [SUSE Open Security Platform](https://github.com/neuvector/neuvector): formerly known as NeuVector when it wasn't open source
     * [KubeArmor CLI (karmor)](https://github.com/kubearmor/KubeArmor): runtime security enforcement (process execution, file access, networking) containers and node using AppArmor, SELinux or BPF-LSM
     * [Security Profiles Operator](https://github.com/kubernetes-sigs/security-profiles-operator): make it easier for users to use SELinux, seccomp and AppArmor in Kubernetes clusters
-* Networking
-  * [Calico](https://projectcalico.docs.tigera.io/about/about-calico): network security solution dataplane
-  * [Istio](https://github.com/istio/istio): service mesh to integrate microservices and manage traffic flow
-  * [Hubble](https://github.com/cilium/hubble): networking and security observability platform built on top of Cilium and eBPF    
+    * [StackRox](https://www.redhat.com/en/technologies/cloud-computing/openshift/advanced-cluster-security-kubernetes): formerly an independent product, now open source and part of OpenShift, but you can also install it on Kubernetes
+    * Privative products
+      * [Sysdig](https://sysdig.com/products/secure/)
+      * [Aqua](https://www.aquasec.com/)
+      * [Prisma Cloud](https://www.paloaltonetworks.com/prisma/environments/kubernetes): formerly known as Twistlock
+      * [Lacework](https://www.lacework.com/)
 * Policy / Admission Controller
   * [Gatekeeper](https://github.com/open-policy-agent/gatekeeper): admission controller OPA based
   * [Kyverno](https://github.com/kyverno/kyverno): policy engine and admission controller
@@ -227,6 +229,10 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
 * Observability
   * [Prometheus, Grafana, Alertmanager](https://github.com/prometheus-community/helm-charts): observability platform
   * [Robusta](https://github.com/robusta-dev/robusta): observability reporting
+* Networking
+  * [Calico](https://projectcalico.docs.tigera.io/about/about-calico): network security solution dataplane
+  * [Istio](https://github.com/istio/istio): service mesh to integrate microservices and manage traffic flow
+  * [Hubble](https://github.com/cilium/hubble): networking and security observability platform built on top of Cilium and eBPF
 * Other
   * [JFrog Artifactory CE](https://jfrog.com/community/download-artifactory-oss/): binary artifact repositories
   * [GitLab CE](https://gitlab.com/gitlab-org/gitlab): software development platform with version control, issue tracking, code review, CI/CD, and more
@@ -300,7 +306,9 @@ Links and information
   * [Open Security Controls Assessment Language (OSCAL)](https://csrc.nist.gov/Projects/open-security-controls-assessment-language): standarized formats for the publication, implementation, and assessment of security controls
   * [Security Content Automation Protocol (SCAP)](https://csrc.nist.gov/projects/security-content-automation-protocol): interoperable specifications for security
   * [Structured Threat Information Expression (STIX)](https://stixproject.github.io/about/): language to exchange cyber threat intelligent
-  * [Vulnerability Exploitability Exchange (VEX)](https://cyclonedx.org/capabilities/vex/): assess the exploitability of vulnerabilities in products
+  * Vulnerability related
+    * [Vulnerability Exploitability Exchange (VEX)](https://cyclonedx.org/capabilities/vex/): assess the exploitability of vulnerabilities in products
+    * [Exploit Prediction Scoring System (EPSS)](https://www.first.org/epss/): open, data-driven effort for estimating the likelihood that a software vulnerability will be exploited in the wild
   * Software Bill of Materials (SBOM)
     * [CycloneDX](https://cyclonedx.org/): lightweight SBOM standard useful for application security contexts and supply chain component analysis
     * [Software Product Data Exchange (SPDX)](https://spdx.dev/specifications/): international open standard (ISO/IEC 5962:2021) format for communicating the components, licenses, and copyrights associated with a software package
