@@ -246,7 +246,14 @@ RUN REPO="open-policy-agent/conftest" ZFILE="conftest_VERSION_Linux_x86_64.tar.g
 RUN REPO="fairwindsops/polaris" ZFILE="polaris_linux_amd64.tar.gz" FILE="polaris" gh_install
 
 # karmor (KubeArmor CLI)
-RUN REPO="kubearmor/kubearmor-client" ZFILE="karmor_0.7.12_linux_amd64.tar.gz" FILE="karmor" gh_install
+RUN REPO="kubearmor/kubearmor-client" ZFILE="karmor_VERSION_linux_amd64.tar.gz" FILE="karmor" gh_install
+
+# gator (GateKeeper CLI)
+RUN REPO="open-policy-agent/gatekeeper" ZFILE="gator-vVERSION-linux-amd64.tar.gz" FILE="gator" gh_install
+
+# doppler
+RUN REPO="DopplerHQ/cli" ZFILE="doppler_VERSION_linux_amd64.tar.gz" FILE="doppler" gh_install
+
 
 # Custom installation from GitHub
 
@@ -369,7 +376,8 @@ RUN curl -fsSLO https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/
     version oc | tee -a sbom.txt
 
 # Kubectl-convert
-RUN curl -fsSLO "https://dl.k8s.io/release/$(curl -fsSL https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl-convert" && \
+RUN VERSION=$(curl -fsSL https://dl.k8s.io/release/stable.txt) && \
+    curl -fsSLO "https://dl.k8s.io/release/$VERSION/bin/linux/amd64/kubectl-convert" && \
     sudo install -o root -g root -m 0755 kubectl-convert /usr/local/bin/kubectl-convert && \
     rm kubectl-convert && \
     version kubectl-convert | tee -a sbom.txt
@@ -546,8 +554,8 @@ RUN echo '# Created in Dockerfile' >>/home/${user}/.bashrc && \
 # Programs that install on user profile
 
 # Miniconda
-RUN curl -sSfLo install.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
-    chmod +x install.sh && ./install.sh -b -p $HOME/miniconda && rm ./install.sh \
+RUN curl -sSfLo install.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+        | sh -s -- -b -p $HOME/miniconda && \
     version conda | tee -a sbom.txt 
 
 # Krew
@@ -587,25 +595,25 @@ RUN go install github.com/jrhouston/tfk8s@latest  && \
     version tfk8s | tee -a sbom.txt
 
 # nvm
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash && \
+RUN curl -fsSLo- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash && \
     version nvm | tee -a sbom.txt
 
+# Snyk, npx, yarn, bitwarden cli
+RUN npm install snyk npx yarn @bitwarden/cli && \
+    version snyk npx yarn bw | tee -a sbom.txt && \
+    npm cache clean -force
+
 # Pyenv
-RUN curl https://pyenv.run | bash && \
+RUN curl -fsSL https://pyenv.run | bash && \
     version pyenv | tee -a sbom.txt
 
 # Poetry
-RUN curl -sSL https://install.python-poetry.org | python3 - && \
+RUN curl -fsSL https://install.python-poetry.org | python3 - && \
     version poetry | tee -a sbom.txt
 
 # Pipx
-RUN python3 -m pip install --user pipx && \
+RUN python3 -m pip install --user --no-cache pipx && \
     echo "pipx" $(pipx --version) | tee -a sbom.txt
-
-# Snyk, npx, yarn
-RUN SOFTWARE="snyk npx yarn" && \ 
-    npm install $SOFTWARE && \
-    version $SOFTWARE | tee -a sbom.txt
 
 # Pip: Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), 
 # docker-squash, checkov, illuminatio, vault-cli, cve-bin-tool, Cloud Custodian

@@ -2,17 +2,17 @@ SIZE      CREATED BY
 0B        CMD ["$DEFAULT_SHELL"]
 0B        ENV DEFAULT_SHELL=/usr/bin/fish
 0B        SHELL [/bin/bash -c]
-6.53kB    RUN |11 /bin/bash -c pipx list --short | tee -a sbom.txt # buildkit
+6.71kB    RUN |11 /bin/bash -c pipx list --short | tee -a sbom.txt # buildkit
 16.1MB    RUN |11 /bin/bash -c pipx install vexy # buildkit
 193MB     RUN |11 /bin/bash -c pipx install checkov # buildkit
 129MB     RUN |11 /bin/bash -c pipx install sdccli # buildkit
-6.08kB    RUN |11 /bin/bash -c pip install --user --no-cache kubernetes PrettyTable urllib3 &&     python3 /usr/local/bin/kubiscan/KubiScan.py --version | tee -a sbom.txt # buildkit
+6.27kB    RUN |11 /bin/bash -c pip install --user --no-cache kubernetes PrettyTable urllib3 &&     python3 /usr/local/bin/kubiscan/KubiScan.py --version | tee -a sbom.txt # buildkit
 569MB     RUN |11 /bin/bash -c SOFTWARE="kube-hunter detect-secrets yubikey-manager thefuck docker-squash         ansible paramiko illuminatio vault-cli cve-bin-tool c7n         robusta in-toto" &&     pip install --user --no-cache $SOFTWARE &&     pip list | grep -F "$(echo "$SOFTWARE" | tr -s ' ' | tr " " '\n')" - | tr -s ' '         | tee -a sbom.txt # buildkit
-94.1MB    RUN |11 /bin/bash -c SOFTWARE="snyk npx yarn" &&     npm install $SOFTWARE &&     version $SOFTWARE | tee -a sbom.txt # buildkit
-2.36MB    RUN |11 /bin/bash -c python3 -m pip install --user pipx &&     echo "pipx" $(pipx --version) | tee -a sbom.txt # buildkit
-89.7MB    RUN |11 /bin/bash -c curl -sSL https://install.python-poetry.org | python3 - &&     version poetry | tee -a sbom.txt # buildkit
-4.29MB    RUN |11 /bin/bash -c curl https://pyenv.run | bash &&     version pyenv | tee -a sbom.txt # buildkit
-1.83MB    RUN |11 /bin/bash -c curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash &&     version nvm | tee -a sbom.txt # buildkit
+2.05MB    RUN |11 /bin/bash -c python3 -m pip install --user --no-cache pipx &&     echo "pipx" $(pipx --version) | tee -a sbom.txt # buildkit
+89.7MB    RUN |11 /bin/bash -c curl -fsSL https://install.python-poetry.org | python3 - &&     version poetry | tee -a sbom.txt # buildkit
+4.29MB    RUN |11 /bin/bash -c curl -fsSL https://pyenv.run | bash &&     version pyenv | tee -a sbom.txt # buildkit
+101MB     RUN |11 /bin/bash -c npm install snyk npx yarn @bitwarden/cli &&     version snyk npx yarn bw | tee -a sbom.txt &&     npm cache clean -force # buildkit
+1.84MB    RUN |11 /bin/bash -c curl -fsSLo- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash &&     version nvm | tee -a sbom.txt # buildkit
 61.6MB    RUN |11 /bin/bash -c go install github.com/jrhouston/tfk8s@latest  &&     version tfk8s | tee -a sbom.txt # buildkit
 44.4MB    RUN |11 /bin/bash -c go install -mod=mod github.com/onsi/ginkgo/v2/ginkgo &&     version ginkgo | tee -a sbom.txt # buildkit
 62.9MB    RUN |11 /bin/bash -c helm plugin install https://github.com/databus23/helm-diff &&     echo "helm plugins:" | tee -a sbom.txt &&     helm plugin list | tee -a sbom.txt # buildkit
@@ -20,7 +20,7 @@ SIZE      CREATED BY
 121kB     RUN |11 /bin/bash -c kubectl krew index add kvaps https://github.com/kvaps/krew-index &&     kubectl krew install kvaps/node-shell # buildkit
 0B        ENV PATH=/home/vicen/.krew/bin:/home/vicen/node_modules/.bin:/home/vicen/.pyenv/bin:/home/vicen/.go/bin:/home/vicen/.gem/bin:/home/vicen/.local/bin:/usr/local/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 30.7MB    RUN |11 /bin/bash -c (     set -x; cd "$(mktemp -d)" &&     OS="$(uname | tr '[:upper:]' '[:lower:]')" &&     ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&     KREW="krew-${OS}_${ARCH}" &&     curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" &&     tar zxvf "${KREW}.tar.gz" &&     ./"${KREW}" install krew     ) # buildkit
-390MB     RUN |11 /bin/bash -c curl -sSfLo install.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh &&     chmod +x install.sh && ./install.sh -b -p $HOME/miniconda && rm ./install.sh     version conda | tee -a sbom.txt # buildkit
+76.6MB    RUN |11 /bin/bash -c curl -sSfLo install.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh         | sh -s -- -b -p $HOME/miniconda &&     version conda | tee -a sbom.txt # buildkit
 3.63kB    RUN |11 /bin/bash -c echo '# Created in Dockerfile' >>/home/${user}/.bashrc &&     echo 'source <(kubectl completion bash)' >>/home/${user}/.bashrc &&     echo 'alias k=kubectl' >>/home/${user}/.bashrc &&     echo 'complete -F __start_kubectl k' >>/home/${user}/.bashrc # buildkit
 9.59kB    RUN |11 /bin/bash -c git clone https://github.com/jethrokuan/z.git &&     mv ./z/conf.d/z.fish ./.config/fish/conf.d/z.fish &&     mv ./z/functions/* ./.config/fish/functions &&     rm -rf ./z # buildkit
 2.46kB    COPY .vimrc ./.vimrc # buildkit
@@ -43,7 +43,7 @@ SIZE      CREATED BY
 4.6kB     RUN |11 /bin/sh -c sudo usermod -aG docker ${user} && sudo -H -u ${user} newgrp docker # buildkit
 4.58kB    RUN |11 /bin/sh -c sudo usermod -aG rvm ${user} # buildkit
 809B      RUN |11 /bin/sh -c echo "${user}:${pass}" | chpasswd # buildkit
-5.25kB    RUN |11 /bin/sh -c mv /install/sbom.txt /home/${user}/sbom.txt &&     chown ${user}:${group} /home/${user}/sbom.txt # buildkit
+5.37kB    RUN |11 /bin/sh -c mv /install/sbom.txt /home/${user}/sbom.txt &&     chown ${user}:${group} /home/${user}/sbom.txt # buildkit
 4.55kB    RUN |11 /bin/sh -c mkdir -p         /home/${user}/.config/fish/completions         /home/${user}/.config/fish/conf.d         /home/${user}/.config/fish/functions         /home/${user}/.gem/bin         /home/${user}/.local/bin         /home/${user}/.go/bin         /home/${user}/.keys &&     chown -R ${user}:${group} /home/${user} # buildkit
 335kB     RUN |11 /bin/sh -c useradd -u ${uid} -g ${group} -s ${shell} -m ${user} &&     usermod -aG sudo ${user} # buildkit
 0B        ARG shell=/usr/bin/fish
@@ -52,7 +52,7 @@ SIZE      CREATED BY
 0B        ARG user=vicente
 17.5MB    RUN |7 /bin/sh -c curl -fsSL https://gitlab.com/gitlab-org/cli/-/raw/main/scripts/install.sh | sudo sh # buildkit
 38.5MB    RUN |7 /bin/sh -c curl -fsSL https://raw.githubusercontent.com/crossplane/crossplane/master/install.sh | sh &&     sudo mv kubectl-crossplane /usr/local/bin/ &&     version kubectl-crossplane | tee -a sbom.txt # buildkit
-13.3MB    RUN |7 /bin/sh -c curl -fsSL https://raw.githubusercontent.com/nektos/act/master/install.sh         | sudo sh -s -- -b /usr/local/bin &&     version act | tee -a sbom.txt # buildkit
+13.4MB    RUN |7 /bin/sh -c curl -fsSL https://raw.githubusercontent.com/nektos/act/master/install.sh         | sudo sh -s -- -b /usr/local/bin &&     version act | tee -a sbom.txt # buildkit
 59.9MB    RUN |7 /bin/sh -c curl -fsSL https://raw.githubusercontent.com/armosec/kubescape/master/install.sh         | sudo /bin/bash &&     version kubescape | tee -a sbom.txt # buildkit
 11.1MB    RUN |7 /bin/sh -c curl -fsSL https://starship.rs/install.sh         | sudo sh -s -- --yes &&     version starship | tee -a sbom.txt # buildkit
 204MB     RUN |7 /bin/sh -c curl -fsSL https://carvel.dev/install.sh | sudo bash - &&     version kapp ytt kapp kbld imgpkg vendir | tee -a sbom.txt # buildkit
@@ -64,7 +64,7 @@ SIZE      CREATED BY
 63.4MB    RUN |7 /bin/sh -c curl -fsSL https://raw.githubusercontent.com/anchore/grype/main/install.sh         | sudo sh -s -- -b /usr/local/bin &&     version grype | tee -a sbom.txt # buildkit
 158MB     RUN |7 /bin/sh -c curl -fsSL -o aws.zip "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" &&     unzip ./aws.zip && ./aws/install &&     rm -r ./aws aws.zip &&     version aws | tee -a sbom.txt # buildkit
 68.2MB    RUN |7 /bin/sh -c curl -fsSLO https://mirror.openshift.com/pub/rhacs/assets/latest/bin/Linux/roxctl &&     chmod +x roxctl &&     sudo mv roxctl /usr/local/bin/ &&     version roxctl | tee -a sbom.txt # buildkit
-55MB      RUN |7 /bin/sh -c curl -fsSLO "https://dl.k8s.io/release/$(curl -fsSL https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl-convert" &&     sudo install -o root -g root -m 0755 kubectl-convert /usr/local/bin/kubectl-convert &&     rm kubectl-convert &&     version kubectl-convert | tee -a sbom.txt # buildkit
+55MB      RUN |7 /bin/sh -c VERSION=$(curl -fsSL https://dl.k8s.io/release/stable.txt) &&     curl -fsSLO "https://dl.k8s.io/release/$VERSION/bin/linux/amd64/kubectl-convert" &&     sudo install -o root -g root -m 0755 kubectl-convert /usr/local/bin/kubectl-convert &&     rm kubectl-convert &&     version kubectl-convert | tee -a sbom.txt # buildkit
 123MB     RUN |7 /bin/sh -c curl -fsSLO https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/oc.tar.gz &&     tar -xvf oc.tar.gz &&     chmod +x oc && sudo mv oc /usr/local/bin/ &&     rm README.md kubectl oc.tar.gz &&     version oc | tee -a sbom.txt # buildkit
 6.68MB    RUN |7 /bin/sh -c curl -fsSLo ./kind https://kind.sigs.k8s.io/dl/latest/kind-linux-amd64 &&     chmod +x ./kind && sudo mv ./kind /usr/local/bin/ &&     version kind | tee -a sbom.txt # buildkit
 75MB      RUN |7 /bin/sh -c curl -fsSLo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64   && chmod +x minikube && sudo mv minikube /usr/local/bin/ &&     version minikube | tee -a sbom.txt # buildkit
@@ -76,9 +76,11 @@ SIZE      CREATED BY
 1.07GB    RUN |7 /bin/sh -c curl -fsSL https://packages.microsoft.com/keys/microsoft.asc         | gpg --dearmor | sudo tee /usr/share/keyrings/microsoft-archive-keyring.gpg > /dev/null &&     sudo chmod a+r /usr/share/keyrings/microsoft-archive-keyring.gpg &&     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main"         | sudo tee /etc/apt/sources.list.d/azure-cli.list > /dev/null &&     sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/azure-cli.list &&     sudo apt-get install -y azure-cli &&     version az | tee -a sbom.txt # buildkit
 426MB     RUN |7 /bin/sh -c curl -fsSL https://download.docker.com/linux/debian/gpg         | gpg --dearmor | sudo tee /usr/share/keyrings/docker-archive-keyring.gpg > /dev/null &&     sudo chmod a+r /usr/share/keyrings/docker-archive-keyring.gpg &&     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable"         | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null &&     sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/docker.list &&     sudo apt-get install -y docker-ce docker-ce-cli containerd.io  &&     version docker | tee -a sbom.txt # buildkit
 49.4MB    RUN |7 /bin/sh -c curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg         | tee /usr/share/keyrings/kubernetes-archive-keyring.gpg > /dev/null &&     sudo chmod a+r /usr/share/keyrings/kubernetes-archive-keyring.gpg &&     echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main"         | sudo tee /etc/apt/sources.list.d/kubernetes.list > /dev/null &&     sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/kubernetes.list &&     sudo apt-get install -y kubectl &&     echo "kubectl" $(kubectl version --short --client 2>/dev/null) | tee -a sbom.txt # buildkit
-32.1MB    RUN |7 /bin/sh -c curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_11/Release.key         | gpg --dearmor | sudo tee /usr/share/keyrings/shells_fish_release_3.gpg > /dev/null &&     sudo chmod a+r /usr/share/keyrings/shells_fish_release_3.gpg &&     echo 'deb [signed-by=/usr/share/keyrings/shells_fish_release_3.gpg] http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /'         | sudo tee /etc/apt/sources.list.d/shells:fish:release:3.list > /dev/null &&     sudo apt-get update &&     sudo apt-get install -y fish &&     version fish | tee -a sbom.txt # buildkit
+32.5MB    RUN |7 /bin/sh -c curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_11/Release.key         | gpg --dearmor | sudo tee /usr/share/keyrings/shells_fish_release_3.gpg > /dev/null &&     sudo chmod a+r /usr/share/keyrings/shells_fish_release_3.gpg &&     echo 'deb [signed-by=/usr/share/keyrings/shells_fish_release_3.gpg] http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /'         | sudo tee /etc/apt/sources.list.d/shells:fish:release:3.list > /dev/null &&     sudo apt-get update &&     sudo apt-get install -y fish &&     version fish | tee -a sbom.txt # buildkit
 10.8MB    RUN |7 /bin/sh -c curl -fsSL https://github.com/cilium/tetragon/releases/download/tetragon-cli/tetragon-linux-amd64.tar.gz         | tar xz && sudo mv tetragon /usr/bin/tetragon &&    echo "tetragon (initial release)" | tee -a sbom.txt # buildkit
-46MB      RUN |7 /bin/sh -c REPO="kubearmor/kubearmor-client" ZFILE="karmor_0.7.12_linux_amd64.tar.gz" FILE="karmor" gh_install # buildkit
+9.34MB    RUN |7 /bin/sh -c REPO="DopplerHQ/cli" ZFILE="doppler_VERSION_linux_amd64.tar.gz" FILE="doppler" gh_install # buildkit
+61.8MB    RUN |7 /bin/sh -c REPO="open-policy-agent/gatekeeper" ZFILE="gator-vVERSION-linux-amd64.tar.gz" FILE="gator" gh_install # buildkit
+46MB      RUN |7 /bin/sh -c REPO="kubearmor/kubearmor-client" ZFILE="karmor_VERSION_linux_amd64.tar.gz" FILE="karmor" gh_install # buildkit
 39.7MB    RUN |7 /bin/sh -c REPO="fairwindsops/polaris" ZFILE="polaris_linux_amd64.tar.gz" FILE="polaris" gh_install # buildkit
 36.6MB    RUN |7 /bin/sh -c REPO="open-policy-agent/conftest" ZFILE="conftest_VERSION_Linux_x86_64.tar.gz" FILE="conftest" gh_install # buildkit
 13.5MB    RUN |7 /bin/sh -c REPO="stelligent/config-lint" ZFILE="config-lint_Linux_x86_64.tar.gz" FILE="config-lint" gh_install # buildkit

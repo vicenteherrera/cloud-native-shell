@@ -138,6 +138,7 @@ docker run --rm -it --hostname tardis --name cli-dev-shell \
     * [sdc-cli](https://sysdiglabs.github.io/sysdig-platform-cli/): Sysdig CLI
     * [roxctl](https://docs.openshift.com/acs/3.66/cli/getting-started-cli.html): StackRox CLI
   * Misc
+    * [gator](https://open-policy-agent.github.io/gatekeeper/website/docs/gator/): Gatekeeper CLI for evaluating ConstraintTemplates and Constraints
     * [detect-secrets](https://github.com/Yelp/detect-secrets): detecting secrets within a code base
     * [Illuminatio](https://github.com/inovex/illuminatio): automatically testing kubernetes network policies
     * [cmctl](https://cert-manager.io/docs/usage/cmctl/#installation): cert-manager cli
@@ -148,6 +149,8 @@ docker run --rm -it --hostname tardis --name cli-dev-shell \
   * [ClamAV](http://www.clamav.net/downloads): Detect malware and virus on Windows or Linux hosts
   * [testssl.sh](https://testssl.sh): checks a server ports for TLS/SSL ciphers, protocols, recent cryptographic flaws, etc
   * [tor, torify](https://gitlab.torproject.org/tpo/team): use a different IP for requests via a p2p connection sharing network 
+  * [Bitwarden cli (bw)](https://github.com/bitwarden/cli): cli to open source Bitwarden secret manager
+  * [Doppler cli](https://github.com/DopplerHQ/cli): multi-cloud SecretOps platform
   * [1Password cli](https://1password.com/downloads/command-line/): cli to 1Password secret manager
   * [Yubikey manager](https://github.com/Yubico/yubikey-manager): configure Yubikey
   * [k6](https://github.com/grafana/k6): load testing tool with javascript plans

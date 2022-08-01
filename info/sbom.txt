@@ -59,6 +59,8 @@ config-lint 1.6.0 (https://github.com/stelligent/config-lint)
 conftest 0.33.2 (https://github.com/open-policy-agent/conftest)
 polaris 7.0.1 (https://github.com/fairwindsops/polaris)
 karmor 0.7.12 (https://github.com/kubearmor/kubearmor-client)
+gator 3.9.0 (https://github.com/open-policy-agent/gatekeeper)
+doppler 3.40.1 (https://github.com/DopplerHQ/cli)
 tetragon (initial release)
 fish, version 3.5.1
 kubectl Client Version: v1.24.3 Kustomize Version: v4.5.4
@@ -70,7 +72,7 @@ gh version 2.14.3 (2022-07-26) https://github.com/cli/cli/releases/tag/v2.14.3
 gcloud Google Cloud SDK 395.0.0 alpha 2022.07.22 beta 2022.07.22 bq 2.0.75 bundled-python3-unix 3.9.12 core 2022.07.22 gsutil 5.11
 tkn Client version: 2020-04-01T10:57:38Z
 minikube version: v1.26.0 commit: f4b412861bb746be73053c9f6d2895f12cf78565
-kind version 0.15.0-alpha+db427511586b56
+kind version 0.15.0-alpha+8e062b766ea622
 oc Client Version: 4.8.11
 **Error: don't know how to get version information from kubectl-convert
 roxctl 3.71.0
@@ -89,8 +91,9 @@ imgpkg version 0.30.0 Succeeded
 vendir version 0.29.0 Succeeded
 starship 1.9.1 branch:master commit_hash:4e9b8409 build_time:2022-06-27 19:07:32 +00:00 build_env:rustc 1.61.0 (fe5b13d68 2022-05-18),
 kubescape Your current version is: v2.0.164
-act version 0.2.29
+act version 0.2.30
 kubectl-crossplane v1.9.0
+**Error: don't know how to get version information from conda
 kubectl krew plugins:
 PLUGIN VERSION
 doctor v0.3.0
@@ -111,12 +114,13 @@ diff	3.5.0  	Preview helm upgrade changes as a diff
 ginkgo Ginkgo Version 2.1.4
 **Error: don't know how to get version information from tfk8s
 **Error: don't know how to get version information from nvm
-pyenv 2.3.2
-poetry Poetry version 1.1.14
-pipx 1.1.0
 snyk 1.981.0
 npx 10.2.2
 yarn 1.22.19
+bw 2022.6.2
+pyenv 2.3.2
+poetry Poetry version 1.1.14
+pipx 1.1.0
 ansible 6.1.0
 ansible-core 2.13.2
 c7n 0.9.17
@@ -131,6 +135,6 @@ robusta 0.0.1
 thefuck 3.32
 vault-cli 3.1.0
 yubikey-manager 4.0.9
-checkov 2.1.82
+checkov 2.1.85
 sdccli 0.7.14
 vexy 0.2.0

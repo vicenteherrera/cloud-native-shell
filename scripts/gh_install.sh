@@ -40,7 +40,13 @@ if [ "${version:0:1}" == "v" ]; then
   usev="v"
 fi
 
-
+# Guess all filenames to use
+if [ "$ZFILE" == 'vVERSION.tar.gz' && "$FILE" == "$ZFILE" && "$XFILE" == "$ZFILE" ]; then
+  FILE=$(echo "$REPO" | sed 's|[a-zA-Z0-9_-]*/||')
+  SO='linux'
+  ARQ='amd64'
+  ZFILE="$FILE-$SO-$ARG"
+fi
 
 # Download from automatic source code attached to tag
 url=""
@@ -52,7 +58,6 @@ fi
 ZFILE=$(echo ${ZFILE/VERSION/$version})
 FILE=$(echo ${FILE/VERSION/$version})
 XFILE=$(echo ${XFILE/VERSION/$version})
-
 
 # Download from specific file attached to tag
 if [ "$url" == "" ]; then
