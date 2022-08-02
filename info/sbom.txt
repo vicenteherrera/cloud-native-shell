@@ -56,7 +56,7 @@ kube-linter 0.4.0 (https://github.com/stackrox/kube-linter)
 mmake 1.4.0 (https://github.com/tj/mmake)
 badrobot 0.1.2 (https://github.com/controlplaneio/badrobot)
 config-lint 1.6.0 (https://github.com/stelligent/config-lint)
-conftest 0.33.2 (https://github.com/open-policy-agent/conftest)
+conftest 0.34.0 (https://github.com/open-policy-agent/conftest)
 polaris 7.0.1 (https://github.com/fairwindsops/polaris)
 karmor 0.7.12 (https://github.com/kubearmor/kubearmor-client)
 gator 3.9.0 (https://github.com/open-policy-agent/gatekeeper)
@@ -65,14 +65,14 @@ tetragon (initial release)
 fish, version 3.5.1
 kubectl Client Version: v1.24.3 Kustomize Version: v4.5.4
 docker Docker version 20.10.17, build 100c701
-azure-cli 2.38.0 core 2.38.0 telemetry 1.0.6 Dependencies: msal 1.18.0b1 azure-mgmt-resource 21.1.0b1 Python location '/opt/az/bin/python3' Extensions directory '/root/.azure/cliextensions' Python (Linux) 3.10.5 (main, Jul 1 2022, 04:14:49) [GCC 10.2.1 20210110] Legal docs and information: aka.ms/AzureCliLegal Your CLI is up-to-date.
+azure-cli 2.39.0 core 2.39.0 telemetry 1.0.6 sbom.txt Dependencies: msal 1.18.0b1 azure-mgmt-resource 21.1.0b1 Python location '/opt/az/bin/python3' Extensions directory '/root/.azure/cliextensions' Python (Linux) 3.10.5 (main, Jul 29 2022, 03:27:39) [GCC 10.2.1 20210110] Legal docs and information: aka.ms/AzureCliLegal
 trivy Version: 0.30.4
 vagrant Vagrant 2.2.19
 gh version 2.14.3 (2022-07-26) https://github.com/cli/cli/releases/tag/v2.14.3
 gcloud Google Cloud SDK 395.0.0 alpha 2022.07.22 beta 2022.07.22 bq 2.0.75 bundled-python3-unix 3.9.12 core 2022.07.22 gsutil 5.11
 tkn Client version: 2020-04-01T10:57:38Z
 minikube version: v1.26.0 commit: f4b412861bb746be73053c9f6d2895f12cf78565
-kind version 0.15.0-alpha+5152e1c4e48d35
+kind version 0.15.0-alpha+5e5f8f71c340b0
 oc Client Version: 4.8.11
 **Error: don't know how to get version information from kubectl-convert
 roxctl 3.71.0
@@ -121,9 +121,10 @@ bw 2022.6.2
 pyenv 2.3.2
 poetry Poetry version 1.1.14
 pipx 1.1.0
+anchorecli 0.9.3
 ansible 6.1.0
 ansible-core 2.13.2
-c7n 0.9.17
+c7n 0.9.15
 cve-bin-tool 3.1.1
 detect-secrets 1.3.0
 docker-squash 1.0.9
@@ -135,6 +136,6 @@ robusta 0.0.1
 thefuck 3.32
 vault-cli 3.1.0
 yubikey-manager 4.0.9
-checkov 2.1.86
+checkov 2.1.87
 sdccli 0.7.14
 vexy 0.2.0

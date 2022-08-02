@@ -128,6 +128,7 @@ make run RUN_SHELL=/bin/bash
   * Container vulnerability scanners
     * [Trivy](https://github.com/aquasecurity/trivy)
     * [Grype](https://github.com/anchore/grype)
+    * [Anchore cli](https://github.com/anchore/anchore-cli)
     * [Snyk](https://docs.snyk.io/snyk-cli/install-the-snyk-cli)
     * [cve-bin-tool](https://github.com/intel/cve-bin-tool)
   * Infrastructure vulnerability scanners
@@ -208,11 +209,12 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
     * [KubeArmor CLI (karmor)](https://github.com/kubearmor/KubeArmor): runtime security enforcement (process execution, file access, networking) containers and node using AppArmor, SELinux or BPF-LSM
     * [Security Profiles Operator](https://github.com/kubernetes-sigs/security-profiles-operator): make it easier for users to use SELinux, seccomp and AppArmor in Kubernetes clusters
     * [StackRox](https://www.redhat.com/en/technologies/cloud-computing/openshift/advanced-cluster-security-kubernetes): formerly an independent product, now open source and part of OpenShift, but you can also install it on Kubernetes
-    * Privative products
+    * Privative platforms
       * [Sysdig](https://sysdig.com/products/secure/)
       * [Aqua](https://www.aquasec.com/)
       * [Prisma Cloud](https://www.paloaltonetworks.com/prisma/environments/kubernetes): formerly known as Twistlock
       * [Lacework](https://www.lacework.com/)
+      * [Anchore](https://anchore.com/): full platform, in addition to its open source tools
 * Policy / Admission Controller
   * [Gatekeeper](https://github.com/open-policy-agent/gatekeeper): admission controller OPA based
   * [Kyverno](https://github.com/kyverno/kyverno): policy engine and admission controller
@@ -229,6 +231,7 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
   * [SPIFFE SPIRE](https://github.com/spiffe/spire): agent and server for establishing trust between software systems
   * [Notary](https://github.com/notaryproject/notary): agent and server to share signed verified content
   * [cert-manager](https://cert-manager.io/docs/usage/cmctl/#installation): certificate manager
+  * [StackHawk](https://www.stackhawk.com/): DAST and API security testing tool that runs in CI/CD
 * Observability
   * [Prometheus, Grafana, Alertmanager](https://github.com/prometheus-community/helm-charts): observability platform
   * [Robusta](https://github.com/robusta-dev/robusta): observability reporting
@@ -275,6 +278,12 @@ Software
   * [OKD](https://www.okd.io/installation/): Kubernetes distribution base for OpenShift
   * [k3s](k3s.io): lightweight Kubernetes installation tool
   * [k0s](https://docs.k0sproject.io/v1.24.2+k0s.0/install/): lightweight Kubernetes installation tool
+* Isolation of nodes
+  * [Kata containers](https://katacontainers.io/)
+  * [Confidential Containers](https://github.com/confidential-containers)
+  * [Confidential GKE Nodes](https://cloud.google.com/kubernetes-engine/docs/how-to/confidential-gke-nodes)
+  * [Firecraker](https://firecracker-microvm.github.io/)
+  * [gVisor](https://gvisor.dev/)
 * Other tools
   * [markmap](https://markmap.js.org/docs#markmap-cli): markdown mindmap generation
   * [plantuml](https://plantuml.com/starting): markdown UML diagram generation

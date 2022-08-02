@@ -615,12 +615,12 @@ RUN curl -fsSL https://install.python-poetry.org | python3 - && \
 RUN python3 -m pip install --user --no-cache pipx && \
     echo "pipx" $(pipx --version) | tee -a sbom.txt
 
-# Pip: Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, sdc-cli (Sysdig), 
-# docker-squash, checkov, illuminatio, vault-cli, cve-bin-tool, Cloud Custodian
-# robusta, in-toto, vexy
+# Pip: Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, , 
+# docker-squash, illuminatio, vault-cli, cve-bin-tool, Cloud Custodian (c7n),
+# robusta, in-toto, Anchore cli
 RUN SOFTWARE="kube-hunter detect-secrets yubikey-manager thefuck docker-squash \
         ansible paramiko illuminatio vault-cli cve-bin-tool c7n \
-        robusta in-toto" && \
+        robusta in-toto anchorecli" && \
     pip install --user --no-cache $SOFTWARE && \
     pip list | grep -F "$(echo "$SOFTWARE" | tr -s ' ' | tr " " '\n')" - | tr -s ' ' \
         | tee -a sbom.txt
@@ -632,7 +632,7 @@ RUN pip install --user --no-cache kubernetes PrettyTable urllib3 && \
 ## Pipx installations
 # We use pix as these require old incompatible version libraries
 
-# Sysdig cli
+# sdc-cli (Sysdig)
 RUN pipx install sdccli
 
 # Checkov
