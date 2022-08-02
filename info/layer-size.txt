@@ -4,7 +4,7 @@ SIZE      CREATED BY
 0B        SHELL [/bin/bash -c]
 6.71kB    RUN |11 /bin/bash -c pipx list --short | tee -a sbom.txt # buildkit
 16.1MB    RUN |11 /bin/bash -c pipx install vexy # buildkit
-193MB     RUN |11 /bin/bash -c pipx install checkov # buildkit
+192MB     RUN |11 /bin/bash -c pipx install checkov # buildkit
 129MB     RUN |11 /bin/bash -c pipx install sdccli # buildkit
 6.27kB    RUN |11 /bin/bash -c pip install --user --no-cache kubernetes PrettyTable urllib3 &&     python3 /usr/local/bin/kubiscan/KubiScan.py --version | tee -a sbom.txt # buildkit
 569MB     RUN |11 /bin/bash -c SOFTWARE="kube-hunter detect-secrets yubikey-manager thefuck docker-squash         ansible paramiko illuminatio vault-cli cve-bin-tool c7n         robusta in-toto" &&     pip install --user --no-cache $SOFTWARE &&     pip list | grep -F "$(echo "$SOFTWARE" | tr -s ' ' | tr " " '\n')" - | tr -s ' '         | tee -a sbom.txt # buildkit
@@ -76,7 +76,7 @@ SIZE      CREATED BY
 1.07GB    RUN |7 /bin/sh -c curl -fsSL https://packages.microsoft.com/keys/microsoft.asc         | gpg --dearmor | sudo tee /usr/share/keyrings/microsoft-archive-keyring.gpg > /dev/null &&     sudo chmod a+r /usr/share/keyrings/microsoft-archive-keyring.gpg &&     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main"         | sudo tee /etc/apt/sources.list.d/azure-cli.list > /dev/null &&     sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/azure-cli.list &&     sudo apt-get install -y azure-cli &&     version az | tee -a sbom.txt # buildkit
 426MB     RUN |7 /bin/sh -c curl -fsSL https://download.docker.com/linux/debian/gpg         | gpg --dearmor | sudo tee /usr/share/keyrings/docker-archive-keyring.gpg > /dev/null &&     sudo chmod a+r /usr/share/keyrings/docker-archive-keyring.gpg &&     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable"         | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null &&     sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/docker.list &&     sudo apt-get install -y docker-ce docker-ce-cli containerd.io  &&     version docker | tee -a sbom.txt # buildkit
 49.4MB    RUN |7 /bin/sh -c curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg         | tee /usr/share/keyrings/kubernetes-archive-keyring.gpg > /dev/null &&     sudo chmod a+r /usr/share/keyrings/kubernetes-archive-keyring.gpg &&     echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main"         | sudo tee /etc/apt/sources.list.d/kubernetes.list > /dev/null &&     sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/kubernetes.list &&     sudo apt-get install -y kubectl &&     echo "kubectl" $(kubectl version --short --client 2>/dev/null) | tee -a sbom.txt # buildkit
-32.5MB    RUN |7 /bin/sh -c curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_11/Release.key         | gpg --dearmor | sudo tee /usr/share/keyrings/shells_fish_release_3.gpg > /dev/null &&     sudo chmod a+r /usr/share/keyrings/shells_fish_release_3.gpg &&     echo 'deb [signed-by=/usr/share/keyrings/shells_fish_release_3.gpg] http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /'         | sudo tee /etc/apt/sources.list.d/shells:fish:release:3.list > /dev/null &&     sudo apt-get update &&     sudo apt-get install -y fish &&     version fish | tee -a sbom.txt # buildkit
+32.1MB    RUN |7 /bin/sh -c curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_11/Release.key         | gpg --dearmor | sudo tee /usr/share/keyrings/shells_fish_release_3.gpg > /dev/null &&     sudo chmod a+r /usr/share/keyrings/shells_fish_release_3.gpg &&     echo 'deb [signed-by=/usr/share/keyrings/shells_fish_release_3.gpg] http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /'         | sudo tee /etc/apt/sources.list.d/shells:fish:release:3.list > /dev/null &&     sudo apt-get update &&     sudo apt-get install -y fish &&     version fish | tee -a sbom.txt # buildkit
 10.8MB    RUN |7 /bin/sh -c curl -fsSL https://github.com/cilium/tetragon/releases/download/tetragon-cli/tetragon-linux-amd64.tar.gz         | tar xz && sudo mv tetragon /usr/bin/tetragon &&    echo "tetragon (initial release)" | tee -a sbom.txt # buildkit
 9.34MB    RUN |7 /bin/sh -c REPO="DopplerHQ/cli" ZFILE="doppler_VERSION_linux_amd64.tar.gz" FILE="doppler" gh_install # buildkit
 61.8MB    RUN |7 /bin/sh -c REPO="open-policy-agent/gatekeeper" ZFILE="gator-vVERSION-linux-amd64.tar.gz" FILE="gator" gh_install # buildkit
@@ -112,9 +112,9 @@ SIZE      CREATED BY
 46.6MB    RUN |7 /bin/sh -c REPO="roboll/helmfile" ZFILE="helmfile_linux_amd64" XFILE="helmfile" gh_install # buildkit
 21.7MB    RUN |7 /bin/sh -c REPO="wercker/stern" ZFILE="stern_linux_amd64" XFILE="stern" gh_install # buildkit
 66.2MB    RUN |7 /bin/sh -c REPO="GoogleContainerTools/skaffold" ZFILE="skaffold-linux-amd64" XFILE="skaffold" gh_install # buildkit
-9.88MB    RUN |7 /bin/sh -c REPO="mikefarah/yq" ZFILE="yq_linux_amd64" FILE="yq_linux_amd64" XFILE="yq" gh_install # buildkit
+12.2MB    RUN |7 /bin/sh -c REPO="mikefarah/yq" ZFILE="yq_linux_amd64" FILE="yq_linux_amd64" XFILE="yq" gh_install # buildkit
 17.2MB    RUN |7 /bin/sh -c REPO="cloud66-oss/copper" ZFILE="linux_amd64_2.0.1" FILE="linux_amd64_2.0.1" XFILE="copper" gh_install # buildkit
-9.6MB     RUN |7 /bin/sh -c REPO="golangci/golangci-lint" ZFILE="golangci-lint-VERSION-linux-amd64.deb" gh_install # buildkit
+9.61MB    RUN |7 /bin/sh -c REPO="golangci/golangci-lint" ZFILE="golangci-lint-VERSION-linux-amd64.deb" gh_install # buildkit
 4.24MB    RUN |7 /bin/sh -c REPO="wagoodman/dive" ZFILE="dive_VERSION_linux_amd64.deb" gh_install # buildkit
 2.69MB    RUN |7 /bin/sh -c REPO="PaulJuliusMartinez/jless" ZFILE="jless-vVERSION-x86_64-unknown-linux-gnu.zip" FILE="jless" gh_install # buildkit
 36.3MB    RUN |7 /bin/sh -c REPO="grafana/k6" ZFILE="k6-vVERSION-linux-amd64.tar.gz" FILE="k6-vVERSION-linux-amd64/k6" XFILE="k6" gh_install # buildkit
@@ -137,7 +137,7 @@ SIZE      CREATED BY
 504MB     RUN |3 /bin/sh -c curl -fsSLo packages-microsoft-prod.deb https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb &&     sudo dpkg -i packages-microsoft-prod.deb &&     rm packages-microsoft-prod.deb &&     sudo apt-get update &&     sudo apt-get install -y dotnet-sdk-${dotnet_ver} &&     version dotnet | tee -a sbom.txt # buildkit
 0B        ARG dotnet_ver=6.0
 192MB     RUN |2 /bin/sh -c gem install jekyll bundler &&     version jekyll bundler | tee -a sbom.txt # buildkit
-687MB     RUN |2 /bin/sh -c PATH="$HOME/.gem/bin:$PATH" &&     command curl -fsSL https://rvm.io/mpapis.asc | gpg2 --import - &&     command curl -fsSL https://rvm.io/pkuczynski.asc | gpg2 --import - &&     curl -fsSL https://get.rvm.io | bash -s stable --ruby &&     version ruby | tee -a sbom.txt # buildkit
+686MB     RUN |2 /bin/sh -c PATH="$HOME/.gem/bin:$PATH" &&     command curl -fsSL https://rvm.io/mpapis.asc | gpg2 --import - &&     command curl -fsSL https://rvm.io/pkuczynski.asc | gpg2 --import - &&     curl -fsSL https://get.rvm.io | bash -s stable --ruby &&     version ruby | tee -a sbom.txt # buildkit
 2.25kB    RUN |2 /bin/sh -c groupadd -g ${gid} ${group} # buildkit
 0B        ARG gid=1000
 0B        ARG group=developer

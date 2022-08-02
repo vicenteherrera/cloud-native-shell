@@ -1,4 +1,4 @@
-# command-line-env
+# Cloud Native Shell
 
 A cloud-native "Tardis" container image... "it's bigger in the inside".
 
@@ -12,12 +12,20 @@ But the goal isn't to fill it just with plain security tools (you already have K
 
 ## Examples
 
+Without having to clone this repo:
+
+```bash
+# Run without sharing any local directory
+docker run --rm -it --hostname tardis --name cloud-native-shell \
+  quay.io/vicenteherrera/cloud-native-shell
+```
+
 After cloning this repo:
 
 ```bash
 # Build using currently active user name, id and default password.
 # It can take up to 30 minutes, and while installing binaries from GitHub, 
-# it may return error or throttle connection. 
+# it may throttle connection and throw 403 errors. 
 # Just wait and rerun picking at the last correct layer.
 make build
 
@@ -29,13 +37,6 @@ make run
 make run RUN_SHELL=/bin/bash
 ```
 
-Without having to clone this repo:
-
-```bash
-# Run without sharing any local directory
-docker run --rm -it --hostname tardis --name cli-dev-shell \
-  quay.io/vicenteherrera/cli-dev-shell
-```
 
 ## Software included
 

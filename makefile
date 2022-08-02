@@ -24,9 +24,9 @@ NOCACHE_PARAM=""
 lint:
 	hadolint ./Dockerfile
 
-# build the container image cli-dev-shell
+# build the container image cloud-native-shell
 build:
-	${RUNSUDO} docker build . -t cli-dev-shell \
+	${RUNSUDO} docker build . -t cloud-native-shell \
 		$$NOCACHE_PARAM \
 		--build-arg GHTOKEN="$$GHTOKEN" \
 		--build-arg debian_ver=11.4 \
@@ -40,7 +40,7 @@ build:
 		--build-arg shell=${DEFAULT_SHELL} \
 		--build-arg pass=${PASSWORD}
 	@echo ""
-	${RUNSUDO} docker image ls cli-dev-shell
+	${RUNSUDO} docker image ls cloud-native-shell
 	@echo ""
 	@$(MAKE) -s sbom-cp
 	@echo ""
@@ -48,22 +48,22 @@ build:
 
 # extract sbom from the container image
 sbom-cp:
-	docker create --name cli-dev-shell-test-copy-sbom cli-dev-shell && \
-		docker cp cli-dev-shell-test-copy-sbom:/home/$$(id -un)/sbom.txt ./info/sbom.txt ||: && \
-		docker rm cli-dev-shell-test-copy-sbom
+	docker create --name cloud-native-shell-test-copy-sbom cloud-native-shell && \
+		docker cp cloud-native-shell-test-copy-sbom:/home/$$(id -un)/sbom.txt ./info/sbom.txt ||: && \
+		docker rm cloud-native-shell-test-copy-sbom
 
 # rebuild the container image ignoring cache
 upgrade:
 	@$(MAKE) -s build NOCACHE_PARAM="--no-cache"
 
-# tag the container image for pushing as quay.io/vicenteherrera/cli-dev-shell
+# tag the container image for pushing as quay.io/vicenteherrera/cloud-native-shell
 tag:
-	${RUNSUDO} docker tag cli-dev-shell quay.io/vicenteherrera/cli-dev-shell
+	${RUNSUDO} docker tag cloud-native-shell quay.io/vicenteherrera/cloud-native-shell
 
 # generate file with layer size information
 layer-size:
 	@ echo "generating layer-size.txt" && \
-	  docker history --no-trunc cli-dev-shell \
+	  docker history --no-trunc cloud-native-shell \
 			--format "table {{.Size}}\t{{.CreatedBy}}" \
 		| ./scripts/str_replace.pl "GHTOKEN=$$GHTOKEN " ""  \
 	  | ./scripts/str_replace.pl "dotnet_ver=6.0 " "" | ./scripts/str_replace.pl "go_ver=1.18 " "" | ./scripts/str_replace.pl "clamav_ver=0.105.0 " "" \
@@ -90,8 +90,8 @@ run:
 		-v /sys/devices/:/sys/devices/ \
 		-v /dev/hidraw1:/dev/hidraw1 \
 		--privileged \
-		--hostname tardis --name cli-dev-shell \
-		quay.io/vicenteherrera/cli-dev-shell \
+		--hostname tardis --name cloud-native-shell \
+		quay.io/vicenteherrera/cloud-native-shell \
 		${RUN_SHELL}
 
 #-  /dev/hidraw1 mounted to access Yubikey, with /dev/bus/usb, /sys/bus/usb and /sys/devices
@@ -100,14 +100,14 @@ run:
 # run the container image without sharing any local file with it
 run-no-sharing:
 	${RUNSUDO} docker run --rm -it \
-		--hostname tardis --name cli-dev-shell \
-		quay.io/vicenteherrera/cli-dev-shell \
+		--hostname tardis --name cloud-native-shell \
+		quay.io/vicenteherrera/cloud-native-shell \
 		${RUN_SHELL}
 
-# push the container image to quay.io/vicenteherrera/cli-dev-shell
+# push the container image to quay.io/vicenteherrera/cloud-native-shell
 push: tag
-	${RUNSUDO} docker push quay.io/vicenteherrera/cli-dev-shell
+	${RUNSUDO} docker push quay.io/vicenteherrera/cloud-native-shell
 
-# pull the container image from quay.io/vicenteherrera/cli-dev-shell
+# pull the container image from quay.io/vicenteherrera/cloud-native-shell
 pull:
-	${RUNSUDO} docker pull quay.io/vicenteherrera/cli-dev-shell
+	${RUNSUDO} docker pull quay.io/vicenteherrera/cloud-native-shell
