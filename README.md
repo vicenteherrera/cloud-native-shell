@@ -109,7 +109,6 @@ make run RUN_SHELL=/bin/bash
     * [conftest](open-policy-agent/conftest): validate configuration files using Rego rules
   * Kubernetes general security posture analyzers
     * [Kube-hunter](https://github.com/aquasecurity/kube-hunter): hunt for security weaknesses in Kubernetes clusters
-    * [Kube-score](https://github.com/zegl/kube-score): static code analysis of your Kubernetes object definitions
     * [KubeScape](https://github.com/armosec/kubescape): multi-cloud K8s risk analysis, security compliance, RBAC visualizer and image vulnerabilities scanning
     * [polaris](https://github.com/fairwindsops/polaris/): CLI to check Kubernetes pods and controllers using best practices
     * [KubeArmor](https://github.com/kubearmor/KubeArmor): runtime security enforcement (process execution, file access, networking) containers and node using AppArmor, SELinux or BPF-LSM 
