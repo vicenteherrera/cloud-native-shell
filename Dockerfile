@@ -170,9 +170,6 @@ RUN REPO="sigstore/cosign" ZFILE="cosign-linux-amd64" XFILE="cosign" gh_install
 RUN REPO="hadolint/hadolint" ZFILE="hadolint-Linux-x86_64" XFILE="hadolint" gh_install
 
 
-# KubeAudit
-RUN REPO="Shopify/kubeaudit" ZFILE="kubeaudit_VERSION_linux_amd64.tar.gz" FILE="kubeaudit" gh_install
-
 # kwctl (Kubewarden cli)
 RUN REPO="kubewarden/kwctl" ZFILE="kwctl-linux-x86_64.zip" FILE="kwctl-linux-x86_64" XFILE="kwctl" gh_install
 
@@ -197,17 +194,12 @@ RUN REPO="tenable/terrascan" ZFILE="terrascan_VERSION_Linux_x86_64.tar.gz" FILE=
 # crictl
 RUN REPO="kubernetes-sigs/cri-tools" ZFILE="crictl-vVERSION-linux-amd64.tar.gz" FILE="crictl" gh_install
 
-# tfscan
-RUN REPO="wils0ns/tfscan" ZFILE="tfscan_VERSION_linux_amd64.tar.gz" FILE="tfscan" gh_install
-
 # chain-bench
 RUN REPO="aquasecurity/chain-bench" ZFILE="chain-bench_VERSION_Linux_64bit.tar.gz" FILE="chain-bench" gh_install
 
 # cmctl
 RUN REPO="cert-manager/cert-manager" ZFILE="cmctl-linux-amd64.tar.gz" FILE="cmctl" gh_install
 
-# kube-score
-RUN REPO="zegl/kube-score" ZFILE="kube-score_VERSION_linux_amd64.tar.gz" FILE="kube-score" gh_install
 
 # CloudQuery
 RUN REPO="cloudquery/cloudquery" ZFILE="cloudquery_Linux_x86_64.zip" FILE="cloudquery" gh_install
@@ -260,6 +252,14 @@ RUN REPO="projectdiscovery/httpx" ZFILE="httpx_VERSION_linux_amd64.zip" FILE="ht
 # datree
 RUN REPO="datreeio/datree"  ZFILE="datree-cli_VERSION_Linux_x86_64.zip" FILE="datree" gh_install
 
+# tfscan
+RUN REPO="wils0ns/tfscan" gh_install
+
+# kube-score
+RUN REPO="zegl/kube-score" gh_install
+
+# KubeAudit
+RUN REPO="Shopify/kubeaudit" gh_install
 
 # Custom installation from GitHub
 
