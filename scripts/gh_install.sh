@@ -48,21 +48,21 @@ if [ "$ZFILE" == "vVERSION.tar.gz" ] && [ "$FILE" == "$ZFILE" ] && [ "$XFILE" ==
   separator="(_|-)"
   osName="linux"
   osArch="(x86_64|amd64|64bit)"
-  extension="(zip|tar\.gz)"
-  echo "Running query from:\ncurl -sSfL https://api.github.com/repos/${REPO}/releases/latest"
+  extension="(zip|tar\.gz|deb)"
+  echo "Running query from: curl -sSfL https://api.github.com/repos/${REPO}/releases/latest"
   url=$(curl -sSfL "https://api.github.com/repos/${REPO}/releases/latest" | grep -Eio "browser_download_url.*${separator}${osName}${separator}${osArch}\.${extension}")
-  url=${url//\"}
-  url=${url/browser_download_url: /}
-  ZFILE=$(basename "$url")
-  if [ "$url" == "" ] || [ "$ZFILE" == "" ]; then
+  if [ "$url" == "" ]; then
     echo "**Error, couldn't guess url or file to download"
     exit 1
   elif (( $(grep -c . <<<"$url") > 1 )); then
-    echo "**Error, more than one possible file to download:"
+    echo "More than one possible file to download:"
     echo $url
-    exit 1
+    url="${url##*$'\n'}"
+    echo "Using: $url"
   fi
-
+  url=${url//\"}
+  url=${url/browser_download_url: /}
+  ZFILE=$(basename "$url")
 fi
 
 # Download from automatic source code attached to tag

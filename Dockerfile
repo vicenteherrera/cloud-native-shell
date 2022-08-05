@@ -123,6 +123,10 @@ RUN REPO="minishift/minishift" ZFILE="minishift-VERSION-linux-amd64.tgz" FILE="m
 # k6
 RUN REPO="grafana/k6" ZFILE="k6-vVERSION-linux-amd64.tar.gz" FILE="k6-vVERSION-linux-amd64/k6" XFILE="k6" gh_install
 
+# golangci-lint
+RUN REPO="golangci/golangci-lint" ZFILE="golangci-lint-VERSION-linux-amd64.tar.gz" FILE="golangci-lint-VERSION-linux-amd64/golangci-lint" XFILE="golangci-lint" gh_install
+
+
 # name on repo not binary to install
 
 # crictl
@@ -174,15 +178,10 @@ RUN REPO="hadolint/hadolint" ZFILE="hadolint-Linux-x86_64" XFILE="hadolint" gh_i
 # kwctl (Kubewarden cli)
 RUN REPO="kubewarden/kwctl" ZFILE="kwctl-linux-x86_64.zip" FILE="kwctl-linux-x86_64" XFILE="kwctl" gh_install
 
-# deb packages
+# heuristic
 
 # Dive
-RUN REPO="wagoodman/dive" ZFILE="dive_VERSION_linux_amd64.deb" gh_install
-
-# golangci-lint
-RUN REPO="golangci/golangci-lint" ZFILE="golangci-lint-VERSION-linux-amd64.deb" gh_install
-
-# heuristic
+RUN REPO="wagoodman/dive" gh_install
 
 # chain-bench
 RUN REPO="aquasecurity/chain-bench" gh_install
