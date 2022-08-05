@@ -45,11 +45,6 @@ if [ "$ZFILE" == "vVERSION.tar.gz" ] && [ "$FILE" == "$ZFILE" ] && [ "$XFILE" ==
   FILE=$(echo "$REPO" | sed 's|[a-zA-Z0-9_-]*/||')
   SO='linux'
   ARQ='amd64'
-  CONTENT=$(curl --silent "https://api.github.com/repos/datreeio/datree/releases/latest")
-  FILES=$(curl --silent "https://api.github.com/repos/datreeio/datree/releases/latest" | jq '.assets[].browser_download_url')
-  DOWNLOAD_URL=$(curl -sSfL "https://api.github.com/repos/datreeio/datree/releases/latest" | grep -o "browser_download_url.*\_${osName}_${osArchitecture}.zip")
-  DOWNLOAD_URL=${DOWNLOAD_URL//\"}
-  DOWNLOAD_URL=${DOWNLOAD_URL/browser_download_url: /}
   ZFILE="${FILE}_VERSION_${SO}_${ARQ}.tar.gz"
   XFILE="$FILE"
 fi
