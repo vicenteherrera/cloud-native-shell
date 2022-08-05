@@ -112,21 +112,10 @@ RUN curl -fsSL -o op.zip https://cache.agilebits.com/dist/1P/op2/pkg/v${one_pass
 COPY ./scripts/gh_install.sh /usr/local/bin/gh_install
 ARG GHTOKEN=""
 
-# Docker-bench
-RUN REPO="docker/docker-bench-security" FILE="docker-bench-security-VERSION" XFILE="docker-bench-security" gh_install
-
-# KubiScan
-RUN REPO="cyberark/KubiScan" FILE="KubiScan-VERSION" XFILE="kubiscan" gh_install
-
-# testssl.sh
-RUN REPO="drwetter/testssl.sh" FILE="testssl.sh-VERSION" XFILE="testssl" gh_install
-
+# compressed inside a directory
 
 # mockgen
 RUN REPO="golang/mock" ZFILE="mock_VERSION_linux_amd64.tar.gz" FILE="mock_VERSION_linux_amd64/mockgen" XFILE="mockgen" gh_install
-
-# ah (Artifact Hub cli)
-RUN REPO="artifacthub/hub" ZFILE="ah_VERSION_linux_amd64.tar.gz" FILE="ah" gh_install
 
 # Minishift
 RUN REPO="minishift/minishift" ZFILE="minishift-VERSION-linux-amd64.tgz" FILE="minishift-VERSION-linux-amd64/minishift" XFILE="minishift" gh_install
@@ -134,16 +123,27 @@ RUN REPO="minishift/minishift" ZFILE="minishift-VERSION-linux-amd64.tgz" FILE="m
 # k6
 RUN REPO="grafana/k6" ZFILE="k6-vVERSION-linux-amd64.tar.gz" FILE="k6-vVERSION-linux-amd64/k6" XFILE="k6" gh_install
 
-# JLess
-RUN REPO="PaulJuliusMartinez/jless" ZFILE="jless-vVERSION-x86_64-unknown-linux-gnu.zip" FILE="jless" gh_install
+# name on repo not binary to install
 
+# crictl
+RUN REPO="kubernetes-sigs/cri-tools" ZFILE="crictl-vVERSION-linux-amd64.tar.gz" FILE="crictl" gh_install
 
-# Dive
-RUN REPO="wagoodman/dive" ZFILE="dive_VERSION_linux_amd64.deb" gh_install
+# cmctl
+RUN REPO="cert-manager/cert-manager" ZFILE="cmctl-linux-amd64.tar.gz" FILE="cmctl" gh_install
 
-# golangci-lint
-RUN REPO="golangci/golangci-lint" ZFILE="golangci-lint-VERSION-linux-amd64.deb" gh_install
+# ah (Artifact Hub cli)
+RUN REPO="artifacthub/hub" ZFILE="ah_VERSION_linux_amd64.tar.gz" FILE="ah" gh_install
 
+# karmor (KubeArmor CLI)
+RUN REPO="kubearmor/kubearmor-client" ZFILE="karmor_VERSION_linux_amd64.tar.gz" FILE="karmor" gh_install
+
+# gator (GateKeeper CLI)
+RUN REPO="open-policy-agent/gatekeeper" ZFILE="gator-vVERSION-linux-amd64.tar.gz" FILE="gator" gh_install
+
+# doppler
+RUN REPO="DopplerHQ/cli" ZFILE="doppler_VERSION_linux_amd64.tar.gz" FILE="doppler" gh_install
+
+# not compressed
 
 # copper
 RUN REPO="cloud66-oss/copper" ZFILE="linux_amd64_2.0.1" FILE="linux_amd64_2.0.1" XFILE="copper" gh_install
@@ -169,46 +169,96 @@ RUN REPO="sigstore/cosign" ZFILE="cosign-linux-amd64" XFILE="cosign" gh_install
 # Hadolint
 RUN REPO="hadolint/hadolint" ZFILE="hadolint-Linux-x86_64" XFILE="hadolint" gh_install
 
+# name on file includes os and arch
 
 # kwctl (Kubewarden cli)
 RUN REPO="kubewarden/kwctl" ZFILE="kwctl-linux-x86_64.zip" FILE="kwctl-linux-x86_64" XFILE="kwctl" gh_install
+
+# deb packages
+
+# Dive
+RUN REPO="wagoodman/dive" ZFILE="dive_VERSION_linux_amd64.deb" gh_install
+
+# golangci-lint
+RUN REPO="golangci/golangci-lint" ZFILE="golangci-lint-VERSION-linux-amd64.deb" gh_install
+
+# heuristic
+
+# chain-bench
+RUN REPO="aquasecurity/chain-bench" gh_install
+
+# eksctl
+RUN REPO="weaveworks/eksctl" gh_install
+
+# Kubesec
+RUN REPO="controlplaneio/kubesec" gh_install
+
+# Audit2RBAC
+RUN REPO="liggitt/audit2rbac" gh_install
+
+# Terrascan
+RUN REPO="tenable/terrascan"  gh_install
+
+# CloudQuery
+RUN REPO="cloudquery/cloudquery" gh_install
+
+# Steampipe
+RUN REPO="turbot/steampipe" gh_install
+
+# Kubeval
+RUN REPO="instrumenta/kubeval" gh_install
+
+# mmake
+RUN REPO="tj/mmake" gh_install
+
+# Bad Robot
+RUN REPO="controlplaneio/badrobot" gh_install
+
+# config-lint
+RUN REPO="stelligent/config-lint" gh_install
+
+# conftest
+RUN REPO="open-policy-agent/conftest" gh_install
+
+# polaris
+RUN REPO="fairwindsops/polaris" gh_install
+
+# httpx
+RUN REPO="projectdiscovery/httpx" gh_install
+
+# tfscan
+RUN REPO="wils0ns/tfscan" gh_install
+
+# kube-score
+RUN REPO="zegl/kube-score" gh_install
+
+# KubeAudit
+RUN REPO="Shopify/kubeaudit" gh_install
+
+# datree
+RUN REPO="datreeio/datree" gh_install
+
+# download from source code and not from releases
+
+# Docker-bench
+RUN REPO="docker/docker-bench-security" FILE="docker-bench-security-VERSION" XFILE="docker-bench-security" gh_install
+
+# KubiScan
+RUN REPO="cyberark/KubiScan" FILE="KubiScan-VERSION" XFILE="kubiscan" gh_install
+
+# testssl.sh
+RUN REPO="drwetter/testssl.sh" FILE="testssl.sh-VERSION" XFILE="testssl" gh_install
+
+# other
+
+# JLess
+RUN REPO="PaulJuliusMartinez/jless" ZFILE="jless-vVERSION-x86_64-unknown-linux-gnu.zip" FILE="jless" gh_install
 
 # Kubectx
 RUN REPO="ahmetb/kubectx" ZFILE="kubectx_vVERSION_linux_x86_64.tar.gz" FILE="kubectx" gh_install
 
 # Kubens
 RUN REPO="ahmetb/kubectx" ZFILE="kubens_vVERSION_linux_x86_64.tar.gz" FILE="kubens" gh_install
-
-# eksctl
-RUN REPO="weaveworks/eksctl" ZFILE="eksctl_linux_amd64.tar.gz" FILE="eksctl" gh_install
-
-# Kubesec (binary)
-RUN REPO="controlplaneio/kubesec" ZFILE="kubesec_linux_amd64.tar.gz" FILE="kubesec" gh_install
-
-# Audit2RBAC
-RUN REPO="liggitt/audit2rbac" ZFILE="audit2rbac-linux-amd64.tar.gz" FILE="audit2rbac" gh_install
-
-# Terrascan
-RUN REPO="tenable/terrascan" ZFILE="terrascan_VERSION_Linux_x86_64.tar.gz" FILE="terrascan" gh_install
-
-# crictl
-RUN REPO="kubernetes-sigs/cri-tools" ZFILE="crictl-vVERSION-linux-amd64.tar.gz" FILE="crictl" gh_install
-
-# chain-bench
-RUN REPO="aquasecurity/chain-bench" ZFILE="chain-bench_VERSION_Linux_64bit.tar.gz" FILE="chain-bench" gh_install
-
-# cmctl
-RUN REPO="cert-manager/cert-manager" ZFILE="cmctl-linux-amd64.tar.gz" FILE="cmctl" gh_install
-
-
-# CloudQuery
-RUN REPO="cloudquery/cloudquery" ZFILE="cloudquery_Linux_x86_64.zip" FILE="cloudquery" gh_install
-
-# Steampipe
-RUN REPO="turbot/steampipe" ZFILE="steampipe_linux_amd64.tar.gz" FILE="steampipe" gh_install
-
-# Kubeval
-RUN REPO="instrumenta/kubeval" ZFILE="kubeval-linux-amd64.tar.gz" FILE="kubeval" gh_install
 
 # promtool (Prometheus CLI)
 RUN REPO="prometheus/prometheus" ZFILE="prometheus-VERSION.linux-amd64.tar.gz" FILE="prometheus-VERSION.linux-amd64/promtool" XFILE="promtool" gh_install
@@ -222,44 +272,7 @@ RUN REPO="cloudflare/pint" ZFILE="pint-VERSION-linux-x86_64.tar.gz" FILE="pint-l
 # kube-linter
 RUN REPO="stackrox/kube-linter" ZFILE="kube-linter-linux.tar.gz" FILE="kube-linter" gh_install
 
-# mmake
-RUN REPO="tj/mmake" ZFILE="mmake_VERSION_linux_x86_64.tar.gz" FILE="mmake" gh_install
 
-# Bad Robot
-RUN REPO="controlplaneio/badrobot" ZFILE="badrobot_linux_amd64.tar.gz" FILE="badrobot" gh_install
-
-# config-lint
-RUN REPO="stelligent/config-lint" ZFILE="config-lint_Linux_x86_64.tar.gz" FILE="config-lint" gh_install
-
-# conftest
-RUN REPO="open-policy-agent/conftest" ZFILE="conftest_VERSION_Linux_x86_64.tar.gz" FILE="conftest" gh_install
-
-# polaris
-RUN REPO="fairwindsops/polaris" ZFILE="polaris_linux_amd64.tar.gz" FILE="polaris" gh_install
-
-# karmor (KubeArmor CLI)
-RUN REPO="kubearmor/kubearmor-client" ZFILE="karmor_VERSION_linux_amd64.tar.gz" FILE="karmor" gh_install
-
-# gator (GateKeeper CLI)
-RUN REPO="open-policy-agent/gatekeeper" ZFILE="gator-vVERSION-linux-amd64.tar.gz" FILE="gator" gh_install
-
-# doppler
-RUN REPO="DopplerHQ/cli" ZFILE="doppler_VERSION_linux_amd64.tar.gz" FILE="doppler" gh_install
-
-# httpx
-RUN REPO="projectdiscovery/httpx" ZFILE="httpx_VERSION_linux_amd64.zip" FILE="httpx" gh_install
-
-# datree
-RUN REPO="datreeio/datree"  ZFILE="datree-cli_VERSION_Linux_x86_64.zip" FILE="datree" gh_install
-
-# tfscan
-RUN REPO="wils0ns/tfscan" gh_install
-
-# kube-score
-RUN REPO="zegl/kube-score" gh_install
-
-# KubeAudit
-RUN REPO="Shopify/kubeaudit" gh_install
 
 # Custom installation from GitHub
 

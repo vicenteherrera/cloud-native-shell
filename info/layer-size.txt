@@ -2,17 +2,17 @@ SIZE      CREATED BY
 0B        CMD ["$DEFAULT_SHELL"]
 0B        ENV DEFAULT_SHELL=/usr/bin/fish
 0B        SHELL [/bin/bash -c]
-6.79kB    RUN |11 /bin/bash -c pipx list --short | tee -a sbom.txt # buildkit
+6.84kB    RUN |11 /bin/bash -c pipx list --short | tee -a sbom.txt # buildkit
 16.3MB    RUN |11 /bin/bash -c pipx install vexy # buildkit
 192MB     RUN |11 /bin/bash -c pipx install checkov # buildkit
 129MB     RUN |11 /bin/bash -c pipx install sdccli # buildkit
-6.34kB    RUN |11 /bin/bash -c pip install --user --no-cache kubernetes PrettyTable urllib3 &&     python3 /usr/local/bin/kubiscan/KubiScan.py --version | tee -a sbom.txt # buildkit
+6.39kB    RUN |11 /bin/bash -c pip install --user --no-cache kubernetes PrettyTable urllib3 &&     python3 /usr/local/bin/kubiscan/KubiScan.py --version | tee -a sbom.txt # buildkit
 572MB     RUN |11 /bin/bash -c SOFTWARE="kube-hunter detect-secrets yubikey-manager thefuck docker-squash         ansible paramiko illuminatio vault-cli cve-bin-tool c7n         robusta in-toto anchorecli" &&     pip install --user --no-cache $SOFTWARE &&     pip list | grep -F "$(echo "$SOFTWARE" | tr -s ' ' | tr " " '\n')" - | tr -s ' '         | tee -a sbom.txt # buildkit
 2.05MB    RUN |11 /bin/bash -c python3 -m pip install --user --no-cache pipx &&     echo "pipx" $(pipx --version) | tee -a sbom.txt # buildkit
 89.7MB    RUN |11 /bin/bash -c curl -fsSL https://install.python-poetry.org | python3 - &&     version poetry | tee -a sbom.txt # buildkit
 4.29MB    RUN |11 /bin/bash -c curl -fsSL https://pyenv.run | bash &&     version pyenv | tee -a sbom.txt # buildkit
 101MB     RUN |11 /bin/bash -c npm install snyk npx yarn @bitwarden/cli &&     version snyk npx yarn bw | tee -a sbom.txt &&     npm cache clean -force # buildkit
-1.83MB    RUN |11 /bin/bash -c curl -fsSLo- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash &&     version nvm | tee -a sbom.txt # buildkit
+1.84MB    RUN |11 /bin/bash -c curl -fsSLo- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash &&     version nvm | tee -a sbom.txt # buildkit
 61.7MB    RUN |11 /bin/bash -c go install github.com/jrhouston/tfk8s@latest  &&     version tfk8s | tee -a sbom.txt # buildkit
 44.4MB    RUN |11 /bin/bash -c go install -mod=mod github.com/onsi/ginkgo/v2/ginkgo &&     version ginkgo | tee -a sbom.txt # buildkit
 62.9MB    RUN |11 /bin/bash -c helm plugin install https://github.com/databus23/helm-diff &&     echo "helm plugins:" | tee -a sbom.txt &&     helm plugin list | tee -a sbom.txt # buildkit
@@ -43,7 +43,7 @@ SIZE      CREATED BY
 4.6kB     RUN |11 /bin/sh -c sudo usermod -aG docker ${user} && sudo -H -u ${user} newgrp docker # buildkit
 4.58kB    RUN |11 /bin/sh -c sudo usermod -aG rvm ${user} # buildkit
 809B      RUN |11 /bin/sh -c echo "${user}:${pass}" | chpasswd # buildkit
-5.43kB    RUN |11 /bin/sh -c mv /install/sbom.txt /home/${user}/sbom.txt &&     chown ${user}:${group} /home/${user}/sbom.txt # buildkit
+5.48kB    RUN |11 /bin/sh -c mv /install/sbom.txt /home/${user}/sbom.txt &&     chown ${user}:${group} /home/${user}/sbom.txt # buildkit
 4.55kB    RUN |11 /bin/sh -c mkdir -p         /home/${user}/.config/fish/completions         /home/${user}/.config/fish/conf.d         /home/${user}/.config/fish/functions         /home/${user}/.gem/bin         /home/${user}/.local/bin         /home/${user}/.go/bin         /home/${user}/.keys &&     chown -R ${user}:${group} /home/${user} # buildkit
 335kB     RUN |11 /bin/sh -c useradd -u ${uid} -g ${group} -s ${shell} -m ${user} &&     usermod -aG sudo ${user} # buildkit
 0B        ARG shell=/usr/bin/fish
@@ -61,7 +61,7 @@ SIZE      CREATED BY
 26.4MB    RUN |7 /bin/sh -c curl -fsSL https://raw.githubusercontent.com/docker-slim/docker-slim/master/scripts/install-dockerslim.sh         | sudo -E bash - &&     version docker-slim | tee -a sbom.txt # buildkit
 46.3MB    RUN |7 /bin/sh -c curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3         | sudo -E bash - &&     version helm | tee -a sbom.txt # buildkit
 60MB      RUN |7 /bin/sh -c curl -fsSL https://raw.githubusercontent.com/anchore/syft/main/install.sh         | sudo sh -s -- -b /usr/local/bin &&     version syft | tee -a sbom.txt # buildkit
-63.4MB    RUN |7 /bin/sh -c curl -fsSL https://raw.githubusercontent.com/anchore/grype/main/install.sh         | sudo sh -s -- -b /usr/local/bin &&     version grype | tee -a sbom.txt # buildkit
+63.9MB    RUN |7 /bin/sh -c curl -fsSL https://raw.githubusercontent.com/anchore/grype/main/install.sh         | sudo sh -s -- -b /usr/local/bin &&     version grype | tee -a sbom.txt # buildkit
 158MB     RUN |7 /bin/sh -c curl -fsSL -o aws.zip "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" &&     unzip ./aws.zip && ./aws/install &&     rm -r ./aws aws.zip &&     version aws | tee -a sbom.txt # buildkit
 68.2MB    RUN |7 /bin/sh -c curl -fsSLO https://mirror.openshift.com/pub/rhacs/assets/latest/bin/Linux/roxctl &&     chmod +x roxctl &&     sudo mv roxctl /usr/local/bin/ &&     version roxctl | tee -a sbom.txt # buildkit
 55MB      RUN |7 /bin/sh -c VERSION=$(curl -fsSL https://dl.k8s.io/release/stable.txt) &&     curl -fsSLO "https://dl.k8s.io/release/$VERSION/bin/linux/amd64/kubectl-convert" &&     sudo install -o root -g root -m 0755 kubectl-convert /usr/local/bin/kubectl-convert &&     rm kubectl-convert &&     version kubectl-convert | tee -a sbom.txt # buildkit
@@ -78,55 +78,56 @@ SIZE      CREATED BY
 49.4MB    RUN |7 /bin/sh -c curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg         | tee /usr/share/keyrings/kubernetes-archive-keyring.gpg > /dev/null &&     sudo chmod a+r /usr/share/keyrings/kubernetes-archive-keyring.gpg &&     echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main"         | sudo tee /etc/apt/sources.list.d/kubernetes.list > /dev/null &&     sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/kubernetes.list &&     sudo apt-get install -y kubectl &&     echo "kubectl" $(kubectl version --short --client 2>/dev/null) | tee -a sbom.txt # buildkit
 32.6MB    RUN |7 /bin/sh -c curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_11/Release.key         | gpg --dearmor | sudo tee /usr/share/keyrings/shells_fish_release_3.gpg > /dev/null &&     sudo chmod a+r /usr/share/keyrings/shells_fish_release_3.gpg &&     echo 'deb [signed-by=/usr/share/keyrings/shells_fish_release_3.gpg] http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /'         | sudo tee /etc/apt/sources.list.d/shells:fish:release:3.list > /dev/null &&     sudo apt-get update &&     sudo apt-get install -y fish &&     version fish | tee -a sbom.txt # buildkit
 10.8MB    RUN |7 /bin/sh -c curl -fsSL https://github.com/cilium/tetragon/releases/download/tetragon-cli/tetragon-linux-amd64.tar.gz         | tar xz && sudo mv tetragon /usr/bin/tetragon &&    echo "tetragon (initial release)" | tee -a sbom.txt # buildkit
-14.2MB    RUN |7 /bin/sh -c REPO="projectdiscovery/httpx" ZFILE="httpx_VERSION_linux_amd64.zip" FILE="httpx" gh_install # buildkit
-9.34MB    RUN |7 /bin/sh -c REPO="DopplerHQ/cli" ZFILE="doppler_VERSION_linux_amd64.tar.gz" FILE="doppler" gh_install # buildkit
-61.8MB    RUN |7 /bin/sh -c REPO="open-policy-agent/gatekeeper" ZFILE="gator-vVERSION-linux-amd64.tar.gz" FILE="gator" gh_install # buildkit
-46MB      RUN |7 /bin/sh -c REPO="kubearmor/kubearmor-client" ZFILE="karmor_VERSION_linux_amd64.tar.gz" FILE="karmor" gh_install # buildkit
-39.7MB    RUN |7 /bin/sh -c REPO="fairwindsops/polaris" ZFILE="polaris_linux_amd64.tar.gz" FILE="polaris" gh_install # buildkit
-36.6MB    RUN |7 /bin/sh -c REPO="open-policy-agent/conftest" ZFILE="conftest_VERSION_Linux_x86_64.tar.gz" FILE="conftest" gh_install # buildkit
-13.5MB    RUN |7 /bin/sh -c REPO="stelligent/config-lint" ZFILE="config-lint_Linux_x86_64.tar.gz" FILE="config-lint" gh_install # buildkit
-10.8MB    RUN |7 /bin/sh -c REPO="controlplaneio/badrobot" ZFILE="badrobot_linux_amd64.tar.gz" FILE="badrobot" gh_install # buildkit
-5.32MB    RUN |7 /bin/sh -c REPO="tj/mmake" ZFILE="mmake_VERSION_linux_x86_64.tar.gz" FILE="mmake" gh_install # buildkit
 35.8MB    RUN |7 /bin/sh -c REPO="stackrox/kube-linter" ZFILE="kube-linter-linux.tar.gz" FILE="kube-linter" gh_install # buildkit
 18.9MB    RUN |7 /bin/sh -c REPO="cloudflare/pint" ZFILE="pint-VERSION-linux-x86_64.tar.gz" FILE="pint-linux-amd64" XFILE="pint" gh_install # buildkit
 25.1MB    RUN |7 /bin/sh -c REPO="prometheus/alertmanager" ZFILE="alertmanager-VERSION.linux-amd64.tar.gz" FILE="alertmanager-VERSION.linux-amd64/amtool" XFILE="amtool" gh_install # buildkit
 101MB     RUN |7 /bin/sh -c REPO="prometheus/prometheus" ZFILE="prometheus-VERSION.linux-amd64.tar.gz" FILE="prometheus-VERSION.linux-amd64/promtool" XFILE="promtool" gh_install # buildkit
-7.42MB    RUN |7 /bin/sh -c REPO="instrumenta/kubeval" ZFILE="kubeval-linux-amd64.tar.gz" FILE="kubeval" gh_install # buildkit
-35.7MB    RUN |7 /bin/sh -c REPO="turbot/steampipe" ZFILE="steampipe_linux_amd64.tar.gz" FILE="steampipe" gh_install # buildkit
-38.8MB    RUN |7 /bin/sh -c REPO="cloudquery/cloudquery" ZFILE="cloudquery_Linux_x86_64.zip" FILE="cloudquery" gh_install # buildkit
-18.8MB    RUN |7 /bin/sh -c REPO="zegl/kube-score" gh_install # buildkit
-46.5MB    RUN |7 /bin/sh -c REPO="cert-manager/cert-manager" ZFILE="cmctl-linux-amd64.tar.gz" FILE="cmctl" gh_install # buildkit
-16.2MB    RUN |7 /bin/sh -c REPO="aquasecurity/chain-bench" ZFILE="chain-bench_VERSION_Linux_64bit.tar.gz" FILE="chain-bench" gh_install # buildkit
-2.29MB    RUN |7 /bin/sh -c REPO="wils0ns/tfscan" gh_install # buildkit
-33.2MB    RUN |7 /bin/sh -c REPO="kubernetes-sigs/cri-tools" ZFILE="crictl-vVERSION-linux-amd64.tar.gz" FILE="crictl" gh_install # buildkit
-70.9MB    RUN |7 /bin/sh -c REPO="tenable/terrascan" ZFILE="terrascan_VERSION_Linux_x86_64.tar.gz" FILE="terrascan" gh_install # buildkit
-39.2MB    RUN |7 /bin/sh -c REPO="liggitt/audit2rbac" ZFILE="audit2rbac-linux-amd64.tar.gz" FILE="audit2rbac" gh_install # buildkit
-10.8MB    RUN |7 /bin/sh -c REPO="controlplaneio/kubesec" ZFILE="kubesec_linux_amd64.tar.gz" FILE="kubesec" gh_install # buildkit
-118MB     RUN |7 /bin/sh -c REPO="weaveworks/eksctl" ZFILE="eksctl_linux_amd64.tar.gz" FILE="eksctl" gh_install # buildkit
 27.9MB    RUN |7 /bin/sh -c REPO="ahmetb/kubectx" ZFILE="kubens_vVERSION_linux_x86_64.tar.gz" FILE="kubens" gh_install # buildkit
 2.41MB    RUN |7 /bin/sh -c REPO="ahmetb/kubectx" ZFILE="kubectx_vVERSION_linux_x86_64.tar.gz" FILE="kubectx" gh_install # buildkit
-46.1MB    RUN |7 /bin/sh -c REPO="kubewarden/kwctl" ZFILE="kwctl-linux-x86_64.zip" FILE="kwctl-linux-x86_64" XFILE="kwctl" gh_install # buildkit
+2.69MB    RUN |7 /bin/sh -c REPO="PaulJuliusMartinez/jless" ZFILE="jless-vVERSION-x86_64-unknown-linux-gnu.zip" FILE="jless" gh_install # buildkit
+21.1MB    RUN |7 /bin/sh -c REPO="drwetter/testssl.sh" FILE="testssl.sh-VERSION" XFILE="testssl" gh_install # buildkit
+180kB     RUN |7 /bin/sh -c REPO="cyberark/KubiScan" FILE="KubiScan-VERSION" XFILE="kubiscan" gh_install # buildkit
+398kB     RUN |7 /bin/sh -c REPO="docker/docker-bench-security" FILE="docker-bench-security-VERSION" XFILE="docker-bench-security" gh_install # buildkit
+16.7MB    RUN |7 /bin/sh -c REPO="datreeio/datree" gh_install # buildkit
 30.5MB    RUN |7 /bin/sh -c REPO="Shopify/kubeaudit" gh_install # buildkit
+18.8MB    RUN |7 /bin/sh -c REPO="zegl/kube-score" gh_install # buildkit
+2.29MB    RUN |7 /bin/sh -c REPO="wils0ns/tfscan" gh_install # buildkit
+14.2MB    RUN |7 /bin/sh -c REPO="projectdiscovery/httpx" gh_install # buildkit
+39.7MB    RUN |7 /bin/sh -c REPO="fairwindsops/polaris" gh_install # buildkit
+36.6MB    RUN |7 /bin/sh -c REPO="open-policy-agent/conftest" gh_install # buildkit
+13.5MB    RUN |7 /bin/sh -c REPO="stelligent/config-lint" gh_install # buildkit
+10.8MB    RUN |7 /bin/sh -c REPO="controlplaneio/badrobot" gh_install # buildkit
+5.32MB    RUN |7 /bin/sh -c REPO="tj/mmake" gh_install # buildkit
+7.42MB    RUN |7 /bin/sh -c REPO="instrumenta/kubeval" gh_install # buildkit
+35.7MB    RUN |7 /bin/sh -c REPO="turbot/steampipe" gh_install # buildkit
+38.8MB    RUN |7 /bin/sh -c REPO="cloudquery/cloudquery" gh_install # buildkit
+70.9MB    RUN |7 /bin/sh -c REPO="tenable/terrascan"  gh_install # buildkit
+39.2MB    RUN |7 /bin/sh -c REPO="liggitt/audit2rbac" gh_install # buildkit
+10.8MB    RUN |7 /bin/sh -c REPO="controlplaneio/kubesec" gh_install # buildkit
+118MB     RUN |7 /bin/sh -c REPO="weaveworks/eksctl" gh_install # buildkit
+16.2MB    RUN |7 /bin/sh -c REPO="aquasecurity/chain-bench" gh_install # buildkit
+9.84MB    RUN |7 /bin/sh -c REPO="golangci/golangci-lint" ZFILE="golangci-lint-VERSION-linux-amd64.deb" gh_install # buildkit
+4.24MB    RUN |7 /bin/sh -c REPO="wagoodman/dive" ZFILE="dive_VERSION_linux_amd64.deb" gh_install # buildkit
+46.1MB    RUN |7 /bin/sh -c REPO="kubewarden/kwctl" ZFILE="kwctl-linux-x86_64.zip" FILE="kwctl-linux-x86_64" XFILE="kwctl" gh_install # buildkit
 2.3MB     RUN |7 /bin/sh -c REPO="hadolint/hadolint" ZFILE="hadolint-Linux-x86_64" XFILE="hadolint" gh_install # buildkit
-87.6MB    RUN |7 /bin/sh -c REPO="sigstore/cosign" ZFILE="cosign-linux-amd64" XFILE="cosign" gh_install # buildkit
+87.7MB    RUN |7 /bin/sh -c REPO="sigstore/cosign" ZFILE="cosign-linux-amd64" XFILE="cosign" gh_install # buildkit
 157MB     RUN |7 /bin/sh -c REPO="kubernetes/kops" ZFILE="kops-linux-amd64" XFILE="kops" gh_install # buildkit
 46.6MB    RUN |7 /bin/sh -c REPO="roboll/helmfile" ZFILE="helmfile_linux_amd64" XFILE="helmfile" gh_install # buildkit
 21.7MB    RUN |7 /bin/sh -c REPO="wercker/stern" ZFILE="stern_linux_amd64" XFILE="stern" gh_install # buildkit
 66.2MB    RUN |7 /bin/sh -c REPO="GoogleContainerTools/skaffold" ZFILE="skaffold-linux-amd64" XFILE="skaffold" gh_install # buildkit
 12.2MB    RUN |7 /bin/sh -c REPO="mikefarah/yq" ZFILE="yq_linux_amd64" FILE="yq_linux_amd64" XFILE="yq" gh_install # buildkit
 17.2MB    RUN |7 /bin/sh -c REPO="cloud66-oss/copper" ZFILE="linux_amd64_2.0.1" FILE="linux_amd64_2.0.1" XFILE="copper" gh_install # buildkit
-9.61MB    RUN |7 /bin/sh -c REPO="golangci/golangci-lint" ZFILE="golangci-lint-VERSION-linux-amd64.deb" gh_install # buildkit
-4.24MB    RUN |7 /bin/sh -c REPO="wagoodman/dive" ZFILE="dive_VERSION_linux_amd64.deb" gh_install # buildkit
-2.69MB    RUN |7 /bin/sh -c REPO="PaulJuliusMartinez/jless" ZFILE="jless-vVERSION-x86_64-unknown-linux-gnu.zip" FILE="jless" gh_install # buildkit
+9.34MB    RUN |7 /bin/sh -c REPO="DopplerHQ/cli" ZFILE="doppler_VERSION_linux_amd64.tar.gz" FILE="doppler" gh_install # buildkit
+61.8MB    RUN |7 /bin/sh -c REPO="open-policy-agent/gatekeeper" ZFILE="gator-vVERSION-linux-amd64.tar.gz" FILE="gator" gh_install # buildkit
+46MB      RUN |7 /bin/sh -c REPO="kubearmor/kubearmor-client" ZFILE="karmor_VERSION_linux_amd64.tar.gz" FILE="karmor" gh_install # buildkit
+73.3MB    RUN |7 /bin/sh -c REPO="artifacthub/hub" ZFILE="ah_VERSION_linux_amd64.tar.gz" FILE="ah" gh_install # buildkit
+46.5MB    RUN |7 /bin/sh -c REPO="cert-manager/cert-manager" ZFILE="cmctl-linux-amd64.tar.gz" FILE="cmctl" gh_install # buildkit
+33.2MB    RUN |7 /bin/sh -c REPO="kubernetes-sigs/cri-tools" ZFILE="crictl-vVERSION-linux-amd64.tar.gz" FILE="crictl" gh_install # buildkit
 36.3MB    RUN |7 /bin/sh -c REPO="grafana/k6" ZFILE="k6-vVERSION-linux-amd64.tar.gz" FILE="k6-vVERSION-linux-amd64/k6" XFILE="k6" gh_install # buildkit
 26.9MB    RUN |7 /bin/sh -c REPO="minishift/minishift" ZFILE="minishift-VERSION-linux-amd64.tgz" FILE="minishift-VERSION-linux-amd64/minishift" XFILE="minishift" gh_install # buildkit
-73.3MB    RUN |7 /bin/sh -c REPO="artifacthub/hub" ZFILE="ah_VERSION_linux_amd64.tar.gz" FILE="ah" gh_install # buildkit
 5.89MB    RUN |7 /bin/sh -c REPO="golang/mock" ZFILE="mock_VERSION_linux_amd64.tar.gz" FILE="mock_VERSION_linux_amd64/mockgen" XFILE="mockgen" gh_install # buildkit
-21.1MB    RUN |7 /bin/sh -c REPO="drwetter/testssl.sh" FILE="testssl.sh-VERSION" XFILE="testssl" gh_install # buildkit
-178kB     RUN |7 /bin/sh -c REPO="cyberark/KubiScan" FILE="KubiScan-VERSION" XFILE="kubiscan" gh_install # buildkit
-395kB     RUN |7 /bin/sh -c REPO="docker/docker-bench-security" FILE="docker-bench-security-VERSION" XFILE="docker-bench-security" gh_install # buildkit
 0B        ARG GHTOKEN=
-3.84kB    COPY ./scripts/gh_install.sh /usr/local/bin/gh_install # buildkit
+4.52kB    COPY ./scripts/gh_install.sh /usr/local/bin/gh_install # buildkit
 12.2MB    RUN |6 /bin/sh -c curl -fsSL -o op.zip https://cache.agilebits.com/dist/1P/op2/pkg/v${one_password_ver}/op_linux_amd64_v${one_password_ver}.zip &&     unzip op.zip && sudo mv op /usr/local/bin/ && rm op.zip op.sig     version op | tee -a sbom.txt # buildkit
 0B        ARG one_password_ver=2.5.1
 40.2MB    RUN |5 /bin/sh -c curl -fsSLo clamav.deb https://www.clamav.net/downloads/production/clamav-${clamav_ver}.linux.x86_64.deb &&     sudo dpkg -i clamav.deb &&     rm clamav.deb &&     version clamav-config | tee -a sbom.txt # buildkit

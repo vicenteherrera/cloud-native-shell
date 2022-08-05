@@ -15,53 +15,54 @@ bundler Bundler version 2.3.19
 dotnet 6.0.302
 go version go1.18 linux/amd64
 clamav-config 0.105.0
-docker-bench-security 1.3.6 (https://github.com/docker/docker-bench-security)
-kubiscan 1.4 (https://github.com/cyberark/KubiScan)
-testssl 3.0.7 (https://github.com/drwetter/testssl.sh)
 mockgen 1.6.0 (https://github.com/golang/mock)
-ah 1.9.0 (https://github.com/artifacthub/hub)
 minishift 1.34.3 (https://github.com/minishift/minishift)
 k6 0.39.0 (https://github.com/grafana/k6)
-jless 0.8.0 (https://github.com/PaulJuliusMartinez/jless)
-dive_0.10.0_linux_amd64.deb 0.10.0 (https://github.com/wagoodman/dive)
-golangci-lint-1.47.3-linux-amd64.deb 1.47.3 (https://github.com/golangci/golangci-lint)
+crictl 1.24.2 (https://github.com/kubernetes-sigs/cri-tools)
+cmctl 1.9.1 (https://github.com/cert-manager/cert-manager)
+ah 1.9.0 (https://github.com/artifacthub/hub)
+karmor 0.7.12 (https://github.com/kubearmor/kubearmor-client)
+gator 3.9.0 (https://github.com/open-policy-agent/gatekeeper)
+doppler 3.40.1 (https://github.com/DopplerHQ/cli)
 copper 2.0.1 (https://github.com/cloud66-oss/copper)
 yq 4.27.2 (https://github.com/mikefarah/yq)
 skaffold 1.39.1 (https://github.com/GoogleContainerTools/skaffold)
 stern 1.11.0 (https://github.com/wercker/stern)
 helmfile 0.144.0 (https://github.com/roboll/helmfile)
 kops 1.24.1 (https://github.com/kubernetes/kops)
-cosign 1.10.0 (https://github.com/sigstore/cosign)
+cosign 1.10.1 (https://github.com/sigstore/cosign)
 hadolint 2.10.0 (https://github.com/hadolint/hadolint)
-kubeaudit 0.19.0 (https://github.com/Shopify/kubeaudit)
 kwctl 1.1.1 (https://github.com/kubewarden/kwctl)
-kubectx 0.9.4 (https://github.com/ahmetb/kubectx)
-kubens 0.9.4 (https://github.com/ahmetb/kubectx)
+dive_0.10.0_linux_amd64.deb 0.10.0 (https://github.com/wagoodman/dive)
+golangci-lint-1.48.0-linux-amd64.deb 1.48.0 (https://github.com/golangci/golangci-lint)
+chain-bench 0.1.3 (https://github.com/aquasecurity/chain-bench)
 eksctl 0.107.0 (https://github.com/weaveworks/eksctl)
 kubesec 2.11.5 (https://github.com/controlplaneio/kubesec)
 audit2rbac 0.9.0 (https://github.com/liggitt/audit2rbac)
 terrascan 1.15.2 (https://github.com/tenable/terrascan)
-crictl 1.24.2 (https://github.com/kubernetes-sigs/cri-tools)
-tfscan 0.6.3 (https://github.com/wils0ns/tfscan)
-chain-bench 0.1.3 (https://github.com/aquasecurity/chain-bench)
-cmctl 1.9.1 (https://github.com/cert-manager/cert-manager)
-kube-score 1.14.0 (https://github.com/zegl/kube-score)
 cloudquery 0.32.1 (https://github.com/cloudquery/cloudquery)
 steampipe 0.15.4 (https://github.com/turbot/steampipe)
 kubeval 0.16.1 (https://github.com/instrumenta/kubeval)
-promtool 2.37.0 (https://github.com/prometheus/prometheus)
-amtool 0.24.0 (https://github.com/prometheus/alertmanager)
-pint 0.28.5 (https://github.com/cloudflare/pint)
-kube-linter 0.4.0 (https://github.com/stackrox/kube-linter)
 mmake 1.4.0 (https://github.com/tj/mmake)
 badrobot 0.1.2 (https://github.com/controlplaneio/badrobot)
 config-lint 1.6.0 (https://github.com/stelligent/config-lint)
 conftest 0.34.0 (https://github.com/open-policy-agent/conftest)
 polaris 7.0.1 (https://github.com/fairwindsops/polaris)
-karmor 0.7.12 (https://github.com/kubearmor/kubearmor-client)
-gator 3.9.0 (https://github.com/open-policy-agent/gatekeeper)
-doppler 3.40.1 (https://github.com/DopplerHQ/cli)
 httpx 1.2.4 (https://github.com/projectdiscovery/httpx)
+tfscan 0.6.3 (https://github.com/wils0ns/tfscan)
+kube-score 1.14.0 (https://github.com/zegl/kube-score)
+kubeaudit 0.19.0 (https://github.com/Shopify/kubeaudit)
+datree 1.6.6 (https://github.com/datreeio/datree)
+docker-bench-security 1.3.6 (https://github.com/docker/docker-bench-security)
+kubiscan 1.4 (https://github.com/cyberark/KubiScan)
+testssl 3.0.7 (https://github.com/drwetter/testssl.sh)
+jless 0.8.0 (https://github.com/PaulJuliusMartinez/jless)
+kubectx 0.9.4 (https://github.com/ahmetb/kubectx)
+kubens 0.9.4 (https://github.com/ahmetb/kubectx)
+promtool 2.37.0 (https://github.com/prometheus/prometheus)
+amtool 0.24.0 (https://github.com/prometheus/alertmanager)
+pint 0.28.5 (https://github.com/cloudflare/pint)
+kube-linter 0.4.0 (https://github.com/stackrox/kube-linter)
 tetragon (initial release)
 fish, version 3.5.1
 kubectl Client Version: v1.24.3 Kustomize Version: v4.5.4
@@ -73,13 +74,13 @@ gh version 2.14.3 (2022-07-26) https://github.com/cli/cli/releases/tag/v2.14.3
 gcloud Google Cloud SDK 396.0.0 alpha 2022.07.29 beta 2022.07.29 bq 2.0.75 bundled-python3-unix 3.9.12 core 2022.07.29 gcloud-crc32c 1.0.0 gsutil 5.11
 tkn Client version: 2020-04-01T10:57:38Z
 minikube version: v1.26.1 commit: 62e108c3dfdec8029a890ad6d8ef96b6461426dc
-kind version 0.15.0-alpha+81790560be00f8
+kind version 0.15.0-alpha+3ad5fe9ee9c8e5
 oc Client Version: 4.8.11
 **Error: don't know how to get version information from kubectl-convert
 roxctl 3.71.0
-aws-cli/2.7.20 Python/3.9.11 Linux/5.10.102.1-microsoft-standard-WSL2 exe/x86_64.debian.11 prompt/off
-grype Application: grype Version: 0.44.0 Syft Version: v0.52.0 BuildDate: 2022-07-25T16:28:13Z GitCommit: a6ec8f11be5fdc116dc7bbfebdc03bfc13cd2005 GitDescription: v0.44.0 Platform: linux/amd64 GoVersion: go1.18.4 Compiler: gc Supported DB Schema: 4
-syft 0.53.2
+aws-cli/2.7.21 Python/3.9.11 Linux/5.10.102.1-microsoft-standard-WSL2 exe/x86_64.debian.11 prompt/off
+grype Application: grype Version: 0.46.0 Syft Version: v0.53.4 BuildDate: 2022-08-04T14:48:21Z GitCommit: c755c7304f4b2758ef37ce43480d2bd6826972af GitDescription: v0.46.0 Platform: linux/amd64 GoVersion: go1.18.4 Compiler: gc Supported DB Schema: 4
+syft 0.53.4
 helm version.BuildInfo{Version:"v3.9.2", GitCommit:"1addefbfe665c350f4daf868a9adc5600cc064fd", GitTreeState:"clean", GoVersion:"go1.17.12"}
 docker-slim version linux|Transformer|1.37.5|86fbd29ab3549fa564e87e4770178480cb0542d3|2022-03-21_06:10:20AM
 okteto version 2.5.2 
@@ -115,7 +116,7 @@ diff	3.5.0  	Preview helm upgrade changes as a diff
 ginkgo Ginkgo Version 2.1.4
 **Error: don't know how to get version information from tfk8s
 **Error: don't know how to get version information from nvm
-snyk 1.982.0
+snyk 1.984.0
 npx 10.2.2
 yarn 1.22.19
 bw 2022.6.2
@@ -137,6 +138,6 @@ robusta 0.0.1
 thefuck 3.32
 vault-cli 3.1.0
 yubikey-manager 4.0.9
-checkov 2.1.92
+checkov 2.1.98
 sdccli 0.7.14
 vexy 0.3.0
