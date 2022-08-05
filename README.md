@@ -111,7 +111,8 @@ make run RUN_SHELL=/bin/bash
     * [Kube-hunter](https://github.com/aquasecurity/kube-hunter): hunt for security weaknesses in Kubernetes clusters
     * [KubeScape](https://github.com/armosec/kubescape): multi-cloud K8s risk analysis, security compliance, RBAC visualizer and image vulnerabilities scanning
     * [polaris](https://github.com/fairwindsops/polaris/): CLI to check Kubernetes pods and controllers using best practices
-    * [KubeArmor](https://github.com/kubearmor/KubeArmor): runtime security enforcement (process execution, file access, networking) containers and node using AppArmor, SELinux or BPF-LSM 
+    * [KubeArmor](https://github.com/kubearmor/KubeArmor): runtime security enforcement (process execution, file access, networking) containers and node using AppArmor, SELinux or BPF-LSM
+    * [Datree](https://github.com/datreeio/datree): automatically validates Kubernetes objects for rule violations, ensuring no misconfigurations reach production
     * [kubectl kubesec-scan](https://github.com/controlplaneio/kubectl-kubesec): security risk analysis
     * [kubectl score](https://github.com/zegl/kube-score): static code analysis for Kubernetes object definitions
     * [kubectl popeye](https://popeyecli.io/): scan cluster for issues
@@ -149,7 +150,8 @@ make run RUN_SHELL=/bin/bash
 * General security and networking
   * [ClamAV](http://www.clamav.net/downloads): Detect malware and virus on Windows or Linux hosts
   * [testssl.sh](https://testssl.sh): checks a server ports for TLS/SSL ciphers, protocols, recent cryptographic flaws, etc
-  * [tor, torify](https://gitlab.torproject.org/tpo/team): use a different IP for requests via a p2p connection sharing network 
+  * [tor, torify](https://gitlab.torproject.org/tpo/team): use a different IP for requests via a p2p connection sharing network
+  * [httpx](https://github.com/projectdiscovery/httpx): fast multi-purpose HTTP toolkit to run multiple prober designed to maintain the result reliability with increased threads
   * [Bitwarden cli (bw)](https://github.com/bitwarden/cli): cli to open source Bitwarden secret manager
   * [Doppler cli](https://github.com/DopplerHQ/cli): multi-cloud SecretOps platform
   * [1Password cli](https://1password.com/downloads/command-line/): cli to 1Password secret manager

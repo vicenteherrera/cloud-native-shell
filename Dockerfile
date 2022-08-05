@@ -254,6 +254,12 @@ RUN REPO="open-policy-agent/gatekeeper" ZFILE="gator-vVERSION-linux-amd64.tar.gz
 # doppler
 RUN REPO="DopplerHQ/cli" ZFILE="doppler_VERSION_linux_amd64.tar.gz" FILE="doppler" gh_install
 
+# httpx
+RUN REPO="projectdiscovery/httpx" ZFILE="httpx_VERSION_linux_amd64.zip" FILE="httpx" gh_install
+
+# datree
+RUN REPO="datreeio/datree"  ZFILE="datree-cli_VERSION_Linux_x86_64.zip" FILE="datree" gh_install
+
 
 # Custom installation from GitHub
 
