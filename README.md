@@ -217,6 +217,7 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
       * [Prisma Cloud](https://www.paloaltonetworks.com/prisma/environments/kubernetes): formerly known as Twistlock
       * [Lacework](https://www.lacework.com/)
       * [Anchore](https://anchore.com/): full platform, in addition to its open source tools
+      * [Mondoo](https://mondoo.com/platform/)
 * Policy / Admission Controller
   * [Gatekeeper](https://github.com/open-policy-agent/gatekeeper): admission controller OPA based
   * [Kyverno](https://github.com/kyverno/kyverno): policy engine and admission controller
@@ -237,14 +238,20 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
 * Observability
   * [Prometheus, Grafana, Alertmanager](https://github.com/prometheus-community/helm-charts): observability platform
   * [Robusta](https://github.com/robusta-dev/robusta): observability reporting
+  * [Fluentd](https://github.com/fluent/fluentd): collects events from various data sources and writes them to files, RDBMS, NoSQL, IaaS, SaaS, Hadoop and so on
+  * [Logstash](https://github.com/elastic/logstash): ingests data from a multitude of sources simultaneously, transforms it, and then sends it to your favorite "stash."
+  
 * Networking
   * [Calico](https://projectcalico.docs.tigera.io/about/about-calico): network security solution dataplane
   * [Istio](https://github.com/istio/istio): service mesh to integrate microservices and manage traffic flow
   * [Hubble](https://github.com/cilium/hubble): networking and security observability platform built on top of Cilium and eBPF
 * Other
+  * [Crossplane](https://crossplane.io/docs/v1.9/getting-started/install-configure.html): provision, compose, and consume infrastructure using the Kubernetes API
   * [JFrog Artifactory CE](https://jfrog.com/community/download-artifactory-oss/): binary artifact repositories
   * [GitLab CE](https://gitlab.com/gitlab-org/gitlab): software development platform with version control, issue tracking, code review, CI/CD, and more
-  * [Crossplane](https://crossplane.io/docs/v1.9/getting-started/install-configure.html): provision, compose, and consume infrastructure using the Kubernetes API
+  * [Sentry](https://github.com/getsentry/sentry): developer-first error tracking and performance monitoring platform
+  * [Graylog](https://github.com/Graylog2/graylog-docker): centralized logging solution that enables aggregating and searching through logs
+
 
 </details>
 
@@ -275,6 +282,7 @@ Software
   * [Yaradare](https://github.com/deepfence/YaRadare): YAR malware container image scanner
   * [SecretScanner](https://github.com/deepfence/SecretScanner): find unprotected secrets in container images or file systems
   * [PacketStreamer](https://github.com/deepfence/PacketStreamer): remote packet capture and collection tool
+  * [Defect Dojo](https://github.com/DefectDojo/django-DefectDojo): security orchestration and vulnerability management platform, push findings to systems like JIRA and Slack
 * Kubernetes installation and distributions
   * [KubeAdm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/): Kubernetes installation tool
   * [OKD](https://www.okd.io/installation/): Kubernetes distribution base for OpenShift
@@ -286,6 +294,23 @@ Software
   * [Confidential GKE Nodes](https://cloud.google.com/kubernetes-engine/docs/how-to/confidential-gke-nodes)
   * [Firecraker](https://firecracker-microvm.github.io/)
   * [gVisor](https://gvisor.dev/)
+* Cloud provider's security tools
+  * AWS
+    * [Security Hub](https://aws.amazon.com/security-hub/)
+    * [Guard Duty](https://docs.aws.amazon.com/guardduty/latest/ug/malware-protection.html)
+    * [Control Tower](https://aws.amazon.com/controltower/)
+  * Google
+    * [Security Command Center](https://cloud.google.com/security-command-center)
+  * Azure
+    * [Microsoft Defender for Cloud](https://docs.microsoft.com/en-us/azure/defender-for-cloud/defender-for-cloud-introduction)
+* Other security platforms
+  * [Qualys](https://www.qualys.com/): identify assets on your global hybrid-IT—on prem, endpoints, clouds, containers, mobile, OT and IoT—for a complete, categorized inventory
+  * [Checkpoint](https://www.checkpoint.com/): software and combined hardware and software products for IT security, including network security, endpoint security, cloud security, mobile security, data security and security management
+  * [Rapid7](https://www.rapid7.com/)
+  * [SentinelOne](https://sentinelone.com/)
+  * [Splunk](https://www.splunk.com/)
+  * [Snyk](https://snyk.io/)
+  * [CyberArk](https://www.cyberark.com/)
 * Other tools
   * [markmap](https://markmap.js.org/docs#markmap-cli): markdown mindmap generation
   * [plantuml](https://plantuml.com/starting): markdown UML diagram generation
@@ -299,6 +324,9 @@ Links and information
   * Benchmarks
     * [CIS Benchmarks](https://www.cisecurity.org/cis-benchmarks/): security standards for hardening IT systems and data against cyberattacks
     * [Security Technical Implementation Guides (STIGs)](https://public.cyber.mil/stigs/): checklist to ensure and enhance security in systems
+  * Cloud Best Practices
+    * [GCP Security Foundations Blueprint](https://cloud.google.com/architecture/security-foundations)
+    * [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/welcome.html)
   * Vulnerability databases
     * [MITRE Common Vulnerability and Exposures (CVE)](https://www.cve.org/): a catalog of known security threats
     * [NIST Vulneratibility Database (NVD)](https://nvd.nist.gov/): enhances CVE with scores and exploitation information
