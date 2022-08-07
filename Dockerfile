@@ -635,10 +635,10 @@ RUN python3 -m pip install --user --no-cache pipx && \
 
 # Pip: Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, , 
 # docker-squash, illuminatio, vault-cli, cve-bin-tool, Cloud Custodian (c7n),
-# robusta, in-toto, Anchore cli
+# robusta, in-toto, Anchore cli, swid-generator
 RUN SOFTWARE="kube-hunter detect-secrets yubikey-manager thefuck docker-squash \
         ansible paramiko illuminatio vault-cli cve-bin-tool c7n \
-        robusta in-toto anchorecli" && \
+        robusta in-toto anchorecli swid-generator" && \
     pip install --user --no-cache $SOFTWARE && \
     pip list | grep -F "$(echo "$SOFTWARE" | tr -s ' ' | tr " " '\n')" - | tr -s ' ' \
         | tee -a sbom.txt

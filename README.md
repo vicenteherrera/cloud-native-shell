@@ -126,6 +126,7 @@ make run RUN_SHELL=/bin/bash
      * [chain-bench](https://github.com/aquasecurity/chain-bench): CIS Software Supply Chain benchmark
      * [Syft](https://github.com/anchore/syft): generate SBOM from container in different formats
      * [Vexy](https://github.com/madpah/vexy): generate VEX (Vulnerability Exploitability Exchange) in [CycloneDX](https://cyclonedx.org/) format
+     * [swid-generator](https://pypi.org/project/swid-generator/): generates [SWID tags](https://csrc.nist.gov/projects/Software-Identification-SWID) from Linux package managers like dpkg, rpm or pacman
   * Container vulnerability scanners
     * [Trivy](https://github.com/aquasecurity/trivy)
     * [Grype](https://github.com/anchore/grype)
@@ -321,6 +322,7 @@ Links and information
   * [MITRE ATT&CK](https://attack.mitre.org/), [ATT&CK navigator](https://mitre-attack.github.io/attack-navigator/), and [D3FEND](https://d3fend.mitre.org/)
   * [MITRE Common Weakness Enumeration (CWE)](https://cwe.mitre.org/): list of software and hardware weakness types
   * [Cloud Security Alliance](https://cloudsecurityalliance.org/): information to define and raise awareness of best practices to ensure a secure cloud computing environment
+  * [Open Web Application Security Project (OWASP)](https://owasp.org/): an online community that produces freely-available articles, methodologies, documentation, tools, and technologies in the field of web application security
   * Benchmarks
     * [CIS Benchmarks](https://www.cisecurity.org/cis-benchmarks/): security standards for hardening IT systems and data against cyberattacks
     * [Security Technical Implementation Guides (STIGs)](https://public.cyber.mil/stigs/): checklist to ensure and enhance security in systems

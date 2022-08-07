@@ -135,9 +135,10 @@ in-toto 1.2.0
 kube-hunter 0.6.8
 paramiko 2.11.0
 robusta 0.0.1
+swid-generator 1.1.0
 thefuck 3.32
 vault-cli 3.1.0
 yubikey-manager 4.0.9
-checkov 2.1.98
+checkov 2.1.103
 sdccli 0.7.14
 vexy 0.3.0
