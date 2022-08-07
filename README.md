@@ -354,5 +354,6 @@ Links and information
   * Software Bill of Materials (SBOM)
     * [CycloneDX](https://cyclonedx.org/): lightweight SBOM standard useful for application security contexts and supply chain component analysis
     * [Software Product Data Exchange (SPDX)](https://spdx.dev/specifications/): international open standard (ISO/IEC 5962:2021) format for communicating the components, licenses, and copyrights associated with a software package
+    * [International standard for software identification tags (SWID)](https://nvlpubs.nist.gov/nistpubs/ir/2016/NIST.IR.8060.pdf): a SWID tag is a structured set of data elements that identify and describe a software product
 
 </details>
