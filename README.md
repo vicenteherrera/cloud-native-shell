@@ -189,7 +189,7 @@ make run RUN_SHELL=/bin/bash
   * [z](https://github.com/rupa/z): smart directory changer
 
 
-## Other open source Cloud Native tools for a cluster
+## Other Cloud Native tools to run in a cluster
 
 The following Cloud Native tools should be installed in the cluster/nodes to be able to use them.
 
@@ -236,6 +236,7 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
   * [Notary](https://github.com/notaryproject/notary): agent and server to share signed verified content
   * [cert-manager](https://cert-manager.io/docs/usage/cmctl/#installation): certificate manager
   * [StackHawk](https://www.stackhawk.com/): DAST and API security testing tool that runs in CI/CD
+  * [Kaniko](https://github.com/GoogleContainerTools/kaniko#running-kaniko-in-a-kubernetes-cluster): a tool to build container images from a Dockerfile, inside a container or Kubernetes cluster
 * Observability
   * [Prometheus, Grafana, Alertmanager](https://github.com/prometheus-community/helm-charts): observability platform
   * [Robusta](https://github.com/robusta-dev/robusta): observability reporting
