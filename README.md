@@ -333,14 +333,17 @@ Links and information
   * Vulnerability databases
     * [MITRE Common Vulnerability and Exposures (CVE)](https://www.cve.org/): a catalog of known security threats
     * [NIST Vulneratibility Database (NVD)](https://nvd.nist.gov/): enhances CVE with scores and exploitation information
-    * [secwiki.cloud](https://www.secwiki.cloud/): cloud vulnerability wiki
-    * [cloudvulndb.org](https://www.cloudvulndb.org/): open cloud vulnerability & security issue database
     * [CIRCL hashlookup](https://www.circl.lu/services/hashlookup/): free lookup hash values against known database of files (malicious/non malicious)
-    * [Virustotal API](https://developers.virustotal.com/reference/overview)
     * [GitHub Advisory Database](https://github.com/github/advisory-database): a free and open source community driven database of CVEs and GitHub-originated security advisories affecting the open source world
-    * [Red Hat Security Updates](https://access.redhat.com/security/security-updates/#/)
-    * [SUSE Update Advisories](https://www.suse.com/support/update/)
-    * [Ubuntu Security Notices](https://ubuntu.com/security/notices)
+    * [Virustotal API](https://developers.virustotal.com/reference/overview)    
+    * Cloud vuln db
+      * [secwiki.cloud](https://www.secwiki.cloud/): cloud vulnerability wiki
+      * [cloudvulndb.org](https://www.cloudvulndb.org/): open cloud vulnerability & security issue database
+    * Distro specific
+      * [Debian Security Advisories](https://www.debian.org/security/)
+      * [Red Hat Security Updates](https://access.redhat.com/security/security-updates/#/)
+      * [SUSE Update Advisories](https://www.suse.com/support/update/)
+      * [Ubuntu Security Notices](https://ubuntu.com/security/notices)
   * Malicious binaries and activity samples
     * [The Zoo](https://github.com/ytisf/theZoo): a live malware repository
     * [Adversary Emulation Library](https://github.com/center-for-threat-informed-defense/adversary_emulation_library): a library of adversary emulation plans to allow organizations to evaluate their defensive capabilities against the real-world threats    
@@ -349,7 +352,7 @@ Links and information
 * Standards and metadata formats
   * [Grafeas](https://grafeas.io/): metadata for software supply chain
   * [Open Security Controls Assessment Language (OSCAL)](https://csrc.nist.gov/Projects/open-security-controls-assessment-language): standarized formats for the publication, implementation, and assessment of security controls
-  * [Security Content Automation Protocol (SCAP)](https://csrc.nist.gov/projects/security-content-automation-protocol): interoperable specifications for security
+  * [Security Content Automation Protocol (SCAP)](https://csrc.nist.gov/projects/security-content-automation-protocol): interoperable specifications for security controls, [more](https://www.cisecurity.org/insights/blog/secure-configurations-and-the-power-of-scap)
   * [Structured Threat Information Expression (STIX)](https://stixproject.github.io/about/): language to exchange cyber threat intelligent
   * Vulnerability related
     * [Vulnerability Exploitability Exchange (VEX)](https://cyclonedx.org/capabilities/vex/): assess the exploitability of vulnerabilities in products
