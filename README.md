@@ -75,7 +75,6 @@ make run RUN_SHELL=/bin/bash
   * [Helmfile](https://github.com/roboll/helmfile): deploy several Helm charts at once
   * [kops](https://kops.sigs.k8s.io/getting_started/install/): provision Kubernetes clusters on cloud providers
   * [Stern](https://github.com/wercker/stern): tail multiple pod logs on Kubernetes
-  * [kubeval](https://github.com/instrumenta/kubeval): validate Kubernetes YAML using schemas generated from the Kubernetes OpenAPI specification
   * [tfk8s](https://github.com/jrhouston/tfk8s): migrate YAML manifests to the [Terraform Kubernetes Provider](https://github.com/hashicorp/terraform-provider-kubernetes)
   * [Carvel tools](https://carvel.dev/ytt/docs/v0.41.0/install/): misc tools (kapp-controller, ytt, kapp, kbld, imgpkg, vendir)
   * [kube-lineage](https://github.com/tohjustin/kube-lineage/): display all dependencies or dependents of an object in a Kubernetes cluster
@@ -101,6 +100,7 @@ make run RUN_SHELL=/bin/bash
   * [Robusta cli](https://docs.robusta.dev/master/installation.html): cli to Robusta Kubernetes troubleshooting and automation platform
 * Cloud Native security
   * Linters
+    * [kubeval](https://github.com/instrumenta/kubeval): validate Kubernetes YAML using schemas generated from the Kubernetes OpenAPI specification
     * [kube-linter](https://github.com/stackrox/kube-linter): checks Kubernetes YAML files and Helm charts against a variety of best practices
     * [KubeAudit](https://github.com/Shopify/kubeaudit): audit Kubernetes clusters for security concerns
     * [Bad Robot](https://github.com/controlplaneio/badrobot): Kubernetes Operator static analys for high risk configurations
@@ -111,7 +111,7 @@ make run RUN_SHELL=/bin/bash
     * [Kube-hunter](https://github.com/aquasecurity/kube-hunter): hunt for security weaknesses in Kubernetes clusters
     * [KubeScape](https://github.com/armosec/kubescape): multi-cloud K8s risk analysis, security compliance, RBAC visualizer and image vulnerabilities scanning
     * [polaris](https://github.com/fairwindsops/polaris/): CLI to check Kubernetes pods and controllers using best practices
-    * [KubeArmor](https://github.com/kubearmor/KubeArmor): runtime security enforcement (process execution, file access, networking) containers and node using AppArmor, SELinux or BPF-LSM
+    * [KubeArmor CLI (karmor)](https://github.com/kubearmor/KubeArmor): runtime security enforcement (process execution, file access, networking) containers and node using AppArmor, SELinux or BPF-LSM
     * [Datree](https://github.com/datreeio/datree): automatically validates Kubernetes objects for rule violations, ensuring no misconfigurations reach production
     * [kubectl kubesec-scan](https://github.com/controlplaneio/kubectl-kubesec): security risk analysis
     * [kubectl score](https://github.com/zegl/kube-score): static code analysis for Kubernetes object definitions
@@ -124,9 +124,10 @@ make run RUN_SHELL=/bin/bash
      * [cosign](https://github.com/sigstore/cosign): container signing, verification andstorage in an OCI registry
      * [in-toto](https://github.com/in-toto/in-toto): verify signed tasks in a pipeline
      * [chain-bench](https://github.com/aquasecurity/chain-bench): CIS Software Supply Chain benchmark
-     * [Syft](https://github.com/anchore/syft): generate SBOM from container in different formats
-     * [Vexy](https://github.com/madpah/vexy): generate VEX (Vulnerability Exploitability Exchange) in [CycloneDX](https://cyclonedx.org/) format
-     * [swid-generator](https://pypi.org/project/swid-generator/): generates [SWID tags](https://csrc.nist.gov/projects/Software-Identification-SWID) from Linux package managers like dpkg, rpm or pacman
+     * Software Bill of Materials
+       * [Syft](https://github.com/anchore/syft): generate SBOM from container in different formats
+       * [Vexy](https://github.com/madpah/vexy): generate VEX (Vulnerability Exploitability Exchange) in [CycloneDX](https://cyclonedx.org/) format
+       * [swid-generator](https://pypi.org/project/swid-generator/): generates [SWID tags](https://csrc.nist.gov/projects/Software-Identification-SWID) from Linux package managers like dpkg, rpm or pacman
   * Container vulnerability scanners
     * [Trivy](https://github.com/aquasecurity/trivy)
     * [Grype](https://github.com/anchore/grype)
@@ -209,9 +210,10 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
     * [ThreatMapper](https://github.com/deepfence/ThreatMapper): open source Kubernetes security platform
     * [Wazuh](https://github.com/wazuh/wazuh-kubernetes/blob/master/instructions.md): open source Kubernetes security platform
     * [SUSE Open Security Platform](https://github.com/neuvector/neuvector): formerly known as NeuVector when it wasn't open source
-    * [KubeArmor CLI (karmor)](https://github.com/kubearmor/KubeArmor): runtime security enforcement (process execution, file access, networking) containers and node using AppArmor, SELinux or BPF-LSM
-    * [Security Profiles Operator](https://github.com/kubernetes-sigs/security-profiles-operator): make it easier for users to use SELinux, seccomp and AppArmor in Kubernetes clusters
     * [StackRox](https://www.redhat.com/en/technologies/cloud-computing/openshift/advanced-cluster-security-kubernetes): formerly an independent product, now open source and part of OpenShift, but you can also install it on Kubernetes
+    * SELinux and Apparmour related
+      * [KubeArmor](https://github.com/kubearmor/KubeArmor): runtime security enforcement (process execution, file access, networking) containers and node using AppArmor, SELinux or BPF-LSM
+      * [Security Profiles Operator](https://github.com/kubernetes-sigs/security-profiles-operator): make it easier for users to use SELinux, seccomp and AppArmor in Kubernetes clusters
     * Privative platforms
       * [Sysdig](https://sysdig.com/products/secure/)
       * [Aqua](https://www.aquasec.com/)
