@@ -37,6 +37,10 @@ make run
 make run RUN_SHELL=/bin/bash
 ```
 
+## Notes about users
+
+* If you build the container yourself with the makefile, it will use your current username, userid, and a "changeme" sudo password. See makefile for more info.
+* You can use docker-in-docker from within the container using "sudo" before executing docker related commands.
 
 ## Software included
 

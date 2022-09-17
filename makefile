@@ -72,6 +72,9 @@ layer-size:
 		| ./scripts/str_replace.pl "user=vicen uid=1000 pass=changeme shell=/usr/bin/fish " "" \
 		> info/layer-size.txt
 
+scan:
+	@$(MAKE) -s run RUN_SHELL="sudo trivy i cloud-native-shell --security-checks vuln --timeout 10m" | tee info/scan.txt
+
 # run the container image, mounting local directories with credentials for CLI tools
 run:
 	KUBEDIR_PARAM=""  && [ -d "$$HOME/.kube" ]     &&  KUBEDIR_PARAM="-v $$HOME/.kube:/home/$$(id -un)/.kube"; \
