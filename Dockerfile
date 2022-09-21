@@ -149,6 +149,9 @@ RUN REPO="DopplerHQ/cli" ZFILE="doppler_VERSION_linux_amd64.tar.gz" FILE="dopple
 
 # not compressed
 
+# Terragrunt
+RUN REPO="gruntwork-io/terragrunt" ZFILE="terragrunt_linux_amd64" XFILE="linux_terragrunt" gh_install
+
 # copper
 RUN REPO="cloud66-oss/copper" ZFILE="linux_amd64_2.0.1" FILE="linux_amd64_2.0.1" XFILE="copper" gh_install
 

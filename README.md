@@ -94,6 +94,7 @@ make run RUN_SHELL=/bin/bash
   * [Azure cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
   * [Oracle Cloud cli](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm)
   * [Terraform](https://github.com/hashicorp/terraform): manage cloud assest with a standard language for all providers
+  * [Terragrunt](https://github.com/gruntwork-io/terragrunt): Terraform wrapper for keeping configurations DRY, working with multiple Terraform modules, and managing remote state
   * [CloudQuery](https://github.com/cloudquery/cloudquery/): query cloud resources using SQL
   * [SteamPipe](https://github.com/turbot/steampipe/): query cloud resources using SQL
   * [Cloud Custodian](https://cloudcustodian.io/docs/quickstart/index.html): query cloud assests with a standard language for all providers
