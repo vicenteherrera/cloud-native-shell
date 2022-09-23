@@ -153,7 +153,7 @@ RUN REPO="DopplerHQ/cli" ZFILE="doppler_VERSION_linux_amd64.tar.gz" FILE="dopple
 RUN REPO="gruntwork-io/terragrunt" ZFILE="terragrunt_linux_amd64" XFILE="linux_terragrunt" gh_install
 
 # copper
-RUN REPO="cloud66-oss/copper" ZFILE="linux_amd64_2.0.1" FILE="linux_amd64_2.0.1" XFILE="copper" gh_install
+RUN REPO="cloud66-oss/copper" ZFILE="linux_amd64_VERSION" FILE="linux_amd64_VERSION" XFILE="copper" gh_install
 
 # yq
 RUN REPO="mikefarah/yq" ZFILE="yq_linux_amd64" FILE="yq_linux_amd64" XFILE="yq" gh_install
@@ -200,9 +200,6 @@ RUN REPO="liggitt/audit2rbac" gh_install
 
 # Terrascan
 RUN REPO="tenable/terrascan"  gh_install
-
-# CloudQuery
-RUN REPO="cloudquery/cloudquery" gh_install
 
 # Steampipe
 RUN REPO="turbot/steampipe" gh_install
@@ -274,14 +271,20 @@ RUN REPO="cloudflare/pint" ZFILE="pint-VERSION-linux-x86_64.tar.gz" FILE="pint-l
 # kube-linter
 RUN REPO="stackrox/kube-linter" ZFILE="kube-linter-linux.tar.gz" FILE="kube-linter" gh_install
 
-
-
 # Custom installation from GitHub
+
+# CloudQuery
+# Their "latest" tag wrongfully points to a test install
+RUN curl -fsSL -o cq.zip https://github.com/cloudquery/cloudquery/releases/download/cli%2Fv0.32.12/cloudquery_Linux_x86_64.zip && \
+    unzip cq.zip && sudo mv cloudquery /usr/bin/cloudquery && rm CHANGELOG.md cq.zip && \
+    version cloudquery | tee -a sbom.txt
+# TODO: Check again in the future if they have fixed it, and instead use:
+# RUN REPO="cloudquery/cloudquery" gh_install
 
 # Tetragon
 RUN curl -fsSL https://github.com/cilium/tetragon/releases/download/tetragon-cli/tetragon-linux-amd64.tar.gz \
         | tar xz && sudo mv tetragon /usr/bin/tetragon && \
-   echo "tetragon (initial release)" | tee -a sbom.txt
+    echo "tetragon (initial release)" | tee -a sbom.txt
 
 ## Install using custom apt sources
 

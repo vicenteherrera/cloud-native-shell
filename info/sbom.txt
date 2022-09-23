@@ -25,23 +25,23 @@ ah 1.9.0 (https://github.com/artifacthub/hub)
 karmor 0.9.6 (https://github.com/kubearmor/kubearmor-client)
 gator 3.9.0 (https://github.com/open-policy-agent/gatekeeper)
 doppler 3.42.0 (https://github.com/DopplerHQ/cli)
+linux_terragrunt 0.38.12 (https://github.com/gruntwork-io/terragrunt)
 copper 2.0.1 (https://github.com/cloud66-oss/copper)
 yq 4.27.5 (https://github.com/mikefarah/yq)
 skaffold 1.39.2 (https://github.com/GoogleContainerTools/skaffold)
 stern 1.11.0 (https://github.com/wercker/stern)
 helmfile 0.144.0 (https://github.com/roboll/helmfile)
-kops 1.24.3 (https://github.com/kubernetes/kops)
-cosign 1.12.0 (https://github.com/sigstore/cosign)
+kops 1.25.0 (https://github.com/kubernetes/kops)
+cosign 1.12.1 (https://github.com/sigstore/cosign)
 hadolint 2.10.0 (https://github.com/hadolint/hadolint)
 kwctl 1.1.3 (https://github.com/kubewarden/kwctl)
 dive 0.10.0 (https://github.com/wagoodman/dive)
-chain-bench 0.1.3 (https://github.com/aquasecurity/chain-bench)
-eksctl 0.111.0 (https://github.com/weaveworks/eksctl)
+chain-bench 0.1.4 (https://github.com/aquasecurity/chain-bench)
+eksctl 0.112.0 (https://github.com/weaveworks/eksctl)
 kubesec 2.11.5 (https://github.com/controlplaneio/kubesec)
 audit2rbac 0.9.0 (https://github.com/liggitt/audit2rbac)
 terrascan 1.15.2 (https://github.com/tenable/terrascan)
-cloudquery cli/v0.32.12 (https://github.com/cloudquery/cloudquery)
-steampipe 0.16.2 (https://github.com/turbot/steampipe)
+steampipe 0.16.3 (https://github.com/turbot/steampipe)
 kubeval 0.16.1 (https://github.com/instrumenta/kubeval)
 mmake 1.4.0 (https://github.com/tj/mmake)
 badrobot 0.1.2 (https://github.com/controlplaneio/badrobot)
@@ -52,17 +52,18 @@ httpx 1.2.4 (https://github.com/projectdiscovery/httpx)
 tfscan 0.6.3 (https://github.com/wils0ns/tfscan)
 kube-score 1.14.0 (https://github.com/zegl/kube-score)
 kubeaudit 0.20.0 (https://github.com/Shopify/kubeaudit)
-datree 1.6.29 (https://github.com/datreeio/datree)
+datree 1.6.33 (https://github.com/datreeio/datree)
 docker-bench-security 1.3.6 (https://github.com/docker/docker-bench-security)
-kubiscan 1.4 (https://github.com/cyberark/KubiScan)
+kubiscan 1.5 (https://github.com/cyberark/KubiScan)
 testssl 3.0.7 (https://github.com/drwetter/testssl.sh)
 jless 0.8.0 (https://github.com/PaulJuliusMartinez/jless)
 kubectx 0.9.4 (https://github.com/ahmetb/kubectx)
 kubens 0.9.4 (https://github.com/ahmetb/kubectx)
 promtool 2.37.1 (https://github.com/prometheus/prometheus)
 amtool 0.24.0 (https://github.com/prometheus/alertmanager)
-pint 0.29.4 (https://github.com/cloudflare/pint)
+pint 0.30.2 (https://github.com/cloudflare/pint)
 kube-linter 0.5.0 (https://github.com/stackrox/kube-linter)
+cloudquery version 0.32.12
 tetragon (initial release)
 fish, version 3.5.1
 kubectl Client Version: v1.25.1 Kustomize Version: v4.5.7
@@ -70,29 +71,29 @@ docker Docker version 20.10.18, build b40c2f6
 azure-cli 2.40.0 core 2.40.0 telemetry 1.0.8 Dependencies: msal 1.18.0b1 azure-mgmt-resource 21.1.0b1 Python location '/opt/az/bin/python3' Extensions directory '/root/.azure/cliextensions' Python (Linux) 3.10.5 (main, Sep 2 2022, 05:41:01) [GCC 10.2.1 20210110] Legal docs and information: aka.ms/AzureCliLegal Your CLI is up-to-date.
 trivy Version: 0.31.2
 vagrant Vagrant 2.3.0
-gh version 2.15.0 (2022-09-06) https://github.com/cli/cli/releases/tag/v2.15.0
-gcloud Google Cloud SDK 402.0.0 alpha 2022.09.12 beta 2022.09.12 bq 2.0.75 bundled-python3-unix 3.9.12 core 2022.09.12 gcloud-crc32c 1.0.0 gsutil 5.13
+gh version 2.16.0 (2022-09-21) https://github.com/cli/cli/releases/tag/v2.16.0
+gcloud Google Cloud SDK 403.0.0 alpha 2022.09.20 beta 2022.09.20 bq 2.0.77 bundled-python3-unix 3.9.12 core 2022.09.20 gcloud-crc32c 1.0.0 gsutil 5.13
 tkn Client version: 2020-04-01T10:57:38Z
 minikube version: v1.27.0 commit: 4243041b7a72319b9be7842a7d34b6767bbdac2b
-kind version 0.16.0-alpha+e3a4cd8884aa6f
+kind version 0.16.0-alpha+8d824c0794d369
 oc Client Version: 4.8.11
 **Error: don't know how to get version information from kubectl-convert
 roxctl 3.71.0
-aws-cli/2.7.33 Python/3.9.11 Linux/5.10.102.1-microsoft-standard-WSL2 exe/x86_64.debian.11 prompt/off
-grype Application: grype Version: 0.50.1 Syft Version: v0.56.0 BuildDate: 2022-09-13T18:32:52Z GitCommit: 403a535321c20565676dc633344e2bf8881cee29 GitDescription: v0.50.1 Platform: linux/amd64 GoVersion: go1.18.5 Compiler: gc Supported DB Schema: 4
-syft 0.56.0
-helm version.BuildInfo{Version:"v3.9.4", GitCommit:"dbc6d8e20fe1d58d50e6ed30f09a04a77e4c68db", GitTreeState:"clean", GoVersion:"go1.17.13"}
+aws-cli/2.7.34 Python/3.9.11 Linux/5.15.57.1-microsoft-standard-WSL2 exe/x86_64.debian.11 prompt/off
+grype Application: grype Version: 0.50.2 Syft Version: v0.57.0 BuildDate: 2022-09-20T19:54:28Z GitCommit: f094b860b9b9ebcdf06d9b9c6f7d5c000fad395b GitDescription: v0.50.2 Platform: linux/amd64 GoVersion: go1.18.6 Compiler: gc Supported DB Schema: 4
+syft 0.57.0
+helm version.BuildInfo{Version:"v3.10.0", GitCommit:"ce66412a723e4d89555dc67217607c6579ffcb21", GitTreeState:"clean", GoVersion:"go1.18.6"}
 docker-slim version linux|Transformer|1.38.0|937cad81bc1b1be05e7fc3cf0f6259c4a1f3a452|2022-08-28_05:51:34AM
 okteto version 2.7.0 
-/root/lib/oracle-cli/bin/oci 3.16.1
-kapp version 0.52.0 Succeeded
+/root/lib/oracle-cli/bin/oci 3.17.0
+kapp version 0.53.0 Succeeded
 ytt version 0.43.0
-kapp version 0.52.0 Succeeded
+kapp version 0.53.0 Succeeded
 kbld version 0.35.0 Succeeded
 imgpkg version 0.32.0 Succeeded
 vendir version 0.31.0 Succeeded
 starship 1.10.3 branch:master commit_hash: build_time:2022-09-08 17:08:03 +00:00 build_env:rustc 1.63.0 (4b91a6ea7 2022-08-08),
-kubescape Your current version is: v2.0.170
+kubescape Your current version is: v2.0.171
 act version 0.2.31
 kubectl-crossplane v1.9.1
 **Error: don't know how to get version information from conda
@@ -113,10 +114,10 @@ who-can v0.4.0
 helm plugins:
 NAME	VERSION	DESCRIPTION                           
 diff	3.5.0  	Preview helm upgrade changes as a diff
-ginkgo Ginkgo Version 2.1.6
+ginkgo Ginkgo Version 2.2.0
 **Error: don't know how to get version information from tfk8s
 **Error: don't know how to get version information from nvm
-snyk 1.1006.0
+snyk 1.1009.0
 npx 10.2.2
 yarn 1.22.19
 bw 2022.9.0
@@ -139,6 +140,34 @@ swid-generator 1.1.0
 thefuck 3.32
 vault-cli 3.1.0
 yubikey-manager 4.0.9
-checkov 2.1.210
+
+                   `-/osso/-`                    
+                `-/osssssssssso/-`                
+            .:+ssssssssssssssssssss+:.            
+        .:+ssssssssssssssssssssssssssss+:.        
+     :osssssssssssssssssssssssssssssssssssso:     
+    /sssssssssssss+::osssssso::+sssssssssssss+    
+   `sssssssssso:--..-`+ssss+ -..--:ossssssssss`   
+   /sssssssss:.+ssss/ /ssss/ /ssss+.:sssssssss/   
+  `ssssssss:.+sssssss./ssss/`sssssss+.:ssssssss`  
+  :ssssss/`-///+oss+/`-////-`/+sso+///-`/ssssss/  
+  sssss+.`.-:-:-..:/`-++++++-`/:..-:-:-.`.+sssss` 
+ :ssso..://:-`:://:.. osssso ..://::`-://:..osss: 
+ osss`-/-.`-- :.`.-/. /ssss/ ./-.`-: --`.-/-`osso 
+-sss:`//..-`` .`-`-//`.----. //-`-`. ``-..//.:sss-
+osss:.::`...`- ..`.:/`+ssss+`/:``.. -`...`::.:ssso
++ssso`:/:`--`:`--`/:-`ssssss`-//`--`:`--`:/:`osss+
+ :sss+`-//.`...`-//..osssssso..//-`...`.//-`+sss: 
+  `+sss/...::/::..-+ssssssssss+-..::/::.../sss+`  
+    -ossss+/:::/+ssssssssssssssss+/:::/+sssso-    
+      :ssssssssssssssssssssssssssssssssssss/      
+       `+ssssssssssssssssssssssssssssssss+`       
+         -osssssssssssssssssssssssssssss-         
+          `/ssssssssssssssssssssssssss/`       
+    
+               KubiScan version 1.5
+               Author: Eviatar Gerzi
+    
+checkov 2.1.223
 sdccli 0.7.14
 vexy 0.3.0
