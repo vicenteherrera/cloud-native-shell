@@ -577,11 +577,6 @@ RUN echo '# Created in Dockerfile' >>/home/${user}/.bashrc && \
 
 # Programs that install on user profile
 
-# Miniconda
-RUN curl -sSfLo install.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
-        | sh -s -- -b -p $HOME/miniconda && \
-    version conda | tee -a sbom.txt 
-
 # Krew
 RUN ( \
     set -x; cd "$(mktemp -d)" && \
