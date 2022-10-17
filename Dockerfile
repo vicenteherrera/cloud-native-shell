@@ -25,25 +25,33 @@ RUN apt-get install -y software-properties-common \
         swig libpcsclite-dev
         
 # Last line for Yubikey manager
-        
-# git, vim, build, python, ruby, podman, prometheus, nmap, ncat, netcat
+
+# Programming
+
+RUN apt-get -y install \
+        build-essential direnv \
+        python3-dev python3-pip python3-setuptools python3-venv \
+        npm \
+        ruby-full zlib1g-dev && \
+    version python3 pip ruby npm | tee -a sbom.txt
+
+# podman, prometheus, nmap, ncat, netcat
 # dnsutils (dig, nslookup, nsupdate), iputils (ping), net-tools (netstat) ,
-# python, npm, ruby
 # podman, buildah, skopeo, yamllint, shellcheck
 # tor, torify
 RUN apt-get -y install \
-        git vim build-essential direnv bat \
+        git vim bat \
         nmap ncat netcat dnsutils iputils-ping net-tools \
         conntrack \
-        python3-dev python3-pip python3-setuptools python3-venv \
-        npm \
-        ruby-full zlib1g-dev \
         podman buildah skopeo yamllint shellcheck \
         tor \
         apache2-utils && \
-    echo "npm" $(npm --version) | tee -a sbom.txt && \
-    version python3 pip ruby podman buildah skopeo yamllint shellcheck tor \
-            ab | tee -a sbom.txt
+    version git podman buildah skopeo yamllint shellcheck tor | tee -a sbom.txt && \
+    ncat --version | tee -a sbom.txt && \
+    nmap --version | grep "Nmap version" | tee -a sbom.txt && \
+    bat --version | tee -a sbom.txt && \
+    netstat --version | grep "net-tools" | tee -a sbom.txt && \
+    ab -V | grep "This is ApacheBench" | xargs -I {} echo "ab: "{} | tee -a sbom.txt
 # conntrack is a Kubernetes 1.20.2 requirement
 # net-tools installs netstat that is a requirements of kube-hunter?
 
@@ -404,7 +412,7 @@ RUN VERSION=$(curl -fsSL https://dl.k8s.io/release/stable.txt) && \
     curl -fsSLO "https://dl.k8s.io/release/$VERSION/bin/linux/amd64/kubectl-convert" && \
     sudo install -o root -g root -m 0755 kubectl-convert /usr/local/bin/kubectl-convert && \
     rm kubectl-convert && \
-    version kubectl-convert | tee -a sbom.txt
+    echo "kubectl-convert $VERSION" | tee -a sbom.txt
 
 # StackRox cli
 RUN curl -fsSLO https://mirror.openshift.com/pub/rhacs/assets/latest/bin/Linux/roxctl && \
@@ -610,12 +618,16 @@ RUN go install -mod=mod github.com/onsi/ginkgo/v2/ginkgo && \
     version ginkgo | tee -a sbom.txt
 
 # tfk8s
-RUN go install github.com/jrhouston/tfk8s@latest  && \
-    version tfk8s | tee -a sbom.txt
+RUN VERSION=$(curl -fsSL https://api.github.com/repos/jrhouston/tfk8s/releases/latest | jq '.tag_name' | xargs) && \
+    go install github.com/jrhouston/tfk8s@latest  && \
+    echo "tfk8s $VERSION" | tee -a sbom.txt
 
 # nvm
-RUN curl -fsSLo- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash && \
-    version nvm | tee -a sbom.txt
+RUN VERSION=$(curl -fsSL https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq '.tag_name' | xargs | cut -c2-) && \
+    curl -fsSLo- https://raw.githubusercontent.com/nvm-sh/nvm/v${VERSION}/install.sh | bash && \
+    export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")" && \
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+RUN echo "nvm" $(nvm --version) | tee -a sbom.txt
 
 # Snyk, npx, yarn, bitwarden cli
 RUN npm install snyk npx yarn @bitwarden/cli && \
@@ -646,7 +658,7 @@ RUN SOFTWARE="kube-hunter detect-secrets yubikey-manager thefuck docker-squash \
 
 # For KubiScan
 RUN pip install --user --no-cache kubernetes PrettyTable urllib3 && \
-    python3 /usr/local/bin/kubiscan/KubiScan.py --version | tee -a sbom.txt
+    python3 /usr/local/bin/kubiscan/KubiScan.py -h | egrep "KubiScan version" | xargs | tee -a sbom.txt
 
 ## Pipx installations
 # We use pix as these require old incompatible version libraries
