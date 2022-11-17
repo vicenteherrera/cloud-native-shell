@@ -21,10 +21,14 @@ if [ "$GHTOKEN" != "" ]; then
   echo "Using GitHub API token"
 fi
 
-http_code=$(curl --silent -L $ghtoken_param --max-time 30 --output version.txt --write-out "%{http_code}" "https://api.github.com/repos/${REPO}/releases/latest" ||:)
+url="https://api.github.com/repos/${REPO}/releases/latest"
+http_code=$(curl --silent -L $ghtoken_param --max-time 30 --output version.txt --write-out "%{http_code}" "$url" ||:)
 if [[ ${http_code} -eq 403 ]] ; then
   echo "Error 403: Forbidden"
   echo "GitHub API may have rate limited your IP address. Please wait and retry build."
+  if [ "$GHTOKEN" == "" ]; then
+    echo "You should use a GitHub API token to avoid rate limiting"
+  fi
   echo $url
   exit 1
 elif [[ ${http_code} -lt 200 || ${http_code} -gt 299 ]] ; then
