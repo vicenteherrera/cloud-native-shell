@@ -49,7 +49,7 @@ if [ "$ZFILE" == "vVERSION.tar.gz" ] && [ "$FILE" == "$ZFILE" ] && [ "$XFILE" ==
   echo "Applying heuristics to get url and file names"
   FILE=$(echo "$REPO" | sed 's|[a-zA-Z0-9_-]*/||')
   XFILE="$FILE"
-  separator="(_|-)"
+  separator="(_|-|)"
   osName="linux"
   osArch="(x86_64|amd64|64bit)"
   extension="(zip|tar\.gz|deb)"
