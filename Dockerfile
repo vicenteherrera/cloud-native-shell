@@ -170,7 +170,7 @@ RUN REPO="mikefarah/yq" ZFILE="yq_linux_amd64" FILE="yq_linux_amd64" XFILE="yq" 
 RUN REPO="GoogleContainerTools/skaffold" ZFILE="skaffold-linux-amd64" XFILE="skaffold" gh_install
 
 # Stern
-RUN REPO="wercker/stern" ZFILE="stern_linux_amd64" XFILE="stern" gh_install
+RUN REPO="stern/stern" gh_install
 
 # helmfile
 RUN REPO="roboll/helmfile" ZFILE="helmfile_linux_amd64" XFILE="helmfile" gh_install
