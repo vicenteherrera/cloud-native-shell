@@ -120,6 +120,49 @@ RUN curl -fsSL -o op.zip https://cache.agilebits.com/dist/1P/op2/pkg/v${one_pass
 COPY ./scripts/gh_install.sh /usr/local/bin/gh_install
 ARG GHTOKEN=""
 
+# heuristic
+
+## Several tools in a single RUN or we will run out of possible layers
+
+RUN REPO="stern/stern"                  gh_install &&\
+    REPO="mikefarah/yq"                 gh_install &&\
+    REPO="roboll/helmfile"              gh_install &&\
+    REPO="weaveworks/eksctl"            gh_install &&\
+    REPO="sigstore/cosign"              gh_install &&\
+    REPO="andreazorzetto/yh"            gh_install &&\
+    REPO="projectcalico/calico"         gh_install &&\
+    REPO="chainguard-dev/vex"           gh_install &&\
+    REPO="tj/mmake"                     gh_install &&\
+    REPO="controlplaneio/badrobot"      gh_install &&\
+    REPO="ryane/kfilt"                  gh_install &&\
+    REPO="ahmetb/kubectx"               gh_install &&\
+    REPO="stackrox/kube-linter"         gh_install &&\
+    REPO="controlplaneio/kubesec"       gh_install
+
+RUN REPO="turbot/steampipe"             gh_install &&\
+    REPO="stelligent/config-lint"       gh_install &&\
+    REPO="open-policy-agent/conftest"   gh_install &&\
+    REPO="fairwindsops/polaris"         gh_install &&\
+    REPO="projectdiscovery/httpx"       gh_install &&\
+    REPO="datreeio/datree"              gh_install &&\
+    REPO="gruntwork-io/terragrunt"      gh_install &&\
+    REPO="GoogleContainerTools/skaffold" gh_install &&\
+    REPO="wagoodman/dive"               gh_install &&\
+    REPO="noahgorstein/jqp"             gh_install &&\
+    REPO="hadolint/hadolint"            gh_install
+
+RUN REPO="opcr-io/policy"               gh_install &&\
+    REPO="wils0ns/tfscan"               gh_install &&\
+    REPO="liggitt/audit2rbac"           gh_install &&\
+    REPO="tenable/terrascan"            gh_install &&\
+    REPO="instrumenta/kubeval"          gh_install &&\
+    REPO="zegl/kube-score"              gh_install &&\
+    REPO="Shopify/kubeaudit"            gh_install
+
+RUN REPO="kubernetes/kops"              gh_install
+
+RUN REPO="aquasecurity/chain-bench"     gh_install
+
 # compressed inside a directory
 
 # mockgen
@@ -133,6 +176,15 @@ RUN REPO="grafana/k6" ZFILE="k6-vVERSION-linux-amd64.tar.gz" FILE="k6-vVERSION-l
 
 # golangci-lint
 RUN REPO="golangci/golangci-lint" ZFILE="golangci-lint-VERSION-linux-amd64.tar.gz" FILE="golangci-lint-VERSION-linux-amd64/golangci-lint" XFILE="golangci-lint" gh_install
+
+# istioctl
+RUN REPO="istio/istio" ZFILE="istio-VERSION-linux-amd64.tar.gz" FILE="istio-VERSION/bin/istioctl" XFILE="istioctl" gh_install
+
+# promtool (Prometheus CLI)
+RUN REPO="prometheus/prometheus" ZFILE="prometheus-VERSION.linux-amd64.tar.gz" FILE="prometheus-VERSION.linux-amd64/promtool" XFILE="promtool" gh_install
+
+# amtool (Prometheus CLI)
+RUN REPO="prometheus/alertmanager" ZFILE="alertmanager-VERSION.linux-amd64.tar.gz" FILE="alertmanager-VERSION.linux-amd64/amtool" XFILE="amtool" gh_install
 
 
 # name on repo not binary to install
@@ -155,95 +207,12 @@ RUN REPO="open-policy-agent/gatekeeper" ZFILE="gator-vVERSION-linux-amd64.tar.gz
 # doppler
 RUN REPO="DopplerHQ/cli" ZFILE="doppler_VERSION_linux_amd64.tar.gz" FILE="doppler" gh_install
 
-# not compressed
 
-# Terragrunt
-RUN REPO="gruntwork-io/terragrunt" ZFILE="terragrunt_linux_amd64" XFILE="linux_terragrunt" gh_install
+# not compressed but with version in binary name
 
 # copper
 RUN REPO="cloud66-oss/copper" ZFILE="linux_amd64_VERSION" FILE="linux_amd64_VERSION" XFILE="copper" gh_install
 
-# yq
-RUN REPO="mikefarah/yq" ZFILE="yq_linux_amd64" FILE="yq_linux_amd64" XFILE="yq" gh_install
-
-# Skaffold
-RUN REPO="GoogleContainerTools/skaffold" ZFILE="skaffold-linux-amd64" XFILE="skaffold" gh_install
-
-# Stern
-RUN REPO="stern/stern" gh_install
-
-# helmfile
-RUN REPO="roboll/helmfile" ZFILE="helmfile_linux_amd64" XFILE="helmfile" gh_install
-
-# kops
-RUN REPO="kubernetes/kops" ZFILE="kops-linux-amd64" XFILE="kops" gh_install
-
-# Cosign
-RUN REPO="sigstore/cosign" ZFILE="cosign-linux-amd64" XFILE="cosign" gh_install
-
-# Hadolint
-RUN REPO="hadolint/hadolint" ZFILE="hadolint-Linux-x86_64" XFILE="hadolint" gh_install
-
-# name on file includes os and arch
-
-# kwctl (Kubewarden cli)
-RUN REPO="kubewarden/kwctl" ZFILE="kwctl-linux-x86_64.zip" FILE="kwctl-linux-x86_64" XFILE="kwctl" gh_install
-
-# heuristic
-
-# Dive
-RUN REPO="wagoodman/dive" gh_install
-
-# chain-bench
-RUN REPO="aquasecurity/chain-bench" gh_install
-
-# eksctl
-RUN REPO="weaveworks/eksctl" gh_install
-
-# Kubesec
-RUN REPO="controlplaneio/kubesec" gh_install
-
-# Audit2RBAC
-RUN REPO="liggitt/audit2rbac" gh_install
-
-# Terrascan
-RUN REPO="tenable/terrascan"  gh_install
-
-# Steampipe
-RUN REPO="turbot/steampipe" gh_install
-
-# Kubeval
-RUN REPO="instrumenta/kubeval" gh_install
-
-# mmake
-RUN REPO="tj/mmake" gh_install
-
-# Bad Robot
-RUN REPO="controlplaneio/badrobot" gh_install
-
-# config-lint
-RUN REPO="stelligent/config-lint" gh_install
-
-# conftest
-RUN REPO="open-policy-agent/conftest" gh_install
-
-# polaris
-RUN REPO="fairwindsops/polaris" gh_install
-
-# httpx
-RUN REPO="projectdiscovery/httpx" gh_install
-
-# tfscan
-RUN REPO="wils0ns/tfscan" gh_install
-
-# kube-score
-RUN REPO="zegl/kube-score" gh_install
-
-# KubeAudit
-RUN REPO="Shopify/kubeaudit" gh_install
-
-# datree
-RUN REPO="datreeio/datree" gh_install
 
 # download from source code and not from releases
 
@@ -256,28 +225,21 @@ RUN REPO="cyberark/KubiScan" FILE="KubiScan-VERSION" XFILE="kubiscan" gh_install
 # testssl.sh
 RUN REPO="drwetter/testssl.sh" FILE="testssl.sh-VERSION" XFILE="testssl" gh_install
 
+
 # other
 
 # JLess
 RUN REPO="PaulJuliusMartinez/jless" ZFILE="jless-vVERSION-x86_64-unknown-linux-gnu.zip" FILE="jless" gh_install
 
-# Kubectx
-RUN REPO="ahmetb/kubectx" ZFILE="kubectx_vVERSION_linux_x86_64.tar.gz" FILE="kubectx" gh_install
-
 # Kubens
 RUN REPO="ahmetb/kubectx" ZFILE="kubens_vVERSION_linux_x86_64.tar.gz" FILE="kubens" gh_install
 
-# promtool (Prometheus CLI)
-RUN REPO="prometheus/prometheus" ZFILE="prometheus-VERSION.linux-amd64.tar.gz" FILE="prometheus-VERSION.linux-amd64/promtool" XFILE="promtool" gh_install
-
-# amtool (Prometheus CLI)
-RUN REPO="prometheus/alertmanager" ZFILE="alertmanager-VERSION.linux-amd64.tar.gz" FILE="alertmanager-VERSION.linux-amd64/amtool" XFILE="amtool" gh_install
-
 # pint
-RUN REPO="cloudflare/pint" ZFILE="pint-VERSION-linux-x86_64.tar.gz" FILE="pint-linux-amd64" XFILE="pint" gh_install
+RUN REPO="cloudflare/pint" ZFILE="pint-VERSION-linux-amd64.tar.gz" FILE="pint-linux-amd64" XFILE="pint" gh_install
 
-# kube-linter
-RUN REPO="stackrox/kube-linter" ZFILE="kube-linter-linux.tar.gz" FILE="kube-linter" gh_install
+# kwctl (Kubewarden cli)
+RUN REPO="kubewarden/kwctl" ZFILE="kwctl-linux-x86_64.zip" FILE="kwctl-linux-x86_64" XFILE="kwctl" gh_install
+
 
 # Custom installation from GitHub
 
@@ -622,6 +584,10 @@ RUN VERSION=$(curl -fsSL https://api.github.com/repos/jrhouston/tfk8s/releases/l
     go install github.com/jrhouston/tfk8s@latest  && \
     echo "tfk8s $VERSION" | tee -a sbom.txt
 
+# psa-checker
+RUN go install github.com/vicenteherrera/psa-checker@latest && \
+    version psa-checker | tee -a sbom.txt
+
 # nvm
 RUN VERSION=$(curl -fsSL https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq '.tag_name' | xargs | cut -c2-) && \
     curl -fsSLo- https://raw.githubusercontent.com/nvm-sh/nvm/v${VERSION}/install.sh | bash && \
@@ -640,7 +606,7 @@ RUN curl -fsSL https://pyenv.run | bash && \
 
 # Poetry
 RUN curl -fsSL https://install.python-poetry.org | python3 - && \
-    version poetry | tee -a sbom.txt
+    poetry --version | tee -a sbom.txt
 
 # Pipx
 RUN python3 -m pip install --user --no-cache pipx && \

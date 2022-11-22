@@ -13,92 +13,44 @@ Nmap version 7.80 ( https://nmap.org )
 net-tools 2.10-alpha
 ab: This is ApacheBench, Version 2.3 <$Revision: 1901567 $>
 ruby 2.7.4p191 (2021-07-07 revision a21a3b7d23) [x86_64-linux-gnu]
-jekyll 4.2.2
-bundler Bundler version 2.3.24
-dotnet 6.0.402
+jekyll 4.3.1
+bundler Bundler version 2.3.26
+dotnet 6.0.403
 go version go1.18 linux/amd64
 clamav-config 0.105.0
-mockgen 1.6.0 (https://github.com/golang/mock)
-minishift 1.34.3 (https://github.com/minishift/minishift)
-k6 0.40.0 (https://github.com/grafana/k6)
-golangci-lint 1.50.0 (https://github.com/golangci/golangci-lint)
-crictl 1.25.0 (https://github.com/kubernetes-sigs/cri-tools)
-cmctl 1.9.1 (https://github.com/cert-manager/cert-manager)
-ah 1.10.0 (https://github.com/artifacthub/hub)
-karmor 0.9.10 (https://github.com/kubearmor/kubearmor-client)
-gator 3.9.2 (https://github.com/open-policy-agent/gatekeeper)
-doppler 3.45.0 (https://github.com/DopplerHQ/cli)
-linux_terragrunt 0.39.1 (https://github.com/gruntwork-io/terragrunt)
-copper 2.0.1 (https://github.com/cloud66-oss/copper)
-yq 4.28.1 (https://github.com/mikefarah/yq)
-skaffold 1.39.2 (https://github.com/GoogleContainerTools/skaffold)
-stern 1.11.0 (https://github.com/wercker/stern)
-helmfile 0.144.0 (https://github.com/roboll/helmfile)
-kops 1.25.1 (https://github.com/kubernetes/kops)
-cosign 1.13.0 (https://github.com/sigstore/cosign)
-hadolint 2.10.0 (https://github.com/hadolint/hadolint)
-kwctl 1.1.3 (https://github.com/kubewarden/kwctl)
-dive 0.10.0 (https://github.com/wagoodman/dive)
-chain-bench 0.1.4 (https://github.com/aquasecurity/chain-bench)
-eksctl 0.115.0 (https://github.com/weaveworks/eksctl)
-kubesec 2.11.5 (https://github.com/controlplaneio/kubesec)
-audit2rbac 0.9.0 (https://github.com/liggitt/audit2rbac)
-terrascan 1.15.2 (https://github.com/tenable/terrascan)
-steampipe 0.16.4 (https://github.com/turbot/steampipe)
-kubeval 0.16.1 (https://github.com/instrumenta/kubeval)
-mmake 1.4.0 (https://github.com/tj/mmake)
-badrobot 0.1.2 (https://github.com/controlplaneio/badrobot)
-config-lint 1.6.0 (https://github.com/stelligent/config-lint)
-conftest 0.34.0 (https://github.com/open-policy-agent/conftest)
-polaris 7.1.5 (https://github.com/fairwindsops/polaris)
-httpx 1.2.4 (https://github.com/projectdiscovery/httpx)
-tfscan 0.6.3 (https://github.com/wils0ns/tfscan)
-kube-score 1.14.0 (https://github.com/zegl/kube-score)
-kubeaudit 0.20.0 (https://github.com/Shopify/kubeaudit)
-datree 1.6.37 (https://github.com/datreeio/datree)
-docker-bench-security 1.3.6 (https://github.com/docker/docker-bench-security)
-kubiscan 1.5 (https://github.com/cyberark/KubiScan)
-testssl 3.0.8 (https://github.com/drwetter/testssl.sh)
-jless 0.8.0 (https://github.com/PaulJuliusMartinez/jless)
-kubectx 0.9.4 (https://github.com/ahmetb/kubectx)
-kubens 0.9.4 (https://github.com/ahmetb/kubectx)
-promtool 2.39.1 (https://github.com/prometheus/prometheus)
-amtool 0.24.0 (https://github.com/prometheus/alertmanager)
-pint 0.30.2 (https://github.com/cloudflare/pint)
-kube-linter 0.5.0 (https://github.com/stackrox/kube-linter)
 cloudquery version 0.32.12
 tetragon (initial release)
 fish, version 3.5.1
-kubectl Client Version: v1.25.3 Kustomize Version: v4.5.7
-docker Docker version 20.10.19, build d85ef84
-azure-cli 2.41.0 core 2.41.0 telemetry 1.0.8 Dependencies: msal 1.20.0b1 azure-mgmt-resource 21.1.0b1 Python location '/opt/az/bin/python3' Extensions directory '/root/.azure/cliextensions' Python (Linux) 3.10.5 (main, Oct 10 2022, 03:02:44) [GCC 10.2.1 20210110] Legal docs and information: aka.ms/AzureCliLegal Your CLI is up-to-date.
-trivy Version: 0.32.1
-vagrant Vagrant 2.3.1
-gh version 2.17.0 (2022-10-04) https://github.com/cli/cli/releases/tag/v2.17.0
-gcloud Google Cloud SDK 405.0.1 alpha 2022.10.14 beta 2022.10.14 bq 2.0.78 bundled-python3-unix 3.9.12 core 2022.10.14 gcloud-crc32c 1.0.0 gsutil 5.14
+kubectl Client Version: v1.25.4 Kustomize Version: v4.5.7
+docker Docker version 20.10.21, build baeda1f
+azure-cli 2.42.0 core 2.42.0 telemetry 1.0.8 Dependencies: msal 1.20.0 azure-mgmt-resource 21.1.0b1 Python location '/opt/az/bin/python3' Extensions directory '/root/.azure/cliextensions' Python (Linux) 3.10.8 (main, Oct 28 2022, 04:19:18) [GCC 10.2.1 20210110] Legal docs and information: aka.ms/AzureCliLegal Your CLI is up-to-date.
+trivy Version: 0.34.0
+vagrant Vagrant 2.3.3
+gh version 2.20.2 (2022-11-15) https://github.com/cli/cli/releases/tag/v2.20.2
+gcloud Google Cloud SDK 410.0.0 alpha 2022.11.11 beta 2022.11.11 bq 2.0.81 bundled-python3-unix 3.9.12 core 2022.11.11 gcloud-crc32c 1.0.0 gsutil 5.16
 tkn Client version: 2020-04-01T10:57:38Z
-minikube version: v1.27.1 commit: fe869b5d4da11ba318eb84a3ac00f336411de7ba
-kind version 0.17.0-alpha+d53225750af998
+minikube version: v1.28.0 commit: 986b1ebd987211ed16f8cc10aed7d2c42fc8392f
+kind version 0.18.0-alpha+7d26b50a129faf
 oc Client Version: 4.8.11
-kubectl-convert v1.25.3
-roxctl 3.72.0
-aws-cli/2.8.3 Python/3.9.11 Linux/5.15.68.1-microsoft-standard-WSL2 exe/x86_64.debian.11 prompt/off
-grype Application: grype Version: 0.50.2 Syft Version: v0.57.0 BuildDate: 2022-09-20T19:54:28Z GitCommit: f094b860b9b9ebcdf06d9b9c6f7d5c000fad395b GitDescription: v0.50.2 Platform: linux/amd64 GoVersion: go1.18.6 Compiler: gc Supported DB Schema: 4
-syft 0.58.0
-helm version.BuildInfo{Version:"v3.10.1", GitCommit:"9f88ccb6aee40b9a0535fcc7efea6055e1ef72c9", GitTreeState:"clean", GoVersion:"go1.18.7"}
-docker-slim version linux|Transformer|1.38.0|937cad81bc1b1be05e7fc3cf0f6259c4a1f3a452|2022-08-28_05:51:34AM
-okteto version 2.7.0 
-/root/lib/oracle-cli/bin/oci 3.18.1
-kapp version 0.53.0 Succeeded
-ytt version 0.43.0
-kapp version 0.53.0 Succeeded
-kbld version 0.35.0 Succeeded
-imgpkg version 0.33.0 Succeeded
-vendir version 0.31.0 Succeeded
+kubectl-convert v1.25.4
+roxctl 3.72.2
+aws-cli/2.9.0 Python/3.9.11 Linux/5.15.0-53-generic exe/x86_64.debian.11 prompt/off
+grype Application: grype Version: 0.53.1 Syft Version: v0.62.1 BuildDate: 2022-11-21T16:54:40Z GitCommit: 826726d553e68cb862597a8737b83f7ade898c3b GitDescription: v0.53.1 Platform: linux/amd64 GoVersion: go1.18.7 Compiler: gc Supported DB Schema: 5
+syft 0.62.1
+helm version.BuildInfo{Version:"v3.10.2", GitCommit:"50f003e5ee8704ec937a756c646870227d7c8b58", GitTreeState:"clean", GoVersion:"go1.18.8"}
+docker-slim version linux|Transformer|1.39.0|f502574b8d8818e86e90d902708d0e32d1acf8f7|2022-10-25_05:05:23AM
+okteto version 2.9.0 
+/root/lib/oracle-cli/bin/oci 3.20.2
+kapp version 0.54.0 Succeeded
+ytt version 0.44.0
+kapp version 0.54.0 Succeeded
+kbld version 0.36.0 Succeeded
+imgpkg version 0.34.0 Succeeded
+vendir version 0.32.0 Succeeded
 starship 1.11.0 branch:master commit_hash: build_time:2022-10-15 01:47:30 +00:00 build_env:rustc 1.64.0 (a55dd71d5 2022-09-19),
-kubescape Your current version is: v2.0.172
-act version 0.2.32
-kubectl-crossplane v1.9.1
+kubescape Your current version is: v2.0.176
+act version 0.2.33
+kubectl-crossplane v1.10.1
 kubectl krew plugins:
 PLUGIN VERSION
 doctor v0.3.0
@@ -116,33 +68,27 @@ who-can v0.4.0
 helm plugins:
 NAME	VERSION	DESCRIPTION                           
 diff	3.6.0  	Preview helm upgrade changes as a diff
-ginkgo Ginkgo Version 2.3.1
 tfk8s v0.1.8
 nvm
-snyk 1.1032.0
-npx 10.2.2
-yarn 1.22.19
-bw 2022.10.0
-pyenv 2.3.5
-poetry Poetry (version 1.2.2)
+Poetry (version 1.2.2)
 pipx 1.1.0
 anchorecli 0.9.3
-ansible 6.5.0
-ansible-core 2.13.5
+ansible 6.6.0
+ansible-core 2.13.6
 c7n 0.9.15
 cve-bin-tool 3.1.1
 detect-secrets 1.4.0
-docker-squash 1.0.9
+docker-squash 1.0.10
 illuminatio 1.4.0
 in-toto 1.2.0
 kube-hunter 0.6.8
-paramiko 2.11.0
+paramiko 2.12.0
 robusta 0.0.1
 swid-generator 1.1.0
 thefuck 3.32
 vault-cli 3.1.0
-yubikey-manager 4.0.9
+yubikey-manager 5.0.0
 KubiScan version 1.5
-checkov 2.1.270
+checkov 2.2.84
 sdccli 0.7.14
 vexy 0.3.0

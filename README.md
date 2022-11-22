@@ -82,12 +82,15 @@ make run RUN_SHELL=/bin/bash
   * [tfk8s](https://github.com/jrhouston/tfk8s): migrate YAML manifests to the [Terraform Kubernetes Provider](https://github.com/hashicorp/terraform-provider-kubernetes)
   * [Carvel tools](https://carvel.dev/ytt/docs/v0.41.0/install/): misc tools (kapp-controller, ytt, kapp, kbld, imgpkg, vendir)
   * [kube-lineage](https://github.com/tohjustin/kube-lineage/): display all dependencies or dependents of an object in a Kubernetes cluster
+  * [kfil](https://github.com/ryane/kfilt): filter multidocument YAML like that coming from Helm template to select specific objects for other kubectl commands
   * [skaffold](https://github.com/GoogleContainerTools/skaffold): deploy source code to Kubernetes clusters building, pushing and deploying your application
   * [Artifact Hub cli (ah)](https://github.com/artifacthub/hub): lint packages for publishing them to Artifact Hub for CNCF projects
   * [Tekton cli](https://tekton.dev/docs/cli/): cli to Tekton cloud native CI/CD system
   * [Okteto cli](https://www.okteto.com/docs/cloud/okteto-cli): cli to Okteto shareable preview environments
   * [Crossplane cli](https://crossplane.io/docs/v1.9/getting-started/install-configure.html): provision, compose, and consume infrastructure using the Kubernetes API
-  * [crictl](https://github.com/kubernetes-sigs/cri-tools/blob/master/docs/crictl.md): inspect and debug CRI-compatible container runtimes and applications on a Kubernetes node  
+  * [crictl](https://github.com/kubernetes-sigs/cri-tools/blob/master/docs/crictl.md): inspect and debug CRI-compatible container runtimes and applications on a Kubernetes node
+  * [calicoctl](https://github.com/projectcalico/calico): in order to manage Calico APIs in the `projectcalico.org/v3` API group, calicoctl provides validation and defaulting for these resources that is not available in kubectl
+  * [istioctl](https://github.com/istio/istio): configuration command line utility that allows service operators to debug and diagnose their Istio service mesh deployments
 * Cloud
   * [AWS cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
   * [Google Cloud cli](https://cloud.google.com/sdk/gcloud)
@@ -133,6 +136,7 @@ make run RUN_SHELL=/bin/bash
        * [Syft](https://github.com/anchore/syft): generate SBOM from container in different formats
        * [Vexy](https://github.com/madpah/vexy): generate VEX (Vulnerability Exploitability Exchange) in [CycloneDX](https://cyclonedx.org/) format
        * [swid-generator](https://pypi.org/project/swid-generator/): generates [SWID tags](https://csrc.nist.gov/projects/Software-Identification-SWID) from Linux package managers like dpkg, rpm or pacman
+       * [vexctl](https://github.com/chainguard-dev/vex): a tool to apply and attest VEX (Vulnerability Exploitability eXchange) data, its purpose is to "turn off" alerts of vulnerabilities known not to affect a product
   * Container vulnerability scanners
     * [Trivy](https://github.com/aquasecurity/trivy)
     * [Grype](https://github.com/anchore/grype)
@@ -150,6 +154,7 @@ make run RUN_SHELL=/bin/bash
     * [gator](https://open-policy-agent.github.io/gatekeeper/website/docs/gator/): Gatekeeper CLI for evaluating ConstraintTemplates and Constraints
     * [detect-secrets](https://github.com/Yelp/detect-secrets): detecting secrets within a code base
     * [Illuminatio](https://github.com/inovex/illuminatio): automatically testing kubernetes network policies
+    * [policy](https://github.com/opcr-io/policy): tool for building, versioning and publishing your authorization policies, using OCI standards to manage artifacts, and the Open Policy Agent (OPA) to compile and run
     * [cmctl](https://cert-manager.io/docs/usage/cmctl/#installation): cert-manager cli
     * [Vault cli](https://www.vaultproject.io/docs/commands): secure, store and control secrets  
     * [Tetragon cli](https://github.com/cilium/tetragon): eBPF-based security observability and runtime enforcement
@@ -183,7 +188,8 @@ make run RUN_SHELL=/bin/bash
   * zsh shell
 * Command line utilities, miscelaneous
   * make, curl, wget, git, vim, nano and others...
-  * [jq](https://stedolan.github.io/jq/), [yq](https://github.com/mikefarah/yq)
+  * [jq](https://stedolan.github.io/jq/), [yq](https://github.com/mikefarah/yq), [yh](https://github.com/andreazorzetto/yh)
+  * [jqp (jq playground)](https://github.com/noahgorstein/jqp): text UI playground for exploring jq
   * [JLess](https://github.com/PaulJuliusMartinez/jless)  
   * [GitHub cli](https://cli.github.com/)
   * [GitLab cli](https://gitlab.com/gitlab-org/cli#installation)
