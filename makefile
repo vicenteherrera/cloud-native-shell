@@ -10,9 +10,14 @@ DEFAULT_SHELL=${FISH_SHELL}
 PASSWORD=changeme
 # Shell to use when running the image, unless a different one state in SHELL environment variable
 RUN_SHELL=${FISH_SHELL}
-
+# Username, group, user id and group id to use
+USER=$(shell id -un)
+GROUP=$(shell id -un)
+UID=$(shell id -u)
+GID=$(shell id -g)
 # -----------------------------------------------------------------------------------------------
 
+# If your configuration requires running Docker as sudo, this will add that command
 RUNSUDO := $(shell groups | grep ' docker ' 1>/dev/null || echo "sudo")
 
 # build the image, tag it and run it
@@ -33,10 +38,10 @@ build:
 		--build-arg one_password_ver=2.5.1 \
 		--build-arg go_ver=1.18 \
 		--build-arg dotnet_ver=6.0 \
-		--build-arg user=$$(id -un) \
-		--build-arg group=$$(id -un) \
-		--build-arg uid=$$(id -u) \
-		--build-arg gid=$$(id -g) \
+		--build-arg user=${USER} \
+		--build-arg group=${GROUP} \
+		--build-arg uid=${UID} \
+		--build-arg gid=${GID} \
 		--build-arg shell=${DEFAULT_SHELL} \
 		--build-arg pass=${PASSWORD}
 	@echo ""
@@ -48,9 +53,9 @@ build:
 
 # extract sbom from the container image
 sbom-cp:
-	docker create --name cloud-native-shell-test-copy-sbom cloud-native-shell && \
-		docker cp cloud-native-shell-test-copy-sbom:/home/$$(id -un)/sbom.txt ./info/sbom.txt ||: && \
-		docker rm cloud-native-shell-test-copy-sbom
+	${RUNSUDO} docker create --name cloud-native-shell-test-copy-sbom cloud-native-shell && \
+	${RUNSUDO} docker cp cloud-native-shell-test-copy-sbom:/home/$$(id -un)/sbom.txt ./info/sbom.txt ||: && \
+	${RUNSUDO} docker rm cloud-native-shell-test-copy-sbom
 
 # rebuild the container image ignoring cache
 upgrade:
@@ -63,13 +68,13 @@ tag:
 # generate file with layer size information
 layer-size:
 	@ echo "generating layer-size.txt" && \
-	  docker history --no-trunc cloud-native-shell \
+	  ${RUNSUDO} docker history --no-trunc cloud-native-shell \
 			--format "table {{.Size}}\t{{.CreatedBy}}" \
 		| ./scripts/str_replace.pl "GHTOKEN=$$GHTOKEN " ""  \
-	  | ./scripts/str_replace.pl "dotnet_ver=6.0 " "" | ./scripts/str_replace.pl "go_ver=1.18 " "" | ./scripts/str_replace.pl "clamav_ver=0.105.0 " "" \
-		| ./scripts/str_replace.pl "group=vicen gid=1000 " "" | ./scripts/str_replace.pl "one_password_ver=2.5.1 " "" \
-		| ./scripts/str_replace.pl "dotnet_ver=6.0 go_ver=1.18 clamav_ver=0.105.0 one_password_ver=2.5.1 " "" \
-		| ./scripts/str_replace.pl "user=vicen uid=1000 pass=changeme shell=/usr/bin/fish " "" \
+		| ./scripts/str_replace.pl "gid=${GID} " "" | ./scripts/str_replace.pl "group=${GROUP} " "" | ./scripts/str_replace.pl "pass=${PASSWORD} " "" \
+		| ./scripts/str_replace.pl "shell=${DEFAULT_SHELL} " "" | ./scripts/str_replace.pl "uid=${UID} " "" | ./scripts/str_replace.pl "user=${USER} " "" \
+	    | ./scripts/str_replace.pl "dotnet_ver=6.0 " "" | ./scripts/str_replace.pl "go_ver=1.18 " "" \
+		| ./scripts/str_replace.pl "one_password_ver=2.5.1 " "" | ./scripts/str_replace.pl "dotnet_ver=6.0 " "" | ./scripts/str_replace.pl "clamav_ver=0.105.0 " "" \
 		> info/layer-size.txt
 
 scan:
