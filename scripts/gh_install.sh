@@ -141,6 +141,7 @@ if [ "$extension" == "deb" ]; then
   sudo apt-get install ./"${ZFILE}"
   rm "${ZFILE}"
   echo "Installed deb package ${ZFILE}"
+  cd ..
   echo "$ZFILE $version (https://github.com/$REPO)" | tee -a sbom.txt
 else 
   if [[ "${ZFILE}" == "${FILE}" ]]; then
@@ -161,11 +162,11 @@ else
   sudo chmod -R a+rX ${FILE}
   sudo mv ${FILE} /usr/local/bin/${XFILE}
   echo "Installed as /usr/local/bin/${XFILE}"
-  size=$(du --apparent-size --block-size=1 -h "/usr/local/bin/${XFILE}" | awk '{ print $1 }')
+  size=$(du --apparent-size --block-size=1 -sh "/usr/local/bin/${XFILE}" | awk '{ print $1 }')
+  cd ..
   echo "$XFILE $version (https://github.com/$REPO) $size" | tee -a sbom.txt
 fi
 
-cd ..
 rm -rf ./temp
 
 # if $FILE is a directory, you must change mode to the bin files in it manually
