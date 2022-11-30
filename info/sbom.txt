@@ -19,7 +19,7 @@ dotnet 6.0.403
 go version go1.18 linux/amd64
 clamav-config 0.105.0
 stern 1.22.0 (https://github.com/stern/stern) 32M
-yq 4.30.4 (https://github.com/mikefarah/yq) 13M
+yq 4.30.5 (https://github.com/mikefarah/yq) 13M
 helmfile 0.144.0 (https://github.com/roboll/helmfile) 45M
 yh 0.4.0 (https://github.com/andreazorzetto/yh) 2.3M
 mmake 1.4.0 (https://github.com/tj/mmake) 5.1M
@@ -28,25 +28,25 @@ kfilt 0.0.7 (https://github.com/ryane/kfilt) 7.7M
 kubectx 0.9.4 (https://github.com/ahmetb/kubectx) 2.3M
 kube-linter 0.5.0 (https://github.com/stackrox/kube-linter) 35M
 kubesec 2.12.0 (https://github.com/controlplaneio/kubesec) 11M
-steampipe_linux_amd64.deb 0.17.2 (https://github.com/turbot/steampipe)
+steampipe_linux_amd64.deb 0.17.3 (https://github.com/turbot/steampipe)
 config-lint 1.6.0 (https://github.com/stelligent/config-lint) 13M
 conftest_0.35.0_linux_amd64.deb 0.35.0 (https://github.com/open-policy-agent/conftest)
 polaris 7.2.0 (https://github.com/fairwindsops/polaris) 38M
 httpx 1.2.5 (https://github.com/projectdiscovery/httpx) 27M
 datree 1.8.1 (https://github.com/datreeio/datree) 22M
-terragrunt 0.40.2 (https://github.com/gruntwork-io/terragrunt) 34M
+terragrunt 0.42.2 (https://github.com/gruntwork-io/terragrunt) 34M
 dive_0.10.0_linux_amd64.deb 0.10.0 (https://github.com/wagoodman/dive)
 jqp 0.3.0 (https://github.com/noahgorstein/jqp) 11M
 hadolint 2.12.0 (https://github.com/hadolint/hadolint) 2.4M
-policy 0.1.42 (https://github.com/opcr-io/policy) 28M
+policy 0.1.43 (https://github.com/opcr-io/policy) 29M
 tfscan 0.6.3 (https://github.com/wils0ns/tfscan) 2.2M
 audit2rbac 0.9.0 (https://github.com/liggitt/audit2rbac) 38M
 kubeval 0.16.1 (https://github.com/instrumenta/kubeval) 7.1M
 kube-score 1.14.0 (https://github.com/zegl/kube-score) 18M
 kubeaudit 0.21.0 (https://github.com/Shopify/kubeaudit) 30M
-chain-bench 0.1.6 (https://github.com/aquasecurity/chain-bench) 18M
-kops 1.25.2 (https://github.com/kubernetes/kops) 141M
-eksctl 0.120.0 (https://github.com/weaveworks/eksctl) 120M
+chain-bench 0.1.7 (https://github.com/aquasecurity/chain-bench) 18M
+kops 1.25.3 (https://github.com/kubernetes/kops) 146M
+eksctl 0.122.0 (https://github.com/weaveworks/eksctl) 120M
 cosign 1.13.1 (https://github.com/sigstore/cosign) 87M
 calico 3.24.5 (https://github.com/projectcalico/calico) 57M
 vex 0.0.2 (https://github.com/chainguard-dev/vex) 67M
@@ -57,12 +57,12 @@ minishift 1.34.3 (https://github.com/minishift/minishift) 26M
 k6 0.41.0 (https://github.com/grafana/k6) 39M
 golangci-lint 1.50.1 (https://github.com/golangci/golangci-lint) 24M
 istioctl 1.16.0 (https://github.com/istio/istio) 87M
-promtool 2.40.2 (https://github.com/prometheus/prometheus) 102M
+promtool 2.40.4 (https://github.com/prometheus/prometheus) 102M
 amtool 0.24.0 (https://github.com/prometheus/alertmanager) 24M
 crictl 1.25.0 (https://github.com/kubernetes-sigs/cri-tools) 48M
 cmctl 1.10.1 (https://github.com/cert-manager/cert-manager) 46M
 ah 1.10.0 (https://github.com/artifacthub/hub) 84M
-karmor 0.10.3 (https://github.com/kubearmor/kubearmor-client) 45M
+karmor 0.10.6 (https://github.com/kubearmor/kubearmor-client) 45M
 gator 3.10.0 (https://github.com/open-policy-agent/gatekeeper) 70M
 doppler 3.52.1 (https://github.com/DopplerHQ/cli) 9.2M
 copper 2.0.1 (https://github.com/cloud66-oss/copper) 17M
@@ -79,7 +79,7 @@ fish, version 3.5.1
 kubectl Client Version: v1.25.4 Kustomize Version: v4.5.7
 docker Docker version 20.10.21, build baeda1f
 azure-cli 2.42.0 core 2.42.0 telemetry 1.0.8 Dependencies: msal 1.20.0 azure-mgmt-resource 21.1.0b1 Python location '/opt/az/bin/python3' Extensions directory '/root/.azure/cliextensions' Python (Linux) 3.10.8 (main, Oct 28 2022, 04:19:18) [GCC 10.2.1 20210110] Legal docs and information: aka.ms/AzureCliLegal Your CLI is up-to-date.
-trivy Version: 0.34.0
+trivy Version: 0.35.0
 vagrant Vagrant 2.3.3
 gh version 2.20.2 (2022-11-15) https://github.com/cli/cli/releases/tag/v2.20.2
 gcloud Google Cloud SDK 410.0.0 alpha 2022.11.11 beta 2022.11.11 bq 2.0.81 bundled-python3-unix 3.9.12 core 2022.11.11 gcloud-crc32c 1.0.0 gsutil 5.16
@@ -89,19 +89,19 @@ kind version 0.18.0-alpha+7d26b50a129faf
 oc Client Version: 4.8.11
 kubectl-convert v1.25.4
 roxctl 3.72.2
-aws-cli/2.9.0 Python/3.9.11 Linux/5.15.0-53-generic exe/x86_64.debian.11 prompt/off
+aws-cli/2.9.2 Python/3.9.11 Linux/5.15.0-53-generic exe/x86_64.debian.11 prompt/off
 grype Application: grype Version: 0.53.1 Syft Version: v0.62.1 BuildDate: 2022-11-21T16:54:40Z GitCommit: 826726d553e68cb862597a8737b83f7ade898c3b GitDescription: v0.53.1 Platform: linux/amd64 GoVersion: go1.18.7 Compiler: gc Supported DB Schema: 5
-syft 0.62.1
+syft 0.62.2
 helm version.BuildInfo{Version:"v3.10.2", GitCommit:"50f003e5ee8704ec937a756c646870227d7c8b58", GitTreeState:"clean", GoVersion:"go1.18.8"}
 docker-slim version linux|Transformer|1.39.0|f502574b8d8818e86e90d902708d0e32d1acf8f7|2022-10-25_05:05:23AM
-okteto version 2.9.1 
+okteto version 2.10.0 
 /root/lib/oracle-cli/bin/oci 3.20.3
 kapp version 0.54.0 Succeeded
 ytt version 0.44.0
 kapp version 0.54.0 Succeeded
 kbld version 0.36.0 Succeeded
 imgpkg version 0.34.0 Succeeded
-vendir version 0.32.0 Succeeded
+vendir version 0.32.1 Succeeded
 starship 1.11.0 branch:master commit_hash: build_time:2022-10-15 01:47:30 +00:00 build_env:rustc 1.64.0 (a55dd71d5 2022-09-19),
 kubescape Your current version is: v2.0.176
 act version 0.2.33
@@ -118,13 +118,15 @@ lineage v0.5.0
 neat v2.0.3
 nsenter v0.2.0
 popeye v0.7.1
-score v1.10.0
+score v1.14.0
 who-can v0.4.0
 helm plugins:
 NAME	VERSION	DESCRIPTION                           
 diff	3.6.0  	Preview helm upgrade changes as a diff
+ginkgo Ginkgo Version 2.5.1
 tfk8s v0.1.8
-nvm
+psa-checker version unknown
+pyenv 2.3.6
 Poetry (version 1.2.2)
 pipx 1.1.0
 anchorecli 0.9.3
@@ -144,6 +146,12 @@ thefuck 3.32
 vault-cli 3.1.0
 yubikey-manager 5.0.0
 KubiScan version 1.5
-checkov 2.2.84
+checkov 2.2.106
 sdccli 0.7.14
 vexy 0.3.0
+nvm
+snyk 1.1064.0
+yarn 1.22.19
+npx 10.2.2
+bitwarden (bw) 2022.10.0
+Artillery Core: 2.0.0-27

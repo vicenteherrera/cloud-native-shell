@@ -3,6 +3,7 @@ FROM debian:${debian_ver} as build
 
 WORKDIR /install
 COPY ./scripts/version.sh /usr/local/bin/version
+RUN chmod a+rx /usr/local/bin/version
 
 # Many of the installation commands are left as they would be run from a host machine
 # so you can copy and paste on your main system, including sudo instruction where needed.
@@ -351,8 +352,8 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3EFE0E0A2F2F60AA &&
 ## Install from custom origin binaries
 
 # Minikube
-RUN curl -fsSLo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
-  && chmod +x minikube && sudo mv minikube /usr/local/bin/ && \
+RUN curl -fsSLo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && \
+    chmod +x minikube && sudo mv minikube /usr/local/bin/ && \
     version minikube | tee -a sbom.txt
 
 # Kind
@@ -449,6 +450,11 @@ RUN curl -fsSL https://raw.githubusercontent.com/crossplane/crossplane/master/in
 
 # Gitlab CLI
 RUN curl -fsSL https://gitlab.com/gitlab-org/cli/-/raw/main/scripts/install.sh | sudo sh
+
+# NodeJS
+
+RUN curl -fsSL https://deb.nodesource.com/setup_19.x | bash - && \
+    apt-get install -y nodejs
 
 # ------------------------------------------------------------------------------------
 
@@ -586,17 +592,7 @@ RUN VERSION=$(curl -fsSL https://api.github.com/repos/jrhouston/tfk8s/releases/l
 RUN go install github.com/vicenteherrera/psa-checker@latest && \
     version psa-checker | tee -a sbom.txt
 
-# nvm
-RUN VERSION=$(curl -fsSL https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq '.tag_name' | xargs | cut -c2-) && \
-    curl -fsSLo- https://raw.githubusercontent.com/nvm-sh/nvm/v${VERSION}/install.sh | bash && \
-    export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")" && \
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-RUN echo "nvm" $(nvm --version) | tee -a sbom.txt
 
-# Snyk, npx, yarn, bitwarden cli
-RUN npm install snyk npx yarn @bitwarden/cli && \
-    version snyk npx yarn bw | tee -a sbom.txt && \
-    npm cache clean -force
 
 # Pyenv
 RUN curl -fsSL https://pyenv.run | bash && \
@@ -638,6 +634,21 @@ RUN pipx install vexy
 
 # List pipx packages
 RUN pipx list --short | tee -a sbom.txt 
+
+# nvm
+RUN VERSION=$(curl -fsSL https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq '.tag_name' | xargs | cut -c2-) && \
+    curl -fsSLo- https://raw.githubusercontent.com/nvm-sh/nvm/v${VERSION}/install.sh | bash && \
+    export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")" && \
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+RUN echo "nvm" $(nvm --version) | tee -a sbom.txt
+
+# npm: Snyk, npx, yarn, bitwarden cli, artillery, npx
+RUN npm install snyk yarn @bitwarden/cli bw npx artillery && \
+    version snyk yarn npx | tee -a sbom.txt && \
+    echo "bitwarden (bw) $(bw --version)" | tee -a sbom.txt && \
+    artillery --version | grep 'Artillery Core' | tee -a sbom.txt && \
+    npm cache clean -force
+
 
 # --------------------------------------------------------------------------------------
 # --------------------------------------------------------------------------------------
