@@ -67,6 +67,7 @@ make run RUN_SHELL=/bin/bash
     * [kubectl ktop](https://github.com/vladimirvivien/ktop): top like tool for Kubernetes
     * [kubectl nsenter](https://github.com/towolf/kubectl-nsenter): SSH onto node and spawn an nsenter shell into a pod
     * [kubectl who-can](https://github.com/aquasecurity/kubectl-who-can): shows which subjects have RBAC permissions to VERB
+    * [kubectl access-matrix (rakkess)](https://github.com/corneliusweig/rakkess): show an access matrix for server resources
   * Local cluster
     * [Minikube](https://minikube.sigs.k8s.io/docs/start/): deploy a local Kubernetes cluster using different hypervisor drivers
     * [Kind](https://kind.sigs.k8s.io/): deploy a local Kubernetes cluster using Docker
@@ -132,7 +133,7 @@ make run RUN_SHELL=/bin/bash
      * [cosign](https://github.com/sigstore/cosign): container signing, verification andstorage in an OCI registry
      * [in-toto](https://github.com/in-toto/in-toto): verify signed tasks in a pipeline
      * [chain-bench](https://github.com/aquasecurity/chain-bench): CIS Software Supply Chain benchmark
-     * Software Bill of Materials
+     * Software Bill of Materials (SBOM)
        * [Syft](https://github.com/anchore/syft): generate SBOM from container in different formats
        * [Vexy](https://github.com/madpah/vexy): generate VEX (Vulnerability Exploitability Exchange) in [CycloneDX](https://cyclonedx.org/) format
        * [swid-generator](https://pypi.org/project/swid-generator/): generates [SWID tags](https://csrc.nist.gov/projects/Software-Identification-SWID) from Linux package managers like dpkg, rpm or pacman
@@ -199,6 +200,7 @@ make run RUN_SHELL=/bin/bash
   * [Batcat](https://github.com/sharkdp/bat): prettier cat replacement
   * [direnv](https://direnv.net/): load and unload environment variables depending on the current directory
   * [z](https://github.com/rupa/z): smart directory changer
+  * [pv](https://ss64.com/bash/pv.html): monitor data being sent through pipe
 
 
 ## Other Cloud Native tools to run in a cluster

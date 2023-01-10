@@ -41,7 +41,7 @@ RUN apt-get -y install \
 # podman, buildah, skopeo, yamllint, shellcheck
 # tor, torify
 RUN apt-get -y install \
-        git vim bat \
+        git vim bat pv \
         nmap ncat netcat dnsutils iputils-ping net-tools \
         conntrack \
         podman buildah skopeo yamllint shellcheck \
@@ -567,10 +567,10 @@ ENV PATH="/home/${user}/.krew/bin:$PATH"
 RUN kubectl krew index add kvaps https://github.com/kvaps/krew-index && \
     kubectl krew install kvaps/node-shell
 
-# Krew plugins: kube-scan, lineage, example, neat, score, popeye
-#               example, ktop, nsenter, doctor
+# Krew plugins: kubesec-scan, lineage, example, neat, score, popeye,
+#               ktop, nsenter, doctor, who-can, rakkess (access-matrix)
 RUN kubectl krew install \
-    kubesec-scan lineage example neat score popeye ktop nsenter doctor who-can && \
+    kubesec-scan lineage example neat score popeye ktop nsenter doctor who-can access-matrix && \
     echo "kubectl krew plugins:" | tee -a sbom.txt && \
     script -qc 'kubectl krew list' | tr -s ' ' | tee -a sbom.txt
 
@@ -585,14 +585,12 @@ RUN go install -mod=mod github.com/onsi/ginkgo/v2/ginkgo && \
 
 # tfk8s
 RUN VERSION=$(curl -fsSL https://api.github.com/repos/jrhouston/tfk8s/releases/latest | jq '.tag_name' | xargs) && \
-    go install github.com/jrhouston/tfk8s@latest  && \
+    go install github.com/jrhouston/tfk8s@${VERSION}  && \
     echo "tfk8s $VERSION" | tee -a sbom.txt
 
 # psa-checker
-RUN go install github.com/vicenteherrera/psa-checker@latest && \
+RUN curl -fsSL https://raw.githubusercontent.com/vicenteherrera/psa-checker/main/install/install.sh | INSTALL_DIR="$(go env GOPATH)/bin" bash && \
     version psa-checker | tee -a sbom.txt
-
-
 
 # Pyenv
 RUN curl -fsSL https://pyenv.run | bash && \
