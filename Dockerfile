@@ -140,7 +140,8 @@ RUN REPO="stern/stern"                  gh_install &&\
     REPO="open-policy-agent/conftest"   gh_install &&\
     REPO="fairwindsops/polaris"         gh_install &&\
     REPO="projectdiscovery/httpx"       gh_install &&\
-    REPO="datreeio/datree"              gh_install
+    REPO="datreeio/datree"              gh_install &&\
+    REPO="ryane/kfilt"                  gh_install
 
 RUN REPO="gruntwork-io/terragrunt"      gh_install &&\
     REPO="wagoodman/dive"               gh_install &&\
@@ -152,7 +153,9 @@ RUN REPO="gruntwork-io/terragrunt"      gh_install &&\
     REPO="instrumenta/kubeval"          gh_install &&\
     REPO="zegl/kube-score"              gh_install &&\
     REPO="Shopify/kubeaudit"            gh_install &&\
-    REPO="aquasecurity/chain-bench"     gh_install
+    REPO="aquasecurity/chain-bench"     gh_install &&\
+    REPO="raesene/eathar"               gh_install &&\
+    REPO="genuinetools/bane"            gh_install
 
 RUN REPO="kubernetes/kops"              gh_install
 RUN REPO="weaveworks/eksctl"            gh_install
@@ -582,6 +585,10 @@ RUN helm plugin install https://github.com/databus23/helm-diff && \
 # Ginkgo
 RUN go install -mod=mod github.com/onsi/ginkgo/v2/ginkgo && \
     version ginkgo | tee -a sbom.txt
+
+# govulncheck
+RUN go install golang.org/x/vuln/cmd/govulncheck@latest && \
+    echo "govulncheck latest" | tee -a sbom.txt
 
 # tfk8s
 RUN VERSION=$(curl -fsSL https://api.github.com/repos/jrhouston/tfk8s/releases/latest | jq '.tag_name' | xargs) && \

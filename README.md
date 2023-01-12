@@ -60,6 +60,7 @@ make run RUN_SHELL=/bin/bash
   * [Hadolint](https://github.com/hadolint/hadolint): dockerfile linter
 * Kubernetes
   * [Kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/), [kubectl-convert](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-convert-plugin), aliases
+  * [kfilt](https://github.com/ryane/kfilt): filter specific resources from a stream of Kubernetes YAML manifests
   * [Krew](https://krew.sigs.k8s.io/)   
     * [kubectl node-shell](https://github.com/kvaps/kubectl-node-shell): start a root shell in a node    
     * [kubectl example](https://github.com/seredot/kubectl-example): resource example YAMLs
@@ -120,6 +121,7 @@ make run RUN_SHELL=/bin/bash
     * [Kube-hunter](https://github.com/aquasecurity/kube-hunter): hunt for security weaknesses in Kubernetes clusters
     * [KubeScape](https://github.com/armosec/kubescape): multi-cloud K8s risk analysis, security compliance, RBAC visualizer and image vulnerabilities scanning
     * [polaris](https://github.com/fairwindsops/polaris/): CLI to check Kubernetes pods and controllers using best practices
+    * [Eathar](https://github.com/raesene/eathar): pull security related information from Kubernetes clusters about PSS and RBAC
     * [KubeArmor CLI (karmor)](https://github.com/kubearmor/KubeArmor): runtime security enforcement (process execution, file access, networking) containers and node using AppArmor, SELinux or BPF-LSM
     * [Datree](https://github.com/datreeio/datree): automatically validates Kubernetes objects for rule violations, ensuring no misconfigurations reach production
     * [kubectl kubesec-scan](https://github.com/controlplaneio/kubectl-kubesec): security risk analysis
@@ -129,6 +131,7 @@ make run RUN_SHELL=/bin/bash
   * RBAC analyzers
     * [KubiScan](https://github.com/cyberark/KubiScan): Scan for risky permissions in RBAC
     * [audit2rbac](https://github.com/liggitt/audit2rbac): generate RBAC based on audit log activity
+    * [Eathar](https://github.com/raesene/eathar): pull security related information from Kubernetes clusters about PSS and RBAC
   * Supply chain
      * [cosign](https://github.com/sigstore/cosign): container signing, verification andstorage in an OCI registry
      * [in-toto](https://github.com/in-toto/in-toto): verify signed tasks in a pipeline
@@ -138,12 +141,17 @@ make run RUN_SHELL=/bin/bash
        * [Vexy](https://github.com/madpah/vexy): generate VEX (Vulnerability Exploitability Exchange) in [CycloneDX](https://cyclonedx.org/) format
        * [swid-generator](https://pypi.org/project/swid-generator/): generates [SWID tags](https://csrc.nist.gov/projects/Software-Identification-SWID) from Linux package managers like dpkg, rpm or pacman
        * [vexctl](https://github.com/chainguard-dev/vex): a tool to apply and attest VEX (Vulnerability Exploitability eXchange) data, its purpose is to "turn off" alerts of vulnerabilities known not to affect a product
-  * Container vulnerability scanners
-    * [Trivy](https://github.com/aquasecurity/trivy)
-    * [Grype](https://github.com/anchore/grype)
-    * [Anchore cli](https://github.com/anchore/anchore-cli)
-    * [Snyk](https://docs.snyk.io/snyk-cli/install-the-snyk-cli)
-    * [cve-bin-tool](https://github.com/intel/cve-bin-tool)
+  * Vulnerability scanners
+    * Container vulnerability scanners
+      * [Trivy](https://github.com/aquasecurity/trivy)
+      * [Grype](https://github.com/anchore/grype)
+      * [Anchore cli](https://github.com/anchore/anchore-cli)
+      * [Snyk](https://docs.snyk.io/snyk-cli/install-the-snyk-cli)
+    * Package vulnerability scanning
+      * [cve-bin-tool](https://github.com/intel/cve-bin-tool)
+      * [govulncheck](https://go.dev/security/vuln/): low-noise, reliable way for Go users to learn about known vulnerabilities that may affect their projects
+    * Detect secrets
+      * [detect-secrets](https://github.com/Yelp/detect-secrets): detecting secrets within a code base
   * Infrastructure vulnerability scanners
     * [Checkov](https://www.checkov.io/1.Welcome/Quick%20Start.html)
     * [TFScan](https://github.com/wils0ns/tfscan)
@@ -153,9 +161,10 @@ make run RUN_SHELL=/bin/bash
     * [roxctl](https://docs.openshift.com/acs/3.66/cli/getting-started-cli.html): StackRox CLI
   * Misc
     * [gator](https://open-policy-agent.github.io/gatekeeper/website/docs/gator/): Gatekeeper CLI for evaluating ConstraintTemplates and Constraints
-    * [detect-secrets](https://github.com/Yelp/detect-secrets): detecting secrets within a code base
+    
     * [Illuminatio](https://github.com/inovex/illuminatio): automatically testing kubernetes network policies
     * [policy](https://github.com/opcr-io/policy): tool for building, versioning and publishing your authorization policies, using OCI standards to manage artifacts, and the Open Policy Agent (OPA) to compile and run
+    * [bane](https://github.com/genuinetools/bane): AppArmor profile generator for docker containers
     * [cmctl](https://cert-manager.io/docs/usage/cmctl/#installation): cert-manager cli
     * [Vault cli](https://www.vaultproject.io/docs/commands): secure, store and control secrets  
     * [Tetragon cli](https://github.com/cilium/tetragon): eBPF-based security observability and runtime enforcement
@@ -169,10 +178,12 @@ make run RUN_SHELL=/bin/bash
   * [Doppler cli](https://github.com/DopplerHQ/cli): multi-cloud SecretOps platform
   * [1Password cli](https://1password.com/downloads/command-line/): cli to 1Password secret manager
   * [Yubikey manager](https://github.com/Yubico/yubikey-manager): configure Yubikey
-  * [k6](https://github.com/grafana/k6): load testing tool with javascript plans
-  * [artillery](https://github.com/artilleryio/artillery):  load testing and synthetic checks at scale
   * [apache2-utils](https://packages.debian.org/es/sid/apache2-utils): includes ab (load testing), logresolve (ip to host name), htpasswd (auth file manipulation), checkgid (test caller can configurate gid), and more.
   * [nmap](https://nmap.org/download), [ncat](https://nmap.org/ncat/), [netcat](https://sectools.org/tool/netcat/), [dig, nslookup, nsupdate](https://packages.debian.org/buster/dnsutils), [ping](https://packages.debian.org/stretch/iputils-ping)
+* Load testing:
+  * [k6](https://github.com/grafana/k6): load testing tool with javascript plans
+  * [artillery](https://github.com/artilleryio/artillery):  load testing and synthetic checks at scale
+  * [ab](https://packages.debian.org/es/sid/apache2-utils): included in apache2-utils
 * Programming
   * [Python](https://www.python.org/), [pip](https://pypi.org/project/pip/), [pipx](https://github.com/pypa/pipx), [PyEnv](https://github.com/pyenv/pyenv), [Poetry](https://python-poetry.org/docs/)
   * [Node](https://nodejs.org/en/), [npm](https://www.npmjs.com/), [nvm](https://github.com/nvm-sh/nvm), [npx](https://www.npmjs.com/package/npx), [yarn](https://yarnpkg.com/getting-started/)
@@ -239,7 +250,7 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
   * [Kyverno](https://github.com/kyverno/kyverno): policy engine and admission controller
   * [Kubewarden](https://github.com/kubewarden): policy engine for Kubernetes
   * [K-rail](https://github.com/cruise-automation/k-rail): workload policy enforcement to secure a multi tenant cluster
-* Secrets
+* Secret management
   * [Hashicorp Vault](https://www.vaultproject.io/)
 * CI/CD / Supply chain
   * [Tekton](https://tekton.dev/docs/getting-started/#tekton-for-kubernetes-cloud-native-cicd-explained)
@@ -257,19 +268,20 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
   * [Robusta](https://github.com/robusta-dev/robusta): observability reporting
   * [Fluentd](https://github.com/fluent/fluentd): collects events from various data sources and writes them to files, RDBMS, NoSQL, IaaS, SaaS, Hadoop and so on
   * [Logstash](https://github.com/elastic/logstash): ingests data from a multitude of sources simultaneously, transforms it, and then sends it to your favorite "stash."
-  
 * Networking
   * [Calico](https://projectcalico.docs.tigera.io/about/about-calico): network security solution dataplane
   * [Istio](https://github.com/istio/istio): service mesh to integrate microservices and manage traffic flow
   * [Hubble](https://github.com/cilium/hubble): networking and security observability platform built on top of Cilium and eBPF
-* Programming
-  * [Miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html): Python package manager
+* Microservices demos
+  * [Google Online Boutique](https://github.com/GoogleCloudPlatform/microservices-demo): go, c#, node.js, Java; includes Locust synthetic load generator, doesn't include databases
+  * [Weaveworks Sock Shop](https://github.com/microservices-demo/microservices-demo): Java, .Net, Go, Node.js, Mongo, MySQL
 * Other
   * [Crossplane](https://crossplane.io/docs/v1.9/getting-started/install-configure.html): provision, compose, and consume infrastructure using the Kubernetes API
   * [JFrog Artifactory CE](https://jfrog.com/community/download-artifactory-oss/): binary artifact repositories
   * [GitLab CE](https://gitlab.com/gitlab-org/gitlab): software development platform with version control, issue tracking, code review, CI/CD, and more
   * [Sentry](https://github.com/getsentry/sentry): developer-first error tracking and performance monitoring platform
   * [Graylog](https://github.com/Graylog2/graylog-docker): centralized logging solution that enables aggregating and searching through logs
+  * [Locust](https://locust.io/): define user behaviour with Python code, and swarm your system with millions of simultaneous users
 
 
 </details>
@@ -288,6 +300,11 @@ The following tools have big requirements that would make the container image ev
 * [SCAP Workbench](https://www.open-scap.org/tools/scap-workbench/#download): graphical utility to perform oscap tasks
 * [iamspy](https://github.com/WithSecureLabs/iamspy): load IAM policies and convert them to Z3 prover constraints and a model for querings if actions are allowed
 
+* [cntr](https://github.com/Mic92/cntr): brings all your developers tools to a minimal running docker container by using a FUSE filesystem, similar to ephemeral containers in Kubernetes
+* Programming
+  * [Miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html): Python package manager
+  * GitHub Actions
+    * [Golang Vulncheck](https://github.com/Templum/govulncheck-action): scan go code for vulnerabilities
 </details>
 
 ## Other miscellaneous links:
@@ -352,6 +369,7 @@ Links and information
     * [NIST Vulneratibility Database (NVD)](https://nvd.nist.gov/): enhances CVE with scores and exploitation information
     * [CIRCL hashlookup](https://www.circl.lu/services/hashlookup/): free lookup hash values against known database of files (malicious/non malicious)
     * [GitHub Advisory Database](https://github.com/github/advisory-database): a free and open source community driven database of CVEs and GitHub-originated security advisories affecting the open source world
+    * [Go Vulnerability Database](https://pkg.go.dev/vuln/): data come directly from Go package maintainers or sources such as MITRE and GitHub, reports are curated by the Go Security team
     * [Virustotal API](https://developers.virustotal.com/reference/overview)    
     * Cloud vuln db
       * [secwiki.cloud](https://www.secwiki.cloud/): cloud vulnerability wiki
