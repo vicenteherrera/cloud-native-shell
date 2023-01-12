@@ -79,7 +79,7 @@ make run RUN_SHELL=/bin/bash
     * [Helm diff plugin](https://github.com/databus23/helm-diff): plugin to preview what a helm upgrade would change
   * [Helmfile](https://github.com/roboll/helmfile): deploy several Helm charts at once
   * [kops](https://kops.sigs.k8s.io/getting_started/install/): provision Kubernetes clusters on cloud providers
-  * [Stern](https://github.com/wercker/stern): tail multiple pod logs on Kubernetes
+  * [Stern](https://github.com/stern/stern): tail multiple pod logs on Kubernetes
   * [tfk8s](https://github.com/jrhouston/tfk8s): migrate YAML manifests to the [Terraform Kubernetes Provider](https://github.com/hashicorp/terraform-provider-kubernetes)
   * [Carvel tools](https://carvel.dev/ytt/docs/v0.41.0/install/): misc tools (kapp-controller, ytt, kapp, kbld, imgpkg, vendir)
   * [kube-lineage](https://github.com/tohjustin/kube-lineage/): display all dependencies or dependents of an object in a Kubernetes cluster
