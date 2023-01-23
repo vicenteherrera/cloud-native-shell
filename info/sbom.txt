@@ -13,29 +13,30 @@ Nmap version 7.80 ( https://nmap.org )
 net-tools 2.10-alpha
 ab: This is ApacheBench, Version 2.3 <$Revision: 1901567 $>
 ruby 2.7.4p191 (2021-07-07 revision a21a3b7d23) [x86_64-linux-gnu]
-jekyll 4.3.1
-bundler Bundler version 2.4.3
-dotnet 6.0.404
+jekyll 4.3.2
+bundler Bundler version 2.4.5
+krane 2.4.9
+dotnet 6.0.405
 go version go1.18 linux/amd64
 clamav-config 0.105.0
 stern 1.22.0 (https://github.com/stern/stern) 32M
-yq 4.30.6 (https://github.com/mikefarah/yq) 13M
+yq 4.30.8 (https://github.com/mikefarah/yq) 13M
 helmfile 0.144.0 (https://github.com/roboll/helmfile) 45M
 yh 0.4.0 (https://github.com/andreazorzetto/yh) 2.3M
 mmake 1.4.0 (https://github.com/tj/mmake) 5.1M
 badrobot 0.1.2 (https://github.com/controlplaneio/badrobot) 11M
 kfilt 0.0.7 (https://github.com/ryane/kfilt) 7.7M
 kubectx 0.9.4 (https://github.com/ahmetb/kubectx) 2.3M
-kube-linter 0.5.1 (https://github.com/stackrox/kube-linter) 35M
+kube-linter 0.6.0 (https://github.com/stackrox/kube-linter) 37M
 kubesec 2.12.0 (https://github.com/controlplaneio/kubesec) 11M
-steampipe_linux_amd64.deb 0.18.0 (https://github.com/turbot/steampipe)
+steampipe_linux_amd64.deb 0.18.1 (https://github.com/turbot/steampipe)
 config-lint 1.6.0 (https://github.com/stelligent/config-lint) 13M
 conftest_0.38.0_linux_amd64.deb 0.38.0 (https://github.com/open-policy-agent/conftest)
 polaris 7.3.0 (https://github.com/fairwindsops/polaris) 39M
 httpx 1.2.6 (https://github.com/projectdiscovery/httpx) 22M
-datree 1.8.12 (https://github.com/datreeio/datree) 23M
+datree 1.8.14 (https://github.com/datreeio/datree) 23M
 kfilt 0.0.7 (https://github.com/ryane/kfilt) 7.7M
-terragrunt 0.42.7 (https://github.com/gruntwork-io/terragrunt) 39M
+terragrunt 0.43.0 (https://github.com/gruntwork-io/terragrunt) 40M
 dive_0.10.0_linux_amd64.deb 0.10.0 (https://github.com/wagoodman/dive)
 jqp 0.4.0 (https://github.com/noahgorstein/jqp) 11M
 hadolint 2.12.0 (https://github.com/hadolint/hadolint) 2.4M
@@ -46,14 +47,14 @@ kubeval 0.16.1 (https://github.com/instrumenta/kubeval) 7.1M
 kube-score 1.16.1 (https://github.com/zegl/kube-score) 18M
 kubeaudit 0.21.0 (https://github.com/Shopify/kubeaudit) 30M
 chain-bench 0.1.7 (https://github.com/aquasecurity/chain-bench) 18M
-eathar 0.2.5 (https://github.com/raesene/eathar) 30M
+eathar 0.2.6 (https://github.com/raesene/eathar) 30M
 bane 0.4.4 (https://github.com/genuinetools/bane) 3.1M
 kops 1.25.3 (https://github.com/kubernetes/kops) 146M
-eksctl 0.124.0 (https://github.com/weaveworks/eksctl) 121M
+eksctl 0.126.0 (https://github.com/weaveworks/eksctl) 122M
 cosign 1.13.1 (https://github.com/sigstore/cosign) 87M
-calico 3.24.5 (https://github.com/projectcalico/calico) 57M
+calico 3.25.0 (https://github.com/projectcalico/calico) 57M
 vex 0.1.0 (https://github.com/chainguard-dev/vex) 67M
-skaffold 2.0.4 (https://github.com/GoogleContainerTools/skaffold) 68M
+skaffold 2.0.5 (https://github.com/GoogleContainerTools/skaffold) 68M
 terrascan 1.17.1 (https://github.com/tenable/terrascan) 74M
 mockgen 1.6.0 (https://github.com/golang/mock) 5.7M
 minishift 1.34.3 (https://github.com/minishift/minishift) 26M
@@ -65,9 +66,9 @@ amtool 0.25.0 (https://github.com/prometheus/alertmanager) 27M
 crictl 1.26.0 (https://github.com/kubernetes-sigs/cri-tools) 51M
 cmctl 1.11.0 (https://github.com/cert-manager/cert-manager) 48M
 ah 1.11.0 (https://github.com/artifacthub/hub) 102M
-karmor 0.11.4 (https://github.com/kubearmor/kubearmor-client) 46M
+karmor 0.11.6 (https://github.com/kubearmor/kubearmor-client) 46M
 gator 3.11.0 (https://github.com/open-policy-agent/gatekeeper) 72M
-doppler 3.52.1 (https://github.com/DopplerHQ/cli) 9.2M
+doppler 3.53.1 (https://github.com/DopplerHQ/cli) 9.3M
 copper 2.0.1 (https://github.com/cloud66-oss/copper) 17M
 docker-bench-security 1.3.6 (https://github.com/docker/docker-bench-security) 406K
 kubiscan 1.5 (https://github.com/cyberark/KubiScan) 203K
@@ -75,30 +76,30 @@ testssl 3.0.8 (https://github.com/drwetter/testssl.sh) 21M
 jless 0.8.0 (https://github.com/PaulJuliusMartinez/jless) 2.6M
 kubens 0.9.4 (https://github.com/ahmetb/kubectx) 27M
 pint 0.40.0 (https://github.com/cloudflare/pint) 23M
-kwctl 1.4.2 (https://github.com/kubewarden/kwctl) 46M
+kwctl 1.5.2 (https://github.com/kubewarden/kwctl) 47M
 cloudquery version 0.32.12
 tetragon (initial release)
 fish, version 3.6.0
-kubectl Client Version: v1.26.0 Kustomize Version: v4.5.7
-docker Docker version 20.10.22, build 3a2c30b
+kubectl Client Version: v1.26.1 Kustomize Version: v4.5.7
+docker Docker version 20.10.23, build 7155243
 azure-cli 2.44.1 core 2.44.1 telemetry 1.0.8 Dependencies: msal 1.20.0 azure-mgmt-resource 21.1.0b1 Python location '/opt/az/bin/python3' Extensions directory '/root/.azure/cliextensions' Python (Linux) 3.10.8 (main, Jan 10 2023, 15:49:27) [GCC 10.2.1 20210110] Legal docs and information: aka.ms/AzureCliLegal Your CLI is up-to-date.
 trivy Version: 0.36.1
 vagrant Vagrant 2.3.4
 gh version 2.21.2 (2023-01-03) https://github.com/cli/cli/releases/tag/v2.21.2
-gcloud Google Cloud SDK 413.0.0 alpha 2023.01.06 beta 2023.01.06 bq 2.0.84 bundled-python3-unix 3.9.12 core 2023.01.06 gcloud-crc32c 1.0.0 gsutil 5.17
+gcloud Google Cloud SDK 414.0.0 alpha 2023.01.13 beta 2023.01.13 bq 2.0.84 bundled-python3-unix 3.9.16 core 2023.01.13 gcloud-crc32c 1.0.0 gsutil 5.18
 tkn Client version: 2020-04-01T10:57:38Z
 minikube version: v1.28.0 commit: 986b1ebd987211ed16f8cc10aed7d2c42fc8392f
-kind version 0.18.0-alpha+7d8a12db780ae3
+kind version 0.18.0-alpha+f552543622786b
 oc Client Version: 4.8.11
-kubectl-convert v1.26.0
+kubectl-convert v1.26.1
 roxctl 3.73.1
-aws-cli/2.9.14 Python/3.9.11 Linux/5.15.0-57-generic exe/x86_64.debian.11 prompt/off
+aws-cli/2.9.17 Python/3.9.11 Linux/5.15.0-58-generic exe/x86_64.debian.11 prompt/off
 grype Application: grype Version: 0.55.0 Syft Version: v0.65.0 BuildDate: 2023-01-04T21:18:26Z GitCommit: c559833c7e02aed827773adb4f9677cb398577be GitDescription: v0.55.0 Platform: linux/amd64 GoVersion: go1.18.9 Compiler: gc Supported DB Schema: 5
-syft 0.65.0
-helm version.BuildInfo{Version:"v3.10.3", GitCommit:"835b7334cfe2e5e27870ab3ed4135f136eecc704", GitTreeState:"clean", GoVersion:"go1.18.9"}
+syft 0.68.0
+helm version.BuildInfo{Version:"v3.11.0", GitCommit:"472c5736ab01133de504a826bd9ee12cbe4e7904", GitTreeState:"clean", GoVersion:"go1.18.10"}
 **Error: don't know how to get version information from docker-slim
-okteto version 2.11.0 
-/root/lib/oracle-cli/bin/oci 3.22.1
+okteto version 2.11.1 
+/root/lib/oracle-cli/bin/oci 3.22.2
 kapp version 0.54.1 Succeeded
 ytt version 0.44.1
 kapp version 0.54.1 Succeeded
@@ -106,9 +107,9 @@ kbld version 0.36.1 Succeeded
 imgpkg version 0.34.1 Succeeded
 vendir version 0.32.2 Succeeded
 starship 1.12.0 branch:master commit_hash: build_time:2022-12-13 16:12:30 +00:00 build_env:rustc 1.65.0 (897e37553 2022-11-02),
-kubescape Your current version is: v2.0.182
-act version 0.2.35
-kubectl-crossplane v1.10.1
+kubescape Your current version is: v2.0.183 [git enabled in build: true]
+act version 0.2.40
+kubectl-crossplane v1.10.2
 kubectl krew plugins:
 PLUGIN VERSION
 access-matrix v0.5.0
@@ -131,7 +132,7 @@ ginkgo Ginkgo Version 2.7.0
 govulncheck latest
 tfk8s v0.1.10
 psa-checker version unknown
-pyenv 2.3.10
+pyenv 2.3.11
 Poetry (version 1.3.2)
 pipx 1.1.0
 anchorecli 0.9.3
@@ -144,19 +145,18 @@ docker-squash 1.0.10
 illuminatio 1.4.0
 in-toto 1.2.0
 kube-hunter 0.6.8
-paramiko 2.12.0
+paramiko 3.0.0
 robusta 0.0.1
 swid-generator 1.1.0
 thefuck 3.32
 vault-cli 3.1.0
-yubikey-manager 5.0.0
+yubikey-manager 5.0.1
 KubiScan version 1.5
-checkov 2.2.258
+checkov 2.2.291
 sdccli 0.7.14
 vexy 0.3.0
 nvm
-snyk 1.1086.0
+snyk 1.1088.0
 yarn 1.22.19
 npx 10.2.2
 bitwarden (bw) 2023.1.0
-Artillery Core: 2.0.0-27

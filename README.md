@@ -60,6 +60,7 @@ make run RUN_SHELL=/bin/bash
   * [Hadolint](https://github.com/hadolint/hadolint): dockerfile linter
 * Kubernetes
   * [Kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/), [kubectl-convert](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-convert-plugin), aliases
+  * [Krane](https://github.com/Shopify/krane): like kubectl, but watches changes, predeploys specific resources, creates secrets, and provides additional information of deployment results
   * [kfilt](https://github.com/ryane/kfilt): filter specific resources from a stream of Kubernetes YAML manifests
   * [Krew](https://krew.sigs.k8s.io/)   
     * [kubectl node-shell](https://github.com/kvaps/kubectl-node-shell): start a root shell in a node    
@@ -230,6 +231,7 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
     * [Polaris](https://github.com/FairwindsOps/polaris/): admission controller to check Kubernetes pods and controllers using best practices
     * [RBAC-Police](https://github.com/PaloAltoNetworks/rbac-police): evaluate RBAC permissions of serviceAccounts, pods and nodes using Rego policies
     * [gitgat](https://github.com/scribe-public/gitgat): OPA policies that verify SCM (currently GitHub's) organization/repositories/user accounts security
+    * [Kube-Scan](https://github.com/octarinesec/kube-scan): Run it on any cluster, gives a risk score from 0 (no risk) to 10 (high risk) for each workload  based on the runtime configuration of based on the open-source framework [Kubernetes Common Configuration Scoring System (KCCSS)](https://github.com/octarinesec/kccss)
   * Security Platforms (inc vulnerability assesment)
     * [ThreatMapper](https://github.com/deepfence/ThreatMapper): open source Kubernetes security platform
     * [Wazuh](https://github.com/wazuh/wazuh-kubernetes/blob/master/instructions.md): open source Kubernetes security platform
@@ -252,6 +254,7 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
   * [K-rail](https://github.com/cruise-automation/k-rail): workload policy enforcement to secure a multi tenant cluster
 * Secret management
   * [Hashicorp Vault](https://www.vaultproject.io/)
+  * [Infisical](https://github.com/Infisical/infisical)
 * CI/CD / Supply chain
   * [Tekton](https://tekton.dev/docs/getting-started/#tekton-for-kubernetes-cloud-native-cicd-explained)
     * [Chains](https://github.com/tektoncd/chains): observs Tekton tasksruns completion to sign them
@@ -263,6 +266,7 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
   * [cert-manager](https://cert-manager.io/docs/usage/cmctl/#installation): certificate manager
   * [StackHawk](https://www.stackhawk.com/): DAST and API security testing tool that runs in CI/CD
   * [Kaniko](https://github.com/GoogleContainerTools/kaniko#running-kaniko-in-a-kubernetes-cluster): a tool to build container images from a Dockerfile, inside a container or Kubernetes cluster
+  * [Shipit](https://github.com/Shopify/shipit-engine#kubernetes): ynchronize and deploy hundreds of projects across dozens of teams, using Python, Rails, RubyGems, Java, and Go
 * Observability
   * [Prometheus, Grafana, Alertmanager](https://github.com/prometheus-community/helm-charts): observability platform
   * [Robusta](https://github.com/robusta-dev/robusta): observability reporting

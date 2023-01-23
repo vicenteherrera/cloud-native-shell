@@ -74,9 +74,9 @@ RUN PATH="$HOME/.gem/bin:$PATH" && \
     curl -fsSL https://get.rvm.io | bash -s stable --ruby && \
     version ruby | tee -a sbom.txt
 
-# Jekyll, Bundler
-RUN gem install jekyll bundler && \
-    version jekyll bundler | tee -a sbom.txt
+# Jekyll, Bundler, Krane
+RUN gem install jekyll bundler krane && \
+    version jekyll bundler krane | tee -a sbom.txt
 
 # Dotnet
 ARG dotnet_ver=6.0
