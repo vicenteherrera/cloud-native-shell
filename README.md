@@ -157,8 +157,9 @@ make run RUN_SHELL=/bin/bash
       * [ggshield](https://github.com/GitGuardian/ggshield): detect more than 350+ types of secrets, as well as other potential security vulnerabilities or policy breaks affecting your codebase
   * Infrastructure vulnerability scanners
     * [Checkov](https://www.checkov.io/1.Welcome/Quick%20Start.html)
-    * [TFScan](https://github.com/wils0ns/tfscan)
-    * [Terrascan](https://github.com/tenable/terrascan#install)
+    * [Terrascan](https://github.com/tenable/terrascan#install): OPA based IaC policies for Terraform, Kubernetes, Argo CD, Atlantis and AWS CloudFormation
+    * [tfsec](https://github.com/aquasecurity/tfsec): static analysis of your Terraform code to spot potential misconfigurations
+    * [TFScan](https://github.com/wils0ns/tfscan): inspect Terraform resources in a state and plan JSON files
   * Security platform's CLI
     * [sdc-cli](https://sysdiglabs.github.io/sysdig-platform-cli/): Sysdig CLI
     * [roxctl](https://docs.openshift.com/acs/3.66/cli/getting-started-cli.html): StackRox CLI
@@ -265,7 +266,8 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
   * [Factory for Repeatable Secure Creation of Artifacts (FRSCA)](https://github.com/buildsec/frsca)  
   * [SPIFFE SPIRE](https://github.com/spiffe/spire): agent and server for establishing trust between software systems
   * [Notary](https://github.com/notaryproject/notary): agent and server to share signed verified content
-  * [cert-manager](https://cert-manager.io/docs/usage/cmctl/#installation): certificate manager
+  * [cert-manager](https://cert-manager.io/docs/usage/cmctl/#installation): open source certificate manager
+  * [Jetstack](https://www.jetstack.io/): enterprise solution based on cert-manager
   * [StackHawk](https://www.stackhawk.com/): DAST and API security testing tool that runs in CI/CD
   * [Kaniko](https://github.com/GoogleContainerTools/kaniko#running-kaniko-in-a-kubernetes-cluster): a tool to build container images from a Dockerfile, inside a container or Kubernetes cluster
   * [Shipit](https://github.com/Shopify/shipit-engine#kubernetes): ynchronize and deploy hundreds of projects across dozens of teams, using Python, Rails, RubyGems, Java, and Go
@@ -330,6 +332,7 @@ Software
   * [SecretScanner](https://github.com/deepfence/SecretScanner): find unprotected secrets in container images or file systems
   * [PacketStreamer](https://github.com/deepfence/PacketStreamer): remote packet capture and collection tool
   * [Defect Dojo](https://github.com/DefectDojo/django-DefectDojo): security orchestration and vulnerability management platform, push findings to systems like JIRA and Slack
+  * [OWASP Zed Attack Proxy (ZAP)](https://github.com/zaproxy/zaproxy): automatically find security vulnerabilities in your web applications while you are developing and testing your applications
 * Kubernetes installation and distributions
   * [KubeAdm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/): Kubernetes installation tool
   * [OKD](https://www.okd.io/installation/): Kubernetes distribution base for OpenShift
@@ -363,8 +366,11 @@ Software
   * [Grafana Cloud](https://grafana.com/products/cloud/)
   * [Amazon Managed Service for Prometheus](https://aws.amazon.com/prometheus/)
 * Other tools
-  * [markmap](https://markmap.js.org/docs#markmap-cli): markdown mindmap generation
-  * [plantuml](https://plantuml.com/starting): markdown UML diagram generation
+  * Online
+    * [Atlantis](https://github.com/runatlantis/atlantis): listens for Terraform pull request events via webhooks, automatically runs terraform plan and comments back on the pull request
+  * Local CLI
+    * [markmap](https://markmap.js.org/docs#markmap-cli): markdown mindmap generation
+    * [plantuml](https://plantuml.com/starting): markdown UML diagram generation
 
 Links and information
 
