@@ -279,6 +279,11 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
 * Microservices demos
   * [Google Online Boutique](https://github.com/GoogleCloudPlatform/microservices-demo): go, c#, node.js, Java; includes Locust synthetic load generator, doesn't include databases
   * [Weaveworks Sock Shop](https://github.com/microservices-demo/microservices-demo): Java, .Net, Go, Node.js, Mongo, MySQL
+* Autoscaling
+  [Karpenter](https://karpenter.sh/): open-source node provisioning project for Kubernetes
+* Cost analysis
+  * [OpenCost](https://www.opencost.io/docs/install): vendor-neutral open source project for measuring and allocating infrastructure and container costs in real time
+  * [KubeCost](https://www.kubecost.com/): enterprise offering based on OpenCost
 * Other
   * [Crossplane](https://crossplane.io/docs/v1.9/getting-started/install-configure.html): provision, compose, and consume infrastructure using the Kubernetes API
   * [JFrog Artifactory CE](https://jfrog.com/community/download-artifactory-oss/): binary artifact repositories
@@ -351,6 +356,10 @@ Software
   * [Splunk](https://www.splunk.com/)
   * [Snyk](https://snyk.io/)
   * [CyberArk](https://www.cyberark.com/)
+* SaaS Tools
+  * [Terraform Cloud](https://cloud.hashicorp.com/products/terraform)
+  * [Grafana Cloud](https://grafana.com/products/cloud/)
+  * [Amazon Managed Service for Prometheus](https://aws.amazon.com/prometheus/)
 * Other tools
   * [markmap](https://markmap.js.org/docs#markmap-cli): markdown mindmap generation
   * [plantuml](https://plantuml.com/starting): markdown UML diagram generation
@@ -371,6 +380,7 @@ Links and information
   * Vulnerability databases
     * [MITRE Common Vulnerability and Exposures (CVE)](https://www.cve.org/): a catalog of known security threats
     * [NIST Vulneratibility Database (NVD)](https://nvd.nist.gov/): enhances CVE with scores and exploitation information
+    * [osv.dev](https://osv.dev/): open, precise, and distributed approach to producing and consuming vulnerability information for open source
     * [CIRCL hashlookup](https://www.circl.lu/services/hashlookup/): free lookup hash values against known database of files (malicious/non malicious)
     * [GitHub Advisory Database](https://github.com/github/advisory-database): a free and open source community driven database of CVEs and GitHub-originated security advisories affecting the open source world
     * [Go Vulnerability Database](https://pkg.go.dev/vuln/): data come directly from Go package maintainers or sources such as MITRE and GitHub, reports are curated by the Go Security team
