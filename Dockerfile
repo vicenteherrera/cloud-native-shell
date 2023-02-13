@@ -165,6 +165,9 @@ RUN REPO="chainguard-dev/vex"           gh_install
 RUN REPO="GoogleContainerTools/skaffold" gh_install
 RUN REPO="tenable/terrascan"            gh_install
 
+# osv-scanner
+RUN REPO="google/osv-scanner"           gh_install
+
 # compressed inside a directory
 
 # mockgen
@@ -613,10 +616,10 @@ RUN python3 -m pip install --user --no-cache pipx && \
 
 # Pip: Kube-hunter, detect-secrets, Yubikey Manager, Thef*ck, , 
 # docker-squash, illuminatio, vault-cli, cve-bin-tool, Cloud Custodian (c7n),
-# robusta, in-toto, Anchore cli, swid-generator
+# robusta, in-toto, Anchore cli, swid-generator, ggshield
 RUN SOFTWARE="kube-hunter detect-secrets yubikey-manager thefuck docker-squash \
         ansible paramiko illuminatio vault-cli cve-bin-tool c7n \
-        robusta in-toto anchorecli swid-generator" && \
+        robusta in-toto anchorecli swid-generator ggshield" && \
     pip install --user --no-cache $SOFTWARE && \
     pip list | grep -F "$(echo "$SOFTWARE" | tr -s ' ' | tr " " '\n')" - | tr -s ' ' \
         | tee -a sbom.txt

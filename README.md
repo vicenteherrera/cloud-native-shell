@@ -151,8 +151,10 @@ make run RUN_SHELL=/bin/bash
     * Package vulnerability scanning
       * [cve-bin-tool](https://github.com/intel/cve-bin-tool)
       * [govulncheck](https://go.dev/security/vuln/): low-noise, reliable way for Go users to learn about known vulnerabilities that may affect their projects
-    * Detect secrets
+      * [osv-scanner](https://github.com/google/osv-scanner/): officially supported frontend to the OSV.dev database that connects a project’s list of dependencies with the vulnerabilities that affect them
+    * Secret Detection
       * [detect-secrets](https://github.com/Yelp/detect-secrets): detecting secrets within a code base
+      * [ggshield](https://github.com/GitGuardian/ggshield): detect more than 350+ types of secrets, as well as other potential security vulnerabilities or policy breaks affecting your codebase
   * Infrastructure vulnerability scanners
     * [Checkov](https://www.checkov.io/1.Welcome/Quick%20Start.html)
     * [TFScan](https://github.com/wils0ns/tfscan)
