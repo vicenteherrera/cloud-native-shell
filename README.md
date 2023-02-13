@@ -333,6 +333,13 @@ Software
   * [PacketStreamer](https://github.com/deepfence/PacketStreamer): remote packet capture and collection tool
   * [Defect Dojo](https://github.com/DefectDojo/django-DefectDojo): security orchestration and vulnerability management platform, push findings to systems like JIRA and Slack
   * [OWASP Zed Attack Proxy (ZAP)](https://github.com/zaproxy/zaproxy): automatically find security vulnerabilities in your web applications while you are developing and testing your applications
+  * Code Security
+    * [SemGrep](https://semgrep.dev/): open source static analysis tool for finding bugs, detecting vulnerabilities in third-party dependencies, and enforcing code standards
+    * [GitGuardian](https://www.gitguardian.com/): SaaS to scan your source code to detect api keys, passwords, certificates, encryption keys and other sensitive data in real-time
+    * [CodeQL](https://codeql.github.com/): semantic code analysis engine. CodeQL lets you query code as though it were data, to find all variants of a vulnerability, and eradicate it 
+    * [SonarQube](https://www.sonarsource.com/products/sonarqube/): code quality and code security analysis for up to 27 programming languages; find bugs, vulnerabilities, security hotspots and code smells throughout your workflow
+    * [Checkmarx](https://checkmarx.com) static and interactive application security testing (SAST and IAST), Software Composition Analysis (SCA), infrastructure as code security testing (KICS), and application security and training development (Codebashing)
+    * [Veracode](https://www.veracode.com/): a SaaS application security solution, DAST test tool for application security testing
 * Kubernetes installation and distributions
   * [KubeAdm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/): Kubernetes installation tool
   * [OKD](https://www.okd.io/installation/): Kubernetes distribution base for OpenShift
