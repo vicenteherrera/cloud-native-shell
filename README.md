@@ -49,6 +49,7 @@ make run RUN_SHELL=/bin/bash
   * [Docker](https://docs.docker.com/engine/reference/commandline/cli/) (includes 'compose' command)
   * [Podman](https://podman.io/): run container images without sudo
   * [Buildah](https://buildah.io/): build container images without sudo
+  * [img](https://github.com/genuinetools/img): standalone, daemon-less, unprivileged Dockerfile and OCI compatible container image builder
   * [Skopeo](https://github.com/containers/skopeo): move container images between different types of container storages
   * [Vagrant](https://www.vagrantup.com/): virtual machines manager
   * [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-with-pip), Paramiko

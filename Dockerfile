@@ -125,48 +125,49 @@ ARG GHTOKEN=""
 
 ## Several tools in a single RUN or we will run out of possible layers
 
-RUN REPO="stern/stern"                  gh_install &&\
-    REPO="mikefarah/yq"                 gh_install &&\
-    REPO="roboll/helmfile"              gh_install &&\
-    REPO="andreazorzetto/yh"            gh_install &&\
-    REPO="tj/mmake"                     gh_install &&\
-    REPO="controlplaneio/badrobot"      gh_install &&\
-    REPO="ryane/kfilt"                  gh_install &&\
-    REPO="ahmetb/kubectx"               gh_install &&\
-    REPO="stackrox/kube-linter"         gh_install &&\
-    REPO="controlplaneio/kubesec"       gh_install &&\
-    REPO="turbot/steampipe"             gh_install &&\
-    REPO="stelligent/config-lint"       gh_install &&\
-    REPO="open-policy-agent/conftest"   gh_install &&\
-    REPO="fairwindsops/polaris"         gh_install &&\
-    REPO="projectdiscovery/httpx"       gh_install &&\
-    REPO="datreeio/datree"              gh_install &&\
-    REPO="ryane/kfilt"                  gh_install
+RUN REPO="stern/stern"                   gh_install &&\
+    REPO="mikefarah/yq"                  gh_install &&\
+    REPO="roboll/helmfile"               gh_install &&\
+    REPO="andreazorzetto/yh"             gh_install &&\
+    REPO="tj/mmake"                      gh_install &&\
+    REPO="controlplaneio/badrobot"       gh_install &&\
+    REPO="ryane/kfilt"                   gh_install &&\
+    REPO="ahmetb/kubectx"                gh_install &&\
+    REPO="stackrox/kube-linter"          gh_install &&\
+    REPO="controlplaneio/kubesec"        gh_install &&\
+    REPO="turbot/steampipe"              gh_install &&\
+    REPO="stelligent/config-lint"        gh_install &&\
+    REPO="open-policy-agent/conftest"    gh_install &&\
+    REPO="fairwindsops/polaris"          gh_install &&\
+    REPO="projectdiscovery/httpx"        gh_install &&\
+    REPO="datreeio/datree"               gh_install &&\
+    REPO="ryane/kfilt"                   gh_install
 
-RUN REPO="gruntwork-io/terragrunt"      gh_install &&\
-    REPO="wagoodman/dive"               gh_install &&\
-    REPO="noahgorstein/jqp"             gh_install &&\
-    REPO="hadolint/hadolint"            gh_install &&\
-    REPO="opcr-io/policy"               gh_install &&\
-    REPO="wils0ns/tfscan"               gh_install &&\
-    REPO="liggitt/audit2rbac"           gh_install &&\
-    REPO="instrumenta/kubeval"          gh_install &&\
-    REPO="zegl/kube-score"              gh_install &&\
-    REPO="Shopify/kubeaudit"            gh_install &&\
-    REPO="aquasecurity/chain-bench"     gh_install &&\
-    REPO="raesene/eathar"               gh_install &&\
-    REPO="genuinetools/bane"            gh_install
+RUN REPO="gruntwork-io/terragrunt"       gh_install &&\
+    REPO="wagoodman/dive"                gh_install &&\
+    REPO="noahgorstein/jqp"              gh_install &&\
+    REPO="hadolint/hadolint"             gh_install &&\
+    REPO="opcr-io/policy"                gh_install &&\
+    REPO="wils0ns/tfscan"                gh_install &&\
+    REPO="liggitt/audit2rbac"            gh_install &&\
+    REPO="instrumenta/kubeval"           gh_install &&\
+    REPO="zegl/kube-score"               gh_install &&\
+    REPO="Shopify/kubeaudit"             gh_install &&\
+    REPO="aquasecurity/chain-bench"      gh_install &&\
+    REPO="raesene/eathar"                gh_install &&\
+    REPO="genuinetools/bane"             gh_install
 
-RUN REPO="kubernetes/kops"              gh_install
-RUN REPO="weaveworks/eksctl"            gh_install
-RUN REPO="sigstore/cosign"              gh_install
-RUN REPO="projectcalico/calico"         gh_install
-RUN REPO="chainguard-dev/vex"           gh_install
-RUN REPO="GoogleContainerTools/skaffold" gh_install
-RUN REPO="tenable/terrascan"            gh_install
+RUN REPO="kubernetes/kops"               gh_install &&\
+    REPO="weaveworks/eksctl"             gh_install &&\
+    REPO="sigstore/cosign"               gh_install &&\
+    REPO="projectcalico/calico"          gh_install &&\
+    REPO="chainguard-dev/vex"            gh_install &&\
+    REPO="GoogleContainerTools/skaffold" gh_install &&\
+    REPO="tenable/terrascan"             gh_install
 
 # osv-scanner
-RUN REPO="google/osv-scanner"           gh_install
+RUN REPO="google/osv-scanner"            gh_install &&\
+    REPO="genuinetools/img"              gh_install
 
 # compressed inside a directory
 
