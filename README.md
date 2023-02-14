@@ -342,10 +342,19 @@ Software
     * [Checkmarx](https://checkmarx.com) static and interactive application security testing (SAST and IAST), Software Composition Analysis (SCA), infrastructure as code security testing (KICS), and application security and training development (Codebashing)
     * [Veracode](https://www.veracode.com/): a SaaS application security solution, DAST test tool for application security testing
 * Kubernetes installation and distributions
-  * [KubeAdm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/): Kubernetes installation tool
+  * [KubeAdm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/): official Kubernetes installation tool
+  * [Kubespray](https://github.com/kubernetes-sigs/kubespray): deploy a production ready Kubernetes cluster on AWS, GCE, Azure, OpenStack, vSphere, Equinix Metal (bare metal), Oracle Cloud Infrastructure (Experimental), or Baremetal
   * [OKD](https://www.okd.io/installation/): Kubernetes distribution base for OpenShift
   * [k3s](k3s.io): lightweight Kubernetes installation tool
   * [k0s](https://docs.k0sproject.io/v1.24.2+k0s.0/install/): lightweight Kubernetes installation tool
+  * SaaS
+    * [AWS EKS](https://aws.amazon.com/eks/): Elastic Kubernetes Service, by AWS
+    * [GCP GKE](https://cloud.google.com/kubernetes-engine): Google Kubernetes Engine
+    * [Azure AKS](https://azure.microsoft.com/es-mx/products/kubernetes-service/): Azure Kubernetes Service, by Microsoft
+    * [Suse RKE](https://www.suse.com/products/rancher-kubernetes-engine/): Rancher Kubernetes Engine, by Suse
+    * [Oracle OKE](https://www.oracle.com/es/cloud/cloud-native/container-engine-kubernetes/): Oracle Kubernetes Engine
+    * [Alibaba ACK](https://www.alibabacloud.com/product/kubernetes): Alibaba Cloud Container Service for Kubernetes
+    * [DigitalOcean DOKS](https://www.digitalocean.com/products/kubernetes): DigitalOcean Kubernetes
 * Isolation of nodes
   * [Kata containers](https://katacontainers.io/)
   * [Confidential Containers](https://github.com/confidential-containers)
@@ -362,6 +371,7 @@ Software
   * Azure
     * [Microsoft Defender for Cloud](https://docs.microsoft.com/en-us/azure/defender-for-cloud/defender-for-cloud-introduction)
 * Other security platforms
+  * [Open VAS](https://www.openvas.org/): centralized network vulnerability scanner server
   * [Qualys](https://www.qualys.com/): identify assets on your global hybrid-IT—on prem, endpoints, clouds, containers, mobile, OT and IoT—for a complete, categorized inventory
   * [Checkpoint](https://www.checkpoint.com/): software and combined hardware and software products for IT security, including network security, endpoint security, cloud security, mobile security, data security and security management
   * [Rapid7](https://www.rapid7.com/)
