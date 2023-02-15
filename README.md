@@ -76,13 +76,13 @@ make run RUN_SHELL=/bin/bash
     * [Kind](https://kind.sigs.k8s.io/): deploy a local Kubernetes cluster using Docker
     * [Minishift](https://github.com/minishift/minishift): deploy a local OpenShift cluster
   * [Kubectx, Kubens](https://github.com/ahmetb/kubectx): easely change Kubernetes config context and current namespace
-  * [OpenShift 4 cli (oc)](https://docs.openshift.com/container-platform/4.7/cli_reference/openshift_cli/getting-started-cli.html)
-  * [eksctl](https://eksctl.io/): create and manage EKS clusters on AWS
   * [Helm](https://helm.sh/): manage apps in Kubernetes with deploy templates packaged as charts
     * [Helm diff plugin](https://github.com/databus23/helm-diff): plugin to preview what a helm upgrade would change
   * [Helmfile](https://github.com/roboll/helmfile): deploy several Helm charts at once
-  * [kops](https://kops.sigs.k8s.io/getting_started/install/): provision Kubernetes clusters on cloud providers
   * [Stern](https://github.com/stern/stern): tail multiple pod logs on Kubernetes
+  * [OpenShift 4 cli (oc)](https://docs.openshift.com/container-platform/4.7/cli_reference/openshift_cli/getting-started-cli.html)
+  * [eksctl](https://eksctl.io/): create and manage EKS clusters on AWS
+  * [kops](https://kops.sigs.k8s.io/getting_started/install/): provision Kubernetes clusters on cloud providers
   * [tfk8s](https://github.com/jrhouston/tfk8s): migrate YAML manifests to the [Terraform Kubernetes Provider](https://github.com/hashicorp/terraform-provider-kubernetes)
   * [Carvel tools](https://carvel.dev/ytt/docs/v0.41.0/install/): misc tools (kapp-controller, ytt, kapp, kbld, imgpkg, vendir)
   * [kube-lineage](https://github.com/tohjustin/kube-lineage/): display all dependencies or dependents of an object in a Kubernetes cluster
@@ -415,7 +415,7 @@ Links and information
     * [NIST Vulneratibility Database (NVD)](https://nvd.nist.gov/): enhances CVE with scores and exploitation information
     * [osv.dev](https://osv.dev/): open, precise, and distributed approach to producing and consuming vulnerability information for open source
     * [CIRCL hashlookup](https://www.circl.lu/services/hashlookup/): free lookup hash values against known database of files (malicious/non malicious)
-    * [GitHub Advisory Database](https://github.com/github/advisory-database): a free and open source community driven database of CVEs and GitHub-originated security advisories affecting the open source world
+    * [GitHub Advisory Database](https://github.com/github/advisory-database): a free and open source community driven database of CVEs and GitHub-originated security advisories affecting the open source world, it powers npm audit
     * [Go Vulnerability Database](https://pkg.go.dev/vuln/): data come directly from Go package maintainers or sources such as MITRE and GitHub, reports are curated by the Go Security team
     * [Virustotal API](https://developers.virustotal.com/reference/overview)    
     * Cloud vuln db
