@@ -159,7 +159,7 @@ make run RUN_SHELL=/bin/bash
       * [detect-secrets](https://github.com/Yelp/detect-secrets): detecting secrets within a code base
       * [ggshield](https://github.com/GitGuardian/ggshield): detect more than 350+ types of secrets, as well as other potential security vulnerabilities or policy breaks affecting your codebase
   * Infrastructure vulnerability scanners
-    * [Checkov](https://www.checkov.io/1.Welcome/Quick%20Start.html)
+    * [Checkov](https://www.checkov.io/1.Welcome/Quick%20Start.html): a static code analysis tool for infrastructure as code (IaC) and also a software composition analysis (SCA) tool for images and open source packages
     * [Terrascan](https://github.com/tenable/terrascan#install): OPA based IaC policies for Terraform, Kubernetes, Argo CD, Atlantis and AWS CloudFormation
     * [tfsec](https://github.com/aquasecurity/tfsec): static analysis of your Terraform code to spot potential misconfigurations
     * [TFScan](https://github.com/wils0ns/tfscan): inspect Terraform resources in a state and plan JSON files
@@ -208,11 +208,11 @@ make run RUN_SHELL=/bin/bash
   * [zsh shell](https://www.zsh.org/): lots of features and compatible with shell
 * Command line utilities, miscelaneous
   * make, curl, wget, git, vim, nano and others...
-  * [jq](https://stedolan.github.io/jq/), [yq](https://github.com/mikefarah/yq), [yh](https://github.com/andreazorzetto/yh)
+  * [jq](https://stedolan.github.io/jq/), [yq](https://github.com/mikefarah/yq), [yh](https://github.com/andreazorzetto/yh): process and filter json and yaml
   * [jqp (jq playground)](https://github.com/noahgorstein/jqp): text UI playground for exploring jq
-  * [JLess](https://github.com/PaulJuliusMartinez/jless)  
-  * [GitHub cli](https://cli.github.com/)
-  * [GitLab cli](https://gitlab.com/gitlab-org/cli#installation)
+  * [JLess](https://github.com/PaulJuliusMartinez/jless): navigate json output with colors, pagination, prettify, and more
+  * [GitHub cli (gh)](https://cli.github.com/): cli to GitHub 
+  * [GitLab cli](https://gitlab.com/gitlab-org/cli#installation): cli to GitLab
   * [Starship prompt](https://starship.rs/): powerful shell prompt
   * [Thef*ck](https://github.com/nvbn/thefuck): correct errors in the previous console command
   * [Batcat](https://github.com/sharkdp/bat): prettier cat replacement
