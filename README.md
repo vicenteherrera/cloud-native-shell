@@ -63,7 +63,7 @@ make run RUN_SHELL=/bin/bash
   * [Kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/), [kubectl-convert](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-convert-plugin), aliases
   * [Krane](https://github.com/Shopify/krane): like kubectl, but watches changes, predeploys specific resources, creates secrets, and provides additional information of deployment results
   * [kfilt](https://github.com/ryane/kfilt): filter specific resources from a stream of Kubernetes YAML manifests
-  * [Krew](https://krew.sigs.k8s.io/)   
+  * [Krew](https://krew.sigs.k8s.io/): plugin system for Kubectl
     * [kubectl node-shell](https://github.com/kvaps/kubectl-node-shell): start a root shell in a node    
     * [kubectl example](https://github.com/seredot/kubectl-example): resource example YAMLs
     * [kubectl neat](https://github.com/itaysk/kubectl-neat): remove clutter from manifests
@@ -147,12 +147,12 @@ make run RUN_SHELL=/bin/bash
        * [vexctl](https://github.com/chainguard-dev/vex): a tool to apply and attest VEX (Vulnerability Exploitability eXchange) data, its purpose is to "turn off" alerts of vulnerabilities known not to affect a product
   * Vulnerability scanners
     * Container vulnerability scanners
-      * [Trivy](https://github.com/aquasecurity/trivy)
-      * [Grype](https://github.com/anchore/grype)
-      * [Anchore cli](https://github.com/anchore/anchore-cli)
-      * [Snyk](https://docs.snyk.io/snyk-cli/install-the-snyk-cli)
+      * [Trivy](https://github.com/aquasecurity/trivy): small and fast open source vulnerability and secrets scanner
+      * [Grype](https://github.com/anchore/grype): small and fast open source vulnerability scanner
+      * [Anchore cli](https://github.com/anchore/anchore-cli): open source vulnerability scanner and Dockerfile analyzer
+      * [Snyk](https://docs.snyk.io/snyk-cli/install-the-snyk-cli): small vulnerability scanner
     * Package vulnerability scanning
-      * [cve-bin-tool](https://github.com/intel/cve-bin-tool)
+      * [cve-bin-tool](https://github.com/intel/cve-bin-tool): open source vulnerability scanner using data from [NVD](https://nvd.nist.gov/), from Intel
       * [govulncheck](https://go.dev/security/vuln/): low-noise, reliable way for Go users to learn about known vulnerabilities that may affect their projects
       * [osv-scanner](https://github.com/google/osv-scanner/): officially supported frontend to the OSV.dev database that connects a project’s list of dependencies with the vulnerabilities that affect them
     * Secret Detection
@@ -203,9 +203,9 @@ make run RUN_SHELL=/bin/bash
     * [Shellcheck](https://github.com/koalaman/shellcheck): lint Bash scripts
     * [mmake](https://github.com/tj/mmake): like make but prints help for targets from comments
 * Shells
-  * [Fish shell](https://fishshell.com/) (default)
-  * Bash shell
-  * zsh shell
+  * [Fish shell](https://fishshell.com/) (default): most feature packed shell
+  * [Bash shell](https://www.gnu.org/software/bash/): most common shell
+  * [zsh shell](https://www.zsh.org/): lots of features and compatible with shell
 * Command line utilities, miscelaneous
   * make, curl, wget, git, vim, nano and others...
   * [jq](https://stedolan.github.io/jq/), [yq](https://github.com/mikefarah/yq), [yh](https://github.com/andreazorzetto/yh)
@@ -390,6 +390,8 @@ Software
   * [Terraform Cloud](https://cloud.hashicorp.com/products/terraform)
   * [Grafana Cloud](https://grafana.com/products/cloud/)
   * [Amazon Managed Service for Prometheus](https://aws.amazon.com/prometheus/)
+  * [DockerHub](https://hub.docker.com): container image and Helm chart registry
+  * [Quay.io](https://quay.io/): free container image registry
 * Other tools
   * Online
     * [Atlantis](https://github.com/runatlantis/atlantis): listens for Terraform pull request events via webhooks, automatically runs terraform plan and comments back on the pull request
