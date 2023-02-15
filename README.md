@@ -293,11 +293,13 @@ The following Cloud Native tools should be installed in the cluster/nodes to be 
   * [KubeCost](https://www.kubecost.com/): enterprise offering based on OpenCost
 * Other
   * [Crossplane](https://crossplane.io/docs/v1.9/getting-started/install-configure.html): provision, compose, and consume infrastructure using the Kubernetes API
+  * [Portainer](https://docs.portainer.io/start/install-ce/server/kubernetes/baremetal#deploy-using-helm): a lightweight service delivery platform for containerized applications that can be used to manage Docker, Swarm, Kubernetes and ACI environments, to manage orchestrator resources (containers, images, volumes, networks and more) through a ‘smart’ GUI and/or an extensive API
   * [JFrog Artifactory CE](https://jfrog.com/community/download-artifactory-oss/): binary artifact repositories
   * [GitLab CE](https://gitlab.com/gitlab-org/gitlab): software development platform with version control, issue tracking, code review, CI/CD, and more
   * [Sentry](https://github.com/getsentry/sentry): developer-first error tracking and performance monitoring platform
   * [Graylog](https://github.com/Graylog2/graylog-docker): centralized logging solution that enables aggregating and searching through logs
   * [Locust](https://locust.io/): define user behaviour with Python code, and swarm your system with millions of simultaneous users
+  * [Teleport](https://github.com/gravitational/teleport): an identity-aware, multi-protocol access proxy which understands SSH, HTTPS, RDP, Kubernetes API, MySQL, MongoDB and PostgreSQL wire protocols
 
 
 </details>
@@ -315,12 +317,14 @@ The following tools have big requirements that would make the container image ev
 * [OpenSCAP base](https://www.open-scap.org/tools/openscap-base/#download): cli to parse and evaluate the SCAP standard
 * [SCAP Workbench](https://www.open-scap.org/tools/scap-workbench/#download): graphical utility to perform oscap tasks
 * [iamspy](https://github.com/WithSecureLabs/iamspy): load IAM policies and convert them to Z3 prover constraints and a model for querings if actions are allowed
-
 * [cntr](https://github.com/Mic92/cntr): brings all your developers tools to a minimal running docker container by using a FUSE filesystem, similar to ephemeral containers in Kubernetes
+* [Finch](https://github.com/runfinch/finch): an open source client for container development for MacOs, integrated with nerdctl for build/run/push/pull, containerd for container management, buildkit for OCI image builds, pulled together and run with a vm managed by [Lima](https://github.com/lima-vm/lima).
+* [nerdctl](https://github.com/containerd/nerdctl): docker-compatible CLI for containerd, width rootless image build
 * Programming
   * [Miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html): Python package manager
   * GitHub Actions
     * [Golang Vulncheck](https://github.com/Templum/govulncheck-action): scan go code for vulnerabilities
+
 </details>
 
 ## Other miscellaneous links:
@@ -347,7 +351,8 @@ Software
   * [KubeAdm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/): official Kubernetes installation tool
   * [Kubespray](https://github.com/kubernetes-sigs/kubespray): deploy a production ready Kubernetes cluster on AWS, GCE, Azure, OpenStack, vSphere, Equinix Metal (bare metal), Oracle Cloud Infrastructure (Experimental), or Baremetal
   * [OKD](https://www.okd.io/installation/): Kubernetes distribution base for OpenShift
-  * [k3s](k3s.io): lightweight Kubernetes installation tool
+  * [k3s](https://k3s.io): lightweight Kubernetes distribution based on Rancher
+  * [k3d](https://k3d.io): lightweight wrapper to run k3s on Docker
   * [k0s](https://docs.k0sproject.io/v1.24.2+k0s.0/install/): lightweight Kubernetes installation tool
   * SaaS
     * [AWS EKS](https://aws.amazon.com/eks/): Elastic Kubernetes Service, by AWS
