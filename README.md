@@ -95,6 +95,7 @@ make run RUN_SHELL=/bin/bash
   * [crictl](https://github.com/kubernetes-sigs/cri-tools/blob/master/docs/crictl.md): inspect and debug CRI-compatible container runtimes and applications on a Kubernetes node
   * [calicoctl](https://github.com/projectcalico/calico): in order to manage Calico APIs in the `projectcalico.org/v3` API group, calicoctl provides validation and defaulting for these resources that is not available in kubectl
   * [istioctl](https://github.com/istio/istio): configuration command line utility that allows service operators to debug and diagnose their Istio service mesh deployments
+  * [inletsctl](https://github.com/inlets/inletsctl): create an exit-server (tunnel server) on public cloud infrastructure
 * Cloud
   * [AWS cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
   * [Google Cloud cli](https://cloud.google.com/sdk/gcloud)
@@ -138,6 +139,7 @@ make run RUN_SHELL=/bin/bash
      * [cosign](https://github.com/sigstore/cosign): container signing, verification andstorage in an OCI registry
      * [in-toto](https://github.com/in-toto/in-toto): verify signed tasks in a pipeline
      * [chain-bench](https://github.com/aquasecurity/chain-bench): CIS Software Supply Chain benchmark
+     * [cfssl](https://github.com/cloudflare/cfssl): CloudFlare's PKI/TLS toolkit, both a command line tool and an HTTP API server for signing, verifying, and bundling TLS certificates
      * Software Bill of Materials (SBOM)
        * [Syft](https://github.com/anchore/syft): generate SBOM from container in different formats
        * [Vexy](https://github.com/madpah/vexy): generate VEX (Vulnerability Exploitability Exchange) in [CycloneDX](https://cyclonedx.org/) format

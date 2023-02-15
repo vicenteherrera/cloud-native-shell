@@ -79,6 +79,7 @@ jless 0.8.0 (https://github.com/PaulJuliusMartinez/jless) 2.6M
 kubens 0.9.4 (https://github.com/ahmetb/kubectx) 27M
 pint 0.40.0 (https://github.com/cloudflare/pint) 23M
 kwctl 1.5.3 (https://github.com/kubewarden/kwctl) 47M
+inletsctl 0.8.19 (https://github.com/inlets/inletsctl) 46M
 cloudquery version 0.32.12
 tetragon (initial release)
 fish, version 3.6.0
@@ -101,7 +102,7 @@ syft 0.71.0
 helm version.BuildInfo{Version:"v3.11.1", GitCommit:"293b50c65d4d56187cd4e2f390f0ada46b4c4737", GitTreeState:"clean", GoVersion:"go1.18.10"}
 **Error: don't know how to get version information from docker-slim
 okteto version 2.12.1 
-/root/lib/oracle-cli/bin/oci 3.22.5
+/root/lib/oracle-cli/bin/oci 3.23.0
 kapp version 0.54.1 Succeeded
 ytt version 0.44.1
 kapp version 0.54.1 Succeeded
@@ -130,9 +131,10 @@ who-can v0.4.0
 helm plugins:
 NAME	VERSION	DESCRIPTION                           
 diff	3.6.0  	Preview helm upgrade changes as a diff
-ginkgo Ginkgo Version 2.8.0
+ginkgo Ginkgo Version 2.8.1
 govulncheck latest
 tfk8s v0.1.10
+cfssl v1.6.3
 psa-checker version unknown
 pyenv 2.3.12
 Poetry (version 1.3.2)
@@ -155,11 +157,11 @@ thefuck 3.32
 vault-cli 3.1.0
 yubikey-manager 5.0.1
 KubiScan version 1.5
-checkov 2.3.3
+checkov 2.3.10
 sdccli 0.7.14
 vexy 0.3.0
 nvm
-snyk 1.1100.0
+snyk 1.1103.0
 yarn 1.22.19
 npx 10.2.2
 bitwarden (bw) 2023.1.0

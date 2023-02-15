@@ -246,6 +246,9 @@ RUN REPO="cloudflare/pint" ZFILE="pint-VERSION-linux-amd64.tar.gz" FILE="pint-li
 # kwctl (Kubewarden cli)
 RUN REPO="kubewarden/kwctl" ZFILE="kwctl-linux-x86_64.zip" FILE="kwctl-linux-x86_64" XFILE="kwctl" gh_install
 
+# Inlets ctl
+RUN REPO="inlets/inletsctl" ZFILE="inletsctl.tgz" FILE="inletsctl" gh_install
+
 
 # Custom installation from GitHub
 
@@ -598,6 +601,11 @@ RUN go install golang.org/x/vuln/cmd/govulncheck@latest && \
 RUN VERSION=$(curl -fsSL https://api.github.com/repos/jrhouston/tfk8s/releases/latest | jq '.tag_name' | xargs) && \
     go install github.com/jrhouston/tfk8s@${VERSION}  && \
     echo "tfk8s $VERSION" | tee -a sbom.txt
+
+# cfssl and related tools
+RUN VERSION=$(curl -fsSL https://api.github.com/repos/cloudflare/cfssl/releases/latest | jq '.tag_name' | xargs) && \
+    go install github.com/cloudflare/cfssl/cmd/...@${VERSION}  && \
+    echo "cfssl $VERSION" | tee -a sbom.txt
 
 # psa-checker
 RUN curl -fsSL https://raw.githubusercontent.com/vicenteherrera/psa-checker/main/install/install.sh | INSTALL_DIR="$(go env GOPATH)/bin" bash && \
