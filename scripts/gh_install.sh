@@ -5,6 +5,46 @@
 
 set -euo pipefail
 
+function setg_content_curl {
+  local url="$1"
+  local gh_token="$2"
+  local ghtoken_param=""
+  local ret=0
+  local response
+  local http_code
+  local content
+  if [ "$gh_token" != "" ]; then
+    ghtoken_param="-u $gh_token"
+    echo "Using GitHub API token"
+  fi
+  
+  response=$(curl -s -L $ghtoken_param --max-time 30 -w "%{http_code}" "$url") || ret=$?
+  if [ $ret -gt 0 ]; then
+    echo "**Error executing CURL to get from $url"
+  fi
+  http_code=$(tail -n1 <<< "$response")  # get the last line
+  # echo "http_code: $http_code"
+  if [ ${http_code} -eq 403 ] ; then
+    echo "**Error 403: Forbidden calling $url"
+    echo "Server may have rate limited your IP address. Please wait and retry build."
+    if [ "$ghtoken_param" == "" ]; then
+      echo "You should use a GitHub API token to avoid rate limiting"
+    fi
+    echo $url
+    exit 1
+  elif [ "${http_code}" -eq "000" ] ; then
+    echo "**Error 000: Timeout calling $url"
+    echo "Please wait and retry build."
+    exit 1
+  elif [[ ${http_code} -lt 200 || ${http_code} -gt 299 ]] ; then
+    echo "**Error $http_code getting version"
+    echo "Check URL is correct: $url1"
+    exit 1
+  fi
+  GLOBAL_CONTENT=$(sed '$ d' <<< "$response")
+}
+
+
 # repository as username/reponame in GitHub URL
 [ "$REPO" == "" ] && echo "REPO env variable required" && exit 1
 # filename to download from releseas channel, include VERSION when it is part of the name
@@ -15,36 +55,30 @@ default_zfile="vVERSION.tar.gz"
 # Name of the file or directory after moving to /usr/local/bin if different
 : "${XFILE:=$FILE}"
 
+# GH token for calls to its API
+GHTOKEN="${GHTOKEN:-}"
+
+# Globals
+GLOBAL_CONTENT=""
+
 echo "# Install GH $REPO"
 
-GHTOKEN="${GHTOKEN:-}"
-ghtoken_param=""
-if [ "$GHTOKEN" != "" ]; then
-  ghtoken_param="-u $GHTOKEN"
-  echo "Using GitHub API token"
-fi
+setg_content_curl "https://api.github.com/repos/${REPO}/releases/latest" "$GHTOKEN"
+version=$(echo "$GLOBAL_CONTENT" | jq ".tag_name" | xargs )
 
-url1="https://api.github.com/repos/${REPO}/releases/latest"
-http_code=$(curl --silent -L $ghtoken_param --max-time 30 --output version.txt --write-out "%{http_code}" "$url1" ||:)
-if [[ ${http_code} -eq 403 ]] ; then
-  echo "**Error 403: Forbidden"
-  echo "GitHub API may have rate limited your IP address. Please wait and retry build."
-  if [ "$GHTOKEN" == "" ]; then
-    echo "You should use a GitHub API token to avoid rate limiting"
-  fi
-  echo $url1
-  exit 1
-elif [[ ${http_code} -lt 200 || ${http_code} -gt 299 ]] ; then
-  echo "**Error $http_code getting version"
-  echo "Check URL is correct: $url1"
-  exit 1
-fi
-version=$(cat version.txt | jq ".tag_name" | xargs )
-rm version.txt
+## Alternative
+# GITHUB_LATEST_VERSION=$(curl -L -s -H 'Accept: application/json' https://github.com/${REPO}/releases/latest | sed -e 's/.*"tag_name":"\([^"]*\)".*/\1/')
+# GITHUB_URL="https://github.com/${REPO}/releases/download/${GITHUB_LATEST_VERSION}/${GITHUB_FILE}"
+
 usev=""
 if [ "${version:0:1}" == "v" ]; then
   version=$(echo $version | cut -c2-)
   usev="v"
+fi
+
+if [ "$GHTOKEN" != "" ]; then
+  ghtoken_param="-u $GHTOKEN"
+  echo "Using GitHub API token"
 fi
 
 # Guess all filenames to use
@@ -57,34 +91,18 @@ if [ "$ZFILE" == "$default_zfile" ] && [ "$FILE" == "$ZFILE" ] && [ "$XFILE" == 
   osArch="(x86_64|amd64|64bit|)"
   extension="(zip|tar\.gz|deb)"
   optVersion="(v)?(\.[0-9])*"
-  echo "Running query from: https://api.github.com/repos/${REPO}/releases/latest"
-  url1="https://api.github.com/repos/${REPO}/releases/latest"
-  http_code=$(curl --silent -L $ghtoken_param --max-time 30 --output content.txt --write-out "%{http_code}" "$url1" ||:)
-  if [[ ${http_code} -eq 403 ]] ; then
-    echo "**Error 403: Forbidden"
-    echo "GitHub API may have rate limited your IP address. Please wait and retry build."
-    if [ "$GHTOKEN" == "" ]; then
-      echo "You should use a GitHub API token to avoid rate limiting"
-    fi
-    echo $url1
-    exit 1
-  elif [[ ${http_code} -lt 200 || ${http_code} -gt 299 ]] ; then
-    echo "**Error $http_code getting version"
-    echo "Check URL is correct: $url1"
-    exit 1
-  fi
-  url=$(cat content.txt | grep -Eio "browser_download_url.*${sep}${optVersion}${sep}${osName}${sep}${osArch}${sep}${optVersion}"'"' | head -n1 ||:)
-  urlne=url
+
+  url=$(echo "$GLOBAL_CONTENT" | grep -Eio "browser_download_url.*${sep}${optVersion}${sep}${osName}${sep}${osArch}${sep}${optVersion}"'"' | head -n1 ||:)
   if [ "$url" == "" ]; then
     echo "No file without extension for download"
-    url=$(cat content.txt | grep -Eio "browser_download_url.*${sep}${optVersion}${sep}${osName}${sep}${osArch}${sep}${optVersion}\.${extension}" | head -n1 ||:)
-  else  
+    url=$(echo "$GLOBAL_CONTENT" | grep -Eio "browser_download_url.*${sep}${optVersion}${sep}${osName}${sep}${osArch}${sep}${optVersion}\.${extension}" | head -n1 ||:)
+  else
     echo "Found file without extension for download"
     FILE=""
   fi
   if [ "$url" == "" ]; then
     echo "**Error, couldn't guess url or file to download"
-    cat content.txt | grep -Eio "browser_download_url.*"
+    echo "$GLOBAL_CONTENT" | grep -Eio "browser_download_url.*"
     exit 1
   elif (( $(grep -c . <<<"$url") > 1 )); then
     echo "More than one possible file to download:"
@@ -93,7 +111,6 @@ if [ "$ZFILE" == "$default_zfile" ] && [ "$FILE" == "$ZFILE" ] && [ "$XFILE" == 
     echo "Using: $url"
     exit 1
   fi
-  rm content.txt
   url=${url//\"}
   url=${url/browser_download_url: /}
   echo "At $url"
@@ -124,11 +141,15 @@ echo "Download: $ZFILE, Extract: $FILE, Install as: $XFILE"
 mkdir -p temp
 cd temp
 
-http_code=$(curl --silent -L --max-time 30 --output ${ZFILE} --write-out "%{http_code}" "$url" ||:)
+ret=0
+http_code=$(curl --silent -L --max-time 30 --output ${ZFILE} --write-out "%{http_code}" "$url") || ret=$?
+if [ $ret -gt 0 ]; then
+  echo "**Error getting file with CURL from $url"
+  exit 1
+fi
 if [[ ${http_code} -lt 200 || ${http_code} -gt 299 ]]; then
-  echo "Error $http_code downloading file"
+  echo "Error $http_code downloading file from $url"
   echo "Check URL is correct and you are not API rate limited by your IP address"
-  echo "URL: $url"
   exit 1
 fi
 
