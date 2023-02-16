@@ -11,15 +11,15 @@ RUN chmod a+rx /usr/local/bin/version
 # Do not ask interactive questions while installing using apt or dpkg
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
-RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get update
 
 # Instead of increasing the Debian image version, you may upgrade it,
 # but the image size will be larger
 # RUN apt-get -y upgrade
 
 # Start with apt-utils so other installations can configure on the fly
-RUN apt-get install -y apt-utils 
-RUN apt-get install -y software-properties-common \
+RUN DEBIAN_FRONTEND=noninteractive DEBCONF_NOWARNINGS="yes" apt-get install -y --no-install-recommends apt-utils 
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y software-properties-common \
         apt-transport-https ca-certificates lsb-release \
         gnupg gnupg2 curl wget unzip sudo \
         zsh nano jq procps \
@@ -29,19 +29,20 @@ RUN apt-get install -y software-properties-common \
 
 # Programming
 
-RUN apt-get -y install \
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
         build-essential direnv \
         python3-dev python3-pip python3-setuptools python3-venv \
         npm \
         ruby-full zlib1g-dev && \
     version python3 pip ruby npm | tee -a sbom.txt
 
-# podman, prometheus, nmap, ncat, netcat
+# git, vim, bat, pv, parallel, tmux, screen
+# nmap, ncat, netcat
 # dnsutils (dig, nslookup, nsupdate), iputils (ping), net-tools (netstat) ,
 # podman, buildah, skopeo, yamllint, shellcheck
-# tor, torify
-RUN apt-get -y install \
-        git vim bat pv \
+# tor (torify), apache2-utils (ab)
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
+        git vim bat pv parallel tmux screen \
         nmap ncat netcat dnsutils iputils-ping net-tools \
         conntrack \
         podman buildah skopeo yamllint shellcheck \
@@ -51,6 +52,9 @@ RUN apt-get -y install \
     ncat --version | tee -a sbom.txt && \
     nmap --version | grep "Nmap version" | tee -a sbom.txt && \
     bat --version | tee -a sbom.txt && \
+    screen --version | tee -a sbom.txt && \
+    tmux -V | tee -a sbom.txt && \
+    parallel --version | head -n 1 | tee -a sbom.txt && \
     netstat --version | grep "net-tools" | tee -a sbom.txt && \
     ab -V | grep "This is ApacheBench" | xargs -I {} echo "ab: "{} | tee -a sbom.txt
 # conntrack is a Kubernetes 1.20.2 requirement
@@ -418,9 +422,8 @@ RUN curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-he
     version helm | tee -a sbom.txt
 
 # Docker Slim
-RUN curl -fsSL https://raw.githubusercontent.com/docker-slim/docker-slim/master/scripts/install-dockerslim.sh \
-        | sudo -E bash - && \
-    version docker-slim | tee -a sbom.txt
+RUN curl -fsSL https://raw.githubusercontent.com/slimtoolkit/slim/master/scripts/install-slim.sh | sudo -E bash - && \
+    version slim | tee -a sbom.txt
 
 # Okteto cli
 RUN curl -fsSL https://get.okteto.com \

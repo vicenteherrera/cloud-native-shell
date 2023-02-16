@@ -53,7 +53,7 @@ make run RUN_SHELL=/bin/bash
   * [Skopeo](https://github.com/containers/skopeo): move container images between different types of container storages
   * [Vagrant](https://www.vagrantup.com/): virtual machines manager
   * [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-with-pip), Paramiko
-  * [docker-slim](https://github.com/docker-slim/docker-slim): reduce footprint of container images
+  * [slim](https://github.com/slimtoolkit/slim): reduce footprint of container images
   * [docker-squash](https://github.com/goldmann/docker-squash): squash layers of a container image reducing size
   * [dive](https://github.com/wagoodman/dive): explore container image and layers
   * [act](https://github.com/nektos/act): test GitHub actions locally
@@ -218,7 +218,9 @@ make run RUN_SHELL=/bin/bash
   * [direnv](https://direnv.net/): load and unload environment variables depending on the current directory
   * [z](https://github.com/rupa/z): smart directory changer
   * [pv](https://ss64.com/bash/pv.html): monitor data being sent through pipe
-
+  * [parallel](https://www.gnu.org/software/parallel/): launch parallel processes from the command line
+  * [tmux](https://github.com/tmux/tmux/wiki): a terminal multiplexer, it lets you switch easily between several programs in one terminal, detach them and reattach them to a different terminal
+  * [screen](https://ss64.com/bash/screen.html): multiplex a physical terminal between several processes
 
 ## Other Cloud Native tools to run in a cluster
 
