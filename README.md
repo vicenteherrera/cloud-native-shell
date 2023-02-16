@@ -168,12 +168,11 @@ make run RUN_SHELL=/bin/bash
     * [roxctl](https://docs.openshift.com/acs/3.66/cli/getting-started-cli.html): StackRox CLI
   * Misc
     * [gator](https://open-policy-agent.github.io/gatekeeper/website/docs/gator/): Gatekeeper CLI for evaluating ConstraintTemplates and Constraints
-    
     * [Illuminatio](https://github.com/inovex/illuminatio): automatically testing kubernetes network policies
     * [policy](https://github.com/opcr-io/policy): tool for building, versioning and publishing your authorization policies, using OCI standards to manage artifacts, and the Open Policy Agent (OPA) to compile and run
     * [bane](https://github.com/genuinetools/bane): AppArmor profile generator for docker containers
     * [cmctl](https://cert-manager.io/docs/usage/cmctl/#installation): cert-manager cli
-    * [Vault cli](https://www.vaultproject.io/docs/commands): secure, store and control secrets  
+    * [Vault cli](https://www.vaultproject.io/docs/commands): secure, store and control secrets
     * [Tetragon cli](https://github.com/cilium/tetragon): eBPF-based security observability and runtime enforcement
     * [Kubewarden cli](https://github.com/kubewarden/kwctl): policy engine for Kubernetes
 * General security and networking
