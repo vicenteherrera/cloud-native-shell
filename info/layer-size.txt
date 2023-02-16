@@ -2,19 +2,21 @@ SIZE      CREATED BY
 0B        /bin/bash -c #(nop)  CMD ["$DEFAULT_SHELL"]
 0B        /bin/bash -c #(nop)  ENV DEFAULT_SHELL=/usr/bin/fish
 0B        /bin/bash -c #(nop)  SHELL [/bin/bash -c]
+10.3MB    |11 /bin/bash -c curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh         | bash &&     version lazydocker | tee -a sbom.txt
+24.3MB    |11 /bin/bash -c curl -fsSL https://raw.githubusercontent.com/vicenteherrera/psa-checker/main/install/install.sh | INSTALL_DIR="$(go env GOPATH)/bin" bash &&     version psa-checker | tee -a sbom.txt
 349MB     |11 /bin/bash -c npm install snyk yarn @bitwarden/cli bw npx artillery &&     version snyk yarn npx | tee -a sbom.txt &&     echo "bitwarden (bw) $(bw --version)" | tee -a sbom.txt &&     artillery --version | grep 'Artillery Core' | tee -a sbom.txt &&     npm cache clean -force
-7.43kB    |11 /bin/bash -c echo "nvm" $(nvm --version) | tee -a sbom.txt
-1.97MB    |11 /bin/bash -c VERSION=$(curl -fsSL https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq '.tag_name' | xargs | cut -c2-) &&     curl -fsSLo- https://raw.githubusercontent.com/nvm-sh/nvm/v${VERSION}/install.sh | bash &&     export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")" &&     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-7.83kB    |11 /bin/bash -c pipx list --short | tee -a sbom.txt
+63B       |11 /bin/bash -c echo -e "function nvm\n  bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv\nend" > $HOME/.config/fish/functions/nvm.fish
+1.98MB    |11 /bin/bash -c VERSION=$(curl -fsSL https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq '.tag_name' | xargs | cut -c2-) &&     curl -fsSLo- https://raw.githubusercontent.com/nvm-sh/nvm/v${VERSION}/install.sh | bash &&     export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")" &&     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" &&     nvm | grep "Node Version Manager" | tee -a sbom.txt
+7.96kB    |11 /bin/bash -c pipx list --short | tee -a sbom.txt
 17.2MB    |11 /bin/bash -c pipx install vexy
-221MB     |11 /bin/bash -c pipx install checkov
+224MB     |11 /bin/bash -c pipx install checkov
 147MB     |11 /bin/bash -c pipx install sdccli
-7.38kB    |11 /bin/bash -c pip install --user --no-cache kubernetes PrettyTable urllib3 &&     python3 /usr/local/bin/kubiscan/KubiScan.py -h | egrep "KubiScan version" | xargs | tee -a sbom.txt
+7.51kB    |11 /bin/bash -c pip install --user --no-cache kubernetes PrettyTable urllib3 &&     python3 /usr/local/bin/kubiscan/KubiScan.py -h | egrep "KubiScan version" | xargs | tee -a sbom.txt
+2.37kB    |11 /bin/bash -c echo -e "\n#The f*ck\nthefuck --alias | source\nalias please fuck" >> $HOME/.config/fish/config.fish
 650MB     |11 /bin/bash -c SOFTWARE="kube-hunter detect-secrets yubikey-manager thefuck docker-squash         ansible paramiko illuminatio vault-cli cve-bin-tool c7n         robusta in-toto anchorecli swid-generator ggshield" &&     pip install --user --no-cache $SOFTWARE &&     pip list | grep -F "$(echo "$SOFTWARE" | tr -s ' ' | tr " " '\n')" - | tr -s ' '         | tee -a sbom.txt
 1.38MB    |11 /bin/bash -c python3 -m pip install --user --no-cache pipx &&     echo "pipx" $(pipx --version) | tee -a sbom.txt
 109MB     |11 /bin/bash -c curl -fsSL https://install.python-poetry.org | python3 - &&     poetry --version | tee -a sbom.txt
-4.6MB     |11 /bin/bash -c curl -fsSL https://pyenv.run | bash &&     version pyenv | tee -a sbom.txt
-24.3MB    |11 /bin/bash -c curl -fsSL https://raw.githubusercontent.com/vicenteherrera/psa-checker/main/install/install.sh | INSTALL_DIR="$(go env GOPATH)/bin" bash &&     version psa-checker | tee -a sbom.txt
+4.61MB    |11 /bin/bash -c curl -fsSL https://pyenv.run | bash &&     version pyenv | tee -a sbom.txt
 334MB     |11 /bin/bash -c VERSION=$(curl -fsSL https://api.github.com/repos/cloudflare/cfssl/releases/latest | jq '.tag_name' | xargs) &&     go install github.com/cloudflare/cfssl/cmd/...@${VERSION}  &&     echo "cfssl $VERSION" | tee -a sbom.txt
 61.4MB    |11 /bin/bash -c VERSION=$(curl -fsSL https://api.github.com/repos/jrhouston/tfk8s/releases/latest | jq '.tag_name' | xargs) &&     go install github.com/jrhouston/tfk8s@${VERSION}  &&     echo "tfk8s $VERSION" | tee -a sbom.txt
 53.3MB    |11 /bin/bash -c go install golang.org/x/vuln/cmd/govulncheck@latest &&     echo "govulncheck latest" | tee -a sbom.txt
@@ -25,11 +27,19 @@ SIZE      CREATED BY
 0B        /bin/bash -c #(nop)  ENV PATH=/home/vicente/.krew/bin:/home/vicente/node_modules/.bin:/home/vicente/.pyenv/bin:/home/vicente/.go/bin:/home/vicente/.gem/bin:/home/vicente/.local/bin:/usr/local/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 31.2MB    |11 /bin/bash -c (     set -x; cd "$(mktemp -d)" &&     OS="$(uname | tr '[:upper:]' '[:lower:]')" &&     ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&     KREW="krew-${OS}_${ARCH}" &&     curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" &&     tar zxvf "${KREW}.tar.gz" &&     ./"${KREW}" install krew     )
 3.63kB    |11 /bin/bash -c echo '# Created in Dockerfile' >>/home/${user}/.bashrc &&     echo 'source <(kubectl completion bash)' >>/home/${user}/.bashrc &&     echo 'alias k=kubectl' >>/home/${user}/.bashrc &&     echo 'complete -F __start_kubectl k' >>/home/${user}/.bashrc
-9.59kB    |11 /bin/bash -c git clone https://github.com/jethrokuan/z.git &&     mv ./z/conf.d/z.fish ./.config/fish/conf.d/z.fish &&     mv ./z/functions/* ./.config/fish/functions &&     rm -rf ./z
+0B        /bin/bash -c #(nop)  SHELL [/bin/bash -c]
+6.93kB    |11 /usr/bin/fish -c helm completion fish > ~/.config/fish/completions/helm.fish
+148kB     |11 /usr/bin/fish -c curl -fsSL https://github.com/ahmetb/kubectx/blob/master/completion/kubectx.fish --output ~/.config/fish/completions/kubectx.fish
+599B      |11 /usr/bin/fish -c curl -fsSL https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/kubens.fish --output ~/.config/fish/completions/kubens.fish
+217kB     |11 /usr/bin/fish -c fisher install evanlucas/fish-kubectl-completions
+9.59kB    |11 /usr/bin/fish -c git clone https://github.com/jethrokuan/z.git &&     mv ./z/conf.d/z.fish ./.config/fish/conf.d/z.fish &&     mv ./z/functions/* ./.config/fish/functions &&     rm -rf ./z
+5.12kB    |11 /usr/bin/fish -c fisher install edc/bass
+19kB      |11 /usr/bin/fish -c curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher &&     fisher --version | tee -a sbom.txt
+0B        /usr/bin/fish -c #(nop)  SHELL [/usr/bin/fish -c]
 2.46kB    /bin/bash -c #(nop) COPY --chown=vicente:vicentefile:cdcdaab1dc4d9581f988cf3968ed8d1bf176b2f747c4178cd6e8ea5fdd1f6ceb in ./.vimrc 
 2.69kB    /bin/bash -c #(nop) COPY --chown=vicente:vicentefile:59dca5e1a2d934e5d5be99c3758fe7040953d61fc3a49c2748eae13c2a19e2f5 in ./.config/starship.toml 
 1.34kB    /bin/bash -c #(nop) COPY --chown=vicente:vicentefile:0b855320cb624c82da1b52a83b67d659cf23d49da370173a4c12b6cc52951309 in ./.config/fish/config-alias.fish 
-2.37kB    /bin/bash -c #(nop) COPY --chown=vicente:vicentefile:574f7103c65d0714e7a14bb921b04019d4aa19c6110801222ce00db39b9468c8 in ./.config/fish/config.fish 
+2.31kB    /bin/bash -c #(nop) COPY --chown=vicente:vicentefile:2a285b41210e2c9b4463e78f0e81f1d668bc15bdd8cb30b07974b6abc0efcd3f in ./.config/fish/config.fish 
 0B        /bin/bash -c #(nop)  ENV PATH=/home/vicente/node_modules/.bin:/home/vicente/.pyenv/bin:/home/vicente/.go/bin:/home/vicente/.gem/bin:/home/vicente/.local/bin:/usr/local/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 0B        /bin/bash -c #(nop)  ENV PATH=/home/vicente/.pyenv/bin:/home/vicente/.go/bin:/home/vicente/.gem/bin:/home/vicente/.local/bin:/usr/local/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 0B        /bin/bash -c #(nop)  ENV PATH=/home/vicente/.go/bin:/home/vicente/.gem/bin:/home/vicente/.local/bin:/usr/local/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -46,29 +56,29 @@ SIZE      CREATED BY
 4.64kB    |11 /bin/sh -c sudo usermod -aG docker ${user} && sudo -H -u ${user} newgrp docker
 4.61kB    |11 /bin/sh -c sudo usermod -aG rvm ${user}
 811B      |11 /bin/sh -c echo "${user}:${pass}" | chpasswd
-6.55kB    |11 /bin/sh -c mv /install/sbom.txt /home/${user}/sbom.txt &&     chown ${user}:${group} /home/${user}/sbom.txt
+6.69kB    |11 /bin/sh -c mv /install/sbom.txt /home/${user}/sbom.txt &&     chown ${user}:${group} /home/${user}/sbom.txt
 4.55kB    |11 /bin/sh -c mkdir -p         /home/${user}/.config/fish/completions         /home/${user}/.config/fish/conf.d         /home/${user}/.config/fish/functions         /home/${user}/.gem/bin         /home/${user}/.local/bin         /home/${user}/.go/bin         /home/${user}/.keys &&     chown -R ${user}:${group} /home/${user}
 335kB     |11 /bin/sh -c useradd -u ${uid} -g ${group} -s ${shell} -m ${user} &&     usermod -aG sudo ${user}
 0B        /bin/sh -c #(nop)  ARG shell=/usr/bin/fish
 0B        /bin/sh -c #(nop)  ARG pass=changeme
 0B        /bin/sh -c #(nop)  ARG uid=1000
 0B        /bin/sh -c #(nop)  ARG user=vicente
-210MB     |7 /bin/sh -c curl -fsSL https://deb.nodesource.com/setup_19.x | bash - &&     apt-get install -y nodejs
-0B        |7 /bin/sh -c curl -fsSL https://gitlab.com/gitlab-org/cli/-/raw/main/scripts/install.sh | sudo sh
-38.6MB    |7 /bin/sh -c curl -fsSL https://raw.githubusercontent.com/crossplane/crossplane/master/install.sh | sh &&     sudo mv kubectl-crossplane /usr/local/bin/ &&     version kubectl-crossplane | tee -a sbom.txt
+210MB     |7 /bin/sh -c curl -fsSL https://deb.nodesource.com/setup_19.x         | bash - &&     apt-get install -y nodejs
+38.6MB    |7 /bin/sh -c curl -fsSL https://raw.githubusercontent.com/crossplane/crossplane/master/install.sh         | sh &&     sudo mv kubectl-crossplane /usr/local/bin/ &&     version kubectl-crossplane | tee -a sbom.txt
 14MB      |7 /bin/sh -c curl -fsSL https://raw.githubusercontent.com/nektos/act/master/install.sh         | sudo sh -s -- -b /usr/local/bin &&     version act | tee -a sbom.txt
 125MB     |7 /bin/sh -c curl -fsSL https://raw.githubusercontent.com/armosec/kubescape/master/install.sh         | sudo /bin/bash &&     version kubescape | tee -a sbom.txt
 12.4MB    |7 /bin/sh -c curl -fsSL https://starship.rs/install.sh         | sudo sh -s -- --yes &&     version starship | tee -a sbom.txt
-219MB     |7 /bin/sh -c curl -fsSL https://carvel.dev/install.sh | sudo bash - &&     version kapp ytt kapp kbld imgpkg vendir | tee -a sbom.txt
+219MB     |7 /bin/sh -c curl -fsSL https://carvel.dev/install.sh         | sudo bash - &&     version kwt kctrl kapp ytt kapp kbld imgpkg vendir | tee -a sbom.txt
 423MB     |7 /bin/sh -c curl -fsSL https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh         | sudo bash -s --  --accept-all-defaults &&     version /root/lib/oracle-cli/bin/oci | tee -a sbom.txt
 64.5MB    |7 /bin/sh -c curl -fsSL https://get.okteto.com         | sudo sh &&     okteto version | tee -a sbom.txt
-48.9MB    |7 /bin/sh -c curl -fsSL https://raw.githubusercontent.com/slimtoolkit/slim/master/scripts/install-slim.sh | sudo -E bash - &&     version slim | tee -a sbom.txt
+48.9MB    |7 /bin/sh -c curl -fsSL https://raw.githubusercontent.com/slimtoolkit/slim/master/scripts/install-slim.sh         | sudo -E bash - &&     version slim | tee -a sbom.txt
 46.9MB    |7 /bin/sh -c curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3         | sudo -E bash - &&     version helm | tee -a sbom.txt
 27.1MB    |7 /bin/sh -c curl -fsSL https://raw.githubusercontent.com/anchore/syft/main/install.sh         | sudo sh -s -- -b /usr/local/bin &&     version syft | tee -a sbom.txt
-63.9MB    |7 /bin/sh -c curl -fsSL https://raw.githubusercontent.com/anchore/grype/main/install.sh         | sudo sh -s -- -b /usr/local/bin &&     version grype | tee -a sbom.txt
+39MB      |7 /bin/sh -c curl -fsSL https://raw.githubusercontent.com/anchore/grype/main/install.sh         | sudo sh -s -- -b /usr/local/bin &&     version grype | tee -a sbom.txt
 176MB     |7 /bin/sh -c curl -fsSL -o aws.zip "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" &&     unzip ./aws.zip && ./aws/install &&     rm -r ./aws aws.zip &&     version aws | tee -a sbom.txt
 67.1MB    |7 /bin/sh -c curl -fsSLO https://mirror.openshift.com/pub/rhacs/assets/latest/bin/Linux/roxctl &&     chmod +x roxctl &&     sudo mv roxctl /usr/local/bin/ &&     version roxctl | tee -a sbom.txt
 57.8MB    |7 /bin/sh -c VERSION=$(curl -fsSL https://dl.k8s.io/release/stable.txt) &&     curl -fsSLO "https://dl.k8s.io/release/$VERSION/bin/linux/amd64/kubectl-convert" &&     sudo install -o root -g root -m 0755 kubectl-convert /usr/local/bin/kubectl-convert &&     rm kubectl-convert &&     echo "kubectl-convert $VERSION" | tee -a sbom.txt
+26.8MB    |7 /bin/sh -c GLREPO="gitlab-org/cli" && GLREPO_ID="gitlab-org%2Fcli" &&     VERSION=$(curl -s https://gitlab.com/api/v4/projects/${GLREPO_ID}/releases/ | jq '.[]' | jq -r '.name' | head -1 | cut -c2-) &&     curl -fsSL -o glab.tar.gz https://gitlab.com/${GLREPO}/-/releases/v${VERSION}/downloads/glab_${VERSION}_Linux_x86_64.tar.gz &&     tar -xvf glab.tar.gz &&     chmod a+x bin/glab && sudo mv bin/glab /usr/local/bin/ &&     rm -r LICENSE README.md bin/ &&     version glab | tee -a sbom.txt
 123MB     |7 /bin/sh -c curl -fsSLO https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/linux/oc.tar.gz &&     tar -xvf oc.tar.gz &&     chmod +x oc && sudo mv oc /usr/local/bin/ &&     rm README.md kubectl oc.tar.gz &&     version oc | tee -a sbom.txt
 6.94MB    |7 /bin/sh -c curl -fsSLo ./kind https://kind.sigs.k8s.io/dl/latest/kind-linux-amd64 &&     chmod +x ./kind && sudo mv ./kind /usr/local/bin/ &&     version kind | tee -a sbom.txt
 81.1MB    |7 /bin/sh -c curl -fsSLo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 &&     chmod +x minikube && sudo mv minikube /usr/local/bin/ &&     version minikube | tee -a sbom.txt
@@ -80,12 +90,12 @@ SIZE      CREATED BY
 1.23GB    |7 /bin/sh -c curl -fsSL https://packages.microsoft.com/keys/microsoft.asc         | gpg --dearmor | sudo tee /usr/share/keyrings/microsoft-archive-keyring.gpg > /dev/null &&     sudo chmod a+r /usr/share/keyrings/microsoft-archive-keyring.gpg &&     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main"         | sudo tee /etc/apt/sources.list.d/azure-cli.list > /dev/null &&     sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/azure-cli.list &&     sudo apt-get install -y azure-cli &&     version az | tee -a sbom.txt
 403MB     |7 /bin/sh -c curl -fsSL https://download.docker.com/linux/debian/gpg         | gpg --dearmor | sudo tee /usr/share/keyrings/docker-archive-keyring.gpg > /dev/null &&     sudo chmod a+r /usr/share/keyrings/docker-archive-keyring.gpg &&     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable"         | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null &&     sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/docker.list &&     sudo apt-get install -y docker-ce docker-ce-cli containerd.io  &&     version docker | tee -a sbom.txt
 51.8MB    |7 /bin/sh -c curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg         | tee /usr/share/keyrings/kubernetes-archive-keyring.gpg > /dev/null &&     sudo chmod a+r /usr/share/keyrings/kubernetes-archive-keyring.gpg &&     echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main"         | sudo tee /etc/apt/sources.list.d/kubernetes.list > /dev/null &&     sudo apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/kubernetes.list &&     sudo apt-get install -y kubectl &&     echo "kubectl" $(kubectl version --short --client 2>/dev/null) | tee -a sbom.txt
-32.1MB    |7 /bin/sh -c curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_11/Release.key         | gpg --dearmor | sudo tee /usr/share/keyrings/shells_fish_release_3.gpg > /dev/null &&     sudo chmod a+r /usr/share/keyrings/shells_fish_release_3.gpg &&     echo 'deb [signed-by=/usr/share/keyrings/shells_fish_release_3.gpg] http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /'         | sudo tee /etc/apt/sources.list.d/shells:fish:release:3.list > /dev/null &&     sudo apt-get update &&     sudo apt-get install -y fish &&     version fish | tee -a sbom.txt
+32.5MB    |7 /bin/sh -c curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_11/Release.key         | gpg --dearmor | sudo tee /usr/share/keyrings/shells_fish_release_3.gpg > /dev/null &&     sudo chmod a+r /usr/share/keyrings/shells_fish_release_3.gpg &&     echo 'deb [signed-by=/usr/share/keyrings/shells_fish_release_3.gpg] http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /'         | sudo tee /etc/apt/sources.list.d/shells:fish:release:3.list > /dev/null &&     sudo apt-get update &&     sudo apt-get install -y fish &&     version fish | tee -a sbom.txt
 10.8MB    |7 /bin/sh -c curl -fsSL https://github.com/cilium/tetragon/releases/download/tetragon-cli/tetragon-linux-amd64.tar.gz         | tar xz && sudo mv tetragon /usr/bin/tetragon &&     echo "tetragon (initial release)" | tee -a sbom.txt
 38.1MB    |7 /bin/sh -c curl -fsSL -o cq.zip https://github.com/cloudquery/cloudquery/releases/download/cli%2Fv0.32.12/cloudquery_Linux_x86_64.zip &&     unzip cq.zip && sudo mv cloudquery /usr/bin/cloudquery && rm CHANGELOG.md cq.zip &&     version cloudquery | tee -a sbom.txt
 47.9MB    |7 /bin/sh -c REPO="inlets/inletsctl" ZFILE="inletsctl.tgz" FILE="inletsctl" gh_install
 48.9MB    |7 /bin/sh -c REPO="kubewarden/kwctl" ZFILE="kwctl-linux-x86_64.zip" FILE="kwctl-linux-x86_64" XFILE="kwctl" gh_install
-23.4MB    |7 /bin/sh -c REPO="cloudflare/pint" ZFILE="pint-VERSION-linux-amd64.tar.gz" FILE="pint-linux-amd64" XFILE="pint" gh_install
+23.5MB    |7 /bin/sh -c REPO="cloudflare/pint" ZFILE="pint-VERSION-linux-amd64.tar.gz" FILE="pint-linux-amd64" XFILE="pint" gh_install
 27.9MB    |7 /bin/sh -c REPO="ahmetb/kubectx" ZFILE="kubens_vVERSION_linux_x86_64.tar.gz" FILE="kubens" gh_install
 2.69MB    |7 /bin/sh -c REPO="PaulJuliusMartinez/jless" ZFILE="jless-vVERSION-x86_64-unknown-linux-gnu.zip" FILE="jless" gh_install
 21.4MB    |7 /bin/sh -c REPO="drwetter/testssl.sh" FILE="testssl.sh-VERSION" XFILE="testssl" gh_install
@@ -105,12 +115,12 @@ SIZE      CREATED BY
 41.7MB    |7 /bin/sh -c REPO="grafana/k6" ZFILE="k6-vVERSION-linux-amd64.tar.gz" FILE="k6-vVERSION-linux-amd64/k6" XFILE="k6" gh_install
 26.9MB    |7 /bin/sh -c REPO="minishift/minishift" ZFILE="minishift-VERSION-linux-amd64.tgz" FILE="minishift-VERSION-linux-amd64/minishift" XFILE="minishift" gh_install
 5.89MB    |7 /bin/sh -c REPO="golang/mock" ZFILE="mock_VERSION_linux_amd64.tar.gz" FILE="mock_VERSION_linux_amd64/mockgen" XFILE="mockgen" gh_install
-39MB      |7 /bin/sh -c REPO="google/osv-scanner"            gh_install &&    REPO="genuinetools/img"              gh_install
+97.9MB    |7 /bin/sh -c REPO="google/osv-scanner"            gh_install &&    REPO="genuinetools/img"              gh_install &&    REPO="derailed/k9s"                  gh_install &&    REPO="kubeshark/kubeshark"
 651MB     |7 /bin/sh -c REPO="kubernetes/kops"               gh_install &&    REPO="weaveworks/eksctl"             gh_install &&    REPO="sigstore/cosign"               gh_install &&    REPO="projectcalico/calico"          gh_install &&    REPO="chainguard-dev/vex"            gh_install &&    REPO="GoogleContainerTools/skaffold" gh_install &&    REPO="tenable/terrascan"             gh_install
 250MB     |7 /bin/sh -c REPO="gruntwork-io/terragrunt"       gh_install &&    REPO="wagoodman/dive"                gh_install &&    REPO="noahgorstein/jqp"              gh_install &&    REPO="hadolint/hadolint"             gh_install &&    REPO="opcr-io/policy"                gh_install &&    REPO="wils0ns/tfscan"                gh_install &&    REPO="liggitt/audit2rbac"            gh_install &&    REPO="instrumenta/kubeval"           gh_install &&    REPO="zegl/kube-score"               gh_install &&    REPO="Shopify/kubeaudit"             gh_install &&    REPO="aquasecurity/chain-bench"      gh_install &&    REPO="raesene/eathar"                gh_install &&    REPO="genuinetools/bane"             gh_install
 366MB     |7 /bin/sh -c REPO="stern/stern"                   gh_install &&    REPO="mikefarah/yq"                  gh_install &&    REPO="roboll/helmfile"               gh_install &&    REPO="andreazorzetto/yh"             gh_install &&    REPO="tj/mmake"                      gh_install &&    REPO="controlplaneio/badrobot"       gh_install &&    REPO="ryane/kfilt"                   gh_install &&    REPO="ahmetb/kubectx"                gh_install &&    REPO="stackrox/kube-linter"          gh_install &&    REPO="controlplaneio/kubesec"        gh_install &&    REPO="turbot/steampipe"              gh_install &&    REPO="stelligent/config-lint"        gh_install &&    REPO="open-policy-agent/conftest"    gh_install &&    REPO="fairwindsops/polaris"          gh_install &&    REPO="projectdiscovery/httpx"        gh_install &&    REPO="datreeio/datree"               gh_install &&    REPO="ryane/kfilt"                   gh_install
 0B        /bin/sh -c #(nop)  ARG GHTOKEN=
-5.82kB    /bin/sh -c #(nop) COPY file:060acbcf9e64641aeb867c1cb28bf6f355b7e5cc17d5597fa750dbc0921f7750 in /usr/local/bin/gh_install 
+6.05kB    /bin/sh -c #(nop) COPY file:3e49fadecfd968f266b7a8533239985edd22952a8c6f9c2bfa23cc42a7d1ec9b in /usr/local/bin/gh_install 
 12.2MB    |6 /bin/sh -c curl -fsSL -o op.zip https://cache.agilebits.com/dist/1P/op2/pkg/v${one_password_ver}/op_linux_amd64_v${one_password_ver}.zip &&     unzip op.zip && sudo mv op /usr/local/bin/ && rm op.zip op.sig     version op | tee -a sbom.txt
 0B        /bin/sh -c #(nop)  ARG one_password_ver=2.5.1
 40.2MB    |5 /bin/sh -c curl -fsSLo clamav.deb https://www.clamav.net/downloads/production/clamav-${clamav_ver}.linux.x86_64.deb &&     sudo dpkg -i clamav.deb &&     rm clamav.deb &&     version clamav-config | tee -a sbom.txt

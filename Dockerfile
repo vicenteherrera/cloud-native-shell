@@ -169,9 +169,10 @@ RUN REPO="kubernetes/kops"               gh_install &&\
     REPO="GoogleContainerTools/skaffold" gh_install &&\
     REPO="tenable/terrascan"             gh_install
 
-# osv-scanner
 RUN REPO="google/osv-scanner"            gh_install &&\
-    REPO="genuinetools/img"              gh_install
+    REPO="genuinetools/img"              gh_install &&\
+    REPO="derailed/k9s"                  gh_install &&\
+    REPO="kubeshark/kubeshark"
 
 # compressed inside a directory
 
@@ -382,6 +383,16 @@ RUN curl -fsSLO https://mirror.openshift.com/pub/openshift-v4/clients/oc/latest/
     rm README.md kubectl oc.tar.gz && \
     version oc | tee -a sbom.txt
 
+
+# Gitlab CLI
+RUN GLREPO="gitlab-org/cli" && GLREPO_ID="gitlab-org%2Fcli" && \
+    VERSION=$(curl -s https://gitlab.com/api/v4/projects/${GLREPO_ID}/releases/ | jq '.[]' | jq -r '.name' | head -1 | cut -c2-) && \
+    curl -fsSL -o glab.tar.gz https://gitlab.com/${GLREPO}/-/releases/v${VERSION}/downloads/glab_${VERSION}_Linux_x86_64.tar.gz && \
+    tar -xvf glab.tar.gz && \
+    chmod a+x bin/glab && sudo mv bin/glab /usr/local/bin/ && \
+    rm -r LICENSE README.md bin/ && \
+    version glab | tee -a sbom.txt
+
 # Kubectl-convert
 RUN VERSION=$(curl -fsSL https://dl.k8s.io/release/stable.txt) && \
     curl -fsSLO "https://dl.k8s.io/release/$VERSION/bin/linux/amd64/kubectl-convert" && \
@@ -422,7 +433,8 @@ RUN curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-he
     version helm | tee -a sbom.txt
 
 # Docker Slim
-RUN curl -fsSL https://raw.githubusercontent.com/slimtoolkit/slim/master/scripts/install-slim.sh | sudo -E bash - && \
+RUN curl -fsSL https://raw.githubusercontent.com/slimtoolkit/slim/master/scripts/install-slim.sh \
+        | sudo -E bash - && \
     version slim | tee -a sbom.txt
 
 # Okteto cli
@@ -437,8 +449,9 @@ RUN curl -fsSL https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/i
 # Installs to /root/lib/oracle-cli/bin
 
 # Carvel tools
-RUN curl -fsSL https://carvel.dev/install.sh | sudo bash - && \
-    version kapp ytt kapp kbld imgpkg vendir | tee -a sbom.txt
+RUN curl -fsSL https://carvel.dev/install.sh \
+        | sudo bash - && \
+    version kwt kctrl kapp ytt kapp kbld imgpkg vendir | tee -a sbom.txt
 
 # Starship prompt
 RUN curl -fsSL https://starship.rs/install.sh \
@@ -457,16 +470,14 @@ RUN curl -fsSL https://raw.githubusercontent.com/nektos/act/master/install.sh \
 # It also requires docker to run
 
 # Crossplane cli (kubectl plugin installer)
-RUN curl -fsSL https://raw.githubusercontent.com/crossplane/crossplane/master/install.sh | sh && \
+RUN curl -fsSL https://raw.githubusercontent.com/crossplane/crossplane/master/install.sh \
+        | sh && \
     sudo mv kubectl-crossplane /usr/local/bin/ && \
     version kubectl-crossplane | tee -a sbom.txt
 
-# Gitlab CLI
-RUN curl -fsSL https://gitlab.com/gitlab-org/cli/-/raw/main/scripts/install.sh | sudo sh
-
 # NodeJS
-
-RUN curl -fsSL https://deb.nodesource.com/setup_19.x | bash - && \
+RUN curl -fsSL https://deb.nodesource.com/setup_19.x \
+        | bash - && \
     apt-get install -y nodejs
 
 # ------------------------------------------------------------------------------------
@@ -535,6 +546,15 @@ COPY --chown=${user}:${group} .vimrc ./.vimrc
 
 # Fish shell specifics
 
+SHELL ["/usr/bin/fish", "-c"]
+
+# fisher
+RUN curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher && \
+    fisher --version | tee -a sbom.txt
+
+# bass
+RUN fisher install edc/bass
+
 # Z for the fish shell
 RUN git clone https://github.com/jethrokuan/z.git && \
     mv ./z/conf.d/z.fish ./.config/fish/conf.d/z.fish && \
@@ -542,13 +562,22 @@ RUN git clone https://github.com/jethrokuan/z.git && \
     rm -rf ./z
 
 # Kubectl completions for fish
+RUN fisher install evanlucas/fish-kubectl-completions
+
 # Kubens completions for fish
+RUN curl -fsSL https://raw.githubusercontent.com/ahmetb/kubectx/master/completion/kubens.fish --output ~/.config/fish/completions/kubens.fish
+
 # Kubectx completions for fish
-# helm completions
-# pipx completions
-# ...
+RUN curl -fsSL https://github.com/ahmetb/kubectx/blob/master/completion/kubectx.fish --output ~/.config/fish/completions/kubectx.fish
+
+# helm completions for fish
+RUN helm completion fish > ~/.config/fish/completions/helm.fish
+
+# --------------------------------------------------------------------------------------
 
 # Bash shell specifics
+
+SHELL ["/bin/bash", "-c"]
 
 # Kubectl completions for bash
 RUN echo '# Created in Dockerfile' >>/home/${user}/.bashrc && \
@@ -557,12 +586,13 @@ RUN echo '# Created in Dockerfile' >>/home/${user}/.bashrc && \
     echo 'complete -F __start_kubectl k' >>/home/${user}/.bashrc
 
 # Zsh shell specifics
-# ohmyzsh
 # ...
 
 # --------------------------------------------------------------------------------------
 
 # Programs that install on user profile
+
+## Krew related user installation
 
 # Krew
 RUN ( \
@@ -587,10 +617,16 @@ RUN kubectl krew install \
     echo "kubectl krew plugins:" | tee -a sbom.txt && \
     script -qc 'kubectl krew list' | tr -s ' ' | tee -a sbom.txt
 
+
+## Helm related user installations
+
 # Helm plugins: helm-diff
 RUN helm plugin install https://github.com/databus23/helm-diff && \
     echo "helm plugins:" | tee -a sbom.txt && \
     helm plugin list | tee -a sbom.txt
+
+
+## Go related user installations
 
 # Ginkgo
 RUN go install -mod=mod github.com/onsi/ginkgo/v2/ginkgo && \
@@ -610,9 +646,8 @@ RUN VERSION=$(curl -fsSL https://api.github.com/repos/cloudflare/cfssl/releases/
     go install github.com/cloudflare/cfssl/cmd/...@${VERSION}  && \
     echo "cfssl $VERSION" | tee -a sbom.txt
 
-# psa-checker
-RUN curl -fsSL https://raw.githubusercontent.com/vicenteherrera/psa-checker/main/install/install.sh | INSTALL_DIR="$(go env GOPATH)/bin" bash && \
-    version psa-checker | tee -a sbom.txt
+
+## Python related user installations
 
 # Pyenv
 RUN curl -fsSL https://pyenv.run | bash && \
@@ -636,7 +671,10 @@ RUN SOFTWARE="kube-hunter detect-secrets yubikey-manager thefuck docker-squash \
     pip list | grep -F "$(echo "$SOFTWARE" | tr -s ' ' | tr " " '\n')" - | tr -s ' ' \
         | tee -a sbom.txt
 
-# For KubiScan
+# Autocompletion and alias for Thef*ck on fish
+RUN echo -e "\n#The f*ck\nthefuck --alias | source\nalias please fuck" >> $HOME/.config/fish/config.fish
+
+# KubiScan and requirements
 RUN pip install --user --no-cache kubernetes PrettyTable urllib3 && \
     python3 /usr/local/bin/kubiscan/KubiScan.py -h | egrep "KubiScan version" | xargs | tee -a sbom.txt
 
@@ -655,12 +693,19 @@ RUN pipx install vexy
 # List pipx packages
 RUN pipx list --short | tee -a sbom.txt 
 
+
+## Node related user installations
+
 # nvm
 RUN VERSION=$(curl -fsSL https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq '.tag_name' | xargs | cut -c2-) && \
     curl -fsSLo- https://raw.githubusercontent.com/nvm-sh/nvm/v${VERSION}/install.sh | bash && \
     export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")" && \
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-RUN echo "nvm" $(nvm --version) | tee -a sbom.txt
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && \
+    nvm | grep "Node Version Manager" | tee -a sbom.txt
+
+# Configure nvm for fish
+RUN echo -e "function nvm\n  bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv\nend" > $HOME/.config/fish/functions/nvm.fish
+# Requires bass
 
 # npm: Snyk, npx, yarn, bitwarden cli, artillery, npx
 RUN npm install snyk yarn @bitwarden/cli bw npx artillery && \
@@ -668,6 +713,18 @@ RUN npm install snyk yarn @bitwarden/cli bw npx artillery && \
     echo "bitwarden (bw) $(bw --version)" | tee -a sbom.txt && \
     artillery --version | grep 'Artillery Core' | tee -a sbom.txt && \
     npm cache clean -force
+
+
+## Other installations
+
+# psa-checker
+RUN curl -fsSL https://raw.githubusercontent.com/vicenteherrera/psa-checker/main/install/install.sh | INSTALL_DIR="$(go env GOPATH)/bin" bash && \
+    version psa-checker | tee -a sbom.txt
+
+# Lazydocker
+RUN curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh \
+        | bash && \
+    version lazydocker | tee -a sbom.txt
 
 
 # --------------------------------------------------------------------------------------

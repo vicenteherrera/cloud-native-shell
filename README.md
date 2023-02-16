@@ -53,6 +53,7 @@ make run RUN_SHELL=/bin/bash
   * [Skopeo](https://github.com/containers/skopeo): move container images between different types of container storages
   * [Vagrant](https://www.vagrantup.com/): virtual machines manager
   * [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-with-pip), Paramiko
+  * [lazydocker](https://github.com/jesseduffield/lazydocker): a simple terminal UI for both docker and docker-compose
   * [slim](https://github.com/slimtoolkit/slim): reduce footprint of container images
   * [docker-squash](https://github.com/goldmann/docker-squash): squash layers of a container image reducing size
   * [dive](https://github.com/wagoodman/dive): explore container image and layers
@@ -80,7 +81,8 @@ make run RUN_SHELL=/bin/bash
     * [Helm diff plugin](https://github.com/databus23/helm-diff): plugin to preview what a helm upgrade would change
   * [Helmfile](https://github.com/roboll/helmfile): deploy several Helm charts at once
   * [Stern](https://github.com/stern/stern): tail multiple pod logs on Kubernetes
-  * [OpenShift 4 cli (oc)](https://docs.openshift.com/container-platform/4.7/cli_reference/openshift_cli/getting-started-cli.html)
+  * [k9s](https://k9scli.io/): a terminal based UI to interact with your Kubernetes clusters
+  * [OpenShift 4 cli (oc)](https://docs.openshift.com/container-platform/4.7/cli_reference/openshift_cli/getting-started-cli.html): OpenShift client, equivalent and compatible with kubectl
   * [eksctl](https://eksctl.io/): create and manage EKS clusters on AWS
   * [kops](https://kops.sigs.k8s.io/getting_started/install/): provision Kubernetes clusters on cloud providers
   * [tfk8s](https://github.com/jrhouston/tfk8s): migrate YAML manifests to the [Terraform Kubernetes Provider](https://github.com/hashicorp/terraform-provider-kubernetes)
@@ -111,6 +113,7 @@ make run RUN_SHELL=/bin/bash
   * [amtool](https://github.com/prometheus/alertmanager): Alertmanager CLI
   * [pint](https://cloudflare.github.io/pint/): PromQL rule linter
   * [Robusta cli](https://docs.robusta.dev/master/installation.html): cli to Robusta Kubernetes troubleshooting and automation platform
+  * [Kubeshark](https://github.com/kubeshark/kubeshark): an API Traffic Viewer for Kubernetes providing real-time, protocol-level visibility into Kubernetes’ internal network, capturing, dissecting and monitoring all traffic and payloads going in, out and across containers, pods, nodes and clusters.
 * Cloud Native security
   * Linters
     * [kubeval](https://github.com/instrumenta/kubeval): validate Kubernetes YAML using schemas generated from the Kubernetes OpenAPI specification
@@ -203,6 +206,8 @@ make run RUN_SHELL=/bin/bash
     * [mmake](https://github.com/tj/mmake): like make but prints help for targets from comments
 * Shells
   * [Fish shell](https://fishshell.com/) (default): most feature packed shell
+    * [Fisher](https://github.com/jorgebucaran/fisher): a plugin manager for Fish
+    * [Bass](https://github.com/edc/bass): bass makes it easy to use utilities written for Bash in fish shell
   * [Bash shell](https://www.gnu.org/software/bash/): most common shell
   * [zsh shell](https://www.zsh.org/): lots of features and compatible with shell
 * Command line utilities, miscelaneous

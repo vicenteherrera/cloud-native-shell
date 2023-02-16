@@ -35,10 +35,6 @@ eval (direnv hook fish)
 ## batcat
 alias bat "batcat"
 
-## The F*ck
-thefuck --alias | source
-alias please fuck
-
 # ## PyEnv
 set -x PYENV_ROOT "$HOME/.pyenv"
 set -x PATH "$PYENV_ROOT/bin:$PATH"

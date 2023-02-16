@@ -37,7 +37,7 @@ config-lint 1.6.0 (https://github.com/stelligent/config-lint) 13M
 conftest_0.39.0_linux_amd64.deb 0.39.0 (https://github.com/open-policy-agent/conftest)
 polaris 7.3.2 (https://github.com/fairwindsops/polaris) 39M
 httpx 1.2.7 (https://github.com/projectdiscovery/httpx) 24M
-datree 1.8.21 (https://github.com/datreeio/datree) 23M
+datree 1.8.24 (https://github.com/datreeio/datree) 23M
 kfilt 0.0.7 (https://github.com/ryane/kfilt) 7.7M
 terragrunt 0.43.2 (https://github.com/gruntwork-io/terragrunt) 40M
 dive_0.10.0_linux_amd64.deb 0.10.0 (https://github.com/wagoodman/dive)
@@ -61,6 +61,7 @@ skaffold 2.1.0 (https://github.com/GoogleContainerTools/skaffold) 69M
 terrascan 1.18.0 (https://github.com/tenable/terrascan) 75M
 osv-scanner 1.1.0 (https://github.com/google/osv-scanner) 7.9M
 img 0.5.11 (https://github.com/genuinetools/img) 30M
+k9s 0.27.3 (https://github.com/derailed/k9s) 57M
 mockgen 1.6.0 (https://github.com/golang/mock) 5.7M
 minishift 1.34.3 (https://github.com/minishift/minishift) 26M
 k6 0.42.0 (https://github.com/grafana/k6) 40M
@@ -80,7 +81,7 @@ kubiscan 1.5 (https://github.com/cyberark/KubiScan) 203K
 testssl 3.0.8 (https://github.com/drwetter/testssl.sh) 21M
 jless 0.8.0 (https://github.com/PaulJuliusMartinez/jless) 2.6M
 kubens 0.9.4 (https://github.com/ahmetb/kubectx) 27M
-pint 0.40.0 (https://github.com/cloudflare/pint) 23M
+pint 0.40.1 (https://github.com/cloudflare/pint) 23M
 kwctl 1.5.3 (https://github.com/kubewarden/kwctl) 47M
 inletsctl 0.8.19 (https://github.com/inlets/inletsctl) 46M
 cloudquery version 0.32.12
@@ -95,17 +96,20 @@ gh version 2.23.0 (2023-02-08) https://github.com/cli/cli/releases/tag/v2.23.0
 gcloud Google Cloud SDK 418.0.0 alpha 2023.02.13 beta 2023.02.13 bq 2.0.85 bundled-python3-unix 3.9.16 core 2023.02.13 gcloud-crc32c 1.0.0 gsutil 5.20
 tkn Client version: 2020-04-01T10:57:38Z
 minikube version: v1.29.0 commit: ddac20b4b34a9c8c857fc602203b6ba2679794d3
-kind version 0.18.0-alpha+d5faadf8ba92a3
+kind version 0.18.0-alpha+b3d74a382d5fe3
 oc Client Version: 4.8.11
+glab version 1.25.3 (2023-02-06)
 kubectl-convert v1.26.1
 roxctl 3.73.2
 aws-cli/2.10.0 Python/3.9.11 Linux/5.15.0-60-generic exe/x86_64.debian.11 prompt/off
-grype Application: grype Version: 0.56.0 Syft Version: v0.68.1 BuildDate: 2023-01-26T17:26:33Z GitCommit: c01ee9b2c73098726ff5b39156134682745dd5db GitDescription: v0.56.0 Platform: linux/amd64 GoVersion: go1.18.10 Compiler: gc Supported DB Schema: 5
-syft 0.71.0
+grype Application: grype Version: 0.57.0 Syft Version: v0.71.0 BuildDate: 2023-02-16T16:24:55Z GitCommit: 18cce64f4a9f873032683dcb7f6c288d5060ab17 GitDescription: v0.57.0 Platform: linux/amd64 GoVersion: go1.19.5 Compiler: gc Supported DB Schema: 5
+syft 0.72.0
 helm version.BuildInfo{Version:"v3.11.1", GitCommit:"293b50c65d4d56187cd4e2f390f0ada46b4c4737", GitTreeState:"clean", GoVersion:"go1.18.10"}
 slim version linux|Transformer|1.40.0|a4bb798922820523fceedb9121f5bcfdfc9f2901|2023-01-15_09:42:23PM
 okteto version 2.12.1 
 /root/lib/oracle-cli/bin/oci 3.23.0
+kwt Client Version: 0.0.6
+kctrl version 0.44.1 Succeeded
 kapp version 0.54.1 Succeeded
 ytt version 0.44.1
 kapp version 0.54.1 Succeeded
@@ -116,6 +120,7 @@ starship 1.12.0 branch:master commit_hash: build_time:2022-12-13 16:12:30 +00:00
 kubescape Your current version is: v2.2.0 [git enabled in build: true]
 act version 0.2.42
 kubectl-crossplane v1.11.0
+fisher, version 4.4.3
 kubectl krew plugins:
 PLUGIN VERSION
 access-matrix v0.5.0
@@ -138,7 +143,6 @@ ginkgo Ginkgo Version 2.8.1
 govulncheck latest
 tfk8s v0.1.10
 cfssl v1.6.3
-psa-checker version unknown
 pyenv 2.3.13
 Poetry (version 1.3.2)
 pipx 1.1.0
@@ -160,11 +164,13 @@ thefuck 3.32
 vault-cli 3.1.0
 yubikey-manager 5.0.1
 KubiScan version 1.5
-checkov 2.3.20
+checkov 2.3.22
 sdccli 0.7.14
 vexy 0.3.0
-nvm
-snyk 1.1104.0
+Node Version Manager (v0.39.3)
+snyk 1.1105.0
 yarn 1.22.19
 npx 10.2.2
 bitwarden (bw) 2023.2.0
+psa-checker version unknown
+lazydocker Version: 0.20.0 Date: 2022-11-12T04:29:12Z BuildSource: binaryRelease Commit: 530dbbe57009f4596bfeedba1c8169becd98b9a8 OS: linux Arch: amd64

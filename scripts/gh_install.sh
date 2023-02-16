@@ -76,11 +76,6 @@ if [ "${version:0:1}" == "v" ]; then
   usev="v"
 fi
 
-if [ "$GHTOKEN" != "" ]; then
-  ghtoken_param="-u $GHTOKEN"
-  echo "Using GitHub API token"
-fi
-
 # Guess all filenames to use
 if [ "$ZFILE" == "$default_zfile" ] && [ "$FILE" == "$ZFILE" ] && [ "$XFILE" == "$ZFILE" ]; then
   echo "Applying heuristics to get url and file names"
